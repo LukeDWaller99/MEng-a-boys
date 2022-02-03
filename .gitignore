@@ -1,0 +1,7 @@
+BUILD
+.mbed
+mbed-os
+.DS_Store
+*.zip
+.DS_Store
+
