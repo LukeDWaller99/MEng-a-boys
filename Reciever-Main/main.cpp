@@ -4,11 +4,7 @@
 **/
 
 #include <mbed.h>
-#include "Sampler.h"
-#include "DRAM.h"
-
-Sampler sampler;
-DRAM dram;
+#include <nRF24L01P.h>
 
 int main() {
 
