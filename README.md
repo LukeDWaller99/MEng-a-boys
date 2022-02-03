@@ -9,17 +9,10 @@ The specification outlines multiple requirments needed for O.R.C.A to be conside
     1. [ ] Sub Text here 
 
 ----
-
 ## Dependancies
 
-The main.cpp file contains all the instantiations needed in the correct order. 
-However, several of the modules of this project can be used as standalone classes. 
-To ensure that these classes are instantiated correctly, the dependencies are listed below.
-
 ----
-
 ## Error Codes
-In the event of an error, the Error Handler will automatically perform actions based on the severity:
 
 ----
 ## Contributions
@@ -34,11 +27,11 @@ In the event of an error, the Error Handler will automatically perform actions b
 [GIT REPO](https://github.com/LukeDWaller99/Final_Year_Project.git)
 
 ----
-
-## Used Resources
+## Resources
 
 [Mark Down Editor](https://markdown-editor.github.io/) - used for editing the README <br>
 [HTML Editor](https://html-online.com/editor/) - used for ediiting the webpage to output the data in a readable way <br>
 [C++ Shell](http://cpp.sh/) - used to test C++ code without having to be utilised on the final project <br>
+[Mark down to PDF](https://md2pdf.netlify.app/) - used to convert the markdown read me into a pdf <br>
 
 ----
