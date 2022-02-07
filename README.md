@@ -29,8 +29,7 @@ The specification outlines multiple requirments needed for O.R.C.A to be conside
 ----
 ## Link to log book
 
-[Project Logbook](https://liveplymouthac.sharepoint.com/sites/ProjectsPROJ324325-2021/_layouts/OneNote.aspx?id=%2Fsites%2FProjectsPROJ324325-2021%2FSiteAssets%2FProjects%20%28PROJ324325%29%20-%202021%20Notebook
-onenote:https://liveplymouthac.sharepoint.com/sites/ProjectsPROJ324325-2021/SiteAssets/Projects%20(PROJ324325)%20-%202021%20Notebook/)
+[Project Logbook](https://liveplymouthac.sharepoint.com/sites/ProjectsPROJ324325-2021/_layouts/15/Doc.aspx?sourcedoc={dae66f39-0306-4608-a96c-f59587e0a60f}&action=view&wd=target%28%28s%5C%29%20Luke%20Waller%2FLogbook.one%7Cb0a32049-4cde-49f1-a087-fff75bb17abe%2F26%5C%2F09%5C%2F21%7C5c86107a-6758-4820-b09a-467497c53ac0%2F%29)
 
 ----
 ## Resources
