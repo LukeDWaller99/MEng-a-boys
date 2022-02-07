@@ -1,7 +1,6 @@
 # Final Year Project - O.R.C.A. - On-water Rubbish Collection robot with Automatic sensing
+
 ----
-
-
 # Requirements
 The specification outlines multiple requirments needed for O.R.C.A to be consider fit for purpose. <br>
 To succeed this project needs to work, needs to be useful, and needs to be novel. 
@@ -18,6 +17,7 @@ To succeed this project needs to work, needs to be useful, and needs to be novel
 	1. [ ] 
 3. [ ] Create a remote control system
 	1. [ ] 
+
 ----
 ## Dependancies
 
