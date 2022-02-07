@@ -3,11 +3,16 @@
 
 
 # Requirements
-The specification outlines multiple requirments needed for O.R.C.A to be consider fit for purpose.
+The specification outlines multiple requirments needed for O.R.C.A to be consider fit for purpose. <br>
+To succeed this project needs to work, needs to be useful, and needs to be novel. 
 
-1. [ ] Text Here
-    1. [ ] Sub Text here 
-
+1. [ ] Create Something that floats
+    1. [ ] Create a basic prototype that is able to be controlled remotely
+	2. [ ] More text here
+2. [ ] Create something that collect litter 
+	1. [ ] Sub text here
+3. [ ] Create a remote control system
+	1. [ ] Sub text here
 ----
 ## Dependancies
 
