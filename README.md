@@ -6,9 +6,14 @@
 The specification outlines multiple requirments needed for O.R.C.A to be consider fit for purpose. <br>
 To succeed this project needs to work, needs to be useful, and needs to be novel. 
 
-1. [ ] Create Something that floats
-    1. [ ] Create a basic prototype that is able to be controlled remotely
-	2. [ ] Use materials that are easily accessible for the prrof of concept design 
+1. [x] Create Something that floats
+    1. [x] Create a basic prototype that is able to be controlled remotely
+		1. [x] Servo used to control steering
+		2. [x] Brushless DC motor (BLDC Motor) to control thrust 
+		3. [x] Simple RC electronics from a car to control the motors
+	2. [x] Use materials that are easily accessible for the proof of concept design
+		1. [x] Milkshake cartons from a supermarket fore the hull of the catamaran
+		2. [x] Chinese style food container for the main electonics housing
 2. [ ] Create something that collect litter 
 	1. [ ] 
 3. [ ] Create a remote control system
