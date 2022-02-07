@@ -27,6 +27,12 @@ The specification outlines multiple requirments needed for O.R.C.A to be conside
 [GIT REPO](https://github.com/LukeDWaller99/Final_Year_Project.git)
 
 ----
+## Link to log book
+
+[Project Logbook](https://liveplymouthac.sharepoint.com/sites/ProjectsPROJ324325-2021/_layouts/OneNote.aspx?id=%2Fsites%2FProjectsPROJ324325-2021%2FSiteAssets%2FProjects%20%28PROJ324325%29%20-%202021%20Notebook
+onenote:https://liveplymouthac.sharepoint.com/sites/ProjectsPROJ324325-2021/SiteAssets/Projects%20(PROJ324325)%20-%202021%20Notebook/)
+
+----
 ## Resources
 
 [Mark Down Editor](https://markdown-editor.github.io/) - used for editing the README <br>
