@@ -8,11 +8,11 @@ To succeed this project needs to work, needs to be useful, and needs to be novel
 
 1. [ ] Create Something that floats
     1. [ ] Create a basic prototype that is able to be controlled remotely
-	2. [ ] More text here
+	2. [ ] Use materials that are easily accessible for the prrof of concept design 
 2. [ ] Create something that collect litter 
-	1. [ ] Sub text here
+	1. [ ] 
 3. [ ] Create a remote control system
-	1. [ ] Sub text here
+	1. [ ] 
 ----
 ## Dependancies
 
@@ -29,7 +29,7 @@ To succeed this project needs to work, needs to be useful, and needs to be novel
 ----
 ## Link to GitHub Repository
 
-[GIT REPO](https://github.com/LukeDWaller99/Final_Year_Project.git)
+[Git REPO](https://github.com/LukeDWaller99/Final_Year_Project.git)
 
 ----
 ## Link to log book
