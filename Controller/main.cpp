@@ -20,6 +20,7 @@ int redOn = 4096; //    0b0001000000000000;
 int greenOn = 8192; //  0b0010000000000000;
 int blueOn = 16384; //  0b0100000000000000;
 int ledMask = 1020; //  0b0000001111111100;
+int allOn =  0b0111000000000000;
 
 int quantisePotVal (int EightBitPotVal){
     int LedMask = 0;
@@ -48,12 +49,12 @@ int main() {
     
 
     while (true) {
-    LEDs = ledMask | greenOn;
+    LEDs = ledMask | allOn;
     potVal = pot.read_u16();
     eightBitPotVal = potVal >> 13;
     quantisedVal = quantisePotVal(eightBitPotVal);
     ledMask = quantisedVal << 2;
-    printf("%d\n", quantisedVal);
+    // printf("%d\n", quantisedVal);
     wait_us(10);
     }
 }
