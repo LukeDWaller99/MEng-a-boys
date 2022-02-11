@@ -10,7 +10,10 @@ The Controller will need to remotely control the craft with bi-directional commu
 		1. [ ] 4 discreet buttons
 		2. [ ] 2 in the joysticks
 	3. [ ] 2 Rotary Potentiometers
-3. [ ] Power
+3. [ ] Outputs
+	1. [ ] Buzzer for feedback to user
+	2. [ ] Status LEDs
+4. [ ] Power
 	1. [ ] Power Indicator LED
 	2. [ ] Battery Powered
 		1. [ ] 18650 Li-Po battery
@@ -19,10 +22,10 @@ The Controller will need to remotely control the craft with bi-directional commu
 	4. [ ] Reverse polarity protection
 	5. [ ] Low voltage detection chip
 	6. [ ] ON/OFF power switch
-4. [ ] Communication with main craft
+5. [ ] Communication with main craft
 	1. [ ] RF chip (nRF24L01)
 	2. [ ] Single or bi-directional communication?
-8. [ ] Case
+6. [ ] Case
 	1. [ ] Comfortable
 	2. [ ] Ergonomic 
 	3. [ ] Light and easy to tranport 
