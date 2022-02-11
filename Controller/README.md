@@ -24,7 +24,7 @@ The Controller will need to remotely control the craft with bi-directional commu
 	6. [ ] ON/OFF power switch
 5. [ ] Communication with main craft
 	1. [ ] RF chip (nRF24L01)
-	2. [ ] Single or bi-directional communication?
+	2. [ ] Bi-directional communication
 6. [ ] Case
 	1. [ ] Comfortable
 	2. [ ] Ergonomic 
