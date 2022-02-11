@@ -14,6 +14,7 @@ int potVal;
 int eightBitPotVal;
 int quantisedVal;
 PortOut LEDs(PortE);
+DigitalIn Btn_A(PG_0), Btn_B(PG_1), Btn_C(PG_2), Btn_D(PG_3);
 
 
 int redOn = 4096; //    0b0001000000000000;
