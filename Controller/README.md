@@ -13,10 +13,11 @@ The Controller will need to remotely control the craft with bi-directional commu
 	1. [ ] Power Indicator LED
 	2. [ ] Battery Powered
 		1. [ ] 18650 Li-Po battery
-		2. [ ] Battery Charger? - could use seperate charger to reduce complexity
+		2. [ ] Battery Charger - could use seperate charger to reduce complexity
 	3. [ ] Suitable Buck Converter to supply appropriate voltage
 	4. [ ] Reverse polarity protection
 	5. [ ] Low voltage detection chip
+	6. [ ] ON/OFF power switch
 4. [ ] Communication with main craft
 	1. [ ] RF chip (nRF24L01)
 	2. [ ] Single or bi-directional communication?
