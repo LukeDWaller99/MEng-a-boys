@@ -1,4 +1,179 @@
-EESchema Schematic File Version 2
-EELAYER 25 0
+EESchema Schematic File Version 4
+EELAYER 30 0
 EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:LED D?
+U 1 1 6206EEE4
+P 1150 2500
+F 0 "D?" V 1189 2382 50  0000 R CNN
+F 1 "LED" V 1098 2382 50  0000 R CNN
+F 2 "" H 1150 2500 50  0001 C CNN
+F 3 "~" H 1150 2500 50  0001 C CNN
+	1    1150 2500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 62071445
+P 1150 2800
+F 0 "R?" H 1220 2846 50  0000 L CNN
+F 1 "R" H 1220 2755 50  0000 L CNN
+F 2 "" V 1080 2800 50  0001 C CNN
+F 3 "~" H 1150 2800 50  0001 C CNN
+	1    1150 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_BJT:2N2219 Q?
+U 1 1 62073873
+P 1250 3150
+F 0 "Q?" H 1441 3104 50  0000 L CNN
+F 1 "S9013" H 1441 3195 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-39-3" H 1450 3075 50  0001 L CIN
+F 3 "http://www.onsemi.com/pub_link/Collateral/2N2219-D.PDF" H 1250 3150 50  0001 L CNN
+	1    1250 3150
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:Earth #PWR?
+U 1 1 620753C5
+P 1150 3450
+F 0 "#PWR?" H 1150 3200 50  0001 C CNN
+F 1 "Earth" H 1150 3300 50  0001 C CNN
+F 2 "" H 1150 3450 50  0001 C CNN
+F 3 "~" H 1150 3450 50  0001 C CNN
+	1    1150 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1150 3350 1150 3450
+$Comp
+L Device:R R?
+U 1 1 62076135
+P 1600 3150
+F 0 "R?" H 1670 3196 50  0000 L CNN
+F 1 "R" H 1670 3105 50  0000 L CNN
+F 2 "" V 1530 3150 50  0001 C CNN
+F 3 "~" H 1600 3150 50  0001 C CNN
+	1    1600 3150
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 62076BAE
+P 2100 3150
+F 0 "R?" H 2170 3196 50  0000 L CNN
+F 1 "R" H 2170 3105 50  0000 L CNN
+F 2 "" V 2030 3150 50  0001 C CNN
+F 3 "~" H 2100 3150 50  0001 C CNN
+	1    2100 3150
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_BJT:2N2219 Q?
+U 1 1 6207754D
+P 2450 3150
+F 0 "Q?" H 2640 3196 50  0000 L CNN
+F 1 "S9013" H 2640 3105 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-39-3" H 2650 3075 50  0001 L CIN
+F 3 "http://www.onsemi.com/pub_link/Collateral/2N2219-D.PDF" H 2450 3150 50  0001 L CNN
+	1    2450 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1750 3150 1850 3150
+Text GLabel 1850 3000 0    50   Input ~ 0
+BUZZER
+Wire Wire Line
+	1850 3000 1850 3150
+Connection ~ 1850 3150
+Wire Wire Line
+	1850 3150 1950 3150
+$Comp
+L power:Earth #PWR?
+U 1 1 62078B9E
+P 2550 3450
+F 0 "#PWR?" H 2550 3200 50  0001 C CNN
+F 1 "Earth" H 2550 3300 50  0001 C CNN
+F 2 "" H 2550 3450 50  0001 C CNN
+F 3 "~" H 2550 3450 50  0001 C CNN
+	1    2550 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2550 3350 2550 3450
+$Comp
+L power:+3.3V #PWR?
+U 1 1 62079CBC
+P 1150 2350
+F 0 "#PWR?" H 1150 2200 50  0001 C CNN
+F 1 "+3.3V" H 1165 2523 50  0000 C CNN
+F 2 "" H 1150 2350 50  0001 C CNN
+F 3 "" H 1150 2350 50  0001 C CNN
+	1    1150 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 6207AAD5
+P 2550 2350
+F 0 "#PWR?" H 2550 2200 50  0001 C CNN
+F 1 "+3.3V" H 2565 2523 50  0000 C CNN
+F 2 "" H 2550 2350 50  0001 C CNN
+F 3 "" H 2550 2350 50  0001 C CNN
+	1    2550 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 6207DE62
+P 2450 2600
+F 0 "R?" H 2520 2646 50  0000 L CNN
+F 1 "R" H 2520 2555 50  0000 L CNN
+F 2 "" V 2380 2600 50  0001 C CNN
+F 3 "~" H 2450 2600 50  0001 C CNN
+	1    2450 2600
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:Buzzer BZ?
+U 1 1 6207EA88
+P 2750 2600
+F 0 "BZ?" H 2902 2629 50  0000 L CNN
+F 1 "Buzzer" H 2902 2538 50  0000 L CNN
+F 2 "" V 2725 2700 50  0001 C CNN
+F 3 "~" V 2725 2700 50  0001 C CNN
+	1    2750 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2550 2950 2450 2950
+Wire Wire Line
+	2450 2950 2450 2750
+Connection ~ 2550 2950
+Wire Wire Line
+	2450 2450 2450 2350
+Wire Wire Line
+	2450 2350 2550 2350
+Connection ~ 2550 2350
+Wire Wire Line
+	2650 2350 2650 2500
+Wire Wire Line
+	2550 2350 2650 2350
+Wire Wire Line
+	2650 2950 2650 2700
+Wire Wire Line
+	2550 2950 2650 2950
 $EndSCHEMATC
