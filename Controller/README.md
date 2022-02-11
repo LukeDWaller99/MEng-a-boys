@@ -9,7 +9,7 @@ The Controller will need to remotely control the craft with bi-directional commu
 	2. [ ] 6 buttons
 		1. [ ] 4 discreet buttons
 		2. [ ] 2 in the joysticks
-3. Power
+3. [ ] Power
 	1. [ ] Power Indicator LED
 	2. [ ] Battery Powered
 		1. [ ] 18650 Li-Po battery
@@ -28,6 +28,7 @@ The Controller will need to remotely control the craft with bi-directional commu
 	
 	----
 ## Dependancies/Libraries Used
+
 `nRF24L01P.h` Authored by Owen Edwards (c) 2010
 ----
 ## Contributions
