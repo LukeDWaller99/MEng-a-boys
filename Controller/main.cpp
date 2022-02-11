@@ -3,9 +3,9 @@
     Main file for Final Year Project - Luke Waller
 **/
 
-#include <cstdio>
 #include <mbed.h>
 #include <nRF24L01P.h>
+#include "Buzzer.h"
 
 // for initial test, map the pot value to the led strip on the MSB as a test
 // need to create an analog in instance of the pot 
@@ -21,6 +21,7 @@ int greenOn = 8192; //  0b0010000000000000;
 int blueOn = 16384; //  0b0100000000000000;
 int ledMask = 1020; //  0b0000001111111100;
 int allOn =  0b0111000000000000;
+Buzzer buzzer;
 
 // DigitalIn Btn_1(), Btn_2(), Btn_3(), Btn_4(), Btn_L3(), Btn_R3();
 // DigitalOut buzz(), led_1(), led_2();
@@ -54,6 +55,10 @@ int quantisePotVal (int EightBitPotVal){
 
 // create an array of outputs for the leds for the output
 int main() {
+    
+    buzzer.chime(24999, "E","F","G", Buzzer::HIGHER);
+    buzzer.chime(10000000);
+
     while (true) {
     LEDs = ledMask | allOn;
     potVal = pot.read_u16();
