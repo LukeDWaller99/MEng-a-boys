@@ -1,6 +1,6 @@
 # Controller Specifications
 ----
-## Requirements 
+## Requirements
 The Controller will need to remotely control the craft with bi-directional communication. This will involve serveral design considerations including:
 1. [ ] Microcontroller
 	1. [ ] NUCLEO-8S207K8
@@ -25,3 +25,13 @@ The Controller will need to remotely control the craft with bi-directional commu
 	2. [ ] Ergonomic 
 	3. [ ] Light and easy to tranport 
 	4. [ ] 3D printed
+	
+	----
+## Dependancies/Libraries Used
+`nRF24L01P.h` Authored by Owen Edwards (c) 2010
+----
+## Contributions
+**Luke Waller**
+
+*Authored*
+
