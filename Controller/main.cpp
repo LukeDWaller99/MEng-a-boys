@@ -23,11 +23,11 @@ int ledMask = 1020; //  0b0000001111111100;
 int allOn =  0b0111000000000000;
 Buzzer buzzer;
 
-// DigitalIn Btn_1(), Btn_2(), Btn_3(), Btn_4(), Btn_L3(), Btn_R3();
-// DigitalOut buzz(), led_1(), led_2();
-// AnalogIn L_Pitch(), L_Roll(), R_Pitch(), R_Roll(), Pot_1(), Pot_2();
+// DigitalIn Btn_1(), Btn_2(), Btn_3(), Btn_4(), Btn_L3(), Btn_R3(); 6
+// DigitalOut buzz(), led_1(), led_2(); 3
+// AnalogIn L_Pitch(), L_Roll(), R_Pitch(), R_Roll(), Pot_1(), Pot_2(); 6 
 
-// MOSI, MISO, SCK, CS, CE, IRQ - must be an interrupt pin
+// MOSI, MISO, SCK, CS, CE, IRQ - must be an interrupt pin 6 
 // nRF24L01P Serial_Comms();
 
 
