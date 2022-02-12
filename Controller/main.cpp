@@ -56,8 +56,12 @@ int quantisePotVal (int EightBitPotVal){
 // create an array of outputs for the leds for the output
 int main() {
     
-    buzzer.chime(24999, "E","F","G", Buzzer::HIGHER);
+    buzzer.chime(25000, "E","F","G", Buzzer::HIGHER);
     buzzer.chime(10000000);
+
+    buzzer = "C";   // operator overload to set note 
+    buzzer = 1;     // operator overload to turn buzzer on and off
+    buzzer = 0.5f;  // operator overload to set period of buzzer on
 
     while (true) {
     LEDs = ledMask | allOn;

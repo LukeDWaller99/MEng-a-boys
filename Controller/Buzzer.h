@@ -12,6 +12,7 @@
  */
 #include <mbed.h>
 
+
 /**
  * Defines
  */
@@ -34,6 +35,7 @@ public:
 
     void operator = (const char* note);
     void operator = (int on_off);
+    void operator = (float time);
 
     void chime(int delay = 100000, const char* note1 = "C", const char* note2 = "D", const char* note3 = "E", OCTAVE octave = HIGHER);
 

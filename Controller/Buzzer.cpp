@@ -1,6 +1,4 @@
 #include "Buzzer.h"
-#include <cstdint>
-
 
 Buzzer::Buzzer(PinName pin) : buzzer(pin) {
 
@@ -31,6 +29,10 @@ void Buzzer::operator = (int on_off){
     } else {
     stop();
     }
+}
+
+void Buzzer::operator=(float time){
+    buzz(time);
 }
 
 void Buzzer::chime(int delay, const char* note1, const char* note2, const char* note3, OCTAVE octave){
