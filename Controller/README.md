@@ -3,7 +3,7 @@
 ## Requirements
 The Controller will need to remotely control the craft with bi-directional communication. This will involve serveral design considerations including:
 1. [ ] Microcontroller
-	1. [ ] NUCLEO-8S207K8
+	1. [ ] NUCLEO-8S207K8 or NUCLEO-G031K8
 2. [ ] Inputs
 	1. [ ] 2 Analogue Joysticks
 	2. [ ] 5 buttons
