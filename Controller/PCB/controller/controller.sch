@@ -150,282 +150,6 @@ Wire Wire Line
 Wire Wire Line
 	2250 1300 2350 1300
 $Comp
-L Device:R_POT L_pitch
-U 1 1 620815C8
-P 850 2300
-F 0 "L_pitch" H 781 2346 50  0000 R CNN
-F 1 "R_POT" H 781 2255 50  0000 R CNN
-F 2 "" H 850 2300 50  0001 C CNN
-F 3 "~" H 850 2300 50  0001 C CNN
-	1    850  2300
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C?
-U 1 1 62085EAE
-P 1150 2450
-F 0 "C?" H 1265 2496 50  0000 L CNN
-F 1 "100nF" H 1265 2405 50  0000 L CNN
-F 2 "" H 1188 2300 50  0001 C CNN
-F 3 "~" H 1150 2450 50  0001 C CNN
-	1    1150 2450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 62088E6B
-P 1600 2300
-F 0 "R?" H 1670 2346 50  0000 L CNN
-F 1 "620" H 1670 2255 50  0000 L CNN
-F 2 "" V 1530 2300 50  0001 C CNN
-F 3 "~" H 1600 2300 50  0001 C CNN
-	1    1600 2300
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	1000 2300 1150 2300
-Wire Wire Line
-	1150 2600 850  2600
-Wire Wire Line
-	850  2600 850  2450
-Wire Wire Line
-	850  2600 850  2700
-Connection ~ 850  2600
-Wire Wire Line
-	1150 2300 1450 2300
-Connection ~ 1150 2300
-Text GLabel 1750 2300 2    50   Input ~ 0
-L_pitch
-$Comp
-L power:+3.3V #PWR?
-U 1 1 6209E5F1
-P 850 2150
-F 0 "#PWR?" H 850 2000 50  0001 C CNN
-F 1 "+3.3V" H 865 2323 50  0000 C CNN
-F 2 "" H 850 2150 50  0001 C CNN
-F 3 "" H 850 2150 50  0001 C CNN
-	1    850  2150
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:Earth #PWR?
-U 1 1 620B5C2E
-P 850 2700
-F 0 "#PWR?" H 850 2450 50  0001 C CNN
-F 1 "Earth" H 850 2550 50  0001 C CNN
-F 2 "" H 850 2700 50  0001 C CNN
-F 3 "~" H 850 2700 50  0001 C CNN
-	1    850  2700
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R_POT L_roll
-U 1 1 620B5C34
-P 850 3200
-F 0 "L_roll" H 781 3246 50  0000 R CNN
-F 1 "R_POT" H 781 3155 50  0000 R CNN
-F 2 "" H 850 3200 50  0001 C CNN
-F 3 "~" H 850 3200 50  0001 C CNN
-	1    850  3200
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C?
-U 1 1 620B5C3A
-P 1150 3350
-F 0 "C?" H 1265 3396 50  0000 L CNN
-F 1 "100nF" H 1265 3305 50  0000 L CNN
-F 2 "" H 1188 3200 50  0001 C CNN
-F 3 "~" H 1150 3350 50  0001 C CNN
-	1    1150 3350
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 620B5C40
-P 1600 3200
-F 0 "R?" H 1670 3246 50  0000 L CNN
-F 1 "620" H 1670 3155 50  0000 L CNN
-F 2 "" V 1530 3200 50  0001 C CNN
-F 3 "~" H 1600 3200 50  0001 C CNN
-	1    1600 3200
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	1000 3200 1150 3200
-Wire Wire Line
-	1150 3500 850  3500
-Wire Wire Line
-	850  3500 850  3350
-$Comp
-L power:Earth #PWR?
-U 1 1 620B5C49
-P 850 3600
-F 0 "#PWR?" H 850 3350 50  0001 C CNN
-F 1 "Earth" H 850 3450 50  0001 C CNN
-F 2 "" H 850 3600 50  0001 C CNN
-F 3 "~" H 850 3600 50  0001 C CNN
-	1    850  3600
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	850  3500 850  3600
-Connection ~ 850  3500
-Wire Wire Line
-	1150 3200 1450 3200
-Connection ~ 1150 3200
-Text GLabel 1750 3200 2    50   Input ~ 0
-L_roll
-$Comp
-L power:+3.3V #PWR?
-U 1 1 620B5C54
-P 850 3050
-F 0 "#PWR?" H 850 2900 50  0001 C CNN
-F 1 "+3.3V" H 865 3223 50  0000 C CNN
-F 2 "" H 850 3050 50  0001 C CNN
-F 3 "" H 850 3050 50  0001 C CNN
-	1    850  3050
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R_POT R_pitch
-U 1 1 620BA9C8
-P 850 4100
-F 0 "R_pitch" H 781 4146 50  0000 R CNN
-F 1 "R_POT" H 781 4055 50  0000 R CNN
-F 2 "" H 850 4100 50  0001 C CNN
-F 3 "~" H 850 4100 50  0001 C CNN
-	1    850  4100
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C?
-U 1 1 620BA9CE
-P 1150 4250
-F 0 "C?" H 1265 4296 50  0000 L CNN
-F 1 "100nF" H 1265 4205 50  0000 L CNN
-F 2 "" H 1188 4100 50  0001 C CNN
-F 3 "~" H 1150 4250 50  0001 C CNN
-	1    1150 4250
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 620BA9D4
-P 1600 4100
-F 0 "R?" H 1670 4146 50  0000 L CNN
-F 1 "620" H 1670 4055 50  0000 L CNN
-F 2 "" V 1530 4100 50  0001 C CNN
-F 3 "~" H 1600 4100 50  0001 C CNN
-	1    1600 4100
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	1000 4100 1150 4100
-Wire Wire Line
-	1150 4400 850  4400
-Wire Wire Line
-	850  4400 850  4250
-$Comp
-L power:Earth #PWR?
-U 1 1 620BA9DD
-P 850 4500
-F 0 "#PWR?" H 850 4250 50  0001 C CNN
-F 1 "Earth" H 850 4350 50  0001 C CNN
-F 2 "" H 850 4500 50  0001 C CNN
-F 3 "~" H 850 4500 50  0001 C CNN
-	1    850  4500
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	850  4400 850  4500
-Connection ~ 850  4400
-Wire Wire Line
-	1150 4100 1450 4100
-Connection ~ 1150 4100
-Text GLabel 1750 4100 2    50   Input ~ 0
-R_pitch
-$Comp
-L power:+3.3V #PWR?
-U 1 1 620BA9E8
-P 850 3950
-F 0 "#PWR?" H 850 3800 50  0001 C CNN
-F 1 "+3.3V" H 865 4123 50  0000 C CNN
-F 2 "" H 850 3950 50  0001 C CNN
-F 3 "" H 850 3950 50  0001 C CNN
-	1    850  3950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R_POT R_roll
-U 1 1 620BD6B5
-P 850 5000
-F 0 "R_roll" H 781 5046 50  0000 R CNN
-F 1 "R_POT" H 781 4955 50  0000 R CNN
-F 2 "" H 850 5000 50  0001 C CNN
-F 3 "~" H 850 5000 50  0001 C CNN
-	1    850  5000
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C?
-U 1 1 620BD6BB
-P 1150 5150
-F 0 "C?" H 1265 5196 50  0000 L CNN
-F 1 "100nF" H 1265 5105 50  0000 L CNN
-F 2 "" H 1188 5000 50  0001 C CNN
-F 3 "~" H 1150 5150 50  0001 C CNN
-	1    1150 5150
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 620BD6C1
-P 1600 5000
-F 0 "R?" H 1670 5046 50  0000 L CNN
-F 1 "620" H 1670 4955 50  0000 L CNN
-F 2 "" V 1530 5000 50  0001 C CNN
-F 3 "~" H 1600 5000 50  0001 C CNN
-	1    1600 5000
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	1000 5000 1150 5000
-Wire Wire Line
-	1150 5300 850  5300
-Wire Wire Line
-	850  5300 850  5150
-$Comp
-L power:Earth #PWR?
-U 1 1 620BD6CA
-P 850 5400
-F 0 "#PWR?" H 850 5150 50  0001 C CNN
-F 1 "Earth" H 850 5250 50  0001 C CNN
-F 2 "" H 850 5400 50  0001 C CNN
-F 3 "~" H 850 5400 50  0001 C CNN
-	1    850  5400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	850  5300 850  5400
-Connection ~ 850  5300
-Wire Wire Line
-	1150 5000 1450 5000
-Connection ~ 1150 5000
-Text GLabel 1750 5000 2    50   Input ~ 0
-R_roll
-$Comp
-L power:+3.3V #PWR?
-U 1 1 620BD6D5
-P 850 4850
-F 0 "#PWR?" H 850 4700 50  0001 C CNN
-F 1 "+3.3V" H 865 5023 50  0000 C CNN
-F 2 "" H 850 4850 50  0001 C CNN
-F 3 "" H 850 4850 50  0001 C CNN
-	1    850  4850
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:R_POT POT_1
 U 1 1 620E4CE9
 P 850 5900
@@ -564,111 +288,40 @@ F 3 "" H 850 6650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Switch:SW_SPST Btn_L3
-U 1 1 620E9535
-P 3500 1000
-F 0 "Btn_L3" V 3454 1098 50  0000 L CNN
-F 1 "SW_SPST" V 3545 1098 50  0000 L CNN
-F 2 "" H 3500 1000 50  0001 C CNN
-F 3 "~" H 3500 1000 50  0001 C CNN
-	1    3500 1000
-	0    1    1    0   
-$EndComp
-$Comp
 L Device:R R?
 U 1 1 620EA4AB
-P 3200 1100
-F 0 "R?" H 3270 1146 50  0000 L CNN
-F 1 "1K" H 3270 1055 50  0000 L CNN
-F 2 "" V 3130 1100 50  0001 C CNN
-F 3 "~" H 3200 1100 50  0001 C CNN
-	1    3200 1100
-	-1   0    0    1   
+P 1500 3050
+F 0 "R?" V 1600 3000 50  0000 L CNN
+F 1 "1K" V 1600 2850 50  0000 L CNN
+F 2 "" V 1430 3050 50  0001 C CNN
+F 3 "~" H 1500 3050 50  0001 C CNN
+	1    1500 3050
+	0    1    1    0   
 $EndComp
 $Comp
 L Device:R R?
 U 1 1 620EAE13
-P 3500 1450
-F 0 "R?" H 3570 1496 50  0000 L CNN
-F 1 "10K" H 3570 1405 50  0000 L CNN
-F 2 "" V 3430 1450 50  0001 C CNN
-F 3 "~" H 3500 1450 50  0001 C CNN
-	1    3500 1450
+P 1650 3300
+F 0 "R?" H 1720 3346 50  0000 L CNN
+F 1 "10K" H 1720 3255 50  0000 L CNN
+F 2 "" V 1580 3300 50  0001 C CNN
+F 3 "~" H 1650 3300 50  0001 C CNN
+	1    1650 3300
 	-1   0    0    1   
 $EndComp
-Text GLabel 3200 950  1    50   Input ~ 0
+Text GLabel 1350 3050 0    50   Input ~ 0
 Btn_L3
 $Comp
 L power:Earth #PWR?
 U 1 1 620EB4E6
-P 3500 1600
-F 0 "#PWR?" H 3500 1350 50  0001 C CNN
-F 1 "Earth" H 3500 1450 50  0001 C CNN
-F 2 "" H 3500 1600 50  0001 C CNN
-F 3 "~" H 3500 1600 50  0001 C CNN
-	1    3500 1600
+P 1650 3450
+F 0 "#PWR?" H 1650 3200 50  0001 C CNN
+F 1 "Earth" H 1650 3300 50  0001 C CNN
+F 2 "" H 1650 3450 50  0001 C CNN
+F 3 "~" H 1650 3450 50  0001 C CNN
+	1    1650 3450
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	3200 1250 3500 1250
-Wire Wire Line
-	3500 1250 3500 1300
-Wire Wire Line
-	3500 1200 3500 1250
-Connection ~ 3500 1250
-$Comp
-L Switch:SW_SPST Btn_R3
-U 1 1 62100FD2
-P 4450 950
-F 0 "Btn_R3" V 4404 1048 50  0000 L CNN
-F 1 "SW_SPST" V 4495 1048 50  0000 L CNN
-F 2 "" H 4450 950 50  0001 C CNN
-F 3 "~" H 4450 950 50  0001 C CNN
-	1    4450 950 
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 62100FD8
-P 4150 1050
-F 0 "R?" H 4220 1096 50  0000 L CNN
-F 1 "1K" H 4220 1005 50  0000 L CNN
-F 2 "" V 4080 1050 50  0001 C CNN
-F 3 "~" H 4150 1050 50  0001 C CNN
-	1    4150 1050
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 62100FDE
-P 4450 1400
-F 0 "R?" H 4520 1446 50  0000 L CNN
-F 1 "10K" H 4520 1355 50  0000 L CNN
-F 2 "" V 4380 1400 50  0001 C CNN
-F 3 "~" H 4450 1400 50  0001 C CNN
-	1    4450 1400
-	-1   0    0    1   
-$EndComp
-Text GLabel 4150 900  1    50   Input ~ 0
-Btn_R3
-$Comp
-L power:Earth #PWR?
-U 1 1 62100FE5
-P 4450 1550
-F 0 "#PWR?" H 4450 1300 50  0001 C CNN
-F 1 "Earth" H 4450 1400 50  0001 C CNN
-F 2 "" H 4450 1550 50  0001 C CNN
-F 3 "~" H 4450 1550 50  0001 C CNN
-	1    4450 1550
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4150 1200 4450 1200
-Wire Wire Line
-	4450 1200 4450 1250
-Wire Wire Line
-	4450 1150 4450 1200
-Connection ~ 4450 1200
 $Comp
 L Switch:SW_SPST Btn_1
 U 1 1 62105B68
@@ -922,12 +575,12 @@ Connection ~ 8950 1350
 $Comp
 L MCU_Module:Arduino_Nano_v2.x A?
 U 1 1 62120977
-P 4350 4300
-F 0 "A?" H 4350 3211 50  0000 C CNN
-F 1 "Arduino_Nano_v2.x" H 4350 3120 50  0000 C CNN
-F 2 "Module:Arduino_Nano" H 4350 4300 50  0001 C CIN
-F 3 "https://www.arduino.cc/en/uploads/Main/ArduinoNanoManual23.pdf" H 4350 4300 50  0001 C CNN
-	1    4350 4300
+P 6150 5700
+F 0 "A?" H 6150 4611 50  0000 C CNN
+F 1 "Arduino_Nano_v2.x" H 6150 4520 50  0000 C CNN
+F 2 "Module:Arduino_Nano" H 6150 5700 50  0001 C CIN
+F 3 "https://www.arduino.cc/en/uploads/Main/ArduinoNanoManual23.pdf" H 6150 5700 50  0001 C CNN
+	1    6150 5700
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -976,12 +629,12 @@ Wire Wire Line
 $Comp
 L power:+5V #PWR?
 U 1 1 6208D21D
-P 4550 3300
-F 0 "#PWR?" H 4550 3150 50  0001 C CNN
-F 1 "+5V" H 4600 3450 50  0000 C CNN
-F 2 "" H 4550 3300 50  0001 C CNN
-F 3 "" H 4550 3300 50  0001 C CNN
-	1    4550 3300
+P 6350 4700
+F 0 "#PWR?" H 6350 4550 50  0001 C CNN
+F 1 "+5V" H 6400 4850 50  0000 C CNN
+F 2 "" H 6350 4700 50  0001 C CNN
+F 3 "" H 6350 4700 50  0001 C CNN
+	1    6350 4700
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1044,28 +697,6 @@ F 3 "" H 5350 750 50  0001 C CNN
 $EndComp
 $Comp
 L power:+5V #PWR?
-U 1 1 62093C5F
-P 4450 750
-F 0 "#PWR?" H 4450 600 50  0001 C CNN
-F 1 "+5V" H 4465 923 50  0000 C CNN
-F 2 "" H 4450 750 50  0001 C CNN
-F 3 "" H 4450 750 50  0001 C CNN
-	1    4450 750 
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+5V #PWR?
-U 1 1 62094438
-P 3500 800
-F 0 "#PWR?" H 3500 650 50  0001 C CNN
-F 1 "+5V" H 3515 973 50  0000 C CNN
-F 2 "" H 3500 800 50  0001 C CNN
-F 3 "" H 3500 800 50  0001 C CNN
-	1    3500 800 
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+5V #PWR?
 U 1 1 62094BAE
 P 2250 700
 F 0 "#PWR?" H 2250 550 50  0001 C CNN
@@ -1092,12 +723,12 @@ $EndComp
 $Comp
 L power:+3.3V #PWR?
 U 1 1 620983A3
-P 4450 3300
-F 0 "#PWR?" H 4450 3150 50  0001 C CNN
-F 1 "+3.3V" H 4465 3473 50  0000 C CNN
-F 2 "" H 4450 3300 50  0001 C CNN
-F 3 "" H 4450 3300 50  0001 C CNN
-	1    4450 3300
+P 6250 4700
+F 0 "#PWR?" H 6250 4550 50  0001 C CNN
+F 1 "+3.3V" H 6265 4873 50  0000 C CNN
+F 2 "" H 6250 4700 50  0001 C CNN
+F 3 "" H 6250 4700 50  0001 C CNN
+	1    6250 4700
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1302,8 +933,8 @@ Wire Wire Line
 Wire Wire Line
 	10850 2400 10850 2500
 Connection ~ 10850 2400
-NoConn ~ 4850 3800
-Text GLabel 4850 3700 2    50   Input ~ 0
+NoConn ~ 6650 5200
+Text GLabel 6650 5100 2    50   Input ~ 0
 RESET
 $Comp
 L Regulator_Linear:LM1117-5.0 U?
@@ -1519,4 +1150,299 @@ F 3 "~" H 8250 950 50  0001 C CNN
 $EndComp
 NoConn ~ 8350 750 
 NoConn ~ 7400 750 
+$Comp
+L TickerForge:JOYSTICK_BUTTON U?
+U 1 1 62093E61
+P 2500 2650
+F 0 "U?" H 3028 2703 60  0000 L CNN
+F 1 "LEFT_JOYSTICK" H 3028 2597 60  0000 L CNN
+F 2 "" H 2500 2650 60  0000 C CNN
+F 3 "" H 2500 2650 60  0000 C CNN
+	1    2500 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 620E6CCC
+P 800 2950
+F 0 "#PWR?" H 800 2800 50  0001 C CNN
+F 1 "+5V" H 815 3123 50  0000 C CNN
+F 2 "" H 800 2950 50  0001 C CNN
+F 3 "" H 800 2950 50  0001 C CNN
+	1    800  2950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1650 3050 1850 3050
+Wire Wire Line
+	1650 3050 1650 3150
+Connection ~ 1650 3050
+Wire Wire Line
+	1850 2600 1750 2600
+Wire Wire Line
+	1750 2600 1750 2250
+Wire Wire Line
+	1750 2250 1850 2250
+$Comp
+L power:+3.3V #PWR?
+U 1 1 620FB27E
+P 1750 2250
+F 0 "#PWR?" H 1750 2100 50  0001 C CNN
+F 1 "+3.3V" H 1765 2423 50  0000 C CNN
+F 2 "" H 1750 2250 50  0001 C CNN
+F 3 "" H 1750 2250 50  0001 C CNN
+	1    1750 2250
+	1    0    0    -1  
+$EndComp
+Connection ~ 1750 2250
+$Comp
+L Device:R R?
+U 1 1 620FBEC3
+P 1050 2350
+F 0 "R?" H 1120 2396 50  0000 L CNN
+F 1 "620" H 1120 2305 50  0000 L CNN
+F 2 "" V 980 2350 50  0001 C CNN
+F 3 "~" H 1050 2350 50  0001 C CNN
+	1    1050 2350
+	0    1    1    0   
+$EndComp
+Text GLabel 900  2350 0    50   Input ~ 0
+L_PITCH
+$Comp
+L Device:C C?
+U 1 1 620FDDBF
+P 1350 2450
+F 0 "C?" V 1400 2300 50  0000 L CNN
+F 1 "100nF" V 1400 2500 50  0000 L CNN
+F 2 "" H 1388 2300 50  0001 C CNN
+F 3 "~" H 1350 2450 50  0001 C CNN
+	1    1350 2450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1200 2350 1850 2350
+Wire Wire Line
+	1500 2450 1800 2450
+Wire Wire Line
+	1200 2450 1200 2350
+Connection ~ 1200 2350
+Wire Wire Line
+	1850 2800 1800 2800
+Wire Wire Line
+	1800 2800 1800 2450
+Connection ~ 1800 2450
+Wire Wire Line
+	1800 2450 1850 2450
+$Comp
+L power:Earth #PWR?
+U 1 1 6211BA50
+P 1800 3450
+F 0 "#PWR?" H 1800 3200 50  0001 C CNN
+F 1 "Earth" H 1800 3300 50  0001 C CNN
+F 2 "" H 1800 3450 50  0001 C CNN
+F 3 "~" H 1800 3450 50  0001 C CNN
+	1    1800 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1800 3450 1800 2800
+Connection ~ 1800 2800
+$Comp
+L Device:R R?
+U 1 1 62121E98
+P 1050 2700
+F 0 "R?" H 1120 2746 50  0000 L CNN
+F 1 "620" H 1120 2655 50  0000 L CNN
+F 2 "" V 980 2700 50  0001 C CNN
+F 3 "~" H 1050 2700 50  0001 C CNN
+	1    1050 2700
+	0    1    1    0   
+$EndComp
+Text GLabel 900  2700 0    50   Input ~ 0
+L_ROLL
+$Comp
+L Device:C C?
+U 1 1 62121E9F
+P 1350 2800
+F 0 "C?" V 1400 2650 50  0000 L CNN
+F 1 "100nF" V 1400 2850 50  0000 L CNN
+F 2 "" H 1388 2650 50  0001 C CNN
+F 3 "~" H 1350 2800 50  0001 C CNN
+	1    1350 2800
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1200 2700 1850 2700
+Wire Wire Line
+	1500 2800 1800 2800
+Wire Wire Line
+	1200 2800 1200 2700
+Connection ~ 1200 2700
+Wire Wire Line
+	800  2950 1850 2950
+$Comp
+L Device:R R?
+U 1 1 62138556
+P 1500 4700
+F 0 "R?" V 1600 4650 50  0000 L CNN
+F 1 "1K" V 1600 4500 50  0000 L CNN
+F 2 "" V 1430 4700 50  0001 C CNN
+F 3 "~" H 1500 4700 50  0001 C CNN
+	1    1500 4700
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 6213855C
+P 1650 4950
+F 0 "R?" H 1720 4996 50  0000 L CNN
+F 1 "10K" H 1720 4905 50  0000 L CNN
+F 2 "" V 1580 4950 50  0001 C CNN
+F 3 "~" H 1650 4950 50  0001 C CNN
+	1    1650 4950
+	-1   0    0    1   
+$EndComp
+Text GLabel 1350 4700 0    50   Input ~ 0
+Btn_R3
+$Comp
+L power:Earth #PWR?
+U 1 1 62138563
+P 1650 5100
+F 0 "#PWR?" H 1650 4850 50  0001 C CNN
+F 1 "Earth" H 1650 4950 50  0001 C CNN
+F 2 "" H 1650 5100 50  0001 C CNN
+F 3 "~" H 1650 5100 50  0001 C CNN
+	1    1650 5100
+	1    0    0    -1  
+$EndComp
+$Comp
+L TickerForge:JOYSTICK_BUTTON U?
+U 1 1 62138569
+P 2500 4300
+F 0 "U?" H 3028 4353 60  0000 L CNN
+F 1 "RIGHT_JOYSTICK" H 3028 4247 60  0000 L CNN
+F 2 "" H 2500 4300 60  0000 C CNN
+F 3 "" H 2500 4300 60  0000 C CNN
+	1    2500 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 6213856F
+P 800 4600
+F 0 "#PWR?" H 800 4450 50  0001 C CNN
+F 1 "+5V" H 815 4773 50  0000 C CNN
+F 2 "" H 800 4600 50  0001 C CNN
+F 3 "" H 800 4600 50  0001 C CNN
+	1    800  4600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1650 4700 1850 4700
+Wire Wire Line
+	1650 4700 1650 4800
+Connection ~ 1650 4700
+Wire Wire Line
+	1850 4250 1750 4250
+Wire Wire Line
+	1750 4250 1750 3900
+Wire Wire Line
+	1750 3900 1850 3900
+$Comp
+L power:+3.3V #PWR?
+U 1 1 6213857B
+P 1750 3900
+F 0 "#PWR?" H 1750 3750 50  0001 C CNN
+F 1 "+3.3V" H 1765 4073 50  0000 C CNN
+F 2 "" H 1750 3900 50  0001 C CNN
+F 3 "" H 1750 3900 50  0001 C CNN
+	1    1750 3900
+	1    0    0    -1  
+$EndComp
+Connection ~ 1750 3900
+$Comp
+L Device:R R?
+U 1 1 62138582
+P 1050 4000
+F 0 "R?" H 1120 4046 50  0000 L CNN
+F 1 "620" H 1120 3955 50  0000 L CNN
+F 2 "" V 980 4000 50  0001 C CNN
+F 3 "~" H 1050 4000 50  0001 C CNN
+	1    1050 4000
+	0    1    1    0   
+$EndComp
+Text GLabel 900  4000 0    50   Input ~ 0
+R_PITCH
+$Comp
+L Device:C C?
+U 1 1 62138589
+P 1350 4100
+F 0 "C?" V 1400 3950 50  0000 L CNN
+F 1 "100nF" V 1400 4150 50  0000 L CNN
+F 2 "" H 1388 3950 50  0001 C CNN
+F 3 "~" H 1350 4100 50  0001 C CNN
+	1    1350 4100
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1200 4000 1850 4000
+Wire Wire Line
+	1500 4100 1800 4100
+Wire Wire Line
+	1200 4100 1200 4000
+Connection ~ 1200 4000
+Wire Wire Line
+	1850 4450 1800 4450
+Wire Wire Line
+	1800 4450 1800 4100
+Connection ~ 1800 4100
+Wire Wire Line
+	1800 4100 1850 4100
+$Comp
+L power:Earth #PWR?
+U 1 1 62138597
+P 1800 5100
+F 0 "#PWR?" H 1800 4850 50  0001 C CNN
+F 1 "Earth" H 1800 4950 50  0001 C CNN
+F 2 "" H 1800 5100 50  0001 C CNN
+F 3 "~" H 1800 5100 50  0001 C CNN
+	1    1800 5100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1800 5100 1800 4450
+Connection ~ 1800 4450
+$Comp
+L Device:R R?
+U 1 1 6213859F
+P 1050 4350
+F 0 "R?" H 1120 4396 50  0000 L CNN
+F 1 "620" H 1120 4305 50  0000 L CNN
+F 2 "" V 980 4350 50  0001 C CNN
+F 3 "~" H 1050 4350 50  0001 C CNN
+	1    1050 4350
+	0    1    1    0   
+$EndComp
+Text GLabel 900  4350 0    50   Input ~ 0
+R_ROLL
+$Comp
+L Device:C C?
+U 1 1 621385A6
+P 1350 4450
+F 0 "C?" V 1400 4300 50  0000 L CNN
+F 1 "100nF" V 1400 4500 50  0000 L CNN
+F 2 "" H 1388 4300 50  0001 C CNN
+F 3 "~" H 1350 4450 50  0001 C CNN
+	1    1350 4450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1200 4350 1850 4350
+Wire Wire Line
+	1500 4450 1800 4450
+Wire Wire Line
+	1200 4450 1200 4350
+Connection ~ 1200 4350
+Wire Wire Line
+	800  4600 1850 4600
 $EndSCHEMATC
