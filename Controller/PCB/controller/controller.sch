@@ -756,7 +756,7 @@ F 3 "~" H 6300 1400 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Text GLabel 6000 900  1    50   Input ~ 0
-Btn_?
+Btn_2
 $Comp
 L power:Earth #PWR?
 U 1 1 6210841E
@@ -775,17 +775,6 @@ Wire Wire Line
 Wire Wire Line
 	6300 1150 6300 1200
 Connection ~ 6300 1200
-$Comp
-L Switch:SW_SPST Btn_?
-U 1 1 6210AEE9
-P 7300 950
-F 0 "Btn_?" V 7254 1048 50  0000 L CNN
-F 1 "SW_SPST" V 7345 1048 50  0000 L CNN
-F 2 "" H 7300 950 50  0001 C CNN
-F 3 "~" H 7300 950 50  0001 C CNN
-	1    7300 950 
-	0    1    1    0   
-$EndComp
 $Comp
 L Device:R R?
 U 1 1 6210AEEF
@@ -809,7 +798,7 @@ F 3 "~" H 7300 1400 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Text GLabel 7000 900  1    50   Input ~ 0
-Btn_?
+SW_1
 $Comp
 L power:Earth #PWR?
 U 1 1 6210AEFC
@@ -828,17 +817,6 @@ Wire Wire Line
 Wire Wire Line
 	7300 1150 7300 1200
 Connection ~ 7300 1200
-$Comp
-L Switch:SW_SPST Btn_?
-U 1 1 6210CFFF
-P 8250 950
-F 0 "Btn_?" V 8204 1048 50  0000 L CNN
-F 1 "SW_SPST" V 8295 1048 50  0000 L CNN
-F 2 "" H 8250 950 50  0001 C CNN
-F 3 "~" H 8250 950 50  0001 C CNN
-	1    8250 950 
-	0    1    1    0   
-$EndComp
 $Comp
 L Device:R R?
 U 1 1 6210D005
@@ -862,7 +840,7 @@ F 3 "~" H 8250 1400 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Text GLabel 7950 900  1    50   Input ~ 0
-Btn_?
+SW_2
 $Comp
 L power:Earth #PWR?
 U 1 1 6210D012
@@ -1009,12 +987,12 @@ $EndComp
 $Comp
 L power:+5V #PWR?
 U 1 1 6208E5D4
-P 8250 750
-F 0 "#PWR?" H 8250 600 50  0001 C CNN
-F 1 "+5V" H 8265 923 50  0000 C CNN
-F 2 "" H 8250 750 50  0001 C CNN
-F 3 "" H 8250 750 50  0001 C CNN
-	1    8250 750 
+P 8150 800
+F 0 "#PWR?" H 8150 650 50  0001 C CNN
+F 1 "+5V" H 8165 973 50  0000 C CNN
+F 2 "" H 8150 800 50  0001 C CNN
+F 3 "" H 8150 800 50  0001 C CNN
+	1    8150 800 
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1034,12 +1012,12 @@ Wire Wire Line
 $Comp
 L power:+5V #PWR?
 U 1 1 62091695
-P 7300 750
-F 0 "#PWR?" H 7300 600 50  0001 C CNN
-F 1 "+5V" H 7315 923 50  0000 C CNN
-F 2 "" H 7300 750 50  0001 C CNN
-F 3 "" H 7300 750 50  0001 C CNN
-	1    7300 750 
+P 7200 750
+F 0 "#PWR?" H 7200 600 50  0001 C CNN
+F 1 "+5V" H 7215 923 50  0000 C CNN
+F 2 "" H 7200 750 50  0001 C CNN
+F 3 "" H 7200 750 50  0001 C CNN
+	1    7200 750 
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1484,4 +1462,61 @@ Text GLabel 7000 4100 2    50   Input ~ 0
 NRF_MOSI
 Text GLabel 7000 4000 2    50   Input ~ 0
 NRF_CSN
+$Comp
+L power:+3.3V #PWR?
+U 1 1 620F525F
+P 7750 3900
+F 0 "#PWR?" H 7750 3750 50  0001 C CNN
+F 1 "+3.3V" H 7765 4073 50  0000 C CNN
+F 2 "" H 7750 3900 50  0001 C CNN
+F 3 "" H 7750 3900 50  0001 C CNN
+	1    7750 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 620F58B9
+P 7750 4050
+F 0 "C?" H 7865 4096 50  0000 L CNN
+F 1 "10uF" H 7865 4005 50  0000 L CNN
+F 2 "" H 7788 3900 50  0001 C CNN
+F 3 "~" H 7750 4050 50  0001 C CNN
+	1    7750 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR?
+U 1 1 620F67B9
+P 7750 4200
+F 0 "#PWR?" H 7750 3950 50  0001 C CNN
+F 1 "Earth" H 7750 4050 50  0001 C CNN
+F 2 "" H 7750 4200 50  0001 C CNN
+F 3 "~" H 7750 4200 50  0001 C CNN
+	1    7750 4200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_SPDT SW?
+U 1 1 620F8D01
+P 7300 950
+F 0 "SW?" V 7350 800 50  0000 R CNN
+F 1 "SW_SPDT" V 7250 900 50  0000 R CNN
+F 2 "" H 7300 950 50  0001 C CNN
+F 3 "~" H 7300 950 50  0001 C CNN
+	1    7300 950 
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Switch:SW_SPDT SW?
+U 1 1 620FA2D7
+P 8250 950
+F 0 "SW?" V 8300 800 50  0000 R CNN
+F 1 "SW_SPDT" V 8200 900 50  0000 R CNN
+F 2 "" H 8250 950 50  0001 C CNN
+F 3 "~" H 8250 950 50  0001 C CNN
+	1    8250 950 
+	0    -1   -1   0   
+$EndComp
+NoConn ~ 8350 750 
+NoConn ~ 7400 750 
 $EndSCHEMATC
