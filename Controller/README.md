@@ -7,9 +7,8 @@ The Controller will need to remotely control the craft with bi-directional commu
 2. [ ] Inputs
 	1. [ ] 2 Analogue Joysticks
 	2. [ ] 5 buttons
-		1. [ ] 2 discreet buttons
-		2. [ ] 2 in the joysticks
-		3. [ ] Reset Button
+		1. [ ] 4 discreet buttons
+		2. [ ] Reset Button
 	3. [ ] 2 Rotary Potentiometers
 	4. [ ] 2 SPDT toggling switches
 3. [ ] Outputs
