@@ -3293,7 +3293,7 @@
     (uuid 00000000-0000-0000-0000-000062120977)
     (property "Reference" "A1" (id 0) (at 91.44 183.8706 0))
     (property "Value" "NUCLEO-L432KC" (id 1) (at 91.44 186.182 0))
-    (property "Footprint" "Module:Arduino_Nano" (id 2) (at 91.44 156.21 0)
+    (property "Footprint" "My_library:NUCELO-L432KC_SMD" (id 2) (at 91.44 156.21 0)
       (effects (font (size 1.27 1.27) italic) hide)
     )
     (property "Datasheet" "https://www.arduino.cc/en/uploads/Main/ArduinoNanoManual23.pdf" (id 3) (at 91.44 156.21 0)
@@ -4905,7 +4905,7 @@
       (reference "#PWR0155") (unit 1) (value "Earth") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000062120977"
-      (reference "A1") (unit 1) (value "NUCLEO-L432KC") (footprint "Module:Arduino_Nano")
+      (reference "A1") (unit 1) (value "NUCLEO-L432KC") (footprint "My_library:NUCELO-L432KC_SMD")
     )
     (path "/42f37560-b65a-4070-adca-823dfbc57e67"
       (reference "BT1") (unit 1) (value "Bat_18650") (footprint "My_library:18650_Holder(1)")
