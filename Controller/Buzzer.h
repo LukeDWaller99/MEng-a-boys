@@ -12,12 +12,6 @@
  */
 #include <mbed.h>
 
-
-/**
- * Defines
- */
-#define BUZZER_PIN PB_13
-
 class Buzzer {
 
 public:
@@ -28,7 +22,7 @@ public:
         HIGHER
         } OCTAVE;
 
-    Buzzer(PinName pin = BUZZER_PIN);
+    Buzzer(PinName pin);
     void setNote(const char* note = "C", OCTAVE octave=MIDDLE); 
     void buzz(float amount = 0.5f);
     void stop();
