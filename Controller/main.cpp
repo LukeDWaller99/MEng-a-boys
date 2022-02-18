@@ -33,8 +33,8 @@
 // int ledMask = 1020; //  0b0000001111111100;
 // int allOn =  0b0111000000000000;
 
-// DigitalIn Btn_1(BTN1);          
-// DigitalOut led_1(LED_1);                                               
+InterruptIn Btn_1(BTN1), Btn_2(BTN2), Btn_3(BTN3), Btn_4(BTN4);           
+DigitalOut led_1(LED_1), led_2(LED_2);                                               
 // AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL), Pot_1(POT1), Pot_2(POT2);    
 Buzzer buzzer(BUZZER);
 
@@ -42,6 +42,7 @@ Buzzer buzzer(BUZZER);
 // nRF24L01P nRF24L01(MOSI, MISO, SCK, CS, CE, IRQ);
 
 // Thread BtnThread, SerialThread, PotThread;
+Thread LEDThread, ButtonThread;
 
 // Mutex PotLock;
 
@@ -81,30 +82,49 @@ Buzzer buzzer(BUZZER);
 
 // void PotMethod();
 
+void toggleLEDs();
+void ButtonThreadMethod();
+void Btn_1IRQ(){
+    ButtonThread.flags_set(1);
+}
+void Btn_2IRQ();
+void Btn_3IRQ();
+void Btn_4IRQ();
+
+
 
 // create an array of outputs for the leds for the output
 int main() {
 
+    led_1 = 1;
+
     // BtnThread.start(BtnMethod);
     // PotThread.start(PotMethod);
+    LEDThread.start(toggleLEDs);
+    ButtonThread.start(ButtonThreadMethod);
+    Btn_1.rise(Btn_1IRQ);
+    Btn_2.rise(Btn_2IRQ);
+    Btn_3.rise(Btn_3IRQ);
+    Btn_4.rise(Btn_4IRQ);
     
     // // buzzer.chime(10000000, "E","F","G", Buzzer::HIGHER);
     // // buzzer.chime(10000000)
 
-    buzzer = "G";   // operator overload to set note 
-    // buzzer = 1;     // operator overload to turn buzzer on and off
-    buzzer = 1.0f;  // operator overload to set period of buzzer on
+    // buzzer = "G";   // operator overload to set note 
+    // // buzzer = 1;     // operator overload to turn buzzer on and off
+    // buzzer = 1.0f;  // operator overload to set period of buzzer on
+    // // buzzer = 0;
+
+    // // led_1 = 1;
+    // // led_2 = 1;
+
+    // buzzer = 1;
+    // wait_us(100000);
     // buzzer = 0;
-
-    // led_1 = 1;
-    // led_2 = 1;
-
-    buzzer = 1;
-    wait_us(100000);
-    buzzer = 0;
 
     while (true) {
         // led_1 = 1;
+        // led_2 = 1;
         // if (Btn_1 == 1) {
         // led_1 = 1;
         // }
@@ -149,3 +169,54 @@ int main() {
         
 //     }
 // }
+
+void toggleLEDs(){
+    while (true) {
+    led_1 = !led_1;
+    led_2 = !led_2;
+    ThisThread::sleep_for(1s);
+    }
+}
+
+void ButtonThreadMethod(){
+    printf("Thread Started\n");
+    while (true) {
+        buzzer = 0;
+        ThisThread::flags_wait_any(0x7fffffff, false);
+        buzzer = 1;
+        int flag = ThisThread::flags_get();
+        printf("Flag = %d\n", flag);
+        if (flag == 1) {
+            printf("Button 1 pressed\n");
+        }
+        else if (flag == 2) {
+            printf("Button 2 pressed\n");
+        }
+        else if (flag == 3) {
+            printf("Button 3 pressed\n");
+        }
+        else if (flag == 4) {
+            printf("Button 4 pressed\n");
+        }
+        else {
+            printf("ERROR\n");
+        }
+        flag = 0;
+                ThisThread::sleep_for(500ms);
+        ThisThread::flags_clear(0x7fffffff);
+    }
+}
+
+
+
+void Btn_2IRQ(){
+    ButtonThread.flags_set(2);
+}
+
+void Btn_3IRQ(){
+    ButtonThread.flags_set(3);
+}
+
+void Btn_4IRQ(){
+    ButtonThread.flags_set(4);
+}

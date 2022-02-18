@@ -20,7 +20,7 @@
 #define R_ROLL  PF_3
 
 // input buttons
-#define BTN1    PA_7  
+#define BTN1    PF_10
 #define BTN2    PF_2
 #define BTN3    PF_1
 #define BTN4    PF_0
