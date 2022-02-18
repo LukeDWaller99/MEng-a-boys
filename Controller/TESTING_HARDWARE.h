@@ -14,30 +14,30 @@
 #define IRQ     PB_1
 
 // joystick pins
-#define L_PITCH PA_2
-#define L_ROLL  PA_7
-#define R_PITCH PA_6
-#define R_ROLL  PA_5
+#define L_PITCH PA_0
+#define L_ROLL  PC_0
+#define R_PITCH PC_3
+#define R_ROLL  PF_3
 
 // input buttons
-#define BTN1    PG_0
-#define BTN2    PG_1
-#define BTN3    PG_2
-#define BTN4    PG_3
+#define BTN1    PA_7  
+#define BTN2    PF_2
+#define BTN3    PF_1
+#define BTN4    PF_0
 
 //input switches
-#define SW1     PB_6
-#define SW2     PB_7
+#define SW1     PD_7
+#define SW2     PD_6
 
 // leds
-#define LED_1   PC_2
-#define LED_2   PC_3
+#define LED_1   PD_0
+#define LED_2   PD_1
 
 // buzzer
 #define BUZZER  PB_13
 
 // potentiometers 
-#define POT1    PA_0
-#define POT2    PA_0
+#define POT1    PF_5
+#define POT2    PF_10
 
 #endif

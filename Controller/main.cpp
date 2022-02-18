@@ -33,77 +33,87 @@
 // int ledMask = 1020; //  0b0000001111111100;
 // int allOn =  0b0111000000000000;
 
-DigitalIn Btn_1(BTN1), Btn_2(BTN2), SW_1(SW1), SW_2(SW2);          
-DigitalOut led_1(LED_1), led_2(LED_2);                                                
-AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL), Pot_1(POT1), Pot_2(POT2);    
+// DigitalIn Btn_1(BTN1);          
+// DigitalOut led_1(LED_1);                                               
+// AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL), Pot_1(POT1), Pot_2(POT2);    
 Buzzer buzzer(BUZZER);
 
 // MOSI, MISO, SCK, CS, CE, IRQ - must be an interrupt pin 6 
-nRF24L01P nRF24L01(MOSI, MISO, SCK, CS, CE, IRQ);
+// nRF24L01P nRF24L01(MOSI, MISO, SCK, CS, CE, IRQ);
 
-Thread BtnThread, SerialThread, PotThread;
+// Thread BtnThread, SerialThread, PotThread;
 
-Mutex PotLock;
+// Mutex PotLock;
 
-int quantisePotVal (int EightBitPotVal){
-    int LedMask = 0;
-    switch (EightBitPotVal) {
-    case 1:
-    return LedMask = 1;
-    case 2:
-    return LedMask = 3;
-    case 3:
-    return LedMask = 7;
-    case 4:
-    return LedMask = 15;
-    case 5:
-    return LedMask = 31;
-    case 6:
-    return LedMask = 63;
-    case 7:
-    return LedMask = 127;
-    default:
-    return LedMask;
-    }
-}
+// int quantisePotVal (int EightBitPotVal){
+//     int LedMask = 0;
+//     switch (EightBitPotVal) {
+//     case 1:
+//     return LedMask = 1;
+//     case 2:
+//     return LedMask = 3;
+//     case 3:
+//     return LedMask = 7;
+//     case 4:
+//     return LedMask = 15;
+//     case 5:
+//     return LedMask = 31;
+//     case 6:
+//     return LedMask = 63;
+//     case 7:
+//     return LedMask = 127;
+//     default:
+//     return LedMask;
+//     }
+// }
 
-void BtnMethod(){
-    while(true){
+// void BtnMethod(){
+//     while(true){
 
-    }   
-}
+//     }   
+// }
 
-void SerialMethod(){
-    while(true){
+// void SerialMethod(){
+//     while(true){
 
-    }
-}
+//     }
+// }
 
-void PotMethod();
+// void PotMethod();
 
 
 // create an array of outputs for the leds for the output
 int main() {
 
     // BtnThread.start(BtnMethod);
-    PotThread.start(PotMethod);
+    // PotThread.start(PotMethod);
     
     // // buzzer.chime(10000000, "E","F","G", Buzzer::HIGHER);
     // // buzzer.chime(10000000)
 
-    // buzzer = "C";   // operator overload to set note 
+    buzzer = "G";   // operator overload to set note 
     // buzzer = 1;     // operator overload to turn buzzer on and off
-    // buzzer = 0.5f;  // operator overload to set period of buzzer on
+    buzzer = 1.0f;  // operator overload to set period of buzzer on
     // buzzer = 0;
 
-    led_1 = 1;
-    led_2 = 1;
+    // led_1 = 1;
+    // led_2 = 1;
 
     buzzer = 1;
     wait_us(100000);
     buzzer = 0;
 
     while (true) {
+        // led_1 = 1;
+        // if (Btn_1 == 1) {
+        // led_1 = 1;
+        // }
+        // else {
+        // led_1 = 0;
+        // }
+        // else {
+        // led_1 = 0;
+        // }
     // LEDs = ledMask | allOn;
     // potVal = L_Pitch.read_u16();
     // eightBitPotVal = potVal >> 13;
@@ -114,28 +124,28 @@ int main() {
     }
 }
 
-void PotMethod(){
+// void PotMethod(){
 
-    double L_PitchVal;
-    double L_RollVal;
-    double R_PitchVal;
-    double R_RollVal;
-    double Pot_1Val;
-    double Pot_2Val;
+//     double L_PitchVal;
+//     double L_RollVal;
+//     double R_PitchVal;
+//     double R_RollVal;
+//     double Pot_1Val;
+//     double Pot_2Val;
 
-    while(true){
+//     while(true){
 
-        PotLock.lock();
-            L_PitchVal = L_Pitch.read();
-            R_PitchVal = R_Pitch.read();
-            L_RollVal = L_Roll.read();
-            R_RollVal = R_Roll.read();
-            Pot_1Val = Pot_1.read();
-            Pot_2Val = Pot_2.read();
-        PotLock.unlock();
+//         PotLock.lock();
+//             L_PitchVal = L_Pitch.read();
+//             R_PitchVal = R_Pitch.read();
+//             L_RollVal = L_Roll.read();
+//             R_RollVal = R_Roll.read();
+//             Pot_1Val = Pot_1.read();
+//             Pot_2Val = Pot_2.read();
+//         PotLock.unlock();
 
-        printf("%f\n", Pot_1Val);
-        wait_us(1000000);
+//         printf("%f\n", Pot_1Val);
+//         wait_us(1000000);
         
-    }
-}
+//     }
+// }
