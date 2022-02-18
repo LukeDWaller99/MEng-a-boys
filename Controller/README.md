@@ -3,7 +3,7 @@
 ## Requirements
 The Controller will need to remotely control the craft with bi-directional communication. This will involve serveral design considerations including:
 1. [ ] Microcontroller
-	1. [ ] NUCLEO-8S207K8 or NUCLEO-G031K8
+	1. [ ] NUCELO-L432KC
 2. [ ] Inputs
 	1. [ ] 2 Analogue Joysticks
 	2. [ ] 5 buttons
@@ -31,8 +31,13 @@ The Controller will need to remotely control the craft with bi-directional commu
 	2. [ ] Ergonomic 
 	3. [ ] Light and easy to tranport 
 	4. [ ] 3D printed
-	
-	----
+7. [ ] PCB/Electronics
+	1. [x] Schematic  
+	2. [ ] PCB Layout
+8. [ ] Testing
+	1. [x] Testing individual assemblies on a breadboard
+	2. [ ] Debugging code to test all individual components on the PCB
+
 ## Dependancies/Libraries Used
 
 `nRF24L01P.h` Authored by Owen Edwards (c) 2010
