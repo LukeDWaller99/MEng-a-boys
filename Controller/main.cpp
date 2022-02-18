@@ -84,9 +84,7 @@ Thread LEDThread, ButtonThread;
 
 void toggleLEDs();
 void ButtonThreadMethod();
-void Btn_1IRQ(){
-    ButtonThread.flags_set(1);
-}
+void Btn_1IRQ();
 void Btn_2IRQ();
 void Btn_3IRQ();
 void Btn_4IRQ();
@@ -108,7 +106,7 @@ int main() {
     Btn_4.rise(Btn_4IRQ);
     
     // // buzzer.chime(10000000, "E","F","G", Buzzer::HIGHER);
-    // // buzzer.chime(10000000)
+    // buzzer.chime(10000000);
 
     // buzzer = "G";   // operator overload to set note 
     // // buzzer = 1;     // operator overload to turn buzzer on and off
@@ -141,6 +139,7 @@ int main() {
     // ledMask = quantisedVal << 2;
     // // printf("%d\n", quantisedVal);
     // wait_us(10);
+    sleep();
     }
 }
 
@@ -207,7 +206,9 @@ void ButtonThreadMethod(){
     }
 }
 
-
+void Btn_1IRQ(){
+    ButtonThread.flags_set(1);
+}
 
 void Btn_2IRQ(){
     ButtonThread.flags_set(2);
