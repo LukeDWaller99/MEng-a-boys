@@ -13,7 +13,7 @@ The Controller will need to remotely control the craft with bi-directional commu
 	4. [ ] 2 SPDT toggling switches
 3. [ ] Outputs
 	1. [ ] Buzzer for feedback to user
-	2. [ ] Status LEDs
+	2. [ ] 2 Status LEDs
 4. [ ] Power
 	1. [ ] Power Indicator LED
 	2. [ ] Battery Powered
@@ -31,6 +31,7 @@ The Controller will need to remotely control the craft with bi-directional commu
 	2. [ ] Ergonomic 
 	3. [ ] Light and easy to tranport 
 	4. [ ] 3D printed
+	5. [ ] Easy to use
 7. [ ] PCB/Electronics
 	1. [x] Schematic  
 	2. [ ] PCB Layout
