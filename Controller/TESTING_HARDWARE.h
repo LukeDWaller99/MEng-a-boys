@@ -14,7 +14,7 @@
 #define IRQ     PB_1
 
 // joystick pins
-#define L_PITCH PA_0
+#define L_PITCH PA_3
 #define L_ROLL  PC_0
 #define R_PITCH PC_3
 #define R_ROLL  PF_3

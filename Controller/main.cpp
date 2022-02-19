@@ -35,16 +35,16 @@
 
 InterruptIn Btn_1(BTN1), Btn_2(BTN2), Btn_3(BTN3), Btn_4(BTN4);           
 DigitalOut led_1(LED_1), led_2(LED_2);                                               
-// AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL), Pot_1(POT1), Pot_2(POT2);    
+AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL); // Pot_1(POT1), Pot_2(POT2);    
 Buzzer buzzer(BUZZER);
 
 // MOSI, MISO, SCK, CS, CE, IRQ - must be an interrupt pin 6 
 // nRF24L01P nRF24L01(MOSI, MISO, SCK, CS, CE, IRQ);
 
 // Thread BtnThread, SerialThread, PotThread;
-Thread LEDThread, ButtonThread;
+Thread LEDThread, ButtonThread, PotThread;
 
-// Mutex PotLock;
+Mutex PotLock;
 
 // int quantisePotVal (int EightBitPotVal){
 //     int LedMask = 0;
@@ -80,7 +80,7 @@ Thread LEDThread, ButtonThread;
 //     }
 // }
 
-// void PotMethod();
+void PotMethod();
 
 void toggleLEDs();
 void ButtonThreadMethod();
@@ -96,8 +96,7 @@ int main() {
 
     led_1 = 1;
 
-    // BtnThread.start(BtnMethod);
-    // PotThread.start(PotMethod);
+    PotThread.start(PotMethod);
     LEDThread.start(toggleLEDs);
     ButtonThread.start(ButtonThreadMethod);
     Btn_1.rise(Btn_1IRQ);
@@ -143,31 +142,34 @@ int main() {
     }
 }
 
-// void PotMethod(){
+void PotMethod(){
 
-//     double L_PitchVal;
-//     double L_RollVal;
-//     double R_PitchVal;
-//     double R_RollVal;
-//     double Pot_1Val;
-//     double Pot_2Val;
+    double L_PitchVal;
+    double L_RollVal;
+    double R_PitchVal;
+    double R_RollVal;
+    // double Pot_1Val;
+    // double Pot_2Val;
 
-//     while(true){
+    while(true){
 
-//         PotLock.lock();
-//             L_PitchVal = L_Pitch.read();
-//             R_PitchVal = R_Pitch.read();
-//             L_RollVal = L_Roll.read();
-//             R_RollVal = R_Roll.read();
-//             Pot_1Val = Pot_1.read();
-//             Pot_2Val = Pot_2.read();
-//         PotLock.unlock();
+        PotLock.lock();
+            L_PitchVal = L_Pitch.read();
+            R_PitchVal = R_Pitch.read();
+            L_RollVal = L_Roll.read();
+            R_RollVal = R_Roll.read();
+            // Pot_1Val = Pot_1.read();
+            // Pot_2Val = Pot_2.read();
+        PotLock.unlock();
 
-//         printf("%f\n", Pot_1Val);
-//         wait_us(1000000);
+        printf("Left Pitch: %f\n", L_PitchVal);
+        printf("Left Roll: %f\n", L_RollVal);
+        printf("Right Pitch: %f\n", R_PitchVal);
+        printf("Right Roll: %f\n", R_RollVal);
+        ThisThread::sleep_for(2s);
         
-//     }
-// }
+    }
+}
 
 void toggleLEDs(){
     while (true) {
