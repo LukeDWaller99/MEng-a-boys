@@ -4,8 +4,7 @@
         "*": {
             "target.printf_lib": "std",
             "platform.stdio-convert-newlines": true,
-            "platform.stdio-baud-rate": 115200,
-            "target.components_add": ["SD"]
+            "platform.stdio-baud-rate": 115200
         }
 
 
