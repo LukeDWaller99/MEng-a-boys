@@ -9,7 +9,7 @@
 #define MOSI    PB_5
 #define MISO    PB_4
 #define SCK     PB_3
-#define CNS     PA_4
+#define CSN     PA_4
 #define CE      PC_7
 #define IRQ     PA_15
 
