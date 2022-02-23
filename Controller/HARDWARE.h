@@ -12,30 +12,30 @@
 #define IRQ     PA_8    // D9
 
 // joystick pins
-#define L_PITCH PA_0
-#define L_ROLL  PA_7
-#define R_PITCH PA_6
-#define R_ROLL  PA_5
+#define L_PITCH PA_0    // A0
+#define L_ROLL  PA_7    // A6
+#define R_PITCH PA_6    // A5
+#define R_ROLL  PA_5    // A4
 
 // input buttons
-#define BTN1    PB_3 
-#define BTN2    PB_0
-#define BTN3    PB_7
-#define BTN4    PB_6
+#define BTN1    PB_3    // D13
+#define BTN2    PB_1   // D3
+#define BTN3    PB_7    // D4
+#define BTN4    PB_6    // D5
 
 // //input switches
-#define SW1     PC_14
-#define SW2     PC_15
+#define SW1     PC_15   // D8
+#define SW2     PC_14   // D7
 
 // leds
-#define LED_1   PA_10
-#define LED_2   PA_9
+#define LED_1   PA_10   // D0
+#define LED_2   PA_9    // D1
 
 // // buzzer
-#define BUZZER  PA_9
+#define BUZZER  PB_0   // D6
 
 // // potentiometers 
-#define POT1    PA_3
-#define POT2    PA_4
+#define POT1    PA_3    // A2
+#define POT2    PA_4    // A3
 
 #endif

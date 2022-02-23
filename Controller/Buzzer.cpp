@@ -1,10 +1,8 @@
 #include "Buzzer.h"
 
 Buzzer::Buzzer(PinName pin) : buzzer(pin) {
-
     setNote();
     stop();
-
 }
 
 void Buzzer::setNote(const char* note, OCTAVE octave){
