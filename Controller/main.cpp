@@ -15,8 +15,8 @@
 #include "PinNames.h"
 #include "ThisThread.h"
 #include "nfc_errors.h"
+#include "HARDWARE.h"
 
-#define TESTING_MODE    1 // testing mode = 1 - NUCELO-F429ZI
 #define TRASMITTER      0 // determines if the current mode is transmitting or reciving
 #define TRANSFER_SIZE   10
 #define DEFAULT_PIPE    0 // set the defauly pipe for the nRF24L01
@@ -26,13 +26,6 @@
 
 #define RADIO_QUEUE_LENGTH 32
 
-#if TESTING_MODE == 1
-    #include "TESTING_HARDWARE.h"
-
-#elif TESTING_MODE == 0
-    #include "HARDWARE.h"
-
-#endif
 
 // MOSI, MISO, SCK, CNS, CE, IRQ - must be an interrupt pin 6 
 nRF24L01P nRF24L01(MOSI, MISO, SCK, CSN, CE, IRQ);
@@ -119,27 +112,33 @@ int main() {
     wait_us(1000000);
     buzzer = 0;
 
-    // PotThread.start(PotMethod);
+    PotThread.start(PotMethod);
     // RadioThread.start(callback(&radioQueue, &EventQueue::dispatch_forever));
-    // LEDThread.start(toggleLEDs);
-    // ButtonThread.start(ButtonThreadMethod);
-    // Btn_1.rise(Btn_1IRQ);
-    // Btn_2.rise(Btn_2IRQ);
-    // Btn_3.rise(Btn_3IRQ);
-    // Btn_4.rise(Btn_4IRQ);
-    // SW_1.rise(SW_1RisingIRQ);
-    // SW_1.fall(SW_1FallingIRQ);
-    // SW_2.rise(SW_2RisingIRQ);
-    // SW_2.fall(SW_2FallingIRQ);
+    LEDThread.start(toggleLEDs);
+    ButtonThread.start(ButtonThreadMethod);
+    Btn_1.rise(Btn_1IRQ);
+    Btn_2.rise(Btn_2IRQ);
+    Btn_3.rise(Btn_3IRQ);
+    Btn_4.rise(Btn_4IRQ);
+    SW_1.rise(SW_1RisingIRQ);
+    SW_1.fall(SW_1FallingIRQ);
+    SW_2.rise(SW_2RisingIRQ);
+    SW_2.fall(SW_2FallingIRQ);
 
+    txData[0] = 'T';
+    txData[1] = 'E';
+    txData[2] = 'S';
+    txData[3] = 'T';
+
+    nRF24L01.write(0, txData, txDataCnt);
 
     while (true) {
         // nRF24L01.write(0, txData, txDataCnt);
         // wait_us(1000000);
-        if (nRF24L01.readable(0)) {
-            rxDataCnt = nRF24L01.read(0, rxData, sizeof(rxData));
-            printf("%s\n", rxData);
-        }
+        // if (nRF24L01.readable(0)) {
+        //     rxDataCnt = nRF24L01.read(0, rxData, sizeof(rxData));
+        //     printf("%s\n", rxData);
+        // }
     }
 }
 
