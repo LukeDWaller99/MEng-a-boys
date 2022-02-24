@@ -104,6 +104,13 @@ int main() {
 
     nRF24L01.enable();
 
+    txData[0] = 'T';
+    txData[1] = 'E';
+    txData[2] = 'S';
+    txData[3] = 'T';
+
+    nRF24L01.write(0, txData, txDataCnt);
+
     setBtnChar();
     setSWChar();
     setPotChar();
@@ -125,13 +132,6 @@ int main() {
     SW_1.fall(SW_1FallingIRQ);
     SW_2.rise(SW_2RisingIRQ);
     SW_2.fall(SW_2FallingIRQ);
-
-    txData[0] = 'T';
-    txData[1] = 'E';
-    txData[2] = 'S';
-    txData[3] = 'T';
-
-    nRF24L01.write(0, txData, txDataCnt);
 
     while (true) {
         // nRF24L01.write(0, txData, txDataCnt);
@@ -202,12 +202,12 @@ int newPOT_2Val = 0;
     }
     if (oldPOT_1Val != newPOT_1Val){
         sprintf(txPOT_1Temp, "%d", newPOT_1Val);
-        for (int i = 0; i < 4; i++) { txPOT_1[i+3] = txPOT_1Temp[i]; }
+        for (int i = 0; i < 3; i++) { txPOT_1[i+3] = txPOT_1Temp[i]; }
         nRF24L01.write(DEFAULT_PIPE, txPOT_1, txDataCnt);
     }
     if (oldPOT_2Val != newPOT_2Val){
         sprintf(txPOT_2Temp, "%d", newPOT_2Val);
-        for (int i = 0; i < 4; i++) { txPOT_2[i+3] = txPOT_2Temp[i]; }
+        for (int i = 0; i < 3; i++) { txPOT_2[i+3] = txPOT_2Temp[i]; }
         nRF24L01.write(DEFAULT_PIPE, txPOT_2, txDataCnt);
     }
 
@@ -221,15 +221,6 @@ int newPOT_2Val = 0;
 
     PotLock.unlock();
     ThisThread::sleep_for(10ms);
-    }
-}
-
-void toggleLEDs(){
-    printf("LED Thread Started \n");
-    while (true) {
-    led_1 = !led_1;
-    led_2 = !led_2;
-    ThisThread::sleep_for(1s);
     }
 }
 
@@ -262,6 +253,21 @@ void ButtonThreadMethod(){
             txSW1[4] = '1';
             nRF24L01.write(DEFAULT_PIPE, txSW1, txDataCnt);
         }
+        else if (flag == 32){
+            printf("Switch 1 OFF\n");
+            txSW1[4] = '0';
+            nRF24L01.write(DEFAULT_PIPE, txSW1, txDataCnt);
+        }
+        else if (flag == 64){
+            printf("Switch 2 ON\n");
+            txSW1[4] = '0';
+            nRF24L01.write(DEFAULT_PIPE, txSW2, txDataCnt);
+        }
+        else if (flag == 128){
+            printf("Switch 2 OFF\n");
+            txSW1[4] = '0';
+            nRF24L01.write(DEFAULT_PIPE, txSW2, txDataCnt);
+        }
         else {
             printf("ERROR\n");
         }
@@ -290,15 +296,15 @@ void SW_1RisingIRQ(){
 }
 
 void SW_1FallingIRQ(){
-
+    ButtonThread.flags_set(32);
 }
 
 void SW_2RisingIRQ(){
-
+    ButtonThread.flags_set(64);
 }
 
 void SW_2FallingIRQ(){
-
+    ButtonThread.flags_set(128);
 }
 
 
@@ -327,6 +333,7 @@ void setSWChar(){
     txSW1[1] = 'W';
     txSW1[2] = '1';
     txSW1[3] = ':';
+
     txSW2[0] = 'S';
     txSW2[1] = 'W';
     txSW2[2] = '1';
@@ -351,12 +358,19 @@ void setPotChar(){
     txRightRoll[2] = ':';
 
     txPOT_1[0] = 'P';
-    txPOT_1[0] = 'T';
-    txPOT_1[0] = '1';
-    txPOT_1[4] = ':';
+    txPOT_1[1] = '1';
+    txPOT_1[2] = ':';
 
     txPOT_2[0] = 'P';
-    txPOT_2[0] = 'T';
-    txPOT_2[0] = '2';
-    txPOT_2[4] = ':';
+    txPOT_2[1] = '2';
+    txPOT_2[2] = ':';
+}
+
+void toggleLEDs(){
+    printf("LED Thread Started \n");
+    while (true) {
+    led_1 = !led_1;
+    led_2 = !led_2;
+    ThisThread::sleep_for(1s);
+    }
 }
