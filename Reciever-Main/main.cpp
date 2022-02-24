@@ -7,7 +7,7 @@
 #include <nRF24L01P.h>
 #include "HARDWARE.h"
 
-#define TRANSMITTER     1
+#define TRANSMITTER     0
 #define TRANSFER_SIZE   10
 #define DEFAULT_PIPE    0
 
@@ -31,19 +31,13 @@ int main() {
 
     nRF24L01.setTransferSize(TRANSFER_SIZE);
 
-    if (TRANSMITTER == 0) {
-        nRF24L01.setReceiveMode();
-    }
-    else if (TRANSMITTER == 1){
-        nRF24L01.setTransmitMode();
-    }
-    else {
-        // error?
-    }
+    nRF24L01.setReceiveMode();
+
+    nRF24L01.enable();
 
     while (true) {
-    if (nRF24L01.readable(0)) {
-            rxDataCnt = nRF24L01.read(0, rxData, sizeof(rxData));
+    if (nRF24L01.readable(DEFAULT_PIPE)) {
+            rxDataCnt = nRF24L01.read(DEFAULT_PIPE, rxData, sizeof(rxData));
             printf("%s\n", rxData);
         }
     }
