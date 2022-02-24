@@ -3,6 +3,7 @@
     Main file for Final Year Project - Luke Waller
 **/
 
+#include <cmath>
 #include <cstdio>
 #include <mbed.h>
 #include <nRF24L01P.h>
@@ -14,10 +15,8 @@
 #include "EventQueue.h"
 #include "PinNames.h"
 #include "ThisThread.h"
-#include "nfc_errors.h"
 #include "HARDWARE.h"
 
-#define TRASMITTER      0 // determines if the current mode is transmitting or reciving
 #define TRANSFER_SIZE   10
 #define DEFAULT_PIPE    0 // set the defauly pipe for the nRF24L01
 
@@ -42,8 +41,15 @@ char txLeftPitch[TRANSFER_SIZE],
      txLeftRoll[TRANSFER_SIZE],
      txRightPitch[TRANSFER_SIZE], 
      txRightRoll[TRANSFER_SIZE], 
-     txPot1[TRANSFER_SIZE], 
-     txPot2[TRANSFER_SIZE];
+     txPOT_1[TRANSFER_SIZE], 
+     txPOT_2[TRANSFER_SIZE];
+
+char txLeftPitchTemp[TRANSFER_SIZE], 
+     txLeftRollTemp[TRANSFER_SIZE],
+     txRightPitchTemp[TRANSFER_SIZE], 
+     txRightRollTemp[TRANSFER_SIZE], 
+     txPOT_1Temp[TRANSFER_SIZE], 
+     txPOT_2Temp[TRANSFER_SIZE];
 
 char txBTN1[TRANSFER_SIZE],
      txBTN2[TRANSFER_SIZE],
@@ -76,6 +82,7 @@ void SW_2RisingIRQ();
 void SW_2FallingIRQ();
 void setBtnChar();
 void setSWChar();
+void setPotChar();
 
 
 
@@ -93,19 +100,13 @@ int main() {
 
     nRF24L01.setTransferSize(TRANSFER_SIZE);
  
-    if (TRASMITTER == 0) {
-        nRF24L01.setReceiveMode();
-    }
-    else if (TRASMITTER == 1){
-        nRF24L01.setTransmitMode();
-    }
-    else {
-        // error?
-    }
+    nRF24L01.setTransmitMode();
 
     nRF24L01.enable();
 
     setBtnChar();
+    setSWChar();
+    setPotChar();
 
     led_1 = 1;
     buzzer = 1;
@@ -144,16 +145,82 @@ int main() {
 
 void PotMethod(){
 
+int oldLeftPitchVal = 0;
+int newLeftPitchVal = 0;
+
+int oldLeftRollVal = 0;
+int newLeftRollVal = 0;
+
+int oldRightPitchVal = 0;
+int newRightPitchVal = 0;
+
+int oldRightRollVal = 0;
+int newRightRollVal = 0;
+
+int oldPOT_1Val = 0;
+int newPOT_1Val = 0;
+
+int oldPOT_2Val = 0;
+int newPOT_2Val = 0;
+
     while(true){
 
         PotLock.trylock_for(10ms);
-            potVals[0] = (L_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
+            potVals[0] = ((L_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 10;
             potVals[1] = (L_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
             potVals[2] = (R_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
             potVals[3] = (R_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
             potVals[4] = (Pot_1.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
             potVals[5] = (Pot_2.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
-        PotLock.unlock(); 
+
+    newLeftPitchVal     = round(potVals[0]);
+    newLeftRollVal      = round(potVals[1]);
+    newRightPitchVal    = round(potVals[2]);
+    newRightRollVal     = round(potVals[3]);
+    newPOT_1Val         = round(potVals[4]);
+    newPOT_2Val         = round(potVals[5]);
+   
+    if (oldLeftPitchVal != newLeftPitchVal){
+        sprintf(txLeftPitchTemp, "%d", newLeftPitchVal);
+        for (int i = 0; i < 3; i++) { txLeftPitch[i+3] = txLeftPitchTemp[i]; }
+        nRF24L01.write(DEFAULT_PIPE, txLeftPitch, txDataCnt);
+    }
+    if (oldLeftRollVal != newLeftRollVal){
+        sprintf(txLeftRollTemp, "%d", newLeftRollVal);
+        for (int i = 0; i < 3; i++) { txLeftRoll[i+3] = txLeftRollTemp[i]; }
+        nRF24L01.write(DEFAULT_PIPE, txLeftRoll, txDataCnt);
+    }
+    if (oldRightPitchVal != newRightPitchVal){
+        sprintf(txRightPitchTemp, "%d", newRightPitchVal);
+        for (int i = 0; i < 3; i++) { txRightPitch[i+3] = txRightPitchTemp[i]; }
+        nRF24L01.write(DEFAULT_PIPE, txRightPitch, txDataCnt);
+    }
+    if (oldRightRollVal != newRightRollVal){
+        sprintf(txRightRollTemp, "%d", newRightRollVal);
+        for (int i = 0; i < 3; i++) { txRightRoll[i+3] = txRightRollTemp[i]; }
+        nRF24L01.write(DEFAULT_PIPE, txRightRoll, txDataCnt);
+    }
+    if (oldPOT_1Val != newPOT_1Val){
+        sprintf(txPOT_1Temp, "%d", newPOT_1Val);
+        for (int i = 0; i < 4; i++) { txPOT_1[i+3] = txPOT_1Temp[i]; }
+        nRF24L01.write(DEFAULT_PIPE, txPOT_1, txDataCnt);
+    }
+    if (oldPOT_2Val != newPOT_2Val){
+        sprintf(txPOT_2Temp, "%d", newPOT_2Val);
+        for (int i = 0; i < 4; i++) { txPOT_2[i+3] = txPOT_2Temp[i]; }
+        nRF24L01.write(DEFAULT_PIPE, txPOT_2, txDataCnt);
+    }
+
+    oldLeftPitchVal = newLeftPitchVal;
+    oldLeftRollVal = newLeftRollVal;
+    oldRightPitchVal = newRightPitchVal;
+    oldRightRollVal = newRightRollVal;
+    oldPOT_1Val = newPOT_1Val;
+    oldPOT_2Val = newPOT_2Val;
+
+
+    PotLock.unlock();
+    ThisThread::sleep_for(10ms);
     }
 }
 
@@ -237,15 +304,19 @@ void SW_2FallingIRQ(){
 
 
 void setBtnChar(){
+
     txBTN1[0] = 'B';
     txBTN1[1] = 'T';
     txBTN1[2] = '1';
+
     txBTN2[0] = 'B';
     txBTN2[1] = 'T';
     txBTN2[2] = '2';
+
     txBTN3[0] = 'B';
     txBTN3[1] = 'T';
     txBTN3[2] = '3';
+
     txBTN4[0] = 'B';
     txBTN4[1] = 'T';
     txBTN4[2] = '4';
@@ -255,9 +326,37 @@ void setSWChar(){
     txSW1[0] = 'S';
     txSW1[1] = 'W';
     txSW1[2] = '1';
-    txSW1[3] = '=';
+    txSW1[3] = ':';
     txSW2[0] = 'S';
     txSW2[1] = 'W';
     txSW2[2] = '1';
-    txSW2[3] = '=';
+    txSW2[3] = ':';
+}
+
+void setPotChar(){
+    txLeftPitch[0] = 'L';
+    txLeftPitch[1] = 'P';
+    txLeftPitch[2] = ':';
+
+    txLeftRoll[0] = 'L';
+    txLeftRoll[1] = 'R';
+    txLeftRoll[2] = ':';
+
+    txRightPitch[0] = 'R';
+    txRightPitch[1] = 'P';
+    txRightPitch[2] = ':';
+
+    txRightRoll[0] = 'R';
+    txRightRoll[1] = 'R';
+    txRightRoll[2] = ':';
+
+    txPOT_1[0] = 'P';
+    txPOT_1[0] = 'T';
+    txPOT_1[0] = '1';
+    txPOT_1[4] = ':';
+
+    txPOT_2[0] = 'P';
+    txPOT_2[0] = 'T';
+    txPOT_2[0] = '2';
+    txPOT_2[4] = ':';
 }
