@@ -34,7 +34,7 @@
 #define LED_2   PD_1
 
 // buzzer
-#define BUZZER  PB_13
+#define BUZZER  PB_15
 
 // potentiometers 
 #define POT1    PF_5

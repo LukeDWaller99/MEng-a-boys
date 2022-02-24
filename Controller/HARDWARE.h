@@ -19,7 +19,7 @@
 
 // input buttons
 #define BTN1    PB_3    // D13
-#define BTN2    PB_1   // D3
+#define BTN2    PB_1    // D3
 #define BTN3    PB_7    // D4
 #define BTN4    PB_6    // D5
 
