@@ -2,19 +2,19 @@
 ----
 ## Requirements
 The Controller will need to remotely control the craft with bi-directional communication. This will involve serveral design considerations including:
-1. [ ] Microcontroller
-	1. [ ] NUCELO-L432KC
-2. [ ] Inputs
-	1. [ ] 2 Analogue Joysticks
-	2. [ ] 4 buttons
-		1. [ ] 3 discreet buttons
-		2. [ ] Reset Button
-	3. [ ] 1 SPDT toggling switches
-3. [ ] Outputs
-	1. [ ] Buzzer for feedback to user
-	2. [ ] 1 Status LEDs
+1. [x] Microcontroller
+	1. [x] NUCELO-L432KC
+2. [x] Inputs
+	1. [x] 2 Analogue Joysticks
+	2. [x] 4 buttons
+		1. [x] 3 discreet buttons
+		2. [x] Reset Button
+	3. [x] 1 SPDT toggling switches
+3. [x] Outputs
+	1. [x] Buzzer for feedback to user
+	2. [x] 1 Status LEDs
 4. [ ] Power
-	1. [ ] Power Indicator LEDs
+	1. [x] Power Indicator LEDs
 	2. [ ] Battery Powered
 		1. [ ] 18650 Li-Po battery
 		2. [ ] Battery Charger
@@ -23,7 +23,7 @@ The Controller will need to remotely control the craft with bi-directional commu
 	5. [ ] Low voltage detection chip
 	6. [ ] ON/OFF power switch
 5. [ ] Communication with main craft
-	1. [ ] RF chip (nRF24L01)
+	1. [x] RF chip (nRF24L01)
 	2. [ ] Bi-directional communication
 6. [ ] Case
 	1. [ ] Comfortable
