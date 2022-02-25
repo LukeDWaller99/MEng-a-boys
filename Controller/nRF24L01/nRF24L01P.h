@@ -335,6 +335,8 @@ private:
      */
     int getStatusRegister(void);
 
+    void IRQHandler();
+
     SPI         spi_;
     DigitalOut  nCS_;
     DigitalOut  ce_;
