@@ -76,7 +76,7 @@
 #define DEFAULT_NRF24L01P_RF_FREQUENCY  (NRF24L01P_MIN_RF_FREQUENCY + 2)
 #define DEFAULT_NRF24L01P_DATARATE       NRF24L01P_DATARATE_1_MBPS
 #define DEFAULT_NRF24L01P_TX_PWR         NRF24L01P_TX_PWR_ZERO_DB
-#define DEFAULT_NRF24L01P_TRANSFER_SIZE  4
+#define DEFAULT_NRF24L01P_TRANSFER_SIZE  10
 
 /**
  * nRF24L01+ Single Chip 2.4GHz Transceiver from Nordic Semiconductor.
@@ -253,13 +253,13 @@ public:
     /**
      * Transmit data
      *
-     * @param pipe is ignored (included for consistency with file write routine)
      * @param data pointer to an array of bytes to write
+     * @param pipe is ignored (included for consistency with file write routine)
      * @param count the number of bytes to send (1..32)
      * @return the number of bytes actually written, or -1 for an error
      */
-    int write(int pipe, char *data, int count);
-    
+    int write(char *data, int pipe = NRF24L01P_PIPE_P0 , int count = DEFAULT_NRF24L01P_TRANSFER_SIZE);
+
     /**
      * Receive data
      *

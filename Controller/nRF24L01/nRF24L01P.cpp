@@ -834,7 +834,7 @@ bool nRF24L01P::readable(int pipe) {
 }
 
 
-int nRF24L01P::write(int pipe, char *data, int count) {
+int nRF24L01P::write(char *data, int pipe, int count) {
 
     // Note: the pipe number is ignored in a Transmit / write
 
