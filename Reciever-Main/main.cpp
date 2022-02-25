@@ -35,6 +35,8 @@ int main() {
 
     nRF24L01.enable();
 
+    printf("WAITING...\n");
+
     while (true) {
     if (nRF24L01.readable(DEFAULT_PIPE)) {
             rxDataCnt = nRF24L01.read(DEFAULT_PIPE, rxData, TRANSFER_SIZE);
