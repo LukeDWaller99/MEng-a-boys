@@ -53,11 +53,9 @@ char txLeftPitchTemp[TRANSFER_SIZE],
 
 char txBTN1[TRANSFER_SIZE],
      txBTN2[TRANSFER_SIZE],
-     txBTN3[TRANSFER_SIZE],
-     txBTN4[TRANSFER_SIZE];
+     txBTN3[TRANSFER_SIZE];
 
-char txSW1[TRANSFER_SIZE],
-     txSW2[TRANSFER_SIZE];
+char txSW1[TRANSFER_SIZE];
 
 int txDataCnt = TRANSFER_SIZE, rxDataCnt = 0;
 
@@ -170,22 +168,22 @@ int newRightRollVal = 0;
     if (oldLeftPitchVal != newLeftPitchVal){
         sprintf(txLeftPitchTemp, "%d", newLeftPitchVal);
         for (int i = 0; i < 3; i++) { txLeftPitch[i+3] = txLeftPitchTemp[i]; }
-        nRF24L01.write(DEFAULT_PIPE, txLeftPitch, txDataCnt);
+        nRF24L01.write(txLeftPitch);
     }
     if (oldLeftRollVal != newLeftRollVal){
         sprintf(txLeftRollTemp, "%d", newLeftRollVal);
         for (int i = 0; i < 3; i++) { txLeftRoll[i+3] = txLeftRollTemp[i]; }
-        nRF24L01.write(DEFAULT_PIPE, txLeftRoll, txDataCnt);
+        nRF24L01.write(txLeftRoll);
     }
     if (oldRightPitchVal != newRightPitchVal){
         sprintf(txRightPitchTemp, "%d", newRightPitchVal);
         for (int i = 0; i < 3; i++) { txRightPitch[i+3] = txRightPitchTemp[i]; }
-        nRF24L01.write(DEFAULT_PIPE, txRightPitch, txDataCnt);
+        nRF24L01.write(txRightPitch);
     }
     if (oldRightRollVal != newRightRollVal){
         sprintf(txRightRollTemp, "%d", newRightRollVal);
         for (int i = 0; i < 3; i++) { txRightRoll[i+3] = txRightRollTemp[i]; }
-        nRF24L01.write(DEFAULT_PIPE, txRightRoll, txDataCnt);
+        nRF24L01.write(txRightRoll);
     }
 
     oldLeftPitchVal = newLeftPitchVal;
@@ -208,25 +206,25 @@ void ButtonThreadMethod(){
         printf("Flag = %d\n", flag);
         if (flag == 1) {
             printf("Button 1 pressed\n");
-            nRF24L01.write(DEFAULT_PIPE, txBTN1, txDataCnt);
+            nRF24L01.write(txBTN1);
         }
         else if (flag == 2) {
             printf("Button 2 pressed\n");
-            nRF24L01.write(DEFAULT_PIPE, txBTN2, txDataCnt);
+            nRF24L01.write(txBTN2);
         }
         else if (flag == 4) {
             printf("Button 3 pressed\n");
-            nRF24L01.write(DEFAULT_PIPE, txBTN3, txDataCnt);
+            nRF24L01.write(txBTN3);
         }
         else if (flag == 8) {
             printf("Switch 1 ON\n");
             txSW1[4] = '1';
-            nRF24L01.write(DEFAULT_PIPE, txSW1, txDataCnt);
+            nRF24L01.write(txSW1);
         }
         else if (flag == 16){
             printf("Switch 1 OFF\n");
             txSW1[4] = '0';
-            nRF24L01.write(DEFAULT_PIPE, txSW1, txDataCnt);
+            nRF24L01.write(txSW1);
         }
         else {
             printf("ERROR\n");
