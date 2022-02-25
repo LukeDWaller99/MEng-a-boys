@@ -21,7 +21,7 @@ The Controller will need to remotely control the craft with bi-directional commu
 	3. [ ] Suitable Buck Converter to supply appropriate voltages
 	4. [ ] Reverse polarity protection
 	5. [ ] Low voltage detection chip
-	6. [ ] ON/OFF power switch
+	6. [x] ON/OFF power switch
 5. [ ] Communication with main craft
 	1. [x] RF chip (nRF24L01)
 	2. [ ] Bi-directional communication
