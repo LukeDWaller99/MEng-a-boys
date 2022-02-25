@@ -3208,7 +3208,7 @@
   (symbol (lib_id "Switch:SW_SPDT") (at 204.47 54.61 90) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 50647faf-6aa6-4c67-a804-7f8cfafef24c)
-    (property "Reference" "PWR_SW" (id 0) (at 208.28 53.34 90)
+    (property "Reference" "PWR_SW1" (id 0) (at 208.28 53.34 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "SW_SPDT" (id 1) (at 205.74 55.88 90)
@@ -4049,7 +4049,7 @@
       (reference "J1") (unit 1) (value "nRF24L01_Conn") (footprint "Connector_PinHeader_2.54mm:PinHeader_2x04_P2.54mm_Vertical_SMD")
     )
     (path "/50647faf-6aa6-4c67-a804-7f8cfafef24c"
-      (reference "PWR_SW") (unit 1) (value "SW_SPDT") (footprint "My_library:KNX-1-D1")
+      (reference "PWR_SW1") (unit 1) (value "SW_SPDT") (footprint "My_library:KNX-1-D1")
     )
     (path "/00000000-0000-0000-0000-000062073873"
       (reference "Q1") (unit 1) (value "S9013") (footprint "Package_TO_SOT_SMD:SOT-23")
