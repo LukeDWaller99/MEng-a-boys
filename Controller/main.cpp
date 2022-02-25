@@ -107,7 +107,7 @@ int main() {
     txData[2] = 'S';
     txData[3] = 'T';
 
-    nRF24L01.write(0, txData, txDataCnt);
+    nRF24L01.write(txData);
 
     setBtnChar();
     setSWChar();
