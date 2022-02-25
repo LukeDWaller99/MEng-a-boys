@@ -121,7 +121,6 @@ int main() {
     buzzer = 0;
 
     PotThread.start(PotMethod);
-    // RadioThread.start(callback(&radioQueue, &EventQueue::dispatch_forever));
     LEDThread.start(toggleLEDs);
     ButtonThread.start(ButtonThreadMethod);
     Btn_1.rise(Btn_1IRQ);
@@ -220,28 +219,14 @@ void ButtonThreadMethod(){
             nRF24L01.write(DEFAULT_PIPE, txBTN3, txDataCnt);
         }
         else if (flag == 8) {
-            printf("Button 4 pressed\n");
-            nRF24L01.write(DEFAULT_PIPE, txBTN4, txDataCnt);
-        }
-        else if (flag == 16) {
             printf("Switch 1 ON\n");
             txSW1[4] = '1';
             nRF24L01.write(DEFAULT_PIPE, txSW1, txDataCnt);
         }
-        else if (flag == 32){
+        else if (flag == 16){
             printf("Switch 1 OFF\n");
             txSW1[4] = '0';
             nRF24L01.write(DEFAULT_PIPE, txSW1, txDataCnt);
-        }
-        else if (flag == 64){
-            printf("Switch 2 ON\n");
-            txSW1[4] = '0';
-            nRF24L01.write(DEFAULT_PIPE, txSW2, txDataCnt);
-        }
-        else if (flag == 128){
-            printf("Switch 2 OFF\n");
-            txSW1[4] = '0';
-            nRF24L01.write(DEFAULT_PIPE, txSW2, txDataCnt);
         }
         else {
             printf("ERROR\n");
@@ -262,16 +247,12 @@ void Btn_3IRQ(){
     ButtonThread.flags_set(4);
 }
 
-void Btn_4IRQ(){
+void SW_1RisingIRQ(){
     ButtonThread.flags_set(8);
 }
 
-void SW_1RisingIRQ(){
-    ButtonThread.flags_set(16);
-}
-
 void SW_1FallingIRQ(){
-    ButtonThread.flags_set(32);
+    ButtonThread.flags_set(16);
 }
 
 

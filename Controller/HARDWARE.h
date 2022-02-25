@@ -18,9 +18,9 @@
 #define R_ROLL  PA_5    // A4
 
 // input buttons
-#define BTN1    PA_9 // good
+#define BTN1    PA_9 // D1 - good
 #define BTN2    PB_1 // D6 - good
-#define BTN3    PA_3 // good
+#define BTN3    PA_3 // A2 - good
 
 // //input switches
 #define SW1     PB_0  // D3 - good  
