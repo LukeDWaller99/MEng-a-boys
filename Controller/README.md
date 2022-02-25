@@ -6,20 +6,19 @@ The Controller will need to remotely control the craft with bi-directional commu
 	1. [ ] NUCELO-L432KC
 2. [ ] Inputs
 	1. [ ] 2 Analogue Joysticks
-	2. [ ] 5 buttons
-		1. [ ] 4 discreet buttons
+	2. [ ] 4 buttons
+		1. [ ] 3 discreet buttons
 		2. [ ] Reset Button
-	3. [ ] 2 Rotary Potentiometers
-	4. [ ] 2 SPDT toggling switches
+	3. [ ] 1 SPDT toggling switches
 3. [ ] Outputs
 	1. [ ] Buzzer for feedback to user
-	2. [ ] 2 Status LEDs
+	2. [ ] 1 Status LEDs
 4. [ ] Power
-	1. [ ] Power Indicator LED
+	1. [ ] Power Indicator LEDs
 	2. [ ] Battery Powered
 		1. [ ] 18650 Li-Po battery
-		2. [ ] Battery Charger - could use seperate charger to reduce complexity
-	3. [ ] Suitable Buck Converter to supply appropriate voltage
+		2. [ ] Battery Charger
+	3. [ ] Suitable Buck Converter to supply appropriate voltages
 	4. [ ] Reverse polarity protection
 	5. [ ] Low voltage detection chip
 	6. [ ] ON/OFF power switch
