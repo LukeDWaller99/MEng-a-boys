@@ -37,7 +37,7 @@ int main() {
 
     while (true) {
     if (nRF24L01.readable(DEFAULT_PIPE)) {
-            rxDataCnt = nRF24L01.read(DEFAULT_PIPE, rxData, sizeof(rxData));
+            rxDataCnt = nRF24L01.read(DEFAULT_PIPE, rxData, TRANSFER_SIZE);
             printf("%s\n", rxData);
         }
     }
