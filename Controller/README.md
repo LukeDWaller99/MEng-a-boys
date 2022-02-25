@@ -41,7 +41,7 @@ The Controller will need to remotely control the craft with bi-directional commu
 
 ## Dependancies/Libraries Used
 
-`nRF24L01P.h` Authored by Owen Edwards (c) 2010 (Modified by Luke Waller 2022)
+`nRF24L01P.h` Authored by Owen Edwards (c) 2010 (Modified by Luke Waller - 2022)
 ----
 ## Contributions
 **Luke Waller**
