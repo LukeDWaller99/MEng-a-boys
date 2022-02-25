@@ -29,9 +29,9 @@
 // MOSI, MISO, SCK, CNS, CE, IRQ - must be an interrupt pin 6 
 nRF24L01P nRF24L01(MOSI, MISO, SCK, CSN, CE, IRQ);
 
-InterruptIn Btn_1(BTN1), Btn_2(BTN2), Btn_3(BTN3), Btn_4(BTN4), SW_1(SW1), SW_2(SW2);        
-DigitalOut led_1(LED_1), led_2(LED_2);                                              
-AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL), Pot_1(POT1), Pot_2(POT2);    
+InterruptIn Btn_1(BTN1), Btn_2(BTN2), Btn_3(BTN3), SW_1(SW1);        
+DigitalOut led_1(LED_1);                                             
+AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL);   
 Buzzer buzzer(BUZZER);
 
 char txData[TRANSFER_SIZE], 
@@ -93,10 +93,10 @@ int main() {
 
 // Display the (default) setup of the nRF24L01+ chip
     printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
-    printf("nRF24L01 Output power : %d dBm\n",  nRF24L01.getRfOutputPower() );
-    printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate() );
-    printf("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress() );
-    printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress() );
+    printf("nRF24L01 Output power : %d dBm\n",  nRF24L01.getRfOutputPower());
+    printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate());
+    printf("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress());
+    printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress());
 
     nRF24L01.setTransferSize(TRANSFER_SIZE);
  
@@ -127,11 +127,8 @@ int main() {
     Btn_1.rise(Btn_1IRQ);
     Btn_2.rise(Btn_2IRQ);
     Btn_3.rise(Btn_3IRQ);
-    Btn_4.rise(Btn_4IRQ);
     SW_1.rise(SW_1RisingIRQ);
     SW_1.fall(SW_1FallingIRQ);
-    SW_2.rise(SW_2RisingIRQ);
-    SW_2.fall(SW_2FallingIRQ);
 
     while (true) {
         // nRF24L01.write(0, txData, txDataCnt);
@@ -157,11 +154,6 @@ int newRightPitchVal = 0;
 int oldRightRollVal = 0;
 int newRightRollVal = 0;
 
-int oldPOT_1Val = 0;
-int newPOT_1Val = 0;
-
-int oldPOT_2Val = 0;
-int newPOT_2Val = 0;
 
     while(true){
 
@@ -170,16 +162,12 @@ int newPOT_2Val = 0;
             potVals[1] = (L_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
             potVals[2] = (R_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
             potVals[3] = (R_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
-            potVals[4] = (Pot_1.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
-            potVals[5] = (Pot_2.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
 
     newLeftPitchVal     = round(potVals[0]);
     newLeftRollVal      = round(potVals[1]);
     newRightPitchVal    = round(potVals[2]);
     newRightRollVal     = round(potVals[3]);
-    newPOT_1Val         = round(potVals[4]);
-    newPOT_2Val         = round(potVals[5]);
-   
+
     if (oldLeftPitchVal != newLeftPitchVal){
         sprintf(txLeftPitchTemp, "%d", newLeftPitchVal);
         for (int i = 0; i < 3; i++) { txLeftPitch[i+3] = txLeftPitchTemp[i]; }
@@ -200,24 +188,11 @@ int newPOT_2Val = 0;
         for (int i = 0; i < 3; i++) { txRightRoll[i+3] = txRightRollTemp[i]; }
         nRF24L01.write(DEFAULT_PIPE, txRightRoll, txDataCnt);
     }
-    if (oldPOT_1Val != newPOT_1Val){
-        sprintf(txPOT_1Temp, "%d", newPOT_1Val);
-        for (int i = 0; i < 3; i++) { txPOT_1[i+3] = txPOT_1Temp[i]; }
-        nRF24L01.write(DEFAULT_PIPE, txPOT_1, txDataCnt);
-    }
-    if (oldPOT_2Val != newPOT_2Val){
-        sprintf(txPOT_2Temp, "%d", newPOT_2Val);
-        for (int i = 0; i < 3; i++) { txPOT_2[i+3] = txPOT_2Temp[i]; }
-        nRF24L01.write(DEFAULT_PIPE, txPOT_2, txDataCnt);
-    }
 
     oldLeftPitchVal = newLeftPitchVal;
     oldLeftRollVal = newLeftRollVal;
     oldRightPitchVal = newRightPitchVal;
     oldRightRollVal = newRightRollVal;
-    oldPOT_1Val = newPOT_1Val;
-    oldPOT_2Val = newPOT_2Val;
-
 
     PotLock.unlock();
     ThisThread::sleep_for(10ms);
@@ -299,15 +274,6 @@ void SW_1FallingIRQ(){
     ButtonThread.flags_set(32);
 }
 
-void SW_2RisingIRQ(){
-    ButtonThread.flags_set(64);
-}
-
-void SW_2FallingIRQ(){
-    ButtonThread.flags_set(128);
-}
-
-
 
 void setBtnChar(){
 
@@ -323,9 +289,6 @@ void setBtnChar(){
     txBTN3[1] = 'T';
     txBTN3[2] = '3';
 
-    txBTN4[0] = 'B';
-    txBTN4[1] = 'T';
-    txBTN4[2] = '4';
 }
 
 void setSWChar(){
@@ -334,10 +297,6 @@ void setSWChar(){
     txSW1[2] = '1';
     txSW1[3] = ':';
 
-    txSW2[0] = 'S';
-    txSW2[1] = 'W';
-    txSW2[2] = '1';
-    txSW2[3] = ':';
 }
 
 void setPotChar(){
@@ -357,20 +316,12 @@ void setPotChar(){
     txRightRoll[1] = 'R';
     txRightRoll[2] = ':';
 
-    txPOT_1[0] = 'P';
-    txPOT_1[1] = '1';
-    txPOT_1[2] = ':';
-
-    txPOT_2[0] = 'P';
-    txPOT_2[1] = '2';
-    txPOT_2[2] = ':';
 }
 
 void toggleLEDs(){
     printf("LED Thread Started \n");
     while (true) {
     led_1 = !led_1;
-    led_2 = !led_2;
     ThisThread::sleep_for(1s);
     }
 }
