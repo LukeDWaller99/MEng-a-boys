@@ -12,6 +12,7 @@
 #define IRQ     PB_12
 
 // BLDC motor pins
-#define LHS_MOTOR    PE_5
+#define LHS_MOTOR   PE_5
+#define RHS_MOTOR   PE_4
 
 #endif

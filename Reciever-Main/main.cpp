@@ -3,23 +3,38 @@
     Main file for Final Year project Receiver - Luke Waller
 **/
 
+#include <cstdio>
 #include <mbed.h>
-// #include <nRF24L01P.h>
+#include <nRF24L01P.h>
 #include "HARDWARE.h"
-#include "BLDCM.h"
+#include "ESC.h"
+#include <PwmOut.h>
 
 // #define TRANSMITTER     0
 // #define TRANSFER_SIZE   10
 // #define DEFAULT_PIPE    0
+#define CALIBRATE   0
+
+#if CALIBRATE == 1
+
+ESC LHSMotor(LHS_MOTOR, CALIBRATE);
+
+#elif CALIBRATE == 0
+
+ESC LHSMotor(LHS_MOTOR);
+
+#endif
 
 // MOSI, MISO, SCK, CNS, CE, IRQ - must be an interrupt pin 6 
 // nRF24L01P nRF24L01(MOSI, MISO, SCK, CSN, CE, IRQ);
 
-BLDCM LHSMotor(LHS_MOTOR);
+// ESC LHSMotor(LHS_MOTOR);
+
+// PwmOut LHSMotor(LHS_MOTOR);
 
 // char rxData[TRANSFER_SIZE];
 
-int rxDataCnt = 0;
+// int rxDataCnt = 0;
 
 int main() {
 
