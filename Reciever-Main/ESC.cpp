@@ -1,7 +1,6 @@
 #include "ESC.h"
 
 ESC::ESC(PinName pin, int _calibrate) : _ESC(pin) {
-
     setPWM();
 
     if (_calibrate == 0) {
@@ -33,7 +32,6 @@ void ESC::calibrate(){
     wait_us(ESC_CALIBRATE_TIME);
     write(MIN_THROTTLE);
     wait_us(ESC_CALIBRATE_TIME);
-
 }
 
 float ESC::speed(){
