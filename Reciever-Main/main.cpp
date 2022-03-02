@@ -28,10 +28,6 @@ ESC LHSMotor(LHS_MOTOR);
 // MOSI, MISO, SCK, CNS, CE, IRQ - must be an interrupt pin 6 
 // nRF24L01P nRF24L01(MOSI, MISO, SCK, CSN, CE, IRQ);
 
-// ESC LHSMotor(LHS_MOTOR);
-
-// PwmOut LHSMotor(LHS_MOTOR);
-
 // char rxData[TRANSFER_SIZE];
 
 // int rxDataCnt = 0;

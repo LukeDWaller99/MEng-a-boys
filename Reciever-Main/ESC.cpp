@@ -14,7 +14,7 @@ ESC::ESC(PinName pin, int _calibrate) : _ESC(pin) {
 
 
 void ESC::write(float speed){
-    float clampedValue = clampValue(speed);
+    float clampedValue = normalise(speed);
     _p = speed;
     _ESC.pulsewidth_us(clampedValue);
 }
@@ -60,7 +60,7 @@ ESC& ESC::operator= (int on_off){
     return *this;
 }
 
-float ESC::clampValue(float speed){
+float ESC::normalise(float speed){
 
     float clampedValue = 0;
 

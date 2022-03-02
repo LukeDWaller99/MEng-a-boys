@@ -63,7 +63,8 @@ private:
     float _speed;
     float _p;
 
-    float clampValue(float speed);
+    /** Normalise the value between 0.0 and 1.0 */
+    float normalise(float speed);
 
     /** Pair the ESC and the board */
     void connect();
