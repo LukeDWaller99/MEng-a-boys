@@ -3,6 +3,25 @@
     Main file for Final Year project Receiver - Luke Waller
 **/
 
+/*
+    Transmittion Codes - 
+    1xxx - POTs
+        x1xx - Left Pitch
+        x2xx - Left Roll
+        x3xx - Right Pitch
+        x4xx - Right Roll
+            xx0x - Forwards
+            xx1x - Reverse
+                xxx0 - value of throttle
+    2xxx - Buttons
+        x1xx - Button 1
+        x2xx - Button 2
+        x3xx - Button 3
+    3xxx - SW1 
+        xx10 - ON
+        xx00 - OFF
+*/
+
 #include <cstdio>
 #include <cstdlib>
 #include <mbed.h>
@@ -49,17 +68,6 @@ int main() {
 
         wait_us(5000000);
 
-    // RightMotorThread.start(RightMotorThreadMethod);
-
-
-    // while (true) {
-    //     // POTVal = POT.read();
-    //     // printf("%f\n", POTVal);
-    //     // LHSMotor = POTVal;
-    // }
-
-
-
     nRF24L01.powerUp();
 
 // Display the (default) setup of the nRF24L01+ chip
@@ -80,15 +88,6 @@ int main() {
 
     printf("WAITING...\n");
 
-
-
-    // while (true) {
-    // if (nRF24L01.readable(DEFAULT_PIPE)) {
-    //         rxDataCnt = nRF24L01.read(DEFAULT_PIPE, rxData, TRANSFER_SIZE);
-    //         printf("%s\n", rxData);
-    //     }
-    // }
-
 }
 
 void RadioReceiveMethod(){
@@ -98,59 +97,76 @@ void RadioReceiveMethod(){
             nRF24L01.read(DEFAULT_PIPE, rxData, TRANSFER_SIZE);
             printf("%s\n", rxData);
             switch (rxData[0]){
-            case 'B':
-                printf("Button\n");
+            case '1': // POT
+                switch (rxData[1]){
+                case '1': // Left Pitch
+                    switch (rxData[2]) {
+                    case '0':{ // Forwards
+                        // MAKE SURE THROTTLE IS GOING FORWARDS
+                        // set value of throttle
+                        LeftMotorLock.trylock_for(10ms);
+                        LeftMotorThrottle = ThrottleValue(&rxData[3]);
+                        LeftMotorLock.unlock();
+                        break;
+                    }
+                    case '1': // Reverse
+                        // MAKE SURE THROTTLE IS GOING BACKWARDS
+                        // set value of throttle
+                        LeftMotorLock.trylock_for(10ms);
+                        LeftMotorThrottle = ThrottleValue(&rxData[3]);
+                        LeftMotorLock.unlock();
+                    default:
+                        break;
+                    }
+                case '2': // Left Roll
+                    switch (rxData[2]) {
+                    case '0': // Forward
+                    case '1': // Reverse
+                    default:
+                        break;
+                    }
+                case '3': // Right Pitch
+                    switch (rxData[2]) {
+                    case '0': // Forwards
+                        // MAKE SURE THROTTLE IS GOING FORWARDS
+                        // set value of throttle
+                        RightMotorLock.trylock_for(10ms);
+                        RightMotorThrottle = ThrottleValue(&rxData[3]);
+                        RightMotorLock.unlock();
+                    case '1': // Reverse
+                        // MAKE SURE THROTTLE IS GOING BACKWARDS
+                        // set value of throttle
+                    default:
+                        break;
+                    }
+                case '4': // Right Roll
+                    switch (rxData[2]) {
+                    case '0': // Forwards
+                        // set value of throttle 
+                    case '1': // Reverse
+                        // set value of throttle
+                    default:
+                        break;
+                    }
+                default:
+                    break;
+                }
+            case '2': // BUTTON
+                switch (rxData[1]) {
+                case '1': // Button 1
+                case '2': // Button 2
+                case '3': // Button 3
+                default:
+                    break;
+                }
+                break;
+            case '3': // SWITCH
                 switch (rxData[2]) {
-                case '1':
-                    printf("1\n");
-                    LHSMotor = 1;
-                    LHSMotor = 0;
-                    break;
-                case '2':
-                    printf("2\n");
-                    break;
-                case '3':
-                    printf("3\n");
-                    break;
+                case '1': // Switch ON
+                case '2': // Switch OFF
                 default:
                     break;
                 }
-                break;
-            case 'S':
-                switch (rxData[3]) {
-                case '1':
-                    break;
-                case '0':
-                    break;
-                default:
-                    break;
-                }
-                break;
-            case 'L':
-                switch (rxData[1]) {
-                case 'P':
-                    // left throttle
-                    // LeftMotorLock.trylock_for(10ms);
-                    ThrottleValue(rxData);
-                    // LeftMotorLock.unlock();
-                    break;
-                case 'R':
-                    break;
-                default:
-                    break;
-                }
-                break;
-            case 'R':
-                switch (rxData[1]) {
-                case 'P':
-                    // right throttle
-                    break;
-                case 'R':
-                    break;
-                default:
-                    break;
-                }
-                break;
             default:
                 printf("Invalid Input\n");
             }
@@ -175,7 +191,7 @@ void LeftMotorThreadMethod(){
     LeftMotorLock.unlock();
 
     while (true) {
-        // ThisThread::flags_wait_any(0x7fffffff);
+        ThisThread::flags_wait_any(0x7fffffff);
         LeftMotorLock.trylock_for(1ms);
         LHSMotor = LeftMotorThrottle;
         LeftMotorLock.unlock();
@@ -193,7 +209,6 @@ void RightMotorThreadMethod(){
     while (true) {
         ThisThread::flags_wait_any(0x7fffffff);
         RightMotorLock.trylock_for(1ms);
-        // RightMotorThrottle = whatever the value is /10
         RHSMotor = RightMotorThrottle;
         RightMotorLock.unlock();
     }
