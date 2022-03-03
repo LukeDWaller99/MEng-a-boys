@@ -10,8 +10,6 @@ ESC::ESC(PinName pin, int _calibrate) : _ESC(pin) {
     }
 }
 
-
-
 void ESC::write(float speed){
     float clampedValue = normalise(speed);
     _p = speed;
@@ -24,7 +22,6 @@ void ESC::setPWM(int PWMValue){
 
 void ESC::connect(){
     write(MIN_THROTTLE);
-    wait_us(ESC_CALIBRATE_TIME);
 }
 
 void ESC::calibrate(){
@@ -47,12 +44,12 @@ ESC& ESC::operator= (int on_off){
     if (on_off == 1){
         for(float i=0; i<1000; i++) {
             write(i/1000.0f);
-            wait_us(2500);
+            wait_us(250);
         }
     } else if (on_off == 0) {
         for(float i=1000; i>0; i--) {
             write(i/1000.0f);
-            wait_us(2500);
+            wait_us(250);
         }
     }
     return *this;

@@ -13,6 +13,6 @@
 
 // BLDC motor pins
 #define LHS_MOTOR   PE_5
-#define RHS_MOTOR   PE_4
+#define RHS_MOTOR   PE_6
 
 #endif
