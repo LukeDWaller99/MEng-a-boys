@@ -3,6 +3,25 @@
     Main file for Final Year Project - Luke Waller
 **/
 
+/*
+    Transmittion Codes - 
+    1xxx - POTs
+        x1xx - Left Pitch
+        x2xx - Left Roll
+        x3xx - Right Pitch
+        x4xx - Right Roll
+            xx0x - Forwards
+            xx1x - Reverse
+                xxx0 - value of throttle
+    2xxx - Buttons
+        x1xx - Button 1
+        x2xx - Button 2
+        x3xx - Button 3
+    3xxx - SW1 
+        xx10 - ON
+        xx01 - OFF
+*/
+
 #include <cmath>
 #include <cstdio>
 #include <mbed.h>
@@ -34,28 +53,47 @@ DigitalOut led_1(LED_1);
 AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL);   
 Buzzer buzzer(BUZZER);
 
-char txData[TRANSFER_SIZE], 
-     rxData[TRANSFER_SIZE];
+// char txData[TRANSFER_SIZE], 
+//      rxData[TRANSFER_SIZE];
 
-char txLeftPitch[TRANSFER_SIZE], 
-     txLeftRoll[TRANSFER_SIZE],
-     txRightPitch[TRANSFER_SIZE], 
-     txRightRoll[TRANSFER_SIZE], 
-     txPOT_1[TRANSFER_SIZE], 
-     txPOT_2[TRANSFER_SIZE];
+// char txLeftPitch[TRANSFER_SIZE], 
+//      txLeftRoll[TRANSFER_SIZE],
+//      txRightPitch[TRANSFER_SIZE], 
+//      txRightRoll[TRANSFER_SIZE], 
 
-char txLeftPitchTemp[TRANSFER_SIZE], 
-     txLeftRollTemp[TRANSFER_SIZE],
-     txRightPitchTemp[TRANSFER_SIZE], 
-     txRightRollTemp[TRANSFER_SIZE], 
-     txPOT_1Temp[TRANSFER_SIZE], 
-     txPOT_2Temp[TRANSFER_SIZE];
+// char txLeftPitchTemp[TRANSFER_SIZE], 
+//      txLeftRollTemp[TRANSFER_SIZE],
+//      txRightPitchTemp[TRANSFER_SIZE], 
+//      txRightRollTemp[TRANSFER_SIZE], 
 
-char txBTN1[TRANSFER_SIZE],
-     txBTN2[TRANSFER_SIZE],
-     txBTN3[TRANSFER_SIZE];
+// char txBTN1[TRANSFER_SIZE],
+//      txBTN2[TRANSFER_SIZE],
+//      txBTN3[TRANSFER_SIZE];
+
+// char txSW1[TRANSFER_SIZE];
+
+char rxData[TRANSFER_SIZE];
+char txData[TRANSFER_SIZE];
+
+struct stickData { 
+    char LeftPitch[TRANSFER_SIZE], 
+    LeftRoll[TRANSFER_SIZE], 
+    RightPitch[TRANSFER_SIZE], 
+    RightRoll[TRANSFER_SIZE], 
+    LeftPitchTemp[TRANSFER_SIZE], 
+    LeftRollTemp[TRANSFER_SIZE], 
+    RightPitchTemp[TRANSFER_SIZE], 
+    RightRollTemp[TRANSFER_SIZE];
+};
+
+struct btnData {
+    char BTN1[TRANSFER_SIZE], 
+    BTN2[TRANSFER_SIZE], 
+    BTN3[TRANSFER_SIZE]; 
+};
 
 char txSW1[TRANSFER_SIZE];
+
 
 int txDataCnt = TRANSFER_SIZE, rxDataCnt = 0;
 
@@ -80,7 +118,6 @@ void SW_2RisingIRQ();
 void SW_2FallingIRQ();
 void setBtnChar();
 void setSWChar();
-void setPotChar();
 
 
 
@@ -111,7 +148,6 @@ int main() {
 
     setBtnChar();
     setSWChar();
-    setPotChar();
 
     led_1 = 1;
     buzzer = 1;
@@ -139,6 +175,8 @@ int main() {
 
 void PotMethod(){
 
+stickData tx[TRANSFER_SIZE];
+
 int oldLeftPitchVal = 0;
 int newLeftPitchVal = 0;
 
@@ -150,6 +188,22 @@ int newRightPitchVal = 0;
 
 int oldRightRollVal = 0;
 int newRightRollVal = 0;
+
+    tx->LeftPitch[0] = 'L';
+    tx->LeftPitch[1] = 'P';
+    tx->LeftPitch[2] = ':';
+
+    tx->LeftRoll[0] = 'L';
+    tx->LeftRoll[1] = 'R';
+    tx->LeftRoll[2] = ':';
+
+    tx->RightPitch[0] = 'R';
+    tx->RightPitch[1] = 'P';
+    tx->RightPitch[2] = ':';
+
+    tx->RightRoll[0] = 'R';
+    tx->RightRoll[1] = 'R';
+    tx->RightRoll[2] = ':';
 
 
     while(true){
@@ -166,24 +220,24 @@ int newRightRollVal = 0;
     newRightRollVal     = round(potVals[3]);
 
     if (oldLeftPitchVal != newLeftPitchVal){
-        sprintf(txLeftPitchTemp, "%d", newLeftPitchVal);
-        for (int i = 0; i < 3; i++) { txLeftPitch[i+3] = txLeftPitchTemp[i]; }
-        nRF24L01.write(txLeftPitch);
+        sprintf(tx->LeftPitchTemp, "%d", newLeftPitchVal);
+        for (int i = 0; i < 3; i++) {tx->LeftPitch[i+3] = tx->LeftPitchTemp[i]; }
+        nRF24L01.write(tx->LeftPitch);
     }
     if (oldLeftRollVal != newLeftRollVal){
-        sprintf(txLeftRollTemp, "%d", newLeftRollVal);
-        for (int i = 0; i < 3; i++) { txLeftRoll[i+3] = txLeftRollTemp[i]; }
-        nRF24L01.write(txLeftRoll);
+        sprintf(tx->LeftRollTemp, "%d", newLeftRollVal);
+        for (int i = 0; i < 3; i++) { tx->LeftRoll[i+3] = tx->LeftRollTemp[i]; }
+        nRF24L01.write(tx->LeftRoll);
     }
     if (oldRightPitchVal != newRightPitchVal){
-        sprintf(txRightPitchTemp, "%d", newRightPitchVal);
-        for (int i = 0; i < 3; i++) { txRightPitch[i+3] = txRightPitchTemp[i]; }
-        nRF24L01.write(txRightPitch);
+        sprintf(tx->RightPitchTemp, "%d", newRightPitchVal);
+        for (int i = 0; i < 3; i++) { tx->RightPitch[i+3] = tx->RightPitchTemp[i]; }
+        nRF24L01.write(tx->RightPitch);
     }
     if (oldRightRollVal != newRightRollVal){
-        sprintf(txRightRollTemp, "%d", newRightRollVal);
-        for (int i = 0; i < 3; i++) { txRightRoll[i+3] = txRightRollTemp[i]; }
-        nRF24L01.write(txRightRoll);
+        sprintf(tx->RightRollTemp, "%d", newRightRollVal);
+        for (int i = 0; i < 3; i++) { tx->RightRoll[i+3] = tx->RightRollTemp[i]; }
+        nRF24L01.write(tx->RightRoll);
     }
 
     oldLeftPitchVal = newLeftPitchVal;
@@ -197,6 +251,20 @@ int newRightRollVal = 0;
 }
 
 void ButtonThreadMethod(){
+    btnData tx[TRANSFER_SIZE];
+
+    tx->BTN1[0] = 'B';
+    tx->BTN1[1] = 'T';
+    tx->BTN1[2] = '1';
+
+    tx->BTN2[0] = 'B';
+    tx->BTN2[1] = 'T';
+    tx->BTN2[2] = '2';
+
+    tx->BTN3[0] = 'B';
+    tx->BTN3[1] = 'T';
+    tx->BTN3[2] = '3';
+
     printf("Button Thread Started\n");
     while (true) {
         buzzer = 0;
@@ -206,15 +274,15 @@ void ButtonThreadMethod(){
         printf("Flag = %d\n", flag);
         if (flag == 1) {
             printf("Button 1 pressed\n");
-            nRF24L01.write(txBTN1);
+            nRF24L01.write(tx->BTN1);
         }
         else if (flag == 2) {
             printf("Button 2 pressed\n");
-            nRF24L01.write(txBTN2);
+            nRF24L01.write(tx->BTN2);
         }
         else if (flag == 4) {
             printf("Button 3 pressed\n");
-            nRF24L01.write(txBTN3);
+            nRF24L01.write(tx->BTN3);
         }
         else if (flag == 8) {
             printf("Switch 1 ON\n");
@@ -253,23 +321,6 @@ void SW_1FallingIRQ(){
     ButtonThread.flags_set(16);
 }
 
-
-void setBtnChar(){
-
-    txBTN1[0] = 'B';
-    txBTN1[1] = 'T';
-    txBTN1[2] = '1';
-
-    txBTN2[0] = 'B';
-    txBTN2[1] = 'T';
-    txBTN2[2] = '2';
-
-    txBTN3[0] = 'B';
-    txBTN3[1] = 'T';
-    txBTN3[2] = '3';
-
-}
-
 void setSWChar(){
     txSW1[0] = 'S';
     txSW1[1] = 'W';
@@ -278,24 +329,6 @@ void setSWChar(){
 
 }
 
-void setPotChar(){
-    txLeftPitch[0] = 'L';
-    txLeftPitch[1] = 'P';
-    txLeftPitch[2] = ':';
-
-    txLeftRoll[0] = 'L';
-    txLeftRoll[1] = 'R';
-    txLeftRoll[2] = ':';
-
-    txRightPitch[0] = 'R';
-    txRightPitch[1] = 'P';
-    txRightPitch[2] = ':';
-
-    txRightRoll[0] = 'R';
-    txRightRoll[1] = 'R';
-    txRightRoll[2] = ':';
-
-}
 
 void toggleLEDs(){
     printf("LED Thread Started \n");
