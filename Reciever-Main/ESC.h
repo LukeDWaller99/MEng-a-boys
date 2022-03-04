@@ -19,10 +19,13 @@
  * Includes
  */
 #include <mbed.h>
+#include <Thread.h>
 
 class ESC {
 
 public:
+
+    Thread rampUpDownThread;
 
     /** Create a brushless DC motor object connected to the specified PwmOut pin
      *
@@ -56,12 +59,16 @@ public:
     /** Shorthand for turning on the motor (allows ramp up and slow down) */
     ESC& operator= (int on_off);
 
+    void rampUpDownMethod();
+
 private:
 
     PwmOut _ESC;
     float _range;
     float _speed;
     float _p;
+
+    Mutex throttleControl;
 
     /** Normalise the value between 0.0 and 1.0 */
     float normalise(float speed);

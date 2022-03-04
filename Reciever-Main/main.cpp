@@ -36,15 +36,20 @@
 
 #define TRANSFER_SIZE   10
 #define DEFAULT_PIPE    0
-#define CALIBRATE   0
+#define CALIBRATE       0
+#define MOTOR_OFF       0.0f
 
-ESC LHSMotor(LHS_MOTOR), RHSMotor(RHS_MOTOR);
+ESC FWDLeftMotor(FWD_LHS_MOTOR), 
+    FWDRightMotor(FWD_RHS_MOTOR),
+    REVLeftMotor(REV_LHS_MOTOR),
+    REVRightMotor(REV_LHS_MOTOR);
 
 // AnalogIn POT(PA_3);
 
 
 
-float LeftMotorThrottle = 0, RightMotorThrottle = 0;
+float fwdLeftMotorThrottle = 0, fwdRightMotorThrottle = 0;
+float revLeftMotorThrottle = 0, revRightMotorThrottle = 0;
 
 Mutex LeftMotorLock, RightMotorLock;
 
@@ -102,23 +107,23 @@ void RadioReceiveMethod(){
                 case '1': // Left Pitch
                     switch (rxData[2]) {
                     case '0':{ // Forwards
-                        // MAKE SURE THROTTLE IS GOING FORWARDS
                         // set value of throttle
                         LeftMotorLock.trylock_for(10ms);
-                        LeftMotorThrottle = ThrottleValue(&rxData[3]);
+                        revLeftMotorThrottle = MOTOR_OFF;
+                        fwdLeftMotorThrottle = ThrottleValue(&rxData[3]);
                         LeftMotorLock.unlock();
                         break;
                     }
                     case '1': // Reverse
-                        // MAKE SURE THROTTLE IS GOING BACKWARDS
                         // set value of throttle
                         LeftMotorLock.trylock_for(10ms);
-                        LeftMotorThrottle = ThrottleValue(&rxData[3]);
+                        fwdLeftMotorThrottle = MOTOR_OFF;
+                        revLeftMotorThrottle = ThrottleValue(&rxData[3]);
                         LeftMotorLock.unlock();
                     default:
                         break;
                     }
-                case '2': // Left Roll
+                case '2': // Left Roll - currently hove no function
                     switch (rxData[2]) {
                     case '0': // Forward
                     case '1': // Reverse
@@ -128,24 +133,25 @@ void RadioReceiveMethod(){
                 case '3': // Right Pitch
                     switch (rxData[2]) {
                     case '0': // Forwards
-                        // MAKE SURE THROTTLE IS GOING FORWARDS
                         // set value of throttle
                         RightMotorLock.trylock_for(10ms);
-                        RightMotorThrottle = ThrottleValue(&rxData[3]);
+                        revRightMotorThrottle = MOTOR_OFF;
+                        fwdRightMotorThrottle = ThrottleValue(&rxData[3]);
                         RightMotorLock.unlock();
                     case '1': // Reverse
-                        // MAKE SURE THROTTLE IS GOING BACKWARDS
                         // set value of throttle
+                        RightMotorLock.trylock_for(10ms);
+                        fwdRightMotorThrottle = MOTOR_OFF;
+                        revRightMotorThrottle = ThrottleValue(&rxData[3]);
+                        RightMotorLock.unlock();
                     default:
                         break;
                     }
-                case '4': // Right Roll
+                case '4': // Right Roll - currently have no function
                     switch (rxData[2]) {
                     case '0': // Forwards
-                        // set value of throttle 
                     case '1': // Reverse
-                        // set value of throttle
-                    default:
+                        // set value of throttle                    default:
                         break;
                     }
                 default:
@@ -187,13 +193,15 @@ void LeftMotorThreadMethod(){
     printf("Left Motor Thread Started\n");
 
     LeftMotorLock.trylock_for(10ms);
-    LeftMotorThrottle = 0;
+    fwdLeftMotorThrottle = 0;
+    revLeftMotorThrottle = 0;
     LeftMotorLock.unlock();
 
     while (true) {
         ThisThread::flags_wait_any(0x7fffffff);
         LeftMotorLock.trylock_for(1ms);
-        LHSMotor = LeftMotorThrottle;
+        FWDLeftMotor = fwdLeftMotorThrottle;
+        REVLeftMotor = revLeftMotorThrottle;
         LeftMotorLock.unlock();
     }
 }
@@ -203,13 +211,14 @@ void RightMotorThreadMethod(){
     printf("Right Motor Thread Started\n");
 
     RightMotorLock.trylock_for(10ms);
-    RightMotorThrottle = 0;
+    fwdRightMotorThrottle = 0;
     RightMotorLock.unlock();
 
     while (true) {
         ThisThread::flags_wait_any(0x7fffffff);
         RightMotorLock.trylock_for(1ms);
-        RHSMotor = RightMotorThrottle;
+        FWDRightMotor = fwdRightMotorThrottle;
+        REVRightMotor = revRightMotorThrottle;
         RightMotorLock.unlock();
     }
 }
