@@ -28,14 +28,14 @@
 #define LEFT_PITCH_REV  '1','1','1','0'
 #define LEFT_ROLL_REV   '1','2','1','0'
 #define RIGHT_PITCH_REV '1','3','1','0'
-#define RIGHT_ROLL_REV  '1','4','2','0'
+#define RIGHT_ROLL_REV  '1','4','1','0'
 
-#define BUTTON_1    '2','1','0','0'
-#define BUTTON_2    '2','2','0','0'
-#define BUTTON_3    '2','3','0','0'
+#define BUTTON_1    '2','1','x','x'
+#define BUTTON_2    '2','2','x','x'
+#define BUTTON_3    '2','3','x','x'
 
-#define SW1_ON      '3','0','1','0'
-#define SW1_OFF     '3','0','0','1'
+#define SW1_ON      '3','0','x','0'
+#define SW1_OFF     '3','0','x','1'
 
 #define TX_DATA  'T','E','S','T'
 #define RX_DATA  '0','0','0','0'

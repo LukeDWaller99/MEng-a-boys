@@ -3,27 +3,9 @@
     Main file for Final Year Project - Luke Waller
 **/
 
-/*
-    Transmittion Codes - 
-    1xxx - POTs
-        x1xx - Left Pitch
-        x2xx - Left Roll
-        x3xx - Right Pitch
-        x4xx - Right Roll
-            xx0x - Forwards
-            xx1x - Reverse
-                xxx0 - value of throttle
-    2xxx - Buttons
-        x1xx - Button 1
-        x2xx - Button 2
-        x3xx - Button 3
-    3xxx - SW1 
-        xx10 - ON
-        xx01 - OFF
-*/
-
 #include <cmath>
 #include <cstdio>
+#include <cstdlib>
 #include <mbed.h>
 #include <nRF24L01P.h>
 #include <string>
@@ -36,7 +18,10 @@
 #include "ThisThread.h"
 #include "HARDWARE.h"
 
-#define TRANSFER_SIZE   10
+#include "TRASMISSION_CODES.h"
+#include "mbed_power_mgmt.h"
+
+#define TRANSFER_SIZE   4
 #define DEFAULT_PIPE    0 // set the defauly pipe for the nRF24L01
 
 #define MULTIPLYING_FACTOR  2.0f
@@ -53,46 +38,35 @@ DigitalOut led_1(LED_1);
 AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL);   
 Buzzer buzzer(BUZZER);
 
-// char txData[TRANSFER_SIZE], 
-//      rxData[TRANSFER_SIZE];
-
-// char txLeftPitch[TRANSFER_SIZE], 
-//      txLeftRoll[TRANSFER_SIZE],
-//      txRightPitch[TRANSFER_SIZE], 
-//      txRightRoll[TRANSFER_SIZE], 
-
-// char txLeftPitchTemp[TRANSFER_SIZE], 
-//      txLeftRollTemp[TRANSFER_SIZE],
-//      txRightPitchTemp[TRANSFER_SIZE], 
-//      txRightRollTemp[TRANSFER_SIZE], 
-
-// char txBTN1[TRANSFER_SIZE],
-//      txBTN2[TRANSFER_SIZE],
-//      txBTN3[TRANSFER_SIZE];
-
-// char txSW1[TRANSFER_SIZE];
-
-char rxData[TRANSFER_SIZE];
-char txData[TRANSFER_SIZE];
+    char rxData[TRANSFER_SIZE] = {TX_DATA};
+    char txData[TRANSFER_SIZE] = {RX_DATA};
 
 struct stickData { 
-    char LeftPitch[TRANSFER_SIZE], 
-    LeftRoll[TRANSFER_SIZE], 
-    RightPitch[TRANSFER_SIZE], 
-    RightRoll[TRANSFER_SIZE], 
-    LeftPitchTemp[TRANSFER_SIZE], 
-    LeftRollTemp[TRANSFER_SIZE], 
-    RightPitchTemp[TRANSFER_SIZE], 
-    RightRollTemp[TRANSFER_SIZE];
+    char fwdLeftPitch[TRANSFER_SIZE] = {LEFT_PITCH_FWD}, 
+    fwdLeftRoll[TRANSFER_SIZE] = {LEFT_ROLL_FWD}, 
+    fwdRightPitch[TRANSFER_SIZE] = {RIGHT_PITCH_FWD}, 
+    fwdRightRoll[TRANSFER_SIZE] = {RIGHT_ROLL_FWD}, 
+    fwdLeftPitchTemp[TRANSFER_SIZE], 
+    fwdLeftRollTemp[TRANSFER_SIZE], 
+    fwdRightPitchTemp[TRANSFER_SIZE], 
+    fwdRightRollTemp[TRANSFER_SIZE],
+    revLeftPitch[TRANSFER_SIZE] = {LEFT_PITCH_REV}, 
+    revLeftRoll[TRANSFER_SIZE] = {LEFT_ROLL_REV}, 
+    revRightPitch[TRANSFER_SIZE] = {RIGHT_PITCH_REV}, 
+    revRightRoll[TRANSFER_SIZE] = {RIGHT_PITCH_REV}, 
+    revLeftPitchTemp[TRANSFER_SIZE], 
+    revLeftRollTemp[TRANSFER_SIZE], 
+    revRightPitchTemp[TRANSFER_SIZE], 
+    revRightRollTemp[TRANSFER_SIZE];
 };
 
 struct btnData {
-    char BTN1[TRANSFER_SIZE], 
-    BTN2[TRANSFER_SIZE], 
-    BTN3[TRANSFER_SIZE]; 
+    char BTN1[TRANSFER_SIZE] = {BUTTON_1}, 
+    BTN2[TRANSFER_SIZE] = {BUTTON_2}, 
+    BTN3[TRANSFER_SIZE] = {BUTTON_3}; 
 };
 
-char txSW1[TRANSFER_SIZE];
+char txSW1[TRANSFER_SIZE] = {SW1_ON};
 
 
 int txDataCnt = TRANSFER_SIZE, rxDataCnt = 0;
@@ -116,10 +90,6 @@ void SW_1RisingIRQ();
 void SW_1FallingIRQ();
 void SW_2RisingIRQ();
 void SW_2FallingIRQ();
-void setBtnChar();
-void setSWChar();
-
-
 
 // create an array of outputs for the leds for the output
 int main() {
@@ -139,15 +109,7 @@ int main() {
 
     nRF24L01.enable();
 
-    txData[0] = 'T';
-    txData[1] = 'E';
-    txData[2] = 'S';
-    txData[3] = 'T';
-
     nRF24L01.write(txData);
-
-    setBtnChar();
-    setSWChar();
 
     led_1 = 1;
     buzzer = 1;
@@ -164,106 +126,139 @@ int main() {
     SW_1.fall(SW_1FallingIRQ);
 
     while (true) {
-        // nRF24L01.write(0, txData, txDataCnt);
-        // wait_us(1000000);
-        // if (nRF24L01.readable(0)) {
-        //     rxDataCnt = nRF24L01.read(0, rxData, sizeof(rxData));
-        //     printf("%s\n", rxData);
-        // }
+        sleep();
     }
 }
 
 void PotMethod(){
 
-stickData tx[TRANSFER_SIZE];
+    stickData tx[TRANSFER_SIZE];
 
-int oldLeftPitchVal = 0;
-int newLeftPitchVal = 0;
+    int oldLeftPitchVal = 0;
+    int newLeftPitchVal = 0;
 
-int oldLeftRollVal = 0;
-int newLeftRollVal = 0;
+    int oldLeftRollVal = 0;
+    int newLeftRollVal = 0;
 
-int oldRightPitchVal = 0;
-int newRightPitchVal = 0;
+    int oldRightPitchVal = 0;
+    int newRightPitchVal = 0;
 
-int oldRightRollVal = 0;
-int newRightRollVal = 0;
+    int oldRightRollVal = 0;
+    int newRightRollVal = 0;
 
-    tx->LeftPitch[0] = 'L';
-    tx->LeftPitch[1] = 'P';
-    tx->LeftPitch[2] = ':';
-
-    tx->LeftRoll[0] = 'L';
-    tx->LeftRoll[1] = 'R';
-    tx->LeftRoll[2] = ':';
-
-    tx->RightPitch[0] = 'R';
-    tx->RightPitch[1] = 'P';
-    tx->RightPitch[2] = ':';
-
-    tx->RightRoll[0] = 'R';
-    tx->RightRoll[1] = 'R';
-    tx->RightRoll[2] = ':';
-
+    char tempThrottleChar[2];
 
     while(true){
 
         PotLock.trylock_for(10ms);
-            potVals[0] = ((L_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 10;
-            potVals[1] = (L_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
-            potVals[2] = (R_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
-            potVals[3] = (R_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET;
+        potVals[0] = ((L_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
+        potVals[1] = ((L_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
+        potVals[2] = ((R_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
+        potVals[3] = ((R_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
 
-    newLeftPitchVal     = round(potVals[0]);
-    newLeftRollVal      = round(potVals[1]);
-    newRightPitchVal    = round(potVals[2]);
-    newRightRollVal     = round(potVals[3]);
+        newLeftPitchVal     = round(potVals[0]);
+        newLeftRollVal      = round(potVals[1]);
+        newRightPitchVal    = round(potVals[2]);
+        newRightRollVal     = round(potVals[3]);
 
-    if (oldLeftPitchVal != newLeftPitchVal){
-        sprintf(tx->LeftPitchTemp, "%d", newLeftPitchVal);
-        for (int i = 0; i < 3; i++) {tx->LeftPitch[i+3] = tx->LeftPitchTemp[i]; }
-        nRF24L01.write(tx->LeftPitch);
-    }
-    if (oldLeftRollVal != newLeftRollVal){
-        sprintf(tx->LeftRollTemp, "%d", newLeftRollVal);
-        for (int i = 0; i < 3; i++) { tx->LeftRoll[i+3] = tx->LeftRollTemp[i]; }
-        nRF24L01.write(tx->LeftRoll);
-    }
-    if (oldRightPitchVal != newRightPitchVal){
-        sprintf(tx->RightPitchTemp, "%d", newRightPitchVal);
-        for (int i = 0; i < 3; i++) { tx->RightPitch[i+3] = tx->RightPitchTemp[i]; }
-        nRF24L01.write(tx->RightPitch);
-    }
-    if (oldRightRollVal != newRightRollVal){
-        sprintf(tx->RightRollTemp, "%d", newRightRollVal);
-        for (int i = 0; i < 3; i++) { tx->RightRoll[i+3] = tx->RightRollTemp[i]; }
-        nRF24L01.write(tx->RightRoll);
-    }
+        // if (oldLeftPitchVal != newLeftPitchVal){
+        //     sprintf(tx->LeftPitchTemp[3], "%d", newLeftPitchVal);
+        //     for (int i = 0; i < 3; i++) {tx->LeftPitch[i+3] = tx->LeftPitchTemp[i]; }
+        //     nRF24L01.write(tx->LeftPitch);
+        // }
 
-    oldLeftPitchVal = newLeftPitchVal;
-    oldLeftRollVal = newLeftRollVal;
-    oldRightPitchVal = newRightPitchVal;
-    oldRightRollVal = newRightRollVal;
+        // for left pitch values
+        if (oldLeftPitchVal != newLeftPitchVal) {
+            if(newLeftPitchVal > 0){ // forwards
+                newLeftPitchVal = abs(newLeftPitchVal);
+                sprintf(tempThrottleChar, "%d", newLeftPitchVal);
+                tx->fwdLeftPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(tx->fwdLeftPitch);
+            } else if(newLeftPitchVal < 0){ // reverse 
+                newLeftPitchVal = abs(newLeftPitchVal);
+                sprintf(tempThrottleChar, "%d", newLeftPitchVal);
+                tx->revLeftPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(tx->revLeftPitch);
+            } else { // equal to zero
+                newLeftPitchVal = 0;
+                sprintf(tempThrottleChar, "%d", newLeftPitchVal);
+                tx->fwdLeftPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(tx->fwdLeftPitch);
+            }
+        }
 
-    PotLock.unlock();
-    ThisThread::sleep_for(10ms);
+        // for left roll values
+        if (oldLeftRollVal != newLeftRollVal) {
+            if(newLeftRollVal > 0){ // forwards
+                newLeftRollVal = abs(newLeftRollVal);
+                sprintf(tempThrottleChar, "%d", newLeftRollVal);
+                tx->fwdLeftRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(tx->fwdLeftRoll);
+            } else if(newLeftRollVal < 0){ // reverse 
+                newLeftRollVal = abs(newLeftRollVal);
+                sprintf(tempThrottleChar, "%d", newLeftRollVal);
+                tx->revLeftRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(tx->revLeftRoll);
+            } else { // equal to zero
+                newLeftPitchVal = 0;
+                sprintf(tempThrottleChar, "%d", newLeftRollVal);
+                tx->fwdLeftRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(tx->fwdLeftRoll);
+            }
+        }
+
+        // for right pitch values
+        if (oldRightPitchVal != newRightPitchVal) {
+            if(newRightPitchVal > 0){ // forwards
+                newRightPitchVal = abs(newRightPitchVal);
+                sprintf(tempThrottleChar, "%d", newRightPitchVal);
+                tx->fwdRightPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(tx->fwdRightPitch);
+            } else if(newRightPitchVal < 0){ // reverse 
+                newRightPitchVal = abs(newRightPitchVal);
+                sprintf(tempThrottleChar, "%d", newRightPitchVal);
+                tx->revRightPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(tx->revRightPitch);
+            } else { // equal to zero
+                newRightPitchVal = 0;
+                sprintf(tempThrottleChar, "%d", newRightPitchVal);
+                tx->fwdRightPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(tx->fwdRightPitch);
+            }
+        }
+
+        // for right roll values
+        if (oldRightRollVal != newRightRollVal) {
+            if(newRightRollVal > 0){ // forwards
+                newRightRollVal = abs(newRightRollVal);
+                sprintf(tempThrottleChar, "%d", newRightRollVal);
+                tx->fwdRightRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(tx->fwdRightRoll);
+            } else if(newRightRollVal < 0){ // reverse 
+                newRightRollVal = abs(newLeftRollVal);
+                sprintf(tempThrottleChar, "%d", newRightRollVal);
+                tx->revRightRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(tx->revRightRoll);
+            } else { // equal to zero
+                newRightPitchVal = 0;
+                sprintf(tempThrottleChar, "%d", newRightRollVal);
+                tx->fwdRightRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(tx->fwdRightRoll);
+            }
+        }
+
+        oldLeftPitchVal = newLeftPitchVal;
+        oldLeftRollVal = newLeftRollVal;
+        oldRightPitchVal = newRightPitchVal;
+        oldRightRollVal = newRightRollVal;
+
+        PotLock.unlock();
+        ThisThread::sleep_for(10ms);
     }
 }
 
 void ButtonThreadMethod(){
     btnData tx[TRANSFER_SIZE];
-
-    tx->BTN1[0] = 'B';
-    tx->BTN1[1] = 'T';
-    tx->BTN1[2] = '1';
-
-    tx->BTN2[0] = 'B';
-    tx->BTN2[1] = 'T';
-    tx->BTN2[2] = '2';
-
-    tx->BTN3[0] = 'B';
-    tx->BTN3[1] = 'T';
-    tx->BTN3[2] = '3';
 
     printf("Button Thread Started\n");
     while (true) {
@@ -286,12 +281,12 @@ void ButtonThreadMethod(){
         }
         else if (flag == 8) {
             printf("Switch 1 ON\n");
-            txSW1[4] = '1';
+            txSW1[3] = '1';
             nRF24L01.write(txSW1);
         }
         else if (flag == 16){
             printf("Switch 1 OFF\n");
-            txSW1[4] = '0';
+            txSW1[3] = '0';
             nRF24L01.write(txSW1);
         }
         else {
@@ -319,14 +314,6 @@ void SW_1RisingIRQ(){
 
 void SW_1FallingIRQ(){
     ButtonThread.flags_set(16);
-}
-
-void setSWChar(){
-    txSW1[0] = 'S';
-    txSW1[1] = 'W';
-    txSW1[2] = '1';
-    txSW1[3] = ':';
-
 }
 
 
