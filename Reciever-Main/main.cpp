@@ -33,8 +33,8 @@
 #include "PinNames.h"
 #include "ThisThread.h"
 #include "Thread.h"
-#include "lorawan_data_structures.h"
 #include <PwmOut.h>
+#include "L293D.h"
 
 #define TRANSFER_SIZE   10
 #define DEFAULT_PIPE    0
@@ -46,6 +46,9 @@ ESC FWDLeftMotor(FWD_LHS_MOTOR),
     FWDRightMotor(FWD_RHS_MOTOR),
     REVLeftMotor(REV_LHS_MOTOR),
     REVRightMotor(REV_RHS_MOTOR);
+
+L293D ConvMotor1(CONV_MOTOR_1_A, CONV_MOTOR_2_A, CONV_MOTOR_1_ENABLE),
+      ConvMotor2(CONV_MOTOR_2_A, CONV_MOTOR_2_B, CONV_MOTOR_2_ENABLE);
 
 DigitalIn btn(USER_BUTTON);
 

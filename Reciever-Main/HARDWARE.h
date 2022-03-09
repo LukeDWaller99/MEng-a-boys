@@ -17,4 +17,12 @@
 #define REV_LHS_MOTOR   PF_8
 #define REV_RHS_MOTOR   PF_9
 
+//Conveyer Motors
+#define CONV_MOTOR_1_A      PD_4
+#define CONV_MOTOR_1_B      PD_5
+#define CONV_MOTOR_2_A      PD_6
+#define CONV_MOTOR_2_B      PD_7
+#define CONV_MOTOR_1_ENABLE PD_14
+#define CONV_MOTOR_2_ENABLE PD_15
+
 #endif
