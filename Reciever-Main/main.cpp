@@ -27,8 +27,10 @@
 #include <mbed.h>
 #include <nRF24L01P.h>
 #include "AnalogIn.h"
+#include "DigitalIn.h"
 #include "HARDWARE.h"
 #include "ESC.h"
+#include "PinNames.h"
 #include "ThisThread.h"
 #include "Thread.h"
 #include "lorawan_data_structures.h"
@@ -38,13 +40,14 @@
 #define DEFAULT_PIPE    0
 #define CALIBRATE       0
 #define MOTOR_OFF       0.0f
+#define MOTOR_ON        1.0f
 
 ESC FWDLeftMotor(FWD_LHS_MOTOR), 
     FWDRightMotor(FWD_RHS_MOTOR),
     REVLeftMotor(REV_LHS_MOTOR),
-    REVRightMotor(REV_LHS_MOTOR);
+    REVRightMotor(REV_RHS_MOTOR);
 
-// AnalogIn POT(PA_3);
+DigitalIn btn(USER_BUTTON);
 
 
 
@@ -71,6 +74,8 @@ float ThrottleValue(char* data);
 
 int main() {
 
+    printf("Starting Board...\n");
+
         wait_us(5000000);
 
     nRF24L01.powerUp();
@@ -89,10 +94,25 @@ int main() {
     nRF24L01.enable();
 
     LeftMotorThread.start(LeftMotorThreadMethod);
-    RadioThread.start(RadioReceiveMethod);
+    // RadioThread.start(RadioReceiveMethod);
 
     printf("WAITING...\n");
 
+while(true){
+    if (btn == 1){
+
+        LeftMotorThread.flags_set(2);
+    fwdLeftMotorThrottle = MOTOR_ON;
+    revLeftMotorThrottle = MOTOR_ON;
+
+    }
+
+    else {
+        LeftMotorThread.flags_set(2);
+    fwdLeftMotorThrottle = MOTOR_OFF;
+    revLeftMotorThrottle = MOTOR_OFF; 
+    }
+}
 }
 
 void RadioReceiveMethod(){

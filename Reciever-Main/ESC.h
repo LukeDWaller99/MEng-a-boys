@@ -11,7 +11,7 @@
 #define PWM_RANGE           1000.0f
 #define ESC_CALIBRATE_TIME  4000000
 #define MIN_THROTTLE        0.0f
-#define MAX_THROTTLE        1.0f
+#define MAX_THROTTLE        0.5f
 #define DEFAULT_PWM_VALUE   20
 
 
