@@ -9,14 +9,12 @@ ESC::ESC(PinName pin, int _calibrate) : _ESC(pin) {
         calibrate();
     }
 
-    // rampUpDownThread.start(callback(this, &ESC::rampUpDownThread));
-
 }
 
 void ESC::write(float speed){
     float clampedValue = normalise(speed);
-    _p = speed;
-    _ESC.pulsewidth_us(clampedValue);
+    _speed = clampedValue;
+    _ESC.pulsewidth_us(_speed);
 }
 
 void ESC::setPWM(int PWMValue){
@@ -35,43 +33,16 @@ void ESC::calibrate(){
 }
 
 float ESC::speed(){
-    return _p;
+    return _speed;
 }
 
 ESC& ESC::operator= (float speed){
-    throttleControl.trylock_for(10ms);
     write(speed);
-    throttleControl.unlock();
     return *this;
 }
 
 ESC& ESC::operator= (int on_off){
-    if (on_off == 1) {
-        rampUpDownThread.flags_set(2);
-    } else if (on_off == 0) {
-        rampUpDownThread.flags_set(0);
-    }
     return *this;
-}
-
-void ESC::rampUpDownMethod(){
-    while(true){
-        ThisThread::flags_wait_any(0x7fffffff);
-        int flag = ThisThread::flags_get();
-        throttleControl.trylock_for(10ms);
-        if (flag == 2){
-            for(float i=0; i<1000; i++) {
-                write(i/1000.0f);
-                wait_us(250);
-            }
-        } else if (flag == 0) {
-            for(float i=1000; i>0; i--) {
-                write(i/1000.0f);
-                wait_us(250);
-            }
-        }
-        throttleControl.unlock();
-    }
 }
 
 float ESC::normalise(float speed){

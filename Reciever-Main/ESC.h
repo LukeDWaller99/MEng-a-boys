@@ -2,11 +2,10 @@
  * @file ESC.h
  * 
  * @author Luke Waller
-*/
+ */
 #ifndef __ESC_H__
 #define __ESC_H__
 
-#include "PinNames.h"
 #define PWM_OFFSET          1000.0f
 #define PWM_RANGE           1000.0f
 #define ESC_CALIBRATE_TIME  4000000
@@ -14,23 +13,19 @@
 #define MAX_THROTTLE        0.5f
 #define DEFAULT_PWM_VALUE   20
 
-
 /**
  * Includes
  */
 #include <mbed.h>
-#include <Thread.h>
 
 class ESC {
 
 public:
 
-    Thread rampUpDownThread;
-
-    /** Create a brushless DC motor object connected to the specified PwmOut pin
+    /** Create a brushless DC motor object connected to the specified PwmOut pin.
      *
-     * @param pin PwmOut pin to connect to 
-     * @param calibrate Determines whether or not to calibrate the ESC
+     * @param pin PwmOut pin to connect to. 
+     * @param calibrate Determines whether or not to calibrate the ESC.
      */
     ESC(PinName pin, int calibrate = 0);
 
@@ -59,16 +54,11 @@ public:
     /** Shorthand for turning on the motor (allows ramp up and slow down) */
     ESC& operator= (int on_off);
 
-    void rampUpDownMethod();
-
 private:
 
     PwmOut _ESC;
     float _range;
     float _speed;
-    float _p;
-
-    Mutex throttleControl;
 
     /** Normalise the value between 0.0 and 1.0 */
     float normalise(float speed);

@@ -100,19 +100,15 @@ int main() {
 
 while(true){
     if (btn == 1){
-
         LeftMotorThread.flags_set(2);
-    fwdLeftMotorThrottle = MOTOR_ON;
-    revLeftMotorThrottle = MOTOR_ON;
-
-    }
-
-    else {
+        fwdLeftMotorThrottle = MOTOR_ON;
+        revLeftMotorThrottle = MOTOR_ON;
+        } else {
         LeftMotorThread.flags_set(2);
-    fwdLeftMotorThrottle = MOTOR_OFF;
-    revLeftMotorThrottle = MOTOR_OFF; 
+        fwdLeftMotorThrottle = MOTOR_OFF;
+        revLeftMotorThrottle = MOTOR_OFF; 
+        }
     }
-}
 }
 
 void RadioReceiveMethod(){
