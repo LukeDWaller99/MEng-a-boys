@@ -5,7 +5,11 @@ The Main Craft will need to communicate with the controller using bi-directional
 1. [ ] Microcontroller
 	1. [ ] NUCELO-L432KC
 2. [ ] Inputs
+	1. [ ] Sensor for detecting how full the basket is
+	2. [ ] Battery Level detector 
 3. [ ] Outputs
+	1. [ ] 4 BLDC Motors for locomotion
+	2. [ ] 2 H-Bridges for conveyer belt
 4. [ ] Power
 	1. [ ] Power Indicator LEDs
 	2. [ ] Battery Powered
@@ -27,8 +31,8 @@ The Main Craft will need to communicate with the controller using bi-directional
 	2. [ ] Debugging code to test all individual components on the PCB
 
 ## Dependancies/Libraries Used
-
-`BLDCM.h` Authored by Luke Waller 2022
+`nRF24L01P.h` Authored by Owne Edwards (c) - Modified by Luke Waller 2022
+`ESC.h` Authored by Luke Waller 2022
 `Buzzer.h` Authored by Luke Waller 2022 
 ----
 ## Contributions
