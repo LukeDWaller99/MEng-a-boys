@@ -28,6 +28,7 @@
 #include <nRF24L01P.h>
 #include "AnalogIn.h"
 #include "DigitalIn.h"
+#include "DigitalOut.h"
 #include "HARDWARE.h"
 #include "ESC.h"
 #include "PinNames.h"
@@ -47,12 +48,10 @@ ESC FWDLeftMotor(FWD_LHS_MOTOR),
     REVLeftMotor(REV_LHS_MOTOR),
     REVRightMotor(REV_RHS_MOTOR);
 
-L293D ConvMotor1(CONV_MOTOR_1_A, CONV_MOTOR_2_A, CONV_MOTOR_1_ENABLE),
+L293D ConvMotor1(CONV_MOTOR_1_A, CONV_MOTOR_1_B, CONV_MOTOR_1_ENABLE),
       ConvMotor2(CONV_MOTOR_2_A, CONV_MOTOR_2_B, CONV_MOTOR_2_ENABLE);
 
 DigitalIn btn(USER_BUTTON);
-
-
 
 float fwdLeftMotorThrottle = 0, fwdRightMotorThrottle = 0;
 float revLeftMotorThrottle = 0, revRightMotorThrottle = 0;
@@ -77,13 +76,16 @@ float ThrottleValue(char* data);
 
 int main() {
 
+    // enabling the two conveyer motos
+    ConvMotor1 = true, ConvMotor2 = true;
+
     printf("Starting Board...\n");
 
         wait_us(5000000);
 
     nRF24L01.powerUp();
 
-// Display the (default) setup of the nRF24L01+ chip
+// // Display the (default) setup of the nRF24L01+ chip
     printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
     printf("nRF24L01 Output power : %d dBm\n",  nRF24L01.getRfOutputPower() );
     printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate() );
@@ -97,19 +99,31 @@ int main() {
     nRF24L01.enable();
 
     LeftMotorThread.start(LeftMotorThreadMethod);
-    // RadioThread.start(RadioReceiveMethod);
+    RightMotorThread.start(RightMotorThreadMethod);
+    RadioThread.start(RadioReceiveMethod);
 
     printf("WAITING...\n");
 
 while(true){
     if (btn == 1){
+        // int x = 1;
+        ConvMotor1 = 1;
+        ConvMotor2 = 1;
         LeftMotorThread.flags_set(2);
+        RightMotorThread.flags_set(2);
         fwdLeftMotorThrottle = MOTOR_ON;
         revLeftMotorThrottle = MOTOR_ON;
+        fwdRightMotorThrottle = MOTOR_ON;
+        revRightMotorThrottle = MOTOR_ON;
         } else {
+        ConvMotor1 = 0;
+        ConvMotor2 = 0;
         LeftMotorThread.flags_set(2);
+        RightMotorThread.flags_set(2);
         fwdLeftMotorThrottle = MOTOR_OFF;
         revLeftMotorThrottle = MOTOR_OFF; 
+        fwdRightMotorThrottle = MOTOR_OFF;
+        revRightMotorThrottle = MOTOR_OFF;
         }
     }
 }
@@ -178,8 +192,10 @@ void RadioReceiveMethod(){
                 }
             case '2': // BUTTON
                 switch (rxData[1]) {
-                case '1': // Button 1
-                case '2': // Button 2
+                case '1': // Button 1 - motors forwards
+                    ConvMotor1 = 1, ConvMotor1 = 1;
+                case '2': // Button 2 - motors reverse
+                    ConvMotor1 = -1, ConvMotor2 = -1;
                 case '3': // Button 3
                 default:
                     break;
@@ -187,8 +203,10 @@ void RadioReceiveMethod(){
                 break;
             case '3': // SWITCH
                 switch (rxData[2]) {
-                case '1': // Switch ON
-                case '2': // Switch OFF
+                case '1': // Switch ON - enable motors
+                    ConvMotor1 = true, ConvMotor2 = true;
+                case '2': // Switch OFF - disable motors
+                    ConvMotor1 = false, ConvMotor2 = false;
                 default:
                     break;
                 }
@@ -231,6 +249,7 @@ void RightMotorThreadMethod(){
 
     RightMotorLock.trylock_for(10ms);
     fwdRightMotorThrottle = 0;
+    revRightMotorThrottle = 0;
     RightMotorLock.unlock();
 
     while (true) {
