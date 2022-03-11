@@ -1,3 +1,8 @@
+/**
+ * @file HARDWARE.h
+ * 
+ * @author Luke Waller
+ */
 #ifndef __HARDWARE_H__
 #define __HARDWARE_H__
 
