@@ -117,7 +117,7 @@
     (symbol "Joystick_1_1"
       (pin passive line (at 0 -29.21 270) (length 2.54)
         (name "" (effects (font (size 1.27 1.27))))
-        (number "GND" (effects (font (size 1.27 1.27))))
+        (number "EARTH" (effects (font (size 1.27 1.27))))
       )
       (pin bidirectional line (at -15.24 -25.4 0) (length 2.54)
         (name "" (effects (font (size 1.27 1.27))))
