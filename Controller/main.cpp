@@ -21,7 +21,7 @@
 #include "TRASMISSION_CODES.h"
 #include "mbed_power_mgmt.h"
 
-#define TRANSFER_SIZE   4
+#define TRANSFER_SIZE   5
 #define DEFAULT_PIPE    0 // set the defauly pipe for the nRF24L01
 
 #define MULTIPLYING_FACTOR  2.0f
@@ -41,8 +41,7 @@ Buzzer buzzer(BUZZER);
     char rxData[TRANSFER_SIZE] = {TX_DATA};
     char txData[TRANSFER_SIZE] = {RX_DATA};
 
-struct stickData { 
-    char fwdLeftPitch[TRANSFER_SIZE] = {LEFT_PITCH_FWD}, 
+char fwdLeftPitch[TRANSFER_SIZE] = {LEFT_PITCH_FWD}, 
     fwdLeftRoll[TRANSFER_SIZE] = {LEFT_ROLL_FWD}, 
     fwdRightPitch[TRANSFER_SIZE] = {RIGHT_PITCH_FWD}, 
     fwdRightRoll[TRANSFER_SIZE] = {RIGHT_ROLL_FWD}, 
@@ -58,13 +57,12 @@ struct stickData {
     revLeftRollTemp[TRANSFER_SIZE], 
     revRightPitchTemp[TRANSFER_SIZE], 
     revRightRollTemp[TRANSFER_SIZE];
-};
 
-struct btnData {
-    char BTN1[TRANSFER_SIZE] = {BUTTON_1}, 
-    BTN2[TRANSFER_SIZE] = {BUTTON_2}, 
-    BTN3[TRANSFER_SIZE] = {BUTTON_3}; 
-};
+
+char BTN1_PRESSED[TRANSFER_SIZE] = {BUTTON_1},
+     BTN2_PRESSED[TRANSFER_SIZE] = {BUTTON_2}, 
+     BTN3_PRESSED[TRANSFER_SIZE] = {BUTTON_3}; 
+
 
 char txSW1[TRANSFER_SIZE] = {SW1_ON};
 
@@ -109,7 +107,7 @@ int main() {
 
     nRF24L01.enable();
 
-    nRF24L01.write(txData);
+    nRF24L01.write(txData, 0 , TRANSFER_SIZE);
 
     led_1 = 1;
     buzzer = 1;
@@ -131,8 +129,6 @@ int main() {
 }
 
 void PotMethod(){
-
-    stickData tx[TRANSFER_SIZE];
 
     int oldLeftPitchVal = 0;
     int newLeftPitchVal = 0;
@@ -161,29 +157,23 @@ void PotMethod(){
         newRightPitchVal    = round(potVals[2]);
         newRightRollVal     = round(potVals[3]);
 
-        // if (oldLeftPitchVal != newLeftPitchVal){
-        //     sprintf(tx->LeftPitchTemp[3], "%d", newLeftPitchVal);
-        //     for (int i = 0; i < 3; i++) {tx->LeftPitch[i+3] = tx->LeftPitchTemp[i]; }
-        //     nRF24L01.write(tx->LeftPitch);
-        // }
-
         // for left pitch values
         if (oldLeftPitchVal != newLeftPitchVal) {
             if(newLeftPitchVal > 0){ // forwards
                 newLeftPitchVal = abs(newLeftPitchVal);
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
-                tx->fwdLeftPitch[3] = tempThrottleChar[1];
-                nRF24L01.write(tx->fwdLeftPitch);
+                fwdLeftPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(fwdLeftPitch);
             } else if(newLeftPitchVal < 0){ // reverse 
                 newLeftPitchVal = abs(newLeftPitchVal);
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
-                tx->revLeftPitch[3] = tempThrottleChar[1];
-                nRF24L01.write(tx->revLeftPitch);
+                revLeftPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(revLeftPitch);
             } else { // equal to zero
                 newLeftPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
-                tx->fwdLeftPitch[3] = tempThrottleChar[1];
-                nRF24L01.write(tx->fwdLeftPitch);
+                fwdLeftPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(fwdLeftPitch);
             }
         }
 
@@ -192,18 +182,18 @@ void PotMethod(){
             if(newLeftRollVal > 0){ // forwards
                 newLeftRollVal = abs(newLeftRollVal);
                 sprintf(tempThrottleChar, "%d", newLeftRollVal);
-                tx->fwdLeftRoll[3] = tempThrottleChar[1];
-                nRF24L01.write(tx->fwdLeftRoll);
+                fwdLeftRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(fwdLeftRoll);
             } else if(newLeftRollVal < 0){ // reverse 
                 newLeftRollVal = abs(newLeftRollVal);
                 sprintf(tempThrottleChar, "%d", newLeftRollVal);
-                tx->revLeftRoll[3] = tempThrottleChar[1];
-                nRF24L01.write(tx->revLeftRoll);
+                revLeftRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(revLeftRoll);
             } else { // equal to zero
                 newLeftPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newLeftRollVal);
-                tx->fwdLeftRoll[3] = tempThrottleChar[1];
-                nRF24L01.write(tx->fwdLeftRoll);
+                fwdLeftRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(fwdLeftRoll);
             }
         }
 
@@ -212,18 +202,18 @@ void PotMethod(){
             if(newRightPitchVal > 0){ // forwards
                 newRightPitchVal = abs(newRightPitchVal);
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
-                tx->fwdRightPitch[3] = tempThrottleChar[1];
-                nRF24L01.write(tx->fwdRightPitch);
+                fwdRightPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(fwdRightPitch);
             } else if(newRightPitchVal < 0){ // reverse 
                 newRightPitchVal = abs(newRightPitchVal);
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
-                tx->revRightPitch[3] = tempThrottleChar[1];
-                nRF24L01.write(tx->revRightPitch);
+                revRightPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(revRightPitch);
             } else { // equal to zero
                 newRightPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
-                tx->fwdRightPitch[3] = tempThrottleChar[1];
-                nRF24L01.write(tx->fwdRightPitch);
+                fwdRightPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(fwdRightPitch);
             }
         }
 
@@ -232,18 +222,18 @@ void PotMethod(){
             if(newRightRollVal > 0){ // forwards
                 newRightRollVal = abs(newRightRollVal);
                 sprintf(tempThrottleChar, "%d", newRightRollVal);
-                tx->fwdRightRoll[3] = tempThrottleChar[1];
-                nRF24L01.write(tx->fwdRightRoll);
+                fwdRightRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(fwdRightRoll);
             } else if(newRightRollVal < 0){ // reverse 
                 newRightRollVal = abs(newLeftRollVal);
                 sprintf(tempThrottleChar, "%d", newRightRollVal);
-                tx->revRightRoll[3] = tempThrottleChar[1];
-                nRF24L01.write(tx->revRightRoll);
+                revRightRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(revRightRoll);
             } else { // equal to zero
                 newRightPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newRightRollVal);
-                tx->fwdRightRoll[3] = tempThrottleChar[1];
-                nRF24L01.write(tx->fwdRightRoll);
+                fwdRightRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(fwdRightRoll);
             }
         }
 
@@ -258,7 +248,6 @@ void PotMethod(){
 }
 
 void ButtonThreadMethod(){
-    btnData tx[TRANSFER_SIZE];
 
     printf("Button Thread Started\n");
     while (true) {
@@ -267,30 +256,35 @@ void ButtonThreadMethod(){
         int flag = ThisThread::flags_get();
         ThisThread::flags_clear(0x7fffffff);
         printf("Flag = %d\n", flag);
-        if (flag == 1) {
+        switch (flag) {
+        case 1:
             printf("Button 1 pressed\n");
-            nRF24L01.write(tx->BTN1);
-        }
-        else if (flag == 2) {
+            printf("%s\n", BTN1_PRESSED);
+            nRF24L01.write(BTN1_PRESSED, 0, TRANSFER_SIZE);
+            break;
+        case 2: 
             printf("Button 2 pressed\n");
-            nRF24L01.write(tx->BTN2);
-        }
-        else if (flag == 4) {
+            printf("%s\n", BTN2_PRESSED);
+            nRF24L01.write(BTN2_PRESSED);
+            break;
+        case 4:
             printf("Button 3 pressed\n");
-            nRF24L01.write(tx->BTN3);
-        }
-        else if (flag == 8) {
+            printf("%s\n", BTN3_PRESSED);
+            nRF24L01.write(BTN3_PRESSED);
+            break;
+        case 8:
             printf("Switch 1 ON\n");
             txSW1[3] = '1';
             nRF24L01.write(txSW1);
-        }
-        else if (flag == 16){
+            break;
+        case 16:
             printf("Switch 1 OFF\n");
             txSW1[3] = '0';
             nRF24L01.write(txSW1);
-        }
-        else {
-            printf("ERROR\n");
+            break;
+        default:
+            printf("Error!\n");
+            break;
         }
         flag = 0;
     }
