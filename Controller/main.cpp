@@ -39,27 +39,30 @@ Buzzer buzzer(BUZZER);
     char rxData[TRANSFER_SIZE] = {RX_DATA};
     char txData[TRANSFER_SIZE] = {TX_DATA};
 
-char fwdLeftPitch[TRANSFER_SIZE] = {LEFT_PITCH_FWD}, 
-    fwdLeftRoll[TRANSFER_SIZE] = {LEFT_ROLL_FWD}, 
-    fwdRightPitch[TRANSFER_SIZE] = {RIGHT_PITCH_FWD}, 
-    fwdRightRoll[TRANSFER_SIZE] = {RIGHT_ROLL_FWD}, 
-    fwdLeftPitchTemp[TRANSFER_SIZE], 
-    fwdLeftRollTemp[TRANSFER_SIZE], 
-    fwdRightPitchTemp[TRANSFER_SIZE], 
-    fwdRightRollTemp[TRANSFER_SIZE],
-    revLeftPitch[TRANSFER_SIZE] = {LEFT_PITCH_REV}, 
-    revLeftRoll[TRANSFER_SIZE] = {LEFT_ROLL_REV}, 
-    revRightPitch[TRANSFER_SIZE] = {RIGHT_PITCH_REV}, 
-    revRightRoll[TRANSFER_SIZE] = {RIGHT_PITCH_REV}, 
-    revLeftPitchTemp[TRANSFER_SIZE], 
-    revLeftRollTemp[TRANSFER_SIZE], 
-    revRightPitchTemp[TRANSFER_SIZE], 
-    revRightRollTemp[TRANSFER_SIZE];
+struct stickData{
+    char fwdLeftPitch[TRANSFER_SIZE] = {LEFT_PITCH_FWD}, 
+        fwdLeftRoll[TRANSFER_SIZE] = {LEFT_ROLL_FWD}, 
+        fwdRightPitch[TRANSFER_SIZE] = {RIGHT_PITCH_FWD}, 
+        fwdRightRoll[TRANSFER_SIZE] = {RIGHT_ROLL_FWD}, 
+        fwdLeftPitchTemp[TRANSFER_SIZE], 
+        fwdLeftRollTemp[TRANSFER_SIZE], 
+        fwdRightPitchTemp[TRANSFER_SIZE], 
+        fwdRightRollTemp[TRANSFER_SIZE],
+        revLeftPitch[TRANSFER_SIZE] = {LEFT_PITCH_REV}, 
+        revLeftRoll[TRANSFER_SIZE] = {LEFT_ROLL_REV}, 
+        revRightPitch[TRANSFER_SIZE] = {RIGHT_PITCH_REV}, 
+        revRightRoll[TRANSFER_SIZE] = {RIGHT_PITCH_REV}, 
+        revLeftPitchTemp[TRANSFER_SIZE], 
+        revLeftRollTemp[TRANSFER_SIZE], 
+        revRightPitchTemp[TRANSFER_SIZE], 
+        revRightRollTemp[TRANSFER_SIZE];
+};
 
-
-char BTN1_PRESSED[TRANSFER_SIZE] = {BUTTON_1},
-     BTN2_PRESSED[TRANSFER_SIZE] = {BUTTON_2}, 
-     BTN3_PRESSED[TRANSFER_SIZE] = {BUTTON_3}; 
+struct btnData{
+    char BTN1_PRESSED[TRANSFER_SIZE] = {BUTTON_1},
+        BTN2_PRESSED[TRANSFER_SIZE] = {BUTTON_2}, 
+        BTN3_PRESSED[TRANSFER_SIZE] = {BUTTON_3}; 
+};
 
 
 char txSW1[TRANSFER_SIZE] = {SW1_ON};
@@ -129,6 +132,8 @@ int main() {
 
 void PotMethod(){
 
+    stickData tx;
+
     int oldLeftPitchVal = 0;
     int newLeftPitchVal = 0;
 
@@ -161,18 +166,18 @@ void PotMethod(){
             if(newLeftPitchVal > 0){ // forwards
                 newLeftPitchVal = abs(newLeftPitchVal);
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
-                fwdLeftPitch[3] = tempThrottleChar[1];
-                nRF24L01.write(fwdLeftPitch);
+                tx.fwdLeftPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(tx.fwdLeftPitch, 0, TRANSFER_SIZE);
             } else if(newLeftPitchVal < 0){ // reverse 
                 newLeftPitchVal = abs(newLeftPitchVal);
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
-                revLeftPitch[3] = tempThrottleChar[1];
-                nRF24L01.write(revLeftPitch);
+                tx.revLeftPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(tx.revLeftPitch, 0, TRANSFER_SIZE);
             } else { // equal to zero
                 newLeftPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
-                fwdLeftPitch[3] = tempThrottleChar[1];
-                nRF24L01.write(fwdLeftPitch);
+                tx.fwdLeftPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(tx.fwdLeftPitch, 0, TRANSFER_SIZE);
             }
         }
 
@@ -181,18 +186,18 @@ void PotMethod(){
             if(newLeftRollVal > 0){ // forwards
                 newLeftRollVal = abs(newLeftRollVal);
                 sprintf(tempThrottleChar, "%d", newLeftRollVal);
-                fwdLeftRoll[3] = tempThrottleChar[1];
-                nRF24L01.write(fwdLeftRoll);
+                tx.fwdLeftRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(tx.fwdLeftRoll, 0, TRANSFER_SIZE);
             } else if(newLeftRollVal < 0){ // reverse 
                 newLeftRollVal = abs(newLeftRollVal);
                 sprintf(tempThrottleChar, "%d", newLeftRollVal);
-                revLeftRoll[3] = tempThrottleChar[1];
-                nRF24L01.write(revLeftRoll);
+                tx.revLeftRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(tx.revLeftRoll, 0, TRANSFER_SIZE);
             } else { // equal to zero
                 newLeftPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newLeftRollVal);
-                fwdLeftRoll[3] = tempThrottleChar[1];
-                nRF24L01.write(fwdLeftRoll);
+                tx.fwdLeftRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(tx.fwdLeftRoll, 0, TRANSFER_SIZE);
             }
         }
 
@@ -201,18 +206,18 @@ void PotMethod(){
             if(newRightPitchVal > 0){ // forwards
                 newRightPitchVal = abs(newRightPitchVal);
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
-                fwdRightPitch[3] = tempThrottleChar[1];
-                nRF24L01.write(fwdRightPitch);
+                tx.fwdRightPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(tx.fwdRightPitch, 0, TRANSFER_SIZE);
             } else if(newRightPitchVal < 0){ // reverse 
                 newRightPitchVal = abs(newRightPitchVal);
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
-                revRightPitch[3] = tempThrottleChar[1];
-                nRF24L01.write(revRightPitch);
+                tx.revRightPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(tx.revRightPitch, 0, TRANSFER_SIZE);
             } else { // equal to zero
                 newRightPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
-                fwdRightPitch[3] = tempThrottleChar[1];
-                nRF24L01.write(fwdRightPitch);
+                tx.fwdRightPitch[3] = tempThrottleChar[1];
+                nRF24L01.write(tx.fwdRightPitch, 0, TRANSFER_SIZE);
             }
         }
 
@@ -221,18 +226,18 @@ void PotMethod(){
             if(newRightRollVal > 0){ // forwards
                 newRightRollVal = abs(newRightRollVal);
                 sprintf(tempThrottleChar, "%d", newRightRollVal);
-                fwdRightRoll[3] = tempThrottleChar[1];
-                nRF24L01.write(fwdRightRoll);
+                tx.fwdRightRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(tx.fwdRightRoll, 0, TRANSFER_SIZE);
             } else if(newRightRollVal < 0){ // reverse 
                 newRightRollVal = abs(newLeftRollVal);
                 sprintf(tempThrottleChar, "%d", newRightRollVal);
-                revRightRoll[3] = tempThrottleChar[1];
-                nRF24L01.write(revRightRoll);
+                tx.revRightRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(tx.revRightRoll, 0, TRANSFER_SIZE);
             } else { // equal to zero
                 newRightPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newRightRollVal);
-                fwdRightRoll[3] = tempThrottleChar[1];
-                nRF24L01.write(fwdRightRoll);
+                tx.fwdRightRoll[3] = tempThrottleChar[1];
+                nRF24L01.write(tx.fwdRightRoll, 0, TRANSFER_SIZE);
             }
         }
 
@@ -248,6 +253,8 @@ void PotMethod(){
 
 void ButtonThreadMethod(){
 
+    btnData tx;
+
     printf("Button Thread Started\n");
     while (true) {
         buzzer = 0;
@@ -258,18 +265,18 @@ void ButtonThreadMethod(){
         switch (flag) {
         case 1:
             printf("Button 1 pressed\n");
-            printf("%s\n", BTN1_PRESSED);
-            nRF24L01.write(BTN1_PRESSED, 0, TRANSFER_SIZE);
+            printf("%s\n", tx.BTN1_PRESSED);
+            nRF24L01.write(tx.BTN1_PRESSED, 0, TRANSFER_SIZE);
             break;
         case 2: 
             printf("Button 2 pressed\n");
-            printf("%s\n", BTN2_PRESSED);
-            nRF24L01.write(BTN2_PRESSED);
+            printf("%s\n", tx.BTN2_PRESSED);
+            nRF24L01.write(tx.BTN2_PRESSED, 0, TRANSFER_SIZE);
             break;
         case 4:
             printf("Button 3 pressed\n");
-            printf("%s\n", BTN3_PRESSED);
-            nRF24L01.write(BTN3_PRESSED);
+            printf("%s\n", tx.BTN3_PRESSED);
+            nRF24L01.write(tx.BTN3_PRESSED, 0, TRANSFER_SIZE);
             break;
         case 8:
             printf("Switch 1 ON\n");
