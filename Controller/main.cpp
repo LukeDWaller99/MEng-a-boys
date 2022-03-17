@@ -17,9 +17,7 @@
 #include "PinNames.h"
 #include "ThisThread.h"
 #include "HARDWARE.h"
-
 #include "TRASMISSION_CODES.h"
-#include "mbed_power_mgmt.h"
 
 #define TRANSFER_SIZE   5
 #define DEFAULT_PIPE    0 // set the defauly pipe for the nRF24L01
@@ -38,8 +36,8 @@ DigitalOut led_1(LED_1);
 AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL);   
 Buzzer buzzer(BUZZER);
 
-    char rxData[TRANSFER_SIZE] = {TX_DATA};
-    char txData[TRANSFER_SIZE] = {RX_DATA};
+    char rxData[TRANSFER_SIZE] = {RX_DATA};
+    char txData[TRANSFER_SIZE] = {TX_DATA};
 
 char fwdLeftPitch[TRANSFER_SIZE] = {LEFT_PITCH_FWD}, 
     fwdLeftRoll[TRANSFER_SIZE] = {LEFT_ROLL_FWD}, 
@@ -107,12 +105,13 @@ int main() {
 
     nRF24L01.enable();
 
+    printf("%s\n", txData);
     nRF24L01.write(txData, 0 , TRANSFER_SIZE);
 
     led_1 = 1;
-    buzzer = 1;
-    wait_us(1000000);
-    buzzer = 0;
+    // buzzer = 1;
+    // wait_us(1000000);
+    // buzzer = 0;
 
     PotThread.start(PotMethod);
     LEDThread.start(toggleLEDs);
