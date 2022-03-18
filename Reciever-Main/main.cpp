@@ -37,7 +37,7 @@
 #include <PwmOut.h>
 #include "L293D.h"
 
-#define TRANSFER_SIZE   10
+#define TRANSFER_SIZE   5
 #define DEFAULT_PIPE    0
 #define CALIBRATE       0
 #define MOTOR_OFF       0.0f
@@ -81,7 +81,7 @@ int main() {
 
     printf("Starting Board...\n");
 
-        wait_us(5000000);
+        // wait_us(5000000);
 
     nRF24L01.powerUp();
 
@@ -105,26 +105,26 @@ int main() {
     printf("WAITING...\n");
 
 while(true){
-    if (btn == 1){
-        // int x = 1;
-        ConvMotor1 = 1;
-        ConvMotor2 = 1;
-        LeftMotorThread.flags_set(2);
-        RightMotorThread.flags_set(2);
-        fwdLeftMotorThrottle = MOTOR_ON;
-        revLeftMotorThrottle = MOTOR_ON;
-        fwdRightMotorThrottle = MOTOR_ON;
-        revRightMotorThrottle = MOTOR_ON;
-        } else {
-        ConvMotor1 = 0;
-        ConvMotor2 = 0;
-        LeftMotorThread.flags_set(2);
-        RightMotorThread.flags_set(2);
-        fwdLeftMotorThrottle = MOTOR_OFF;
-        revLeftMotorThrottle = MOTOR_OFF; 
-        fwdRightMotorThrottle = MOTOR_OFF;
-        revRightMotorThrottle = MOTOR_OFF;
-        }
+    // if (btn == 1){
+    //     // int x = 1;
+    //     ConvMotor1 = 1;
+    //     ConvMotor2 = 1;
+    //     LeftMotorThread.flags_set(2);
+    //     RightMotorThread.flags_set(2);
+    //     fwdLeftMotorThrottle = MOTOR_ON;
+    //     revLeftMotorThrottle = MOTOR_ON;
+    //     fwdRightMotorThrottle = MOTOR_ON;
+    //     revRightMotorThrottle = MOTOR_ON;
+    //     } else {
+    //     ConvMotor1 = 0;
+    //     ConvMotor2 = 0;
+    //     LeftMotorThread.flags_set(2);
+    //     RightMotorThread.flags_set(2);
+    //     fwdLeftMotorThrottle = MOTOR_OFF;
+    //     revLeftMotorThrottle = MOTOR_OFF; 
+    //     fwdRightMotorThrottle = MOTOR_OFF;
+    //     revRightMotorThrottle = MOTOR_OFF;
+    //     }
     }
 }
 
