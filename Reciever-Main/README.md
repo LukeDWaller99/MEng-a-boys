@@ -3,7 +3,7 @@
 ## Requirements
 The Main Craft will need to communicate with the controller using bi-directional communication. This will involve serveral design considerations including:
 1. [ ] Microcontroller
-	1. [ ] NUCELO-L432KC
+	1. [ ] NUCELO-F429ZI
 2. [ ] Inputs
 	1. [ ] Sensor for detecting how full the basket is
 	2. [ ] Battery Level detector 
