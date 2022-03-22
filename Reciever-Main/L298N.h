@@ -3,8 +3,8 @@
  * 
  * @author Luke Waller
  */
-#ifndef __L293D_H__
-#define __L293D_H__
+#ifndef __L298N_H__
+#define __L298N_H__
 
 #include "PinNames.h"
 #define PWM_RANGE           20000.0f
@@ -17,7 +17,7 @@
  */
 #include <mbed.h>
 
-class L293D {
+class L298N {
 
 public:
 
@@ -28,7 +28,7 @@ public:
      * @param enable DigitalOut to enable and disable motor
      * @param motorEnabled int to set intial state of the motor
      */
-    L293D(PinName pin1, PinName pin2, PinName enable, int motorEnabled = 0);
+    L298N(PinName pin1, PinName pin2, PinName enable, int motorEnabled = 0);
 
     /** Sets direction of motor
      *
