@@ -75,7 +75,7 @@
       (subtractmaskfromsilk false)
       (outputformat 1)
       (mirror false)
-      (drillshape 1)
+      (drillshape 0)
       (scaleselection 1)
       (outputdirectory "")
     )
@@ -3219,6 +3219,9 @@
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
   (gr_text "nRF24L01\n" (at 161.29 82.55 90) (layer "F.SilkS") (tstamp ab2f1ec5-5457-4782-b9f1-aefdc95dc248)
+    (effects (font (size 1.5 1.5) (thickness 0.3)))
+  )
+  (gr_text "O.R.C.A - Control Board" (at 123.19 146.05) (layer "F.SilkS") (tstamp b58a7b9c-ad17-45e3-b88e-7f13c1337f60)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
 
