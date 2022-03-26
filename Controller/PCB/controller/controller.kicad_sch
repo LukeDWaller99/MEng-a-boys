@@ -1495,8 +1495,8 @@
   (no_connect (at 116.84 86.36) (uuid 2068ac49-b555-4a49-b479-94615584758d))
   (no_connect (at 132.08 129.54) (uuid 20a08e16-f4aa-4114-9112-a003d6bd0598))
   (no_connect (at 203.2 125.73) (uuid 22300f14-587e-4f0a-99d7-f112f5de4b6d))
-  (no_connect (at 187.96 128.27) (uuid 22300f14-587e-4f0a-99d7-f112f5de4b6d))
-  (no_connect (at 187.96 123.19) (uuid 22300f14-587e-4f0a-99d7-f112f5de4b6d))
+  (no_connect (at 187.96 128.27) (uuid 22300f14-587e-4f0a-99d7-f112f5de4b6e))
+  (no_connect (at 187.96 123.19) (uuid 22300f14-587e-4f0a-99d7-f112f5de4b6f))
   (no_connect (at 161.29 20.32) (uuid 2b64d2cb-d62a-4762-97ea-f1b0d4293c4f))
   (no_connect (at 132.08 106.68) (uuid 3c9e22ed-1623-4447-9837-febde166b0c9))
   (no_connect (at 106.68 106.68) (uuid 50890a2b-1502-46a1-86fd-206315ee3b42))
@@ -3485,7 +3485,7 @@
     (property "Value" "20K" (id 1) (at 162.56 96.5199 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "My_library:35WR100KLFTR" (id 2) (at 165.1 95.25 0)
+    (property "Footprint" "My_library:Variable_Resistor" (id 2) (at 165.1 95.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 165.1 95.25 0)
@@ -4524,7 +4524,7 @@
       (reference "RESET1") (unit 1) (value "SW_SPST") (footprint "Button_Switch_SMD:SW_Push_1P1T_NO_6x6mm_H9.5mm")
     )
     (path "/5cc4014c-b95b-469d-82a1-798dadb587d3"
-      (reference "RV1") (unit 1) (value "20K") (footprint "My_library:35WR100KLFTR")
+      (reference "RV1") (unit 1) (value "20K") (footprint "My_library:Variable_Resistor")
     )
     (path "/00000000-0000-0000-0000-0000620f8d01"
       (reference "SW1") (unit 1) (value "SW_SPDT") (footprint "My_library:KNX-1-D1")
