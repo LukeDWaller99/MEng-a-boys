@@ -1,4 +1,4 @@
-# Ref     Val               Package                                   PosX       PosY       Rot  Side
+# Ref     ,Val               Package                                   PosX       PosY       Rot  Side
 C1        ,100nF             C_0603_1608Metric                     158.1150   -73.6600   90.0000  top
 C2        ,100nF             C_0603_1608Metric                     137.0850   -73.7800  -90.0000  top
 C3        ,100nF             C_0603_1608Metric                     149.5662   -73.6341    0.0000  top
