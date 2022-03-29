@@ -3139,6 +3139,9 @@
   (gr_text "JoyStick_R" (at 194.31 127) (layer "F.SilkS") (tstamp 22823228-ec30-42c9-9fbd-c96c92e66a97)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
+  (gr_text "Luke Waller\n" (at 116.205 146.05) (layer "F.SilkS") (tstamp 2b4629f5-0683-4d3d-9df5-f662d0b5b3c6)
+    (effects (font (size 1.5 1.5) (thickness 0.3)))
+  )
   (gr_text "5V\n" (at 129.54 83.82) (layer "F.SilkS") (tstamp 486a56f6-6b04-4bd6-9ef8-7d6542ad964c)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
@@ -3151,7 +3154,7 @@
   (gr_text "nRF24L01\n" (at 161.29 82.55 90) (layer "F.SilkS") (tstamp ab2f1ec5-5457-4782-b9f1-aefdc95dc248)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
-  (gr_text "O.R.C.A - Control Board" (at 123.19 146.05) (layer "F.SilkS") (tstamp b58a7b9c-ad17-45e3-b88e-7f13c1337f60)
+  (gr_text "O.R.C.A - Control Board" (at 123.19 143.51) (layer "F.SilkS") (tstamp b58a7b9c-ad17-45e3-b88e-7f13c1337f60)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
 
