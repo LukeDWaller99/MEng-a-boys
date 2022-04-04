@@ -1,5 +1,28 @@
 Part,Quantity,Cost(per 1),Cost,Supplier,URL
-2020 Extrusion (500mm),2,£3.60,xxxx,OOZNEST,https://ooznest.co.uk/product/v-slot-linear-rail-20x20mm-cut-to-size/
-2020 Extrusion (240mm),3,£1.73,xxxx,OOZNEST,https://ooznest.co.uk/product/v-slot-linear-rail-20x20mm-cut-to-size/
-90 Degree Cast Corner,8,£1.50,xxxx,OOZNEST,https://ooznest.co.uk/product/90-degree-cast-corner/
-Drop in Tee Nuts - M4,xxxx,£0.20,xxxx,OOZNEST,https://ooznest.co.uk/product/drop-in-tee-nuts/
+2020 Extrusion (500mm),2,3.60,7.2,OOZNEST,https://ooznest.co.uk/product/v-slot-linear-rail-20x20mm-cut-to-size/
+2020 Extrusion (240mm),3,1.73,5.19,OOZNEST,https://ooznest.co.uk/product/v-slot-linear-rail-20x20mm-cut-to-size/
+90 Degree Cast Corner,8,1.50,12,OOZNEST,https://ooznest.co.uk/product/90-degree-cast-corner/
+Drop in Tee Nuts - M4,60,0.20,12,OOZNEST,https://ooznest.co.uk/product/drop-in-tee-nuts/
+Bolts - M4 x 16 mm,8,,0,,
+Bolts - M4 x 10 mm,40,0.18,7,,
+Bolts - M4 x 16mm (Domed),12,0.20,2.4,,
+Bearings - 15mmx32mmx9mm,6,1.75,10.5,,https://www.ebay.co.uk/itm/283138769685?var=583553237304
+GT2 Pulley - 20 Tooth 8mm Bore,2,2.89,5.78,Ebay,https://www.ebay.co.uk/itm/283138769685?var=583553237304
+GT2 Pulley - 60 Tooth 8mm Bore,2,5.75,11.5,Ebay,https://www.ebay.co.uk/itm/223461492884?var=522579257524
+GT2 Timing Belt,2,4.25,8.5,Ebay,
+Motors,2,,0,,
+Copper Pipe - 15mm x 150mm ,2,,0,,
+Copper Pipe - 15mm x 320mm ,2,,0,,
+Copper Pipe Lagging - 60mm x 220mm,2,,0,,
+Bearing Mounts,4,,0,N/A,N/A
+Conveyer Holder,2,,0,N/A,N/A
+Conveyer Lagging Holders,4,,0,N/A,N/A
+Top Plate Spacers,6,,0,N/A,N/A
+Pipe Retention Clip,2,,0,N/A,N/A
+Motor to Pulley Adaptor,2,,0,N/A,N/A
+Motor Mount Holder,2,,0,N/A,N/A
+Motor Mount,2,,0,N/A,N/A
+Pipe to Pulley Adaptor,2,,0,N/A,N/A
+Total,179,,82.07,,
+Total Printed Parts,26,,,,
+Total Hours of Printing,,,,,
