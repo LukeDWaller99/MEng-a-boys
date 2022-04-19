@@ -16,6 +16,7 @@
 \usepackage[UKenglish]{datetime}
 \usepackage{setspace}
 \usepackage{hhline}
+\usepackage{lastpage}
 
 \hypersetup
 {
@@ -29,18 +30,45 @@
 \fancyhead[R]{Student No. 10618407}
 \fancyfoot[R]{\thepage}
 
+
+
 \doublespacing
+
+
 
 \begin{document}							
 \title{\bf PROJ324 - Project O.R.C.A. - On-water Rubbish Collection robot with Automatic sensing} 	
 \author{Luke Waller} 								
 \date{\today} 										
-\maketitle 												
-\pagenumbering{roman}			
+\maketitle
+\thispagestyle{empty}
+
+\newpage 	
+
+\section*{Abstract}
+\pagenumbering{roman}	
+
+\newpage
+\section*{Acknowledgements}
+											
+		
 \newpage			
-\setcounter{page}{2}								
+\fancyfoot[R]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+\setcounter{page}{1}
+\pagenumbering{arabic}								
 \tableofcontents 
 \newpage
+
+\listoffigures
+\listoftables
+
+\newpage
+
+\section{Glossary}
+\newpage
+\section{Introduction}
+\section{Design Requirements}
+\section{Aims and Objectives}
 
 
 \end{document}
