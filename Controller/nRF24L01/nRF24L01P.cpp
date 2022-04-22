@@ -178,6 +178,8 @@ nRF24L01P::nRF24L01P(PinName mosi,
                      PinName ce,
                      PinName irq) : spi_(mosi, miso, sck), nCS_(csn), ce_(ce), nIRQ_(irq) {
 
+    nIRQ_.rise(callback(this, &nRF24L01P::IRQHandler));
+
     mode = _NRF24L01P_MODE_UNKNOWN;
 
     disable();
@@ -834,7 +836,7 @@ bool nRF24L01P::readable(int pipe) {
 }
 
 
-int nRF24L01P::write(int pipe, char *data, int count) {
+int nRF24L01P::write(char *data, int pipe, int count) {
 
     // Note: the pipe number is ignored in a Transmit / write
 
@@ -1025,5 +1027,9 @@ int nRF24L01P::getStatusRegister(void) {
     nCS_ = 1;
 
     return status;
+
+}
+
+void nRF24L01P::IRQHandler(){
 
 }
