@@ -44,11 +44,13 @@
 
 // Inputs
 #define BTN_1   PG_9
-#define BTN_2   PE_8
-#define SW_1    PE_10
-#define SW_2    PE_12
-#define SW_3    PE_14
-#define SW_4    PE_15
+#define BTN_2   PE_7
+#define SW_1    PE_8
+#define SW_2    PE_10
+#define SW_3    PE_12
+#define SW_4    PF_14
+#define SW_5    PE_13
+#define SW_6    PE_14
 
 // IR Sensors
 #define IR_1    PB_1
