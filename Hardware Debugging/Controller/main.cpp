@@ -37,6 +37,7 @@ AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL);
 Buzzer buzzer(BUZZER);
 
 
+
 // create an array of outputs for the leds for the output
 int main() {
 
@@ -45,15 +46,29 @@ int main() {
     LED = 1;
     buzzer.chime();
 
-    float val;
+    float leftPitch, rightPitch, leftRoll, rightRoll ;
 
     while (true) {
 
-        val = L_Pitch.read();
+        if (SW_1 == 1){
+            LED = 1;
+        } else {
+            LED = 0 ;
+        }
 
-        if (BTN1 == 1){buzzer=1;}
-        else {buzzer=0;}
+        leftPitch = L_Pitch.read();
+        rightPitch = R_Pitch.read();
+        leftRoll = L_Roll.read();
+        rightRoll = R_Roll.read();
 
-        printf("%f\n", val);
+        if ((BT1 == 1) || (BT2 == 1) || (BT3 == 1)){
+            buzzer = 1;
+        } else { buzzer = 0; }
+        printf("------------------------------\n\n");
+        printf("Left Pitch: %f\n", leftPitch);
+        printf("Right Pitch: %f\n", rightPitch);
+        printf("Left Roll: %f\n", leftRoll);
+        printf("Right Roll: %f\n\n", rightRoll);
+        wait_us(1000000);
     }
 }
