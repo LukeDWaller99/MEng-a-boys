@@ -6,36 +6,54 @@
 #include <DigitalIn.h>
 #include <DigitalOut.h>
 #include <ThisThread.h>
+#include <nRF24L01P.h>
 
 #include "Buzzer.h"
 #include "HARDWARE.h"
 
-DigitalIn BT1(BTN1), BT2(BTN2), BT3(BTN3), SW_1(SW1);        
-DigitalOut LED(LED_1);                                             
-AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL);   
-Buzzer buzzer(BUZZER);
+nRF24L01P nRF24L01(MOSI, MISO, SCK, CSN, CE, IRQ);
 
-Thread btnThread, swThread, potThread; // creating threads
+// DigitalIn BT1(BTN1), BT2(BTN2), BT3(BTN3), SW_1(SW1);        
+// DigitalOut LED(LED_1);                                             
+// AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL);   
+// Buzzer buzzer(BUZZER);
 
-Mutex potMutex; // creating mutex lock for pots
+// Thread btnThread, swThread, potThread; // creating threads
 
-void potMethod();
-void btnMethod();
-void swMethod();
+// Mutex potMutex; // creating mutex lock for pots
+
+// void potMethod();
+// void btnMethod();
+// void swMethod();
 
 int main() {
 
     printf("Starting Board...\n");
 
-    buzzer.chime();
+    // buzzer.chime();
 
-    // starting Threads
-    potThread.start(potMethod);
-    btnThread.start(btnMethod);
-    swThread.start(swMethod);
+    nRF24L01.powerUp();
+
+// Display the (default) setup of the nRF24L01+ chip
+    printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
+    printf("nRF24L01 Output power : %d dBm\n",  nRF24L01.getRfOutputPower());
+    printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate());
+    printf("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress());
+    printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress());
+
+    // nRF24L01.setTransferSize(TRANSFER_SIZE);
+ 
+    nRF24L01.setTransmitMode();
+
+    nRF24L01.enable();
+
+        // starting Threads
+    // potThread.start(potMethod);
+    // btnThread.start(btnMethod);
+    // swThread.start(swMethod);
 
 }
-
+/*
 void swMethod(){
     while (true) {
         LED = SW_1 == 1 ? 1 : 0;
@@ -76,4 +94,4 @@ void potMethod(){
 
     }
 
-}
+}*/
