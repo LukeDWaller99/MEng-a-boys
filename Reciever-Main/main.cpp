@@ -22,18 +22,14 @@
         xx00 - OFF
 */
 
-#include <cstdio>
-#include <cstdlib>
 #include <mbed.h>
 #include <nRF24L01P.h>
-#include "AnalogIn.h"
 #include "DigitalIn.h"
-#include "DigitalOut.h"
 #include "HARDWARE.h"
 #include "ESC.h"
+#include "InterruptIn.h"
 #include "PinNames.h"
 #include "ThisThread.h"
-#include "Thread.h"
 #include <PwmOut.h>
 #include "L298N.h"
 
@@ -43,6 +39,9 @@
 #define MOTOR_OFF       0.0f
 #define MOTOR_ON        1.0f
 
+// MOSI, MISO, SCK, CNS, CE, IRQ - must be an interrupt pin 6 
+nRF24L01P nRF24L01(MOSI, MISO, SCK, CSN, CE, IRQ);
+
 ESC FWDLeftMotor(FWD_LHS_MOTOR), 
     FWDRightMotor(FWD_RHS_MOTOR),
     REVLeftMotor(REV_LHS_MOTOR),
@@ -51,27 +50,33 @@ ESC FWDLeftMotor(FWD_LHS_MOTOR),
 L298N ConvMotor1(CONV_MOTOR_1_A, CONV_MOTOR_1_B, CONV_MOTOR_1_ENABLE),
       ConvMotor2(CONV_MOTOR_2_A, CONV_MOTOR_2_B, CONV_MOTOR_2_ENABLE);
 
-DigitalIn btn(USER_BUTTON);
+InterruptIn bat30(Bat_30_PERCENT), bat15(Bat_15_PERCENT), // battery monitoring
+            btn1(BTN_1), btn2(BTN_2), // button inputs
+            SW1(SW_1), SW2(SW_2), SW3(SW_3), SW4(SW_4), SW5(SW_5),SW6(SW_6), // switch inputs
+            IR1(IR_1), IR2(IR_2), IR3(IR_3), IR4(IR_4); // IR Sensor inputs
+
+PwmOut buzzer(BUZZER);
+
+BusOut LEDs(LED_1, LED_10, LED_9, LED_8, LED_7, LED_6, LED_5, LED_4, LED_2, LED_3);
 
 float fwdLeftMotorThrottle = 0, fwdRightMotorThrottle = 0;
 float revLeftMotorThrottle = 0, revRightMotorThrottle = 0;
 
 Mutex LeftMotorLock, RightMotorLock;
 
-Thread LeftMotorThread, RightMotorThread, RadioThread;
-
-// MOSI, MISO, SCK, CNS, CE, IRQ - must be an interrupt pin 6 
-nRF24L01P nRF24L01(MOSI, MISO, SCK, CSN, CE, IRQ);
+Thread LeftMotorThread, RightMotorThread, RadioThread, lowBatteryThread, LEDThread, IRThread, InputThread;
 
 char rxData[TRANSFER_SIZE];
-
-    float POTVal = 0;
-
+float POTVal = 0;
 int rxDataCnt = 0;
 
 void LeftMotorThreadMethod();
 void RightMotorThreadMethod();
 void RadioReceiveMethod();
+void lowBatteryMethod();
+void LEDMethod();
+void IRMethod();
+void InputMethod();
 float ThrottleValue(char* data);
 
 int main() {
@@ -194,9 +199,9 @@ void RadioReceiveMethod(){
                 switch (rxData[1]) {
                 case '1': // Button 1 - motors forwards
                     ConvMotor1 = 1, ConvMotor1 = 1;
-                case '2': // Button 2 - motors reverse
+                case '2': // Button 2
+                case '3': // Button 3 - motors reverse
                     ConvMotor1 = -1, ConvMotor2 = -1;
-                case '3': // Button 3
                 default:
                     break;
                 }

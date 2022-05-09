@@ -11,7 +11,6 @@
 #include <string>
 #include "Buzzer.h"
 #include "Callback.h"
-#include "DigitalIn.h"
 #include "DigitalOut.h"
 #include "EventQueue.h"
 #include "PinNames.h"
@@ -20,7 +19,7 @@
 #include "TRASMISSION_CODES.h"
 
 #define TRANSFER_SIZE   5
-#define DEFAULT_PIPE    0 // set the defauly pipe for the nRF24L01
+#define DEFAULT_PIPE    0 // set the default pipe for the nRF24L01
 
 #define MULTIPLYING_FACTOR  2.0f
 #define POT_OFFSET          1.0f
@@ -79,7 +78,7 @@ char txSW1[TRANSFER_SIZE] = {SW1_ON};
 
 int txDataCnt = TRANSFER_SIZE, rxDataCnt = 0;
 
-Thread LEDThread, ButtonThread, PotThread, RadioThread;
+Thread ButtonThread, PotThread, RadioThread;
 
 Mutex PotLock;
 
@@ -88,7 +87,6 @@ float potVals[6], oldPotVals[6];
 
 void PotMethod();
 
-void toggleLEDs();
 void ButtonThreadMethod();
 void Btn_1IRQ();
 void Btn_2IRQ();
@@ -125,8 +123,9 @@ int main() {
     // wait_us(1000000);
     // buzzer = 0;
 
+    buzzer.chime();
+
     PotThread.start(PotMethod);
-    LEDThread.start(toggleLEDs);
     ButtonThread.start(ButtonThreadMethod);
     Btn_1.rise(Btn_1IRQ);
     Btn_2.rise(Btn_2IRQ);
@@ -283,7 +282,7 @@ void ButtonThreadMethod(){
         buzzer = 0;
         ThisThread::flags_wait_any(0x7fffffff, false);
         int flag = ThisThread::flags_get();
-        ThisThread::flags_clear(0x7fffffff);
+        ThisThread::flags_clear(flag);
         printf("Flag = %d\n", flag);
         switch (flag) {
         case 1:
@@ -301,14 +300,16 @@ void ButtonThreadMethod(){
             printf("%s\n", tx.BTN3_PRESSED);
             // nRF24L01.write(tx.BTN3_PRESSED, 0, TRANSFER_SIZE);
             break;
-        case 8:
+        case 9:
             printf("Switch 1 ON\n");
+            led_1 = 1;
             txSW1[3] = '1';
             // nRF24L01.write(txSW1);
             printf("Switch 1: %s\n", txSW1);
             break;
-        case 16:
+        case 8:
             printf("Switch 1 OFF\n");
+            led_1  = 0;
             txSW1[3] = '0';
             // nRF24L01.write(txSW1);
             printf("Switch 1: %s\n", txSW1);
@@ -322,30 +323,21 @@ void ButtonThreadMethod(){
 }
 
 void Btn_1IRQ(){
-    ButtonThread.flags_set(1);
+        ButtonThread.flags_set(1);
 }
 
 void Btn_2IRQ(){
-    ButtonThread.flags_set(2);
+        ButtonThread.flags_set(2);
 }
 
 void Btn_3IRQ(){
-    ButtonThread.flags_set(4);
+        ButtonThread.flags_set(4);
 }
 
 void SW_1RisingIRQ(){
-    ButtonThread.flags_set(8);
+        ButtonThread.flags_set(9);
 }
 
 void SW_1FallingIRQ(){
-    ButtonThread.flags_set(16);
-}
-
-
-void toggleLEDs(){
-    printf("LED Thread Started \n");
-    while (true) {
-    led_1 = !led_1;
-    ThisThread::sleep_for(1s);
-    }
+        ButtonThread.flags_set(8);
 }

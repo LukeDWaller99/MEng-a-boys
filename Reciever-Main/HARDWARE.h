@@ -45,7 +45,6 @@
 // Inputs
 #define BTN_1   PG_9
 #define BTN_2   PE_8
-#define BTN_3   PE_7
 #define SW_1    PE_10
 #define SW_2    PE_12
 #define SW_3    PE_14
@@ -61,5 +60,9 @@
 
 // Buzzer
 #define BUZZER  PB_8
+
+// Low Battery Inputs
+#define Bat_30_PERCENT PC_0
+#define Bat_15_PERCENT PA_3
 
 #endif
