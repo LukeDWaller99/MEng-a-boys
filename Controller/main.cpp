@@ -84,6 +84,7 @@ Mutex PotLock;
 
 float potVals[6], oldPotVals[6];
 
+ int switchState;
 
 void PotMethod();
 
@@ -94,8 +95,6 @@ void Btn_3IRQ();
 void Btn_4IRQ();
 void SW_1RisingIRQ();
 void SW_1FallingIRQ();
-void SW_2RisingIRQ();
-void SW_2FallingIRQ();
 
 // create an array of outputs for the leds for the output
 int main() {
@@ -118,7 +117,8 @@ int main() {
     printf("%s\n", txData);
     // nRF24L01.write(txData, 0 , TRANSFER_SIZE);
 
-    led_1 = 1;
+    switchState = SW_1 == 1 ? 1 : 0;
+    led_1 = switchState;
     // buzzer = 1;
     // wait_us(1000000);
     // buzzer = 0;
@@ -300,14 +300,14 @@ void ButtonThreadMethod(){
             printf("%s\n", tx.BTN3_PRESSED);
             // nRF24L01.write(tx.BTN3_PRESSED, 0, TRANSFER_SIZE);
             break;
-        case 9:
+        case 8:
             printf("Switch 1 ON\n");
             led_1 = 1;
             txSW1[3] = '1';
             // nRF24L01.write(txSW1);
             printf("Switch 1: %s\n", txSW1);
             break;
-        case 8:
+        case 16:
             printf("Switch 1 OFF\n");
             led_1  = 0;
             txSW1[3] = '0';
@@ -323,21 +323,52 @@ void ButtonThreadMethod(){
 }
 
 void Btn_1IRQ(){
+    Btn_1.rise(NULL);
+    wait_us(5000);
+    if (Btn_1 == 1){
         ButtonThread.flags_set(1);
+    }
+    Btn_1.rise(Btn_1IRQ);
 }
 
 void Btn_2IRQ(){
+    Btn_2.rise(NULL);
+    wait_us(5000);
+    if (Btn_2 == 1){
         ButtonThread.flags_set(2);
+    }
+    Btn_2.rise(Btn_1IRQ);
 }
 
 void Btn_3IRQ(){
+    Btn_3.rise(NULL);
+    wait_us(5000);
+    if (Btn_3 == 1){
         ButtonThread.flags_set(4);
+    }
+    Btn_3.rise(Btn_1IRQ);
 }
 
 void SW_1RisingIRQ(){
-        ButtonThread.flags_set(9);
+    SW_1.rise(NULL);
+    SW_1.fall(NULL);
+        wait_us(5000);
+        if ((SW_1 == 1) && (switchState == 1)){
+             ButtonThread.flags_set(8);
+        }
+    switchState = 0;
+    SW_1.rise(SW_1RisingIRQ);
+    SW_1.fall(SW_1FallingIRQ);
 }
 
 void SW_1FallingIRQ(){
-        ButtonThread.flags_set(8);
+        SW_1.rise(NULL);
+    SW_1.fall(NULL);
+        wait_us(5000);
+        if ((SW_1 == 0) && (switchState == 0)){
+             ButtonThread.flags_set(16);
+        }
+    switchState = 1;
+    SW_1.rise(SW_1RisingIRQ);
+    SW_1.fall(SW_1FallingIRQ);
 }
