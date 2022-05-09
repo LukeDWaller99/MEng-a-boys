@@ -119,6 +119,7 @@ int main() {
 
     switchState = SW_1 == 1 ? 1 : 0;
     led_1 = switchState;
+    
     // buzzer = 1;
     // wait_us(1000000);
     // buzzer = 0;
@@ -353,7 +354,7 @@ void SW_1RisingIRQ(){
     SW_1.rise(NULL);
     SW_1.fall(NULL);
         wait_us(5000);
-        if ((SW_1 == 1) && (switchState == 1)){
+        if (SW_1 == 1){
              ButtonThread.flags_set(8);
         }
     switchState = 0;
@@ -362,10 +363,10 @@ void SW_1RisingIRQ(){
 }
 
 void SW_1FallingIRQ(){
-        SW_1.rise(NULL);
+    SW_1.rise(NULL);
     SW_1.fall(NULL);
         wait_us(5000);
-        if ((SW_1 == 0) && (switchState == 0)){
+        if (SW_1 == 0){
              ButtonThread.flags_set(16);
         }
     switchState = 1;

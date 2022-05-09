@@ -3,25 +3,7 @@
     Main file for Final Year project Receiver - Luke Waller
 **/
 
-/*
-    Transmittion Codes - 
-    1xxx - POTs
-        x1xx - Left Pitch
-        x2xx - Left Roll
-        x3xx - Right Pitch
-        x4xx - Right Roll
-            xx0x - Forwards
-            xx1x - Reverse
-                xxx0 - value of throttle
-    2xxx - Buttons
-        x1xx - Button 1
-        x2xx - Button 2
-        x3xx - Button 3
-    3xxx - SW1 
-        xx10 - ON
-        xx00 - OFF
-*/
-
+#include <cstdio>
 #include <mbed.h>
 #include <nRF24L01P.h>
 #include "DigitalIn.h"
@@ -64,11 +46,15 @@ float revLeftMotorThrottle = 0, revRightMotorThrottle = 0;
 
 Mutex LeftMotorLock, RightMotorLock;
 
-Thread LeftMotorThread, RightMotorThread, RadioThread, lowBatteryThread, LEDThread, IRThread, InputThread;
+Thread LeftMotorThread, RightMotorThread, RadioThread, lowBatteryThread, LEDThread, IRThread, InputThread, bat30percentThread, bat15percentThread;
 
 char rxData[TRANSFER_SIZE];
 float POTVal = 0;
 int rxDataCnt = 0;
+
+int rubbishContainerFull = 0;
+int battery30percent = 0;
+int battery15percent = 0;
 
 void LeftMotorThreadMethod();
 void RightMotorThreadMethod();
@@ -77,7 +63,22 @@ void lowBatteryMethod();
 void LEDMethod();
 void IRMethod();
 void InputMethod();
+void bat30percentMethod();
+void bat15percentMethod();
 float ThrottleValue(char* data);
+
+// IRQ Methods 
+void bat30PercentIRQ();
+void bat15PercentIRQ();
+void btn1IRQ();
+void btn2IRQ();
+void SW1IRQ();
+void SW2IRQ();
+void SW3IRQ();
+void SW4IRQ();
+void SW5IRQ();
+void SW6IRQ();
+void IRIRQ();
 
 int main() {
 
@@ -90,7 +91,7 @@ int main() {
 
     nRF24L01.powerUp();
 
-// // Display the (default) setup of the nRF24L01+ chip
+// Display the (default) setup of the nRF24L01+ chip
     printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
     printf("nRF24L01 Output power : %d dBm\n",  nRF24L01.getRfOutputPower() );
     printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate() );
@@ -106,31 +107,14 @@ int main() {
     LeftMotorThread.start(LeftMotorThreadMethod);
     RightMotorThread.start(RightMotorThreadMethod);
     RadioThread.start(RadioReceiveMethod);
+    lowBatteryThread.start(lowBatteryMethod);
+    LEDThread.start(LEDMethod);
+    IRThread.start(IRMethod);
+    InputThread.start(InputMethod);
+    bat30percentThread.start(bat30percentMethod);
+    bat15percentThread.start(bat15percentMethod);
 
     printf("WAITING...\n");
-
-while(true){
-    // if (btn == 1){
-    //     // int x = 1;
-    //     ConvMotor1 = 1;
-    //     ConvMotor2 = 1;
-    //     LeftMotorThread.flags_set(2);
-    //     RightMotorThread.flags_set(2);
-    //     fwdLeftMotorThrottle = MOTOR_ON;
-    //     revLeftMotorThrottle = MOTOR_ON;
-    //     fwdRightMotorThrottle = MOTOR_ON;
-    //     revRightMotorThrottle = MOTOR_ON;
-    //     } else {
-    //     ConvMotor1 = 0;
-    //     ConvMotor2 = 0;
-    //     LeftMotorThread.flags_set(2);
-    //     RightMotorThread.flags_set(2);
-    //     fwdLeftMotorThrottle = MOTOR_OFF;
-    //     revLeftMotorThrottle = MOTOR_OFF; 
-    //     fwdRightMotorThrottle = MOTOR_OFF;
-    //     revRightMotorThrottle = MOTOR_OFF;
-    //     }
-    }
 }
 
 void RadioReceiveMethod(){
@@ -265,3 +249,222 @@ void RightMotorThreadMethod(){
         RightMotorLock.unlock();
     }
 }
+
+void lowBatteryMethod(){
+
+    printf("Low Battery Thread Running\n");
+
+    while (true) {
+        ThisThread::flags_wait_any(0x7fffffff, false);
+        int flag = ThisThread::flags_get();
+        ThisThread::flags_clear(flag);
+        printf("Flag = %d\n", flag);
+        switch (flag) {
+        case 1: // battery at 30%
+            printf("Battery at 30%%\n");
+            break;
+        case 2: // battery at 15%
+            printf("Battery at 15%%\n");
+            break;
+        case 3: // deactivate thread
+            break;
+        default:
+            printf("Error!\n");
+            break;
+        }
+    }
+}
+
+void LEDMethod(){
+    
+    printf("LED Thread Running\n");
+
+    while (true) {
+    }
+}
+
+void IRMethod(){
+
+    printf("IR Thread Running");
+
+    while (true) {
+        ThisThread::flags_wait_any(0x7fffffff, true);
+        if (rubbishContainerFull == 0) {
+            rubbishContainerFull = 1;
+            // buzz and LEDs
+        } else {
+            // do nothing?
+        }
+    }
+}
+
+void InputMethod(){
+
+    printf("Input Thread Started\n");
+
+    while (true) {
+        ThisThread::flags_wait_any(0x7fffffff, false);
+        int flag = ThisThread::flags_get();
+        ThisThread::flags_clear(0x7fffffff);
+        printf("Flag = %d\n", flag);
+        switch (flag) {
+        case 1: // button 1
+            break;
+        case 2: // button 2
+            break;
+        case 4: // switch 1
+            break;
+        case 8: // switch 2
+            break;
+        case 16: // switch 3
+            break;
+        case 32: // switch 4
+            break;
+        case 64: // switch 5
+            break;
+        case 128: // switch 6
+            break;
+        default:
+            break;
+        }
+    }
+
+}
+
+void bat30percentMethod(){
+
+    printf("Battery 30%% Thread Started\n");
+
+    ThisThread::flags_wait_any(0x7fffffff, false);
+    while (true) {
+        if ((battery30percent == 1) && (battery15percent == 1)) {
+            return;
+        } else {
+            buzzer = 1;
+            ThisThread::sleep_for(1s);
+            buzzer = 0;
+            ThisThread::sleep_for(10s);
+        }
+    }
+}
+
+void bat15percentMethod(){
+    
+    printf("Battery 15%% Thread Started\n");
+
+    ThisThread::flags_wait_any(0x7fffffff, false);
+    while (true) {
+        if ((battery30percent == 1) && (battery15percent == 1)){
+            buzzer = 1;
+            ThisThread::sleep_for(1s);
+            buzzer = 0;
+            ThisThread::sleep_for(1s);
+        }        
+    }
+
+}
+
+void bat30PercentIRQ(){
+    bat30.rise(NULL);
+    wait_us(5000);
+    if (bat30 == 1){
+        lowBatteryThread.flags_set(1);
+    }
+    bat30.rise(bat30PercentIRQ);
+}
+
+void bat15PercentIRQ(){
+    bat15.rise(NULL);
+    wait_us(5000);
+    if (bat15 == 1){
+        lowBatteryThread.flags_set(2);
+    }
+}
+
+void btn1IRQ(){
+    btn1.rise(NULL);
+    wait_us(5000);
+    if (btn1 == 1){
+        InputThread.flags_set(1);
+    }
+    btn1.rise(btn1IRQ);
+}
+
+void btn2IRQ(){
+    btn2.rise(NULL);
+    wait_us(5000);
+    if (btn2 == 1){
+        InputThread.flags_set(2);
+    }
+    btn2.rise(btn2IRQ);
+}
+
+void SW1IRQ(){
+    SW1.rise(NULL);
+    wait_us(5000);
+    if (SW1 == 1){
+        InputThread.flags_set(4);
+    }
+    SW1.rise(SW1IRQ);
+}
+
+void SW2IRQ(){
+    SW2.rise(NULL);
+    wait_us(5000);
+    if (SW2 == 1){
+        InputThread.flags_set(8);
+    }
+    SW2.rise(SW2IRQ);
+}
+
+void SW3IRQ(){
+    SW3.rise(NULL);
+    wait_us(5000);
+    if (SW3 == 1){
+        InputThread.flags_set(16);
+    }
+    SW3.rise(SW3IRQ);
+}
+
+void SW4IRQ(){
+    SW4.rise(NULL);
+    wait_us(5000);
+    if (btn1 == 1){
+        InputThread.flags_set(32);
+    }
+    SW4.rise(SW4IRQ);
+}
+
+void SW5IRQ(){
+    SW5.rise(NULL);
+    wait_us(5000);
+    if (SW5 == 1){
+        InputThread.flags_set(64);
+    }
+    SW5.rise(SW5IRQ);
+}
+
+void SW6IRQ(){
+    SW6.rise(NULL);
+    wait_us(5000);
+    if (SW6 == 1){
+        InputThread.flags_set(128);
+    }
+    SW6.rise(SW6IRQ);
+}
+
+void IRIRQ(){
+    IR1.rise(NULL);
+    IR2.rise(NULL);
+    IR3.rise(NULL);
+    IR4.rise(NULL);
+    wait_us(5000);
+    if (btn1 == 1){
+        IRThread.flags_set(1);
+    }
+    IR1.rise(IRIRQ);
+    IR2.rise(IRIRQ);
+    IR3.rise(IRIRQ);
+    IR4.rise(IRIRQ);
+}
+
