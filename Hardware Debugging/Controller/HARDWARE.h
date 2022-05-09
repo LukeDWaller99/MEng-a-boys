@@ -3,13 +3,21 @@
 
 #include <PinNames.h>
 
-// pins for nRF24L01
-#define MOSI    PA_12   // D2
-#define MISO    PA_11   // D10
-#define SCK     PB_3    // D13
-#define CSN     PB_4    // D12
-#define CE      PB_5    // D11
-#define IRQ     PA_8    // D9 
+// // pins for nRF24L01
+// #define MOSI    PA_12   // D2
+// #define MISO    PA_11   // D10
+// #define SCK     PB_3    // D13
+// #define CSN     PB_4    // D12
+// #define CE      PB_5    // D11
+// #define IRQ     PA_8    // D9 
+
+// nRF24L01
+#define MOSI    PB_5
+#define MISO    PB_4
+#define SCK     PB_3
+#define CSN     PA_4
+#define CE      PC_6
+#define IRQ     PB_13
 
 // joystick pins
 #define L_PITCH PA_0    // A0
