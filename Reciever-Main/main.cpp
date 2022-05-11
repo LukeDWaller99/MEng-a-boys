@@ -18,7 +18,7 @@
 
 #define TRANSFER_SIZE   5
 #define DEFAULT_PIPE    0
-#define CALIBRATE       0
+#define CALIBRATE       1
 #define MOTOR_OFF       0.0f
 #define MOTOR_ON        1.0f
 
@@ -91,7 +91,7 @@ int main() {
 
     printf("Starting Board...\n");
 
-        // wait_us(5000000);
+        wait_us(5000000);
 
     nRF24L01.powerUp();
 
@@ -151,7 +151,9 @@ void RadioReceiveMethod(){
                         LeftMotorLock.trylock_for(10ms);
                         revLeftMotorThrottle = MOTOR_OFF;
                         fwdLeftMotorThrottle = ThrottleValue(&rxData[3]);
+                        LeftMotorThread.flags_set(1);
                         LeftMotorLock.unlock();
+                        printf("FWDs\n");
                         break;
                     }
                     case '1': // Reverse
@@ -159,37 +161,47 @@ void RadioReceiveMethod(){
                         LeftMotorLock.trylock_for(10ms);
                         fwdLeftMotorThrottle = MOTOR_OFF;
                         revLeftMotorThrottle = ThrottleValue(&rxData[3]);
+                        LeftMotorThread.flags_set(1);
                         LeftMotorLock.unlock();
+                        printf("REV\n");
+                        break;
                     default:
                         break;
                     }
-                case '2': // Left Roll - currently hove no function
+                case '2': // Left Roll
                     switch (rxData[2]) {
                     case '0': // Forward
-                    case '1': // Reverse
-                    default:
-                        break;
-                    }
-                case '3': // Right Pitch
-                    switch (rxData[2]) {
-                    case '0': // Forwards
-                        // set value of throttle
+                                            // set value of throttle
                         RightMotorLock.trylock_for(10ms);
                         revRightMotorThrottle = MOTOR_OFF;
                         fwdRightMotorThrottle = ThrottleValue(&rxData[3]);
                         RightMotorLock.unlock();
+                        break;
                     case '1': // Reverse
-                        // set value of throttle
+                                            // set value of throttle
                         RightMotorLock.trylock_for(10ms);
                         fwdRightMotorThrottle = MOTOR_OFF;
                         revRightMotorThrottle = ThrottleValue(&rxData[3]);
                         RightMotorLock.unlock();
+                        break;
+                    default:
+                        break;
+                    }
+                case '3': // Right Pitch - currently have no function
+                    switch (rxData[2]) {
+                    case '0': // Forwards
+
+                        break;
+                    case '1': // Reverse
+
+                        break;
                     default:
                         break;
                     }
                 case '4': // Right Roll - currently have no function
                     switch (rxData[2]) {
                     case '0': // Forwards
+                        break;
                     case '1': // Reverse
                         // set value of throttle                    default:
                         break;
@@ -200,23 +212,34 @@ void RadioReceiveMethod(){
             case '2': // BUTTON
                 switch (rxData[1]) {
                 case '1': // Button 1 - motors forwards
+                    printf("Motors Forwards\n");
                     ConvMotor1 = 1, ConvMotor1 = 1;
+                    break;
                 case '2': // Button 2
                 case '3': // Button 3 - motors reverse
+                    printf("Motors Reverse\n");
                     ConvMotor1 = -1, ConvMotor2 = -1;
+                    break;
                 default:
                     break;
                 }
                 break;
             case '3': // SWITCH
-                switch (rxData[2]) {
+                switch (rxData[3]) {
                 case '1': // Switch ON - enable motors
+                    printf("Switch ON\n");
                     ConvMotor1 = true, ConvMotor2 = true;
-                case '2': // Switch OFF - disable motors
+                    break;
+                case '0': // Switch OFF - disable motors
+                    printf("Switch OFF\n");
                     ConvMotor1 = false, ConvMotor2 = false;
+                    break;
                 default:
                     break;
                 }
+                break;
+            case 'T': // test send
+                break;
             default:
                 printf("Invalid Input\n");
             }
