@@ -43,20 +43,20 @@
 #define LED_10  PD_6
 
 // Inputs
-#define BTN_1   PG_9
-#define BTN_2   PE_8
-#define SW_1    PE_10
-#define SW_2    PE_12
-#define SW_3    PE_14
-#define SW_4    PE_15
-#define SW_5    PB_10
-#define SW_6    PB_11
+#define BTN_1   PG_9    // SW1 - working
+#define BTN_2   PE_7    // SW2 - working
+#define SW_1    PE_8    // SW3 - working
+#define SW_2    PE_10   // SW4 - working
+#define SW_3    PE_12   // SW5 - not in use
+#define SW_4    PE_14   // SW6 - not in use 
+#define SW_5    PF_14   // SW7 - not in use
+#define SW_6    PE_13   // SW8 - not in use
 
 // IR Sensors
-#define IR_1    PB_1
-#define IR_2    PC_2
-#define IR_3    PF_4
-#define IR_4    PB_6
+#define IR_1    PB_1 // working
+#define IR_2    PC_2 // not in use
+#define IR_3    PF_4 // not in use
+#define IR_4    PB_6 // working
 
 // Buzzer
 #define BUZZER  PB_8

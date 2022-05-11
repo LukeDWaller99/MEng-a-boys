@@ -37,7 +37,7 @@
 
 
 // MOSI, MISO, SCK, CNS, CE, IRQ - must be an interrupt pin 6 
-// nRF24L01P nRF24L01(MOSI, MISO, SCK, CSN, CE, IRQ);
+nRF24L01P nRF24L01(MOSI, MISO, SCK, CSN, CE, IRQ);
 
 InterruptIn Btn_1(BTN1), Btn_2(BTN2), Btn_3(BTN3), SW_1(SW1);        
 DigitalOut led_1(LED_1);                                             
@@ -99,23 +99,23 @@ void SW_1FallingIRQ();
 // create an array of outputs for the leds for the output
 int main() {
 
-    // nRF24L01.powerUp();
+    nRF24L01.powerUp();
 
 // Display the (default) setup of the nRF24L01+ chip
-    // printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
-    // printf("nRF24L01 Output power : %d dBm\n",  nRF24L01.getRfOutputPower());
-    // printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate());
-    // printf("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress());
-    // printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress());
+    printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
+    printf("nRF24L01 Output power : %d dBm\n",  nRF24L01.getRfOutputPower());
+    printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate());
+    printf("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress());
+    printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress());
 
-    // nRF24L01.setTransferSize(TRANSFER_SIZE);
+    nRF24L01.setTransferSize(TRANSFER_SIZE);
  
-    // nRF24L01.setTransmitMode();
+    nRF24L01.setTransmitMode();
 
-    // nRF24L01.enable();
+    nRF24L01.enable();
 
     printf("%s\n", txData);
-    // nRF24L01.write(txData, 0 , TRANSFER_SIZE);
+    nRF24L01.write(txData, 0 , TRANSFER_SIZE);
 
     switchState = SW_1 == 1 ? 1 : 0;
     led_1 = switchState;
@@ -126,10 +126,10 @@ int main() {
 
     buzzer.chime();
 
-    PotThread.start(PotMethod);
+    // PotThread.start(PotMethod);
     ButtonThread.start(ButtonThreadMethod);
     Btn_1.rise(Btn_1IRQ);
-    Btn_2.rise(Btn_2IRQ);
+    // Btn_2.rise(Btn_2IRQ);
     Btn_3.rise(Btn_3IRQ);
     SW_1.rise(SW_1RisingIRQ);
     SW_1.fall(SW_1FallingIRQ);
