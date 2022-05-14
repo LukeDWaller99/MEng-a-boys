@@ -114,6 +114,8 @@ int main() {
     printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress());
 
     nRF24L01.setTransferSize(TRANSFER_SIZE);
+
+    nRF24L01.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
  
     nRF24L01.setTransmitMode();
 
