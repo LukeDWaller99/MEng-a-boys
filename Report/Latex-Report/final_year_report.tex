@@ -17,6 +17,10 @@
 \usepackage{setspace}
 \usepackage{hhline}
 \usepackage{lastpage}
+\usepackage[numbers]{natbib}
+
+\graphicspath{{images/}}
+
 
 \hypersetup
 {
@@ -56,8 +60,14 @@ Waste Collection, Microcontroller, Conveyor belt, C++
 
 \newpage
 \section*{Acknowledgements}
-											
+
+The author would like to thank the mentor support provided by Dr Ian Howard, who agreed to to undertake the role of mentor during the start of the Autumn Term.
+
+The author would also like to acknowledge the financial support provided by the University of Plymouth. 
+
+The author would also like to thank his family members for their continued support, and his friends for the continued inspiration to push me more and more every year. 							
 		
+This is a test bib \cite{agile_development}		
 \newpage			
 \fancyfoot[R]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 \setcounter{page}{1}
@@ -73,8 +83,153 @@ Waste Collection, Microcontroller, Conveyor belt, C++
 \section{Glossary}
 \newpage
 \section{Introduction}
+
+
+
 \section{Design Requirements}
+
+The design requirements for this project as outlined in Appendix \ref{app:design_requirements_hardware} and Appendix \ref{app:design_requirements_software} were agreed upon by {SOMEONE - NOT SURE HOW TO PHRASE IAN AND ME}. The table acts a checklist for the project to ensure that the met all of these requirements, this was a dynamic list that was adapted and amended as the project progressed. The core requirements of the project remained the same but some of the higher level attainable aims were adapted as the project progressed. 
+
 \section{Aims and Objectives}
 
+The aims and objectives, which have been listed below, are used as an indicator of success of the project. These were created using the design requirements of the project. The overall success of this project was measured against these aims and objectives. 
+
+1.	Design and create a boat that is capable of floating on water and being driven around by a radio controller and receiver. The craft will need to be an appropriate size such that it can carry all the equipment on board as well as a decent payload of rubbish to be collected. I will need to create a suitable propulsion system, steering system, and make sure the craft is stable both at top speed and when cornering. It is important to make sure the craft is highly controllable and safe to operate. 
+
+2.	Design and create a suitable litter collection system that can collect litter on the surface of water. The system will need to be able to be turned off, not be damaging to wildlife, and be able to collect all types of litter that collect on the surface. 
+
+3.	Combine the litter collection system with the main hull of the boat. Check that the functionality of both components is not impeded by the combination of the two parts together. Get the two parts of the boat controlled separately using a radio controller (as the radio controller that I have is only 3 channels).
+
+4.	Implement a custom microcontroller based remote control and receiver for the boat that would allow broader uses for the controller. The controller would be able to display some rudimentary values such as, battery charge on the boat, the current capacity of the rubbish collection system, and the status of the litter collection system (operating/not operating).
+
+5.	Add sensors, both active and passive to test for current capacity of the litter collection basket as well as current battery charge. The status would be these combined sensors would be outputted to the controller that would alert the user, alongside stopping the boat when the power is low or when the litter collection basket is full.  
+
+\section{Project Managment}
+
+The project has had a development lifecycle of approximately 36 weeks and began on the 6\^th September 2021. 
+
+The project was split into three phases of development, phase one was research and development of the project and ideas. Phase two was developing prototypes and testing. The final phase, phase three, was finalising the design and build. 
+
+The project was managed using the following software: 
+
+\begin{itemize}
+
+\item{LaTeX (TeXMaker), to write the documentation for the project.}
+\item{GitHub, for version control across the whole project.}
+\item{Microsoft Excel, to produce Gantt chart and to produce graphs.}
+\item{Microsoft OneNote, to log progress and documentation of research and experimentation.}
+
+\end{itemize}
+
+The management style for this project followed a similar style used by Roke Manor Research Ltds. agile framework. This framework follows and agile approach to project development \cite{agile_development}, which is evident in the adaptability of the project as it has developed. 
+
+The utilised style used to manage the project was extremely effective and when utilised with software packages above, all tasks were executed in an organised manner. For general awareness of time management and deadlines, a Gantt chart was utilised. This worked well for this type of project, a solo project undertaken with the supervision of one party, but would not have scaled well to a project with a larger group and organisational supervision. Due to this utilisation method, setbacks were minimised and able to be accounted for within the initial plan. Any unplanned setbacks were easy to coordinate within such a small working group. 
+
+The milestones laid out in the project Gantt Chart for phases 1, 2, and 3 are listed below in Appendix \ref{app:phase_1}, Appendix \ref{app:phase_2}, and Appendix \ref{app:phase_3} respectively.
+
+\subsection{Phase 1 - Autumn Term 2021/22}
+
+Phase 1 of the project was ensuring that the planning, research, and development was conducted in aline with the agile methodology. The objectives from Phase 1 are outlined in Appendix \ref{app:phase_1}. At this stage, The design requirements and optioneering were considered.  
+
+From this initial planning phase, a design brief, Gantt Chart, and future steps were created and agreed upon with the project supervisior. A clear set of requirements had been established along with identification of rudimentary concept ideas. The resultant concepts and decision making processes (optioneering) are detailed in section \ref{sec:research} and section \ref{sec:optioneering}.  
+
+\subsection{Phase 2 - Winter Term 2021/22}
+
+Phase 2 involved undertaking initial prototyping and light development of the work to further the work conducted at the end of Phase 1 and to supplement the work being conducted within Phase 3. Phase 2 ran alongside three full-time university modules. It was used as a basis for the prototyping for the project. During Phase 2, initial designs were created, tested, and evaluated. 
+
+The second phase helped focus the design requirements for the project, whilst evaluating what would be possible within the given time scaled budget. The use of threads, learned from ELEC351, along with ..., drove the development of my project from an Arduino based solution to an ARM based solution, as this enabled the use of RTOS functionality. 
+
+The initial prototypes produced in Phases 1 and 2 helped me evaluate critical dimensions and functionalities of the final craft.
+
+\subsection{Phase 3 - Spring/Summer Term 2022} 
+
+\section{Research}
+
+\subsection{Concept Designs - Controller and Receiver}
+\subsubsection{Concept 1 - Off the Shelf Solution}
+Controller and Receiver concept 1 was to use an off the shelf system for controlling the craft. This system would be reliable, functional, but it would be expensive and not allow for versatility of inputs and outputs that we would be required. 
+
+The lack input/output versatility would inhibit the use of smart features on the craft. This does not address any newer technologies or concepts that would be suited to this style of custom RC craft. 
+
+Therefore it was decided that this concept would be used for initial testing and as contingency plan, final deployment would be using concept, unless this proved to be impractical. 
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=1\textwidth]{Off_Shelf_RC_System}}
+\caption{Concept 1 - Off the shelf RC Controller and Receiver}
+\label{fig:Custom_RC_System}
+\end{figure} 
+
+
+\subsubsection{Concept 2 - Custom RF Based Solution}
+
+Concept 2 introduces "smart" features such as custom battery management circuity and litter collection basket capacity sensing. It allowed for a number of inputs and outputs on each system (up to the limit of the board used to control the systems). This would allow for a highly adaptable control system that could be easily adapted for another use-case. The main craft could be changed and the controller system would be easily reusable. Using a microcontroller based system add the ability to add and remove devices as the requirements of the craft change.
+
+The downsides of the system are... Fiddly AF, Hard to GET RC working, Required Knowledge of Microcontrollers to utilise full functionality.  
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=1\textwidth]{Custom_RC_System}}
+\caption{Concept 2 - Custom RC Controller and Receiver}
+\label{fig:Custom_RC_System}
+\end{figure} 
+
+Despite the downsides, this concept has been decided to be the most adaptable and most suited to this application. It is the most complicated of the two concepts; requiring a broad knowledge of embedded systems and battery management technologies. Moreover, the added complexity of the implementation is outweighed by the added functionality and expandability of this system. It was deemed better to design a system that would properly function instead of trying to adapt the correctly available solutions that may not work correct for this purpose. 
+
+\bibliographystyle{IEEEtranN}
+\bibliography{refs}
+
+\begin{appendix}
+
+\subsection{Design Requirements Table}\label{app:design_requirements_hardware}
+
+\begin{table}[H]
+\begin{tabular}{||c||p{0.6\linewidth}|p{0.3\linewidth}||}
+\hline
+Ref & Requirement                           & Required?             \\
+\hline
+1   & Main body of the craft                & Yes                   \\
+\hline
+2   & Suitable Propulsion Method            & Yes                   \\
+\hline
+3   & Collection System for the litter      & Yes                   \\
+\hline
+4   & Custom remote controller and receiver & No - highly desirable \\
+\hline
+5   & Battery powered                       & Yes                   \\
+\hline
+6   & Suitably Waterproofed                 & Yes\\
+\hline              
+\end{tabular}
+\end{table}
+
+\subsection{Software Design Requirements Table}\label{app:design_requirements_software}
+
+\begin{table}[H]
+\begin{tabular}{||c||p{0.6\linewidth}|p{0.3\linewidth}||}
+\hline
+Ref & Requirement                                                                                                                                  & Required?         \\ 
+\hline
+1   & Suitable control system for movement of the craft                                                                                              & Yes               \\
+\hline
+2   & Suitable control system for collecting litter                                                                                                  & Yes               \\
+\hline
+3   & Sense when rubbish collection basket is full and alert the user                                                                                & Yes               \\
+\hline
+4   & Sense when the batteries (on either craft or remote) is running low and alert the user                                                         & Yes               \\
+\hline
+5   & Suitable communication system between the remote and receiver                                                                                  & Yes               \\
+\hline
+6   & Relay information from the receiver to the controller about battery voltage and time of current usage, etc.                                    & No - nice to have \\
+\hline
+7   & System to track amount of rubbish collected                                                                                                    & No - nice to have \\
+\hline
+8   & Calculations of carbon nuetrality of the collected litter, how much litter would need to be collected to make the craft environmentally viable & No - nice to have \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+
+\end{appendix}
 
 \end{document}
