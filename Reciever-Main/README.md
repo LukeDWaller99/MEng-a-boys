@@ -30,7 +30,7 @@ The Main Craft will need to communicate with the controller using bi-directional
 	2. [x] Debugging code to test all individual components on the PCB
 
 ## Dependancies/Libraries Used
-`nRF24L01P.h` Authored by Owne Edwards (c) - Modified by Luke Waller 2022
+`nRF24L01P.h` Authored by Owen Edwards (c) - Modified by Luke Waller 2022
 `ESC.h` Authored by Luke Waller 2022
 `Buzzer.h` Authored by Luke Waller 2022 
 ----
