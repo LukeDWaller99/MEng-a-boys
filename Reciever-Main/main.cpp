@@ -15,6 +15,7 @@
 #include <PwmOut.h>
 #include "L298N.h"
 #include "Buzzer.h"
+#include "debug.h"
 
 #define TRANSFER_SIZE   5
 #define DEFAULT_PIPE    0
@@ -89,18 +90,18 @@ int main() {
     // enabling the two conveyer motos
     ConvMotor1 = true, ConvMotor2 = true;
 
-    printf("Starting Board...\n");
+    PRINT("Starting Board...\n");
 
         wait_us(5000000);
 
     nRF24L01.powerUp();
 
 // Display the (default) setup of the nRF24L01+ chip
-    printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
-    printf("nRF24L01 Output power : %d dBm\n",  nRF24L01.getRfOutputPower() );
-    printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate() );
-    printf("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress() );
-    printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress() );
+    PRINT1("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
+    PRINT1("nRF24L01 Output power : %d dBm\n",  nRF24L01.getRfOutputPower() );
+    PRINT1("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate() );
+    PRINT1("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress() );
+    PRINT1("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress() );
 
     nRF24L01.setTransferSize(TRANSFER_SIZE);
 
@@ -115,7 +116,7 @@ int main() {
     SW1.rise(SW1IRQ);
     SW2.rise(SW2IRQ);
     // SW3.rise(SW3IRQ);
-    // SW4.rise(SW4IRQ);
+    SW4.rise(SW4IRQ);
     // SW5.rise(SW5IRQ);
     // SW6.rise(SW6IRQ);
     IR1.rise(IRIRQ);
@@ -136,11 +137,11 @@ int main() {
 }
 
 void RadioReceiveMethod(){
-    printf("Radio Thread Started\n");
+    PRINT("Radio Thread Started\n");
     while (true) {
         if (nRF24L01.readable()) {
             nRF24L01.read(DEFAULT_PIPE, rxData, TRANSFER_SIZE);
-            printf("%s\n", rxData);
+            PRINT1("Received Data: %s\n", rxData);
             switch (rxData[0]){
             case '1': // POT
                 switch (rxData[1]){
@@ -241,7 +242,7 @@ void RadioReceiveMethod(){
             case 'T': // test send
                 break;
             default:
-                printf("Invalid Input\n");
+                PRINT("Invalid Input\n");
             }
         }
         
@@ -251,13 +252,13 @@ void RadioReceiveMethod(){
 
 float ThrottleValue(char* data){
    float floatVal = atof(data);
-   printf("%f\n", floatVal);
+   PRINT1("%f\n", floatVal);
    return floatVal;
 }
 
 void LeftMotorThreadMethod(){
 
-    printf("Left Motor Thread Started\n");
+    PRINT("Left Motor Thread Started\n");
 
     LeftMotorLock.trylock_for(10ms);
     fwdLeftMotorThrottle = 0;
@@ -275,7 +276,7 @@ void LeftMotorThreadMethod(){
 
 void RightMotorThreadMethod(){
 
-    printf("Right Motor Thread Started\n");
+    PRINT("Right Motor Thread Started\n");
 
     RightMotorLock.trylock_for(10ms);
     fwdRightMotorThrottle = 0;
@@ -293,7 +294,7 @@ void RightMotorThreadMethod(){
 
 void LEDMethod(){
     
-    printf("LED Thread Running\n");
+    PRINT("LED Thread Running\n");
 
     while (true) {
         ThisThread::flags_wait_any(0x7fffffff, false);
@@ -305,13 +306,13 @@ void LEDMethod(){
 
 void IRMethod(){
 
-    printf("IR Thread Running\n");
+    PRINT("IR Thread Running\n");
 
     ThisThread::flags_wait_any(0x7fffffff, true);
     while (true) {
         if (rubbishContainerFull == 0) { 
             rubbishContainerFull = 1;
-            printf("Basket Full!!\n");
+            PRINT("Basket Full!!\n");
             buzzer = 1;
             ThisThread::sleep_for(2s);
             buzzer = 0;
@@ -328,13 +329,13 @@ void IRMethod(){
 
 void InputMethod(){
 
-    printf("Input Thread Started\n");
+    PRINT("Input Thread Started\n");
 
     while (true) {
         ThisThread::flags_wait_any(0x7fffffff, false);
         int flag = ThisThread::flags_get();
         ThisThread::flags_clear(0x7fffffff);
-        printf("Flag = %d\n", flag);
+        PRINT1("Flag = %d\n", flag);
         switch (flag) {
         case 1: // button 1 - disable alarms
             rubbishContainerFull = 0, 
@@ -375,14 +376,14 @@ void InputMethod(){
 
 void bat30percentMethod(){
 
-    printf("Battery 30%% Thread Started\n");
+    PRINT("Battery 30%% Thread Started\n");
 
     ThisThread::flags_wait_any(0x7fffffff, false);
     while (true) {
         if ((battery30percent == 1) && (battery15percent == 1)) {
             return;
         } else {
-            printf("Buzz Buzz\n");
+            PRINT("Buzz Buzz\n");
             buzzer = 1;
             ThisThread::sleep_for(1s);
             buzzer = 0;
@@ -393,12 +394,12 @@ void bat30percentMethod(){
 
 void bat15percentMethod(){
     
-    printf("Battery 15%% Thread Started\n");
+    PRINT("Battery 15%% Thread Started\n");
 
     ThisThread::flags_wait_any(0x7fffffff, false);
     while (true) {
         if ((battery30percent == 1) && (battery15percent == 1)){
-            printf("Buzz Buzz Buzz\n");
+            PRINT("Buzz Buzz Buzz\n");
             buzzer = 1;
             ThisThread::sleep_for(1s);
             buzzer = 0;
@@ -471,14 +472,14 @@ void SW2IRQ(){
 //     SW3.rise(SW3IRQ);
 // }
 
-// void SW4IRQ(){
-//     SW4.rise(NULL);
-//     wait_us(5000);
-//     if (btn1 == 1){
-//         InputThread.flags_set(32);
-//     }
-//     SW4.rise(SW4IRQ);
-// }
+void SW4IRQ(){
+    SW4.rise(NULL);
+    wait_us(5000);
+    if (btn1 == 1){
+        InputThread.flags_set(32);
+    }
+    SW4.rise(SW4IRQ);
+}
 
 // void SW5IRQ(){
 //     SW5.rise(NULL);
