@@ -17,6 +17,8 @@
 #include "Buzzer.h"
 #include "debug.h"
 
+#define PRINTF_DEBUG
+
 #define TRANSFER_SIZE   5
 #define DEFAULT_PIPE    0
 #define CALIBRATE       1
@@ -90,20 +92,22 @@ int main() {
     // enabling the two conveyer motos
     ConvMotor1 = true, ConvMotor2 = true;
 
-    PRINT("Starting Board...\n");
+    printf("Starting Board...\n");
 
         wait_us(5000000);
 
     nRF24L01.powerUp();
 
 // Display the (default) setup of the nRF24L01+ chip
-    PRINT1("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
-    PRINT1("nRF24L01 Output power : %d dBm\n",  nRF24L01.getRfOutputPower() );
-    PRINT1("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate() );
-    PRINT1("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress() );
-    PRINT1("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress() );
+    printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
+    printf("nRF24L01 Output power : %d dBm\n",  nRF24L01.getRfOutputPower() );
+    printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate() );
+    printf("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress() );
+    printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress() );
 
     nRF24L01.setTransferSize(TRANSFER_SIZE);
+
+    nRF24L01.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
 
     nRF24L01.setReceiveMode();
 
@@ -141,7 +145,7 @@ void RadioReceiveMethod(){
     while (true) {
         if (nRF24L01.readable()) {
             nRF24L01.read(DEFAULT_PIPE, rxData, TRANSFER_SIZE);
-            PRINT1("Received Data: %s\n", rxData);
+            printf("Received Data: %s\n", rxData);
             switch (rxData[0]){
             case '1': // POT
                 switch (rxData[1]){
@@ -260,13 +264,13 @@ void RadioReceiveMethod(){
 
 float ThrottleValue(char* data){
    float floatVal = atof(data);
-   PRINT1("%f\n", floatVal);
+   printf("%f\n", floatVal);
    return floatVal;
 }
 
 void LeftMotorThreadMethod(){
 
-    PRINT("Left Motor Thread Started\n");
+    printf("Left Motor Thread Started\n");
 
     LeftMotorLock.trylock_for(10ms);
     fwdLeftMotorThrottle = 0;
@@ -284,7 +288,7 @@ void LeftMotorThreadMethod(){
 
 void RightMotorThreadMethod(){
 
-    PRINT("Right Motor Thread Started\n");
+    printf("Right Motor Thread Started\n");
 
     RightMotorLock.trylock_for(10ms);
     fwdRightMotorThrottle = 0;
@@ -302,7 +306,7 @@ void RightMotorThreadMethod(){
 
 void LEDMethod(){
     
-    PRINT("LED Thread Running\n");
+    printf("LED Thread Running\n");
 
     while (true) {
         ThisThread::flags_wait_any(0x7fffffff, false);
@@ -314,7 +318,7 @@ void LEDMethod(){
 
 void IRMethod(){
 
-    PRINT("IR Thread Running\n");
+    printf("IR Thread Running\n");
 
     ThisThread::flags_wait_any(0x7fffffff, true);
     while (true) {
@@ -337,7 +341,7 @@ void IRMethod(){
 
 void InputMethod(){
 
-    PRINT("Input Thread Started\n");
+    printf("Input Thread Started\n");
 
     while (true) {
         ThisThread::flags_wait_any(0x7fffffff, false);
@@ -384,7 +388,7 @@ void InputMethod(){
 
 void bat30percentMethod(){
 
-    PRINT("Battery 30%% Thread Started\n");
+    printf("Battery 30%% Thread Started\n");
 
     ThisThread::flags_wait_any(0x7fffffff, false);
     while (true) {
@@ -402,7 +406,7 @@ void bat30percentMethod(){
 
 void bat15percentMethod(){
     
-    PRINT("Battery 15%% Thread Started\n");
+    printf("Battery 15%% Thread Started\n");
 
     ThisThread::flags_wait_any(0x7fffffff, false);
     while (true) {
