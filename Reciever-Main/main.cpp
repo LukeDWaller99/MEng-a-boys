@@ -154,9 +154,10 @@ void RadioReceiveMethod(){
                         fwdLeftMotorThrottle = ThrottleValue(&rxData[3]);
                         LeftMotorThread.flags_set(1);
                         LeftMotorLock.unlock();
-                        printf("FWDs\n");
+                        printf("LEFT FWDs\n");
                         break;
                     }
+                break;
                     case '1': // Reverse
                         // set value of throttle
                         LeftMotorLock.trylock_for(10ms);
@@ -164,41 +165,46 @@ void RadioReceiveMethod(){
                         revLeftMotorThrottle = ThrottleValue(&rxData[3]);
                         LeftMotorThread.flags_set(1);
                         LeftMotorLock.unlock();
-                        printf("REV\n");
+                        printf("LEFT REV\n");
                         break;
                     default:
                         break;
                     }
-                case '2': // Left Roll
+                break;
+                case '2': // Left Roll - currently have no function
+                    switch (rxData[2]) {
+                    case '0': // Forwards
+                        break;
+                    case '1': // Reverse
+                        // set value of throttle                    default:
+                        break;
+                    default:
+                        break;
+                    }
+                break;
+                case '3': // Right Pitch - currently have no function
                     switch (rxData[2]) {
                     case '0': // Forward
-                                            // set value of throttle
+                        // set value of throttle
                         RightMotorLock.trylock_for(10ms);
                         revRightMotorThrottle = MOTOR_OFF;
                         fwdRightMotorThrottle = ThrottleValue(&rxData[3]);
                         RightMotorLock.unlock();
+                        printf("Right FWDs\n");
                         break;
                     case '1': // Reverse
-                                            // set value of throttle
+                        // set value of throttle
                         RightMotorLock.trylock_for(10ms);
                         fwdRightMotorThrottle = MOTOR_OFF;
                         revRightMotorThrottle = ThrottleValue(&rxData[3]);
                         RightMotorLock.unlock();
+                        printf("Right REV\n");
                         break;
                     default:
                         break;
+                    break;
                     }
-                case '3': // Right Pitch - currently have no function
-                    switch (rxData[2]) {
-                    case '0': // Forwards
-
-                        break;
-                    case '1': // Reverse
-
-                        break;
-                    default:
-                        break;
-                    }
+                    break;
                 case '4': // Right Roll - currently have no function
                     switch (rxData[2]) {
                     case '0': // Forwards
@@ -210,11 +216,12 @@ void RadioReceiveMethod(){
                 default:
                     break;
                 }
+                break;
             case '2': // BUTTON
                 switch (rxData[1]) {
                 case '1': // Button 1 - motors forwards
                     printf("Motors Forwards\n");
-                    ConvMotor1 = 1, ConvMotor1 = 1;
+                    ConvMotor1 = 1, ConvMotor2 = 1;
                     break;
                 case '2': // Button 2
                 case '3': // Button 3 - motors reverse
@@ -243,6 +250,7 @@ void RadioReceiveMethod(){
                 break;
             default:
                 PRINT("Invalid Input\n");
+                break;
             }
         }
         
