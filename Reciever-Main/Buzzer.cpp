@@ -10,11 +10,19 @@ void Buzzer::setNote(const char* note, OCTAVE octave){
 }
 
 void Buzzer::buzz(float amount){
-    buzzer.write(amount);
+    if(_enabled){buzzer.write(amount);}
 }
 
 void Buzzer::stop(){
     buzzer.write(0);
+}
+
+void Buzzer::disable(){
+    _enabled = false;
+}
+
+void Buzzer::enable(){
+    _enabled = true;
 }
 
 void Buzzer::operator = (const char* note){
@@ -31,6 +39,10 @@ void Buzzer::operator = (int on_off){
 
 void Buzzer::operator=(float time){
     buzz(time);
+}
+
+void Buzzer::operator=(bool enabled){
+    _enabled = enabled == true ? true : false;
 }
 
 void Buzzer::chime(int delay, const char* note1, const char* note2, const char* note3, OCTAVE octave){

@@ -119,15 +119,11 @@ int main() {
 
     nRF24L01.enable();
 
-    printf("%s\n", txData);
-    nRF24L01.write(txData, 0 , TRANSFER_SIZE);
+    // printf("%s\n", txData);
+    // nRF24L01.write(txData, 0 , TRANSFER_SIZE);
 
     switchState = SW_1 == 1 ? 1 : 0;
     led_1 = switchState;
-    
-    // buzzer = 1;
-    // wait_us(1000000);
-    // buzzer = 0;
 
     buzzer.chime();
 
@@ -139,8 +135,6 @@ int main() {
     SW_1.rise(SW_1RisingIRQ);
     SW_1.fall(SW_1FallingIRQ);
 
-    while (true) {
-    }
 }
 
 void PotMethod(){
@@ -172,10 +166,10 @@ void PotMethod(){
         // potVals[3] = ((R_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
 
         newLeftPitchVal     = round(potVals[0]);
-        printf(" New left Pitch Value : %d\n",newLeftPitchVal);
+        // printf(" New left Pitch Value : %d\n",newLeftPitchVal);
         // newLeftRollVal      = round(potVals[1]);
         newRightPitchVal    = round(potVals[2]);
-        printf(" New right Pitch Value : %d\n",newRightPitchVal);
+        // printf(" New right Pitch Value : %d\n",newRightPitchVal);
         // newRightRollVal     = round(potVals[3]);
 
         // for left pitch values
@@ -184,19 +178,19 @@ void PotMethod(){
                 newLeftPitchVal = abs(newLeftPitchVal);
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
                 tx.fwdLeftPitch[3] = tempThrottleChar[0];
-                nRF24L01.write(tx.fwdLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);
+                // nRF24L01.write(tx.fwdLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Left Pitch: %s\n", tx.fwdLeftPitch);
             } else if(newLeftPitchVal < PITCH_LOWER_LIMIT){ // reverse 
                 newLeftPitchVal = abs(newLeftPitchVal);
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
                 tx.revLeftPitch[3] = tempThrottleChar[0];
-                nRF24L01.write(tx.revLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);
+                // nRF24L01.write(tx.revLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Left Pitch: %s\n", tx.revLeftPitch);
             } else { // equal to zero
                 newLeftPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
                 tx.fwdLeftPitch[3] = tempThrottleChar[0];
-                nRF24L01.write(tx.fwdLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);
+                // nRF24L01.write(tx.fwdLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Left Pitch: %s\n", tx.fwdLeftPitch);
             }
         }
@@ -230,19 +224,19 @@ void PotMethod(){
                 newRightPitchVal = abs(newRightPitchVal);
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
                 tx.fwdRightPitch[3] = tempThrottleChar[0];
-                nRF24L01.write(tx.fwdRightPitch, DEFAULT_PIPE, TRANSFER_SIZE);
+                // nRF24L01.write(tx.fwdRightPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Right Pitch: %s\n", tx.fwdRightPitch);
             } else if(newRightPitchVal < PITCH_LOWER_LIMIT){ // reverse 
                 newRightPitchVal = abs(newRightPitchVal);
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
                 tx.revRightPitch[3] = tempThrottleChar[0];
-                nRF24L01.write(tx.revRightPitch, DEFAULT_PIPE, TRANSFER_SIZE);
+                // nRF24L01.write(tx.revRightPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Right Pitch: %s\n", tx.revRightPitch);
             } else { // equal to zero
                 newRightPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
                 tx.fwdRightPitch[3] = tempThrottleChar[0];
-                nRF24L01.write(tx.fwdRightPitch, DEFAULT_PIPE, TRANSFER_SIZE);
+                // nRF24L01.write(tx.fwdRightPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Right Pitch: %s\n", tx.fwdRightPitch);
             }
         }
@@ -295,30 +289,30 @@ void ButtonThreadMethod(){
         case 1:
             printf("Button 1 pressed\n");
             printf("%s\n", tx.BTN1_PRESSED);
-            nRF24L01.write(tx.BTN1_PRESSED, DEFAULT_PIPE, TRANSFER_SIZE);
+            // nRF24L01.write(tx.BTN1_PRESSED, DEFAULT_PIPE, TRANSFER_SIZE);
             break;
         case 2: 
             printf("Button 2 pressed\n");
             printf("%s\n", tx.BTN2_PRESSED);
-            nRF24L01.write(tx.BTN2_PRESSED, DEFAULT_PIPE, TRANSFER_SIZE);
+            // nRF24L01.write(tx.BTN2_PRESSED, DEFAULT_PIPE, TRANSFER_SIZE);
             break;
         case 4:
             printf("Button 3 pressed\n");
             printf("%s\n", tx.BTN3_PRESSED);
-            nRF24L01.write(tx.BTN3_PRESSED, DEFAULT_PIPE, TRANSFER_SIZE);
+            // nRF24L01.write(tx.BTN3_PRESSED, DEFAULT_PIPE, TRANSFER_SIZE);
             break;
         case 8:
             printf("Switch 1 ON\n");
             led_1 = 1;
             txSW1[3] = '1';
-            nRF24L01.write(txSW1, DEFAULT_PIPE, TRANSFER_SIZE);
+            // nRF24L01.write(txSW1, DEFAULT_PIPE, TRANSFER_SIZE);
             printf("Switch 1: %s\n", txSW1);
             break;
         case 16:
             printf("Switch 1 OFF\n");
             led_1  = 0;
             txSW1[3] = '0';
-            nRF24L01.write(txSW1, DEFAULT_PIPE, TRANSFER_SIZE);
+            // nRF24L01.write(txSW1, DEFAULT_PIPE, TRANSFER_SIZE);
             printf("Switch 1: %s\n", txSW1);
             break;
         default:

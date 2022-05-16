@@ -15,9 +15,6 @@
 #include <PwmOut.h>
 #include "L298N.h"
 #include "Buzzer.h"
-#include "debug.h"
-
-#define PRINTF_DEBUG
 
 #define NRF24L01_RX_ADDRESS ((unsigned long long) 0x7878787878)
 #define NRF24L01_TX_ADDRESS ((unsigned long long) 0x7878787878)
@@ -30,7 +27,7 @@
 
 // Radio transeiver
 // MOSI, MISO, SCK, CNS, CE, IRQ - must be an interrupt pin 6 
-nRF24L01P nRF24L01(MOSI, MISO, SCK, CSN, CE, IRQ);
+// nRF24L01P nRF24L01(MOSI, MISO, SCK, CSN, CE, IRQ);
 
 // Reat Drive Motors
 ESC FWDLeftMotor(FWD_LHS_MOTOR), 
@@ -49,7 +46,7 @@ InterruptIn bat30(Bat_30_PERCENT), bat15(Bat_15_PERCENT),   // battery monitorin
 
 Buzzer buzzer(BUZZER);
 
-BusOut LEDs(LED_1, LED_10, LED_9, LED_8, LED_7, LED_6, LED_5, LED_4, LED_2, LED_3);
+DigitalOut led1(LED_1), led2(LED_10), led3(LED_9), led4(LED_8), led5(LED_7), led6(LED_6), led7(LED_5), led8(LED_4), led9(LED_2), led10(LED_3);
 
 float fwdLeftMotorThrottle = 0, fwdRightMotorThrottle = 0;
 float revLeftMotorThrottle = 0, revRightMotorThrottle = 0;
@@ -76,6 +73,7 @@ void InputMethod();
 void bat30percentMethod();
 void bat15percentMethod();
 float ThrottleValue(char* data);
+void flipOutput(DigitalOut pin);
 
 // IRQ Methods 
 void bat30PercentIRQ();
@@ -92,32 +90,32 @@ void IRIRQ();
 
 int main() {
 
-    // enabling the two conveyer motos
-    ConvMotor1 = true, ConvMotor2 = true;
-
     printf("Starting Board...\n");
 
-    wait_us(5000000);
+    buzzer = true;
+    led2 = 1;
 
-    nRF24L01.powerUp();
-    nRF24L01.setTransferSize(TRANSFER_SIZE);
-    nRF24L01.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
-    nRF24L01.setRxAddress(NRF24L01_RX_ADDRESS);
-    nRF24L01.setTxAddress(NRF24L01_TX_ADDRESS);
+    // wait_us(5000000);
+
+    // nRF24L01.powerUp();
+    // nRF24L01.setTransferSize(TRANSFER_SIZE);
+    // nRF24L01.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
+    // nRF24L01.setRxAddress(NRF24L01_RX_ADDRESS);
+    // nRF24L01.setTxAddress(NRF24L01_TX_ADDRESS);
 
 
 // Display the (default) setup of the nRF24L01+ chip
-    printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
-    printf("nRF24L01 Output Power : %d dBm\n",  nRF24L01.getRfOutputPower() );
-    printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate() );
-    printf("nRF24L01 Transfer Size: %d bits\n", nRF24L01.getTransferSize(DEFAULT_PIPE));
-    printf("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress() );
-    printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress() );
+    // printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
+    // printf("nRF24L01 Output Power : %d dBm\n",  nRF24L01.getRfOutputPower() );
+    // printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate() );
+    // printf("nRF24L01 Transfer Size: %d bits\n", nRF24L01.getTransferSize(DEFAULT_PIPE));
+    // printf("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress() );
+    // printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress() );
 
 
-    nRF24L01.setReceiveMode();
+    // nRF24L01.setReceiveMode();
 
-    nRF24L01.enable();
+    // nRF24L01.enable();
 
     bat30.rise(bat30PercentIRQ);
     bat15.rise(bat15PercentIRQ);
@@ -136,17 +134,21 @@ int main() {
 
     LeftMotorThread.start(LeftMotorThreadMethod);
     RightMotorThread.start(RightMotorThreadMethod);
-    RadioThread.start(RadioReceiveMethod);
+    // RadioThread.start(RadioReceiveMethod);
     LEDThread.start(LEDMethod);
     // IRThread.start(IRMethod);
     InputThread.start(InputMethod);
     bat30percentThread.start(bat30percentMethod);
     bat15percentThread.start(bat15percentMethod);
 
+    while (true) {
+    LEDThread.flags_set(1);
+    ThisThread::sleep_for(1s);
+    }
 
 }
 
-void RadioReceiveMethod(){
+/*void RadioReceiveMethod(){
     PRINT("Radio Thread Started\n");
     while (true) {
         if (nRF24L01.readable()) {
@@ -269,7 +271,7 @@ void RadioReceiveMethod(){
         
     }
 
-}
+} */
 
 float ThrottleValue(char* data){
    float floatVal = atof(data);
@@ -321,7 +323,41 @@ void LEDMethod(){
         ThisThread::flags_wait_any(0x7fffffff, false);
         int flag = ThisThread::flags_get();
         ThisThread::flags_clear(flag);
-        LEDs = flag;
+        switch (flag) {
+        case 1:
+            flipOutput(led1);
+            break;
+        case 2:
+            flipOutput(led2);
+            break;
+        case 3:
+            flipOutput(led3);
+            break;
+        case 4:
+            flipOutput(led4);
+            break;
+        case 5: 
+            flipOutput(led5);
+            break;
+        case 6:
+            flipOutput(led6);
+            break;
+        case 7:
+            flipOutput(led7);
+            break;
+        case 8:
+            flipOutput(led8);
+            break;
+        case 9:
+            flipOutput(led9);
+            break;
+        case 10:
+            flipOutput(led10);
+            break;
+        default:
+            break;
+        
+        }
     }
 }
 
@@ -356,28 +392,39 @@ void InputMethod(){
         ThisThread::flags_wait_any(0x7fffffff, false);
         int flag = ThisThread::flags_get();
         ThisThread::flags_clear(0x7fffffff);
-        PRINT1("Flag = %d\n", flag);
+        printf("Flag = %d\n", flag);
         switch (flag) {
         case 1: // button 1 - disable alarms
-            rubbishContainerFull = 0, 
+            printf("Button 1 pressed - Alarms Disabled\n");
             battery15percent = 0, 
             battery30percent = 0;
             bat30.rise(NULL);
             bat15.rise(NULL);
-            buzzer = 0;
+            IR2.rise(NULL);
+            IR4.rise(NULL);
+            buzzer = false;
+            led2 = 0;
             break;
         case 2: // button 2
+            printf("Litter Basket Emptied - Sensors Reset, Buzzer Renabled\n");
+            buzzer = true;
+            led2 = 1;
+            rubbishContainerFull = 0;           
             break;
-        case 4: // switch 1 - disable the motors - 2 quick beeps 
+        case 4: // switch 1 - disable the motors - 4 quick beeps
+            printf("Switch 1 Off - Motors Disabled\n");
+            led3 = 0, led4 = 0;
+            for (int i = 3; i < 11; i++){
+                buzzer = i % 2;
+                ThisThread::sleep_for(100ms);
+            }
+            break;
+        case 8: // switch 2 - enable the motors - 4 long beeps
+            printf("Switch 1 On - Motors Enabled\n");
+            led3 = 1, led4 = 1;
             for (int i = 3; i < 11; i++){
                 buzzer = i % 2;
                 ThisThread::sleep_for(500ms);
-            }
-            break;
-        case 8: // switch 2 - enable the motors - 2 long beeps
-            for (int i = 3; i < 11; i++){
-                buzzer = i % 2;
-                ThisThread::sleep_for(1s);
             }
             break;
         case 16: // switch 3 - not in use
@@ -404,7 +451,7 @@ void bat30percentMethod(){
         if ((battery30percent == 1) && (battery15percent == 1)) {
             return;
         } else {
-            PRINT("Buzz Buzz\n");
+            printf("Buzz\n");
             buzzer = 1;
             ThisThread::sleep_for(1s);
             buzzer = 0;
@@ -420,7 +467,7 @@ void bat15percentMethod(){
     ThisThread::flags_wait_any(0x7fffffff, false);
     while (true) {
         if ((battery30percent == 1) && (battery15percent == 1)){
-            PRINT("Buzz Buzz Buzz\n");
+            printf("Buzz Buzz\n");
             buzzer = 1;
             ThisThread::sleep_for(1s);
             buzzer = 0;
@@ -531,5 +578,9 @@ void IRIRQ(){
     IR2.rise(IRIRQ);
     // IR3.rise(IRIRQ);
     IR4.rise(IRIRQ);
+}
+
+void flipOutput(DigitalOut pin){
+    pin = !pin; 
 }
 
