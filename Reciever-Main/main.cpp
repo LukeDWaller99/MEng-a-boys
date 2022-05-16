@@ -19,6 +19,9 @@
 
 #define PRINTF_DEBUG
 
+#define NRF24L01_RX_ADDRESS ((unsigned long long) 0x7878787878)
+#define NRF24L01_TX_ADDRESS ((unsigned long long) 0x7878787878)
+
 #define TRANSFER_SIZE   5
 #define DEFAULT_PIPE    0
 #define CALIBRATE       1
@@ -42,7 +45,7 @@ L298N ConvMotor1(CONV_MOTOR_1_A, CONV_MOTOR_1_B, CONV_MOTOR_1_ENABLE),
 InterruptIn bat30(Bat_30_PERCENT), bat15(Bat_15_PERCENT),   // battery monitoring
             btn1(BTN_1), btn2(BTN_2),                       // button inputs
             SW1(SW_1), SW2(SW_2), SW4(SW_4),                // switches
-            IR1(IR_1), IR4(IR_4);                           // IR inputs
+            IR2(IR_2), IR4(IR_4);                           // IR inputs
 
 Buzzer buzzer(BUZZER);
 
@@ -94,20 +97,23 @@ int main() {
 
     printf("Starting Board...\n");
 
-        wait_us(5000000);
+    wait_us(5000000);
 
     nRF24L01.powerUp();
+    nRF24L01.setTransferSize(TRANSFER_SIZE);
+    nRF24L01.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
+    nRF24L01.setRxAddress(NRF24L01_RX_ADDRESS);
+    nRF24L01.setTxAddress(NRF24L01_TX_ADDRESS);
+
 
 // Display the (default) setup of the nRF24L01+ chip
     printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
-    printf("nRF24L01 Output power : %d dBm\n",  nRF24L01.getRfOutputPower() );
+    printf("nRF24L01 Output Power : %d dBm\n",  nRF24L01.getRfOutputPower() );
     printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate() );
+    printf("nRF24L01 Transfer Size: %d bits\n", nRF24L01.getTransferSize(DEFAULT_PIPE));
     printf("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress() );
     printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress() );
 
-    nRF24L01.setTransferSize(TRANSFER_SIZE);
-
-    nRF24L01.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
 
     nRF24L01.setReceiveMode();
 
@@ -123,16 +129,16 @@ int main() {
     SW4.rise(SW4IRQ);
     // SW5.rise(SW5IRQ);
     // SW6.rise(SW6IRQ);
-    IR1.rise(IRIRQ);
+    // IR1.rise(IRIRQ);
     // IR2.rise(IRIRQ);
     // IR3.rise(IRIRQ);
-    IR4.rise(IRIRQ);
+    // IR4.rise(IRIRQ);
 
     LeftMotorThread.start(LeftMotorThreadMethod);
     RightMotorThread.start(RightMotorThreadMethod);
     RadioThread.start(RadioReceiveMethod);
     LEDThread.start(LEDMethod);
-    IRThread.start(IRMethod);
+    // IRThread.start(IRMethod);
     InputThread.start(InputMethod);
     bat30percentThread.start(bat30percentMethod);
     bat15percentThread.start(bat15percentMethod);
@@ -155,10 +161,10 @@ void RadioReceiveMethod(){
                         // set value of throttle
                         LeftMotorLock.trylock_for(10ms);
                         revLeftMotorThrottle = MOTOR_OFF;
-                        fwdLeftMotorThrottle = ThrottleValue(&rxData[3]);
+                        fwdLeftMotorThrottle = ThrottleValue(&rxData[3]) / 10;
                         LeftMotorThread.flags_set(1);
                         LeftMotorLock.unlock();
-                        printf("LEFT FWDs\n");
+                        printf("LEFT FWDs : \n");
                         break;
                     }
                 break;
@@ -166,10 +172,10 @@ void RadioReceiveMethod(){
                         // set value of throttle
                         LeftMotorLock.trylock_for(10ms);
                         fwdLeftMotorThrottle = MOTOR_OFF;
-                        revLeftMotorThrottle = ThrottleValue(&rxData[3]);
+                        revLeftMotorThrottle = ThrottleValue(&rxData[3]) / 10;
                         LeftMotorThread.flags_set(1);
                         LeftMotorLock.unlock();
-                        printf("LEFT REV\n");
+                        printf("LEFT REV : %f\n", revLeftMotorThrottle);
                         break;
                     default:
                         break;
@@ -186,29 +192,32 @@ void RadioReceiveMethod(){
                         break;
                     }
                 break;
-                case '3': // Right Pitch - currently have no function
+                case '3': // Right Pitch
                     switch (rxData[2]) {
-                    case '0': // Forward
+                    case '0':{ // Forwards
                         // set value of throttle
                         RightMotorLock.trylock_for(10ms);
                         revRightMotorThrottle = MOTOR_OFF;
-                        fwdRightMotorThrottle = ThrottleValue(&rxData[3]);
+                        fwdRightMotorThrottle = ThrottleValue(&rxData[3]) / 10;
+                        RightMotorThread.flags_set(1);
                         RightMotorLock.unlock();
-                        printf("Right FWDs\n");
+                        printf("LEFT FWDs : \n");
                         break;
+                    }
+                break;
                     case '1': // Reverse
                         // set value of throttle
                         RightMotorLock.trylock_for(10ms);
                         fwdRightMotorThrottle = MOTOR_OFF;
-                        revRightMotorThrottle = ThrottleValue(&rxData[3]);
+                        revRightMotorThrottle = ThrottleValue(&rxData[3]) / 10;
+                        RightMotorThread.flags_set(1);
                         RightMotorLock.unlock();
-                        printf("Right REV\n");
+                        printf("LEFT REV : %f\n", revLeftMotorThrottle);
                         break;
                     default:
                         break;
-                    break;
                     }
-                    break;
+                break;
                 case '4': // Right Roll - currently have no function
                     switch (rxData[2]) {
                     case '0': // Forwards
@@ -324,15 +333,15 @@ void IRMethod(){
     while (true) {
         if (rubbishContainerFull == 0) { 
             rubbishContainerFull = 1;
-            PRINT("Basket Full!!\n");
+            printf("Basket Full!!\n");
             buzzer = 1;
             ThisThread::sleep_for(2s);
             buzzer = 0;
             ThisThread::sleep_for(5s);
         } else {
             // disable IRQ Interrupts
-            IR1.rise(NULL);
-            // IR2.rise(NULL);
+            // IR1.rise(NULL);
+            IR2.rise(NULL);
             // IR3.rise(NULL);
             IR4.rise(NULL);
         }
@@ -512,16 +521,14 @@ void SW4IRQ(){
 // }
 
 void IRIRQ(){
-    IR1.rise(NULL);
-    // IR2.rise(NULL);
+    // IR1.rise(NULL);
+    IR2.rise(NULL);
     // IR3.rise(NULL);
     IR4.rise(NULL);
-    wait_us(5000);
-    if (btn1 == 1){
-        IRThread.flags_set(1);
-    }
-    IR1.rise(IRIRQ);
-    // IR2.rise(IRIRQ);
+    IRThread.flags_set(1);
+    LEDThread.flags_set(1);
+    // IR1.rise(IRIRQ);
+    IR2.rise(IRIRQ);
     // IR3.rise(IRIRQ);
     IR4.rise(IRIRQ);
 }
