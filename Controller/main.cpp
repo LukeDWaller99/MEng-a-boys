@@ -16,27 +16,24 @@
 #include "ThisThread.h"
 #include "HARDWARE.h"
 #include "TRASMISSION_CODES.h"
-#include "nsapi_types.h"
 // #include "debug.h"
 
 // #define PRINTF_DEBUG
 
 #define TRANSFER_SIZE   5
 #define DEFAULT_PIPE    0 // set the default pipe for the nRF24L01
+#define NRF24L01_TX_ADDRESS ((unsigned long long) 0x7878787878)
+#define NRF24L01_RX_ADDRESS ((unsigned long long) 0x7878787878)
 
 #define MULTIPLYING_FACTOR  2.0f
 #define POT_OFFSET          1.0f
 
 // #define RADIO_QUEUE_LENGTH 32
 
-#define LEFT_PITCH_UPPER_LIMIT  0.6f 
-#define LEFT_PITCH_LOWER_LIMIT  0.4f
-#define LEFT_ROLL_UPPER_LIMIT   0.6f
-#define LEFT_ROLL_LOWER_LIMIT   0.4f
-#define RIGHT_PITCH_UPPER_LIMIT 0.6f
-#define RIGHT_PITCH_LOWER_LIMIT 0.4f
-#define RIGHT_ROLL_UPPER_LIMIT  0.6f
-#define RIGHT_ROLL_LOWER_LIMIT  0.4f
+#define PITCH_UPPER_LIMIT  1 
+#define PITCH_LOWER_LIMIT  -1
+#define ROLL_UPPER_LIMIT   1
+#define ROLL_LOWER_LIMIT   -1
 
 
 // MOSI, MISO, SCK, CNS, CE, IRQ - must be an interrupt pin 6 
@@ -105,17 +102,18 @@ int main() {
     printf("Starting Board...\n");
 
     nRF24L01.powerUp();
+    nRF24L01.setTransferSize(TRANSFER_SIZE);
+    nRF24L01.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
+    nRF24L01.setTxAddress(NRF24L01_TX_ADDRESS);
+    nRF24L01.setRxAddress(NRF24L01_RX_ADDRESS);
 
 // Display the (default) setup of the nRF24L01+ chip
     printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
     printf("nRF24L01 Output power : %d dBm\n",  nRF24L01.getRfOutputPower());
     printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate());
+    printf("nRF24L01 Transfer Size: %d bits\n", nRF24L01.getTransferSize(DEFAULT_PIPE));
     printf("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress());
     printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress());
-
-    nRF24L01.setTransferSize(TRANSFER_SIZE);
-
-    nRF24L01.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
  
     nRF24L01.setTransmitMode();
 
@@ -174,19 +172,21 @@ void PotMethod(){
         // potVals[3] = ((R_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
 
         newLeftPitchVal     = round(potVals[0]);
+        printf(" New left Pitch Value : %d\n",newLeftPitchVal);
         // newLeftRollVal      = round(potVals[1]);
         newRightPitchVal    = round(potVals[2]);
+        printf(" New right Pitch Value : %d\n",newRightPitchVal);
         // newRightRollVal     = round(potVals[3]);
 
         // for left pitch values
         if (oldLeftPitchVal != newLeftPitchVal) {
-            if(newLeftPitchVal > LEFT_PITCH_UPPER_LIMIT){ // forwards
+            if(newLeftPitchVal > PITCH_UPPER_LIMIT){ // forwards
                 newLeftPitchVal = abs(newLeftPitchVal);
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
                 tx.fwdLeftPitch[3] = tempThrottleChar[0];
                 nRF24L01.write(tx.fwdLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Left Pitch: %s\n", tx.fwdLeftPitch);
-            } else if(newLeftPitchVal < LEFT_PITCH_LOWER_LIMIT){ // reverse 
+            } else if(newLeftPitchVal < PITCH_LOWER_LIMIT){ // reverse 
                 newLeftPitchVal = abs(newLeftPitchVal);
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
                 tx.revLeftPitch[3] = tempThrottleChar[0];
@@ -203,13 +203,13 @@ void PotMethod(){
 
         // // for left roll values
         // if (oldLeftRollVal != newLeftRollVal) {
-        //     if(newLeftRollVal > LEFT_ROLL_UPPER_LIMIT){ // forwards
+        //     if(newLeftRollVal > ROLL_UPPER_LIMIT){ // forwards
         //         newLeftRollVal = abs(newLeftRollVal);
         //         sprintf(tempThrottleChar, "%d", newLeftRollVal);
         //         tx.fwdLeftRoll[3] = tempThrottleChar[0];
         //         nRF24L01.write(tx.fwdLeftRoll, DEFAULT_PIPE, TRANSFER_SIZE);
         //         printf("Left Roll: %s\n", tx.fwdLeftRoll);
-        //     } else if(newLeftRollVal < LEFT_ROLL_LOWER_LIMIT){ // reverse 
+        //     } else if(newLeftRollVal < ROLL_LOWER_LIMIT){ // reverse 
         //         newLeftRollVal = abs(newLeftRollVal);
         //         sprintf(tempThrottleChar, "%d", newLeftRollVal);
         //         tx.revLeftRoll[3] = tempThrottleChar[0];
@@ -226,13 +226,13 @@ void PotMethod(){
 
         // for right pitch values
         if (oldRightPitchVal != newRightPitchVal) {
-            if(newRightPitchVal > RIGHT_PITCH_UPPER_LIMIT){ // forwards
+            if(newRightPitchVal > PITCH_UPPER_LIMIT){ // forwards
                 newRightPitchVal = abs(newRightPitchVal);
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
                 tx.fwdRightPitch[3] = tempThrottleChar[0];
                 nRF24L01.write(tx.fwdRightPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Right Pitch: %s\n", tx.fwdRightPitch);
-            } else if(newRightPitchVal < RIGHT_PITCH_LOWER_LIMIT){ // reverse 
+            } else if(newRightPitchVal < PITCH_LOWER_LIMIT){ // reverse 
                 newRightPitchVal = abs(newRightPitchVal);
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
                 tx.revRightPitch[3] = tempThrottleChar[0];
@@ -249,13 +249,13 @@ void PotMethod(){
 
         // // for right roll values
         // if (oldRightRollVal != newRightRollVal) {
-        //     if(newRightRollVal > RIGHT_ROLL_UPPER_LIMIT){ // forwards
+        //     if(newRightRollVal > ROLL_UPPER_LIMIT){ // forwards
         //         newRightRollVal = abs(newRightRollVal);
         //         sprintf(tempThrottleChar, "%d", newRightRollVal);
         //         tx.fwdRightRoll[3] = tempThrottleChar[0];
         //         // nRF24L01.write(tx.fwdRightRoll, 0, TRANSFER_SIZE);
         //         printf("Right Roll: %s\n", tx.fwdRightRoll);
-        //     } else if(newRightRollVal < RIGHT_ROLL_LOWER_LIMIT){ // reverse 
+        //     } else if(newRightRollVal < ROLL_LOWER_LIMIT){ // reverse 
         //         newRightRollVal = abs(newLeftRollVal);
         //         sprintf(tempThrottleChar, "%d", newRightRollVal);
         //         tx.revRightRoll[3] = tempThrottleChar[0];
