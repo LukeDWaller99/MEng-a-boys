@@ -1,0 +1,27 @@
+\section{Optioneering}
+\subsection{Controller Optioneering}
+
+The STM32L432 was selected as the processed used for the controller device for this project. It was decided upon because it was lightweight and powerful enough for it's indented use case. 
+ 
+Cost was also important consideration when selecting suitable prototypes. This weighting was important to make sure that the project budget was used in the most effecitve way possible. Given that the Mbed OS IDE was free to use software the cost of development was not needed to be taken into account. 
+
+The 2 largest competing manufactures within the microcontroller industry, ARM and AVR were included when making a choice about which proccessor to use. This allowed a full assemenet of the given options to take place. The chosen AVR processor was the ATMega328P, found in the \textit{Arduino Nano}. Given that it was an 8-bit processor it would be expected to perform poorly against the 32-bit \textit{STMicroelectrionics} boards. One advantage of using the the ATMega328P was its ease of use and setup given the large number of libraries avaliable and popularity within the hobbiest community. 
+
+Despite this, the STM chip was chosen, this was primarily due the lack of RTOS functionality on the AVR chip. This would not allow the use of multithreading. The Cortex-L4 chips are lightwieght and do not consumer a lot of power, this would allow the remote to be run for a long time, whilst also enabling features such as RTOS support. 
+
+Another factor in the critical desicion making process was the ongoing silicon shortage and supply chain issues. This reduced the number of avaliable options for use in the controller.  
+
+As a result of the previously mentioned features, the STM32L432 was decided to be the best choice for the controller for use within the controller for Project O.R.C.A.    
+
+\subsection{Receiver Optioneering}
+
+The STM32F492 was selected for use within the reciever board for this project. This decision making process was conducted in the same manner as the chip selection for the controller. This chip is powerful and includes many inputs and output required to drive the required components for the peripherals.
+
+Power consumption for this board was not an important consideration because it was being powered by the same battery that is used by the motors and other peripherals. The power draw of these components is signicifantly higher than that of the board.
+
+Like with the Controller Optioneering, AVR's ATMega2560 was also considered for use within the reciever. Once again the the RTOS functionality of the STMicroelection  chip paired with the use of the Mbed studio IDE showed the STM32F492 to be the clear choice for chip selection. Given that it was also an ARM processor like the controller, it would be easy to develop the software for as it would only require the use of one IDE. This meant that code would be easy to write for one of the board and be ported easily for reuse on another controller without having to worry about architecture clashes.       
+
+\subsection{Peripheral Optioneering}
+\subsubsection{RF Transciever}
+
+
