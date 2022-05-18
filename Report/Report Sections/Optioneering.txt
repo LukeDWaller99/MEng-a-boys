@@ -24,4 +24,30 @@ Like with the Controller Optioneering, AVR's ATMega2560 was also considered for 
 \subsection{Peripheral Optioneering}
 \subsubsection{RF Transciever}
 
+In order to deliver the functionality shown in conecpt (INSERT REF TO CONECPT), an RF module would need to be sourced to allow for control of the craft at range. The nRF24L01 is used widley within embedded systems as a long range transciever device. Although a basic device it is highly capable of sending limited amounts of data quickly, such as the use case for RC receivers. The nRF24L01 comes as part of a discreet packge that contains all of the components that require it to operate correctly. The discreet package is shown in Fig \ref{fig:nRF24L01_package}.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=.4\textwidth]{nRF24L01_package}}
+\caption{nRF24L01 Discreet Package}
+\label{fig:nRF24L01}
+\end{figure}
+
+The nRF24L01 package uses an 8 pin interface for communicating using SPI with an added chip enabled pin, IRQ pin, 3.3V and ground. This was the only component in which a pre-written library was used. This library was complicated and worked well. As this was not the main focus of the project it was decided that this libray would be used, as it would not detreact from the project. This library was written in Mbed OS so it did not require porting over from another architecture.  
+
+\subsubsection{Brushless DC Motors}
+
+The motors for propelling the craft were decided to be brushless DC motors (BLDC motors). This type of motor was chosen primarily for its water-resistance, given that it contains no brushes unlike a brushed DC motor, and their larger power avaliabiltiy \cite{ref:brushed_vs_brushless}.
+
+\subsubsection{Conveyor Motors}
+
+\subsubsection{Batteries}
+
+\subsubsection{IR Distance Sensors}
+
+\subsection{Finalised Solution}
+
+
+\subsubsection{Block Diagram}
+\subsubsection{Bill of Materials} 
+
 

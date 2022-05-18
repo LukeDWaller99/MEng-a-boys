@@ -7,4 +7,7 @@
 "BLDCM,Brushless DC Motor"
 "DC,Direct Current"
 "PCB,Printed Circuit Board"
-"IDE, Intergrated Development Environment"
+"IDE,Intergrated Development Environment"
+"RC,Radio Controlled"
+"SPI,Serial Parallel Interface"
+"IRQ,Interrupt Request"
