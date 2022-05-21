@@ -57,6 +57,7 @@
 \newacronym{pwm}{PWM}{Pulse Width Modulation}
 \newacronym{li-po}{Li-Po}{Lithium Polymer}
 \newacronym{li-ion}{Li-Ion}{Lithium Ion} 
+\newacronym{mcu}{MCU}{Microcontroller Unit}
 
 							
 \title{\bf PROJ324 - Project O.R.C.A. - On-water Rubbish Collection robot with Automatic sensing} 	
@@ -391,6 +392,29 @@ The project was concluded within time scale set but with a slightly expanded bud
 \section{Software Design}
 \subsection{Controller}
 \subsubsection{Architecture}
+
+
+The Controller is entierly multi-threaded. The decision was taken to use  multithreaded architecture due to the nature of the system being used; monitoring and controlling sensors with interupts coming from multiple sources. A single threaded architecture was initially used during inital testing. This was found to be impractical as the statemachine used became cumbersome. When communicating using \gls{rf} the controller could not respond to any other commands from any oher devices. This may not have been quick enough to react to any other inputs from the user. 
+
+Because of this, the controller architecture was split into threads, listed in Table \ref{table:threads_for_controller}. Each entry in the table is represented by a thread in the program that is initialised during start-up. 
+
+\begin{table}[H]
+\centering
+\setlength{\arrayrulewidth}{1.5pt}
+\begin{tabular}{|p{0.3\linewidth}|p{0.3\linewidth}|}
+\hline
+\cellcolor{gray!40}Thread Name & \cellcolor{gray!40}Function \\ 
+\hline
+\cellcolor{gray!20}Radio Thread & \cellcolor{gray!20}Sends data over the RF module\\
+\hline
+\cellcolor{gray!20}Input Thread & \cellcolor{gray!20}Used to handle inputs when flags raised\\
+\hline
+\end{tabular}
+\caption{Threads for Controller}
+\label{table:threads_for_controller}
+\end{table}
+
+
 \subsubsection{Serial Communications}
 \subsubsection{Buzzer API}
 \subsubsection{Main Code}

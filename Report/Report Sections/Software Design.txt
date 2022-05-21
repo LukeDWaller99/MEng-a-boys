@@ -1,6 +1,28 @@
 \subsection{Controller}
 \subsubsection{Architecture}
-The Controller is entierly multi-threaded. The decision was taken to use multithreaded architecure 
+The Controller is entierly multi-threaded. The decision was taken to use  multithreaded architecture due to the nature of the system being used; monitoring and controlling sensors with interupts coming from multiple sources. A single threaded architecture was initially used during inital testing. This was found to be impractical as the statemachine used became cumbersome. When communicating using \gls{rf} the controller could not respond to any other commands from any oher devices. This may not have been quick enough to react to any other inputs from the user. 
+
+Because of this, the controller architecture was split into threads, listed in Table \ref{table:threads_for_controller}. Each entry in the table is represented by a thread in the program. 
+
+\begin{table}[H]
+\centering
+\setlength{\arrayrulewidth}{1.5pt}
+\begin{tabular}{|p{0.3\linewidth}|p{0.3\linewidth}|}
+\hline
+\cellcolor{gray!40}Thread Name & \cellcolor{gray!40}Function \\ 
+\hline
+\cellcolor{gray!20}Pot Thread & \cellcolor{gray!20}Reads the data from the joysticks\\
+\hline
+\cellcolor{gray!20}Button Thread & \cellcolor{gray!20}Handle inputs when flags raised\\
+\hline
+\end{tabular}
+\caption{Threads for Controller}
+\label{table:threads_for_controller}
+\end{table}
+
+Sorting the differing processes into different threads, the scheduler to stop the streads whenever they are not being run. Given that these threads only get run when one of the inputs is changed, these happen relatively infrequently, compared to the core clock speed of the \gls{MCU}
+
+
 \subsubsection{Serial Communications}
 \subsubsection{Buzzer API}
 \subsubsection{Main Code}
