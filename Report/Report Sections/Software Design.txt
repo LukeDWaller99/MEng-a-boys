@@ -1,0 +1,14 @@
+\subsection{Controller}
+\subsubsection{Architecture}
+The Controller is entierly multi-threaded. The decision was taken to use multithreaded architecure 
+\subsubsection{Serial Communications}
+\subsubsection{Buzzer API}
+\subsubsection{Main Code}
+
+\subsection{Receiver}
+\subsubsection{Architecture}
+\subsubsection{Serial Communications}
+\subsubsection{Buzzer API}
+\subsubsection{L2938N API}
+\subsubsection{BLDCM API}
+\subsubsection{Main Code}
