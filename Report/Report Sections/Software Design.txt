@@ -20,11 +20,53 @@ Because of this, the controller architecture was split into threads, listed in T
 \label{table:threads_for_controller}
 \end{table}
 
-Sorting the differing processes into different threads, the scheduler to stop the streads whenever they are not being run. Given that these threads only get run when one of the inputs is changed, these happen relatively infrequently, compared to the core clock speed of the \gls{MCU}
+Sorting the differing processes into different threads, the scheduler to stop the threads whenever they are not being run. Given that these threads only get run when one of the inputs is changed, these happen relatively infrequently, compared to the core clock speed of the \gls{MCU}. 
 
+\subsubsection{Serial Communications}\label{sec:serial_communication_1}
+The serial communication for this project was done over SPI using nRF24L01 modules to send data. As there was already an nRF24L01 library written for Mbed \cite{nRF24L01_lib_ref}. This abstracted the serial interface from the user to just writing to the \gls{rf} devices, and allowing the library to handle the rest. 
 
-\subsubsection{Serial Communications}
-\subsubsection{Buzzer API}
+This library was externally written and whilst it was functional, it was a bit rough aroundthe edges and felt, in parts, to be unfinished. Whilst this functionality was not used, it would have been nice to have a complete library. Despite this, the library was operational and only required the data to be sent across using char arrays, whilst fiddly this was not too difficult to achieve. 
+
+This library could have been re-written to include its missing functionality, but this would have taken up a significant amount of the project given that the serial/\gls{rf} communication was not the main objective.     
+
+Despite the class being functionality incomplete, it was easy to use for sending data using radio. Code \ref{code:nRF24L01_declaration} shows how to create the object for the nRF24L01 Class. It requires the use of an \gls{spi} interface on the board.  
+
+\begin{lstlisting}[language=C++,label=code:nRF24L0_declaration,caption=nRF24L01 Class Constructor]
+#include <nRF24L01P.h>
+nRF24L01P radio(MOSI, MISO, SCK, CSN, CE, IRQ);
+\end{lstlisting}
+
+Once the object is declared, the code in Code \ref{code:nRF24L01_SETUP} is then used to set up the nRF24L01 so that it can be used correctly. 
+
+\begin{lstlisting}[language=C++,label=code:nRF24L0_SETUP,caption=nRF24L01 Set Up]
+radio.powerUp();
+radio.setTransferSize(TRANSFER_SIZE);
+radio.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
+radio.setRxAddress(NRF24L01_RX_ADDRESS);
+radio.setTxAddress(NRF24L01_TX_ADDRESS);
+radio.setReceiveMode();
+radio.enable();
+\end{lstlisting}
+
+Code \ref{code:nRF24L01_send_data} shows how the data is written to the nRF24L01 module. This requires the data to be in a char array format, ideally the module would allow strings and integers to be passed to it, but the use of char arrays was acceptable.
+
+\begin{lstlisting}[language=C++,label=code:nRF24L01_send_data,caption=Sending Data Using nRF24L01]
+radio.write(char *data, int pipe, int count);
+\end{lstlisting}
+
+\subsubsection{Buzzer API}\label{sec:buzzer_1}
+
+The buzzer used for this project is a standard piezo buzzer that required a PWM pin to drive at a given frequency. To make the buzzer audible and fit within the western standard of music notation, a class was written to to encapsulate the buzzer functionality, allowing the buzzer to be easily used. 
+
+This buzzer class was inspired by the University of Plymouth's buzzer class written for the Module Support Board. 
+
+This class has been written such that it is thread safe. The object-oriented nature of the class has allowed the class and code to be utilised on both the controller and receiver, both of which utilise buzzers as a method of alerting the user. 
+
+\begin{lstlisting}[language=C++,label=code:buzzer_decleration,caption= Buzzer Class Constructor]
+#include "Buzzer.h"
+Buzzer buzzer(BUZZER);
+\end{lstlisting}
+
 \subsubsection{Main Code}
 
 \subsection{Receiver}

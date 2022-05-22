@@ -19,6 +19,37 @@
 \usepackage{lastpage}
 \usepackage[numbers]{natbib}
 \usepackage[acronym]{glossaries}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{customgreen}{rgb}{0,0.6,0}
+\definecolor{customgray}{rgb}{0.5,0.5,0.5}
+\definecolor{custommauve}{rgb}{0.6,0,0.8}
+
+\lstset{ 
+  basicstyle=\small,        % the size of the fonts that are used for the code
+  breaklines=true,                 % sets automatic line breaking
+  commentstyle=\color{customgreen},    % comment style
+  firstnumber=1,                % start line enumeration with line 1000
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=10pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{customgray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{custommauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\renewcommand*{\lstlistingname}{Code}
+\renewcommand{\lstlistlistingname}{Code}
+
 
 \makeglossaries
 
@@ -58,6 +89,7 @@
 \newacronym{li-po}{Li-Po}{Lithium Polymer}
 \newacronym{li-ion}{Li-Ion}{Lithium Ion} 
 \newacronym{mcu}{MCU}{Microcontroller Unit}
+\newacronym{api}{API}{Application Programming Interface}
 
 							
 \title{\bf PROJ324 - Project O.R.C.A. - On-water Rubbish Collection robot with Automatic sensing} 	
@@ -65,6 +97,7 @@
 \date{\today} 										
 \maketitle
 \thispagestyle{empty}
+
 
 \newpage 	
 
@@ -97,6 +130,7 @@ The author would also like to thank his family members for their continued suppo
 
 \listoffigures
 \listoftables
+\lstlistoflistings
 \printglossaries
 
 \newpage
@@ -414,10 +448,60 @@ Because of this, the controller architecture was split into threads, listed in T
 \label{table:threads_for_controller}
 \end{table}
 
+\subsubsection{Serial Communications}\label{sec:serial_communication_1}
+The serial communication for this project was done over SPI using nRF24L01 modules to send data. As there was already an nRF24L01 library written for Mbed \cite{nRF24L01_lib_ref}. This abstracted the serial interface from the user to just writing to the \gls{rf} devices, and allowing the library to handle the rest. 
 
-\subsubsection{Serial Communications}
+This library was externally written and whilst it was functional, it was a bit rough aroundthe edges and felt, in parts, to be unfinished. Whilst this functionality was not used, it would have been nice to have a complete library. Despite this, the library was operational and only required the data to be sent across using char arrays, whilst fiddly this was not too difficult to achieve. 
+
+This library could have been re-written to include its missing functionality, but this would have taken up a significant amount of the project given that the serial/\gls{rf} communication was not the main objective.     
+
+Despite the class being functionality incomplete, it was easy to use for sending data using radio. Code \ref{code:nRF24L01_declaration} shows how to create the object for the nRF24L01 Class. It requires the use of an \gls{spi} interface on the board.  
+
+\begin{lstlisting}[language=C++,label=code:nRF24L01_declaration,caption=nRF24L01 Class Constructor]
+#include <nRF24L01P.h>
+nRF24L01P radio(MOSI, MISO, SCK, CSN, CE, IRQ);
+\end{lstlisting}
+
+Once the object is declared, the code in Code \ref{code:nRF24L01_SETUP} is then used to set up the nRF24L01 so that it can be used correctly. 
+
+\begin{lstlisting}[language=C++,label=code:nRF24L01_SETUP,caption=nRF24L01 Set Up]
+radio.powerUp();
+radio.setTransferSize(TRANSFER_SIZE);
+radio.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
+radio.setRxAddress(NRF24L01_RX_ADDRESS);
+radio.setTxAddress(NRF24L01_TX_ADDRESS);
+radio.setReceiveMode();
+radio.enable();
+\end{lstlisting}
+
+Code \ref{code:nRF24L01_send_data} shows how the data is written to the nRF24L01 module. This requires the data to be in a char array format, ideally the module would allow strings and integers to be passed to it, but the use of char arrays was acceptable.
+
+\begin{lstlisting}[language=C++,label=code:nRF24L01_send_data,caption=Sending Data Using nRF24L01]
+radio.write(char *data, int pipe, int count);
+\end{lstlisting}
+
+
+
 \subsubsection{Buzzer API}
+
+The buzzer used for this project is a standard piezo buzzer that required a PWM pin to drive at a given frequency. To make the buzzer audible and fit within the western standard of music notation, a class was written to to encapsulate the buzzer functionality, allowing the buzzer to be easily used. 
+
+This buzzer class was inspired by the University of Plymouth's buzzer class written for the Module Support Board. 
+
+This class has been written such that it is thread safe. The object-oriented nature of the class has allowed the class and code to be utilised on both the controller and receiver, both of which utilise buzzers as a method of alerting the user. 
+
+\begin{lstlisting}[language=C++,label=code:buzzer_decleration,caption= Buzzer Class Constructor]
+#include "Buzzer.h"
+Buzzer buzzer(BUZZER);
+\end{lstlisting}
+
+Using this \gls{api}, the buzzer could be turned on or off, the note can be changed, and the octave the note is in can also be changed. This allowed multiple different alerts to the user to be utilised. This increased the versatility of the buzzer. 
+
+This class includes operator overloads such that using the buzzer is easy and intuitive.
+
 \subsubsection{Main Code}
+
+
 
 \subsection{Receiver}
 \subsubsection{Architecture}
