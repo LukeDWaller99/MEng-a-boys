@@ -1,4 +1,4 @@
-The design requirements for this project as outlined in Appendix \ref{app:design_requirements_hardware} and Appendix \ref{app:design_requirements_software} were agreed upon by {SOMEONE - NOT SURE HOW TO PHRASE IAN AND ME}. The table acts a checklist for the project to ensure that the met all of these requirements, this was a dynamic list that was adapted and amended as the project progressed. The core requirements of the project remained the same but some of the higher level attainable aims were adapted as the project progressed. 
+The design requirements for this project as outlined in Appendix \ref{app:design_requirements_hardware} and Appendix \ref{app:design_requirements_software} were agreed upon by the author and their project supervisor. The table acts a checklist for the project to ensure that the met all of these requirements, this was a dynamic list that was adapted and amended as the project progressed. The core requirements of the project remained the same but some of the higher level attainable aims were adapted as the project progressed. 
 
 
 \Appendix{Hardware Design Requirements Table}\label{app:design_requirements_hardware}

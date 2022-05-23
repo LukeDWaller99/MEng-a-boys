@@ -27,7 +27,7 @@
 
 // Radio transeiver
 // MOSI, MISO, SCK, CNS, CE, IRQ - must be an interrupt pin 6 
-// nRF24L01P nRF24L01(MOSI, MISO, SCK, CSN, CE, IRQ);
+nRF24L01P nRF24L01(MOSI, MISO, SCK, CSN, CE, IRQ);
 
 // Reat Drive Motors
 ESC FWDLeftMotor(FWD_LHS_MOTOR), 
@@ -41,8 +41,8 @@ L298N ConvMotor1(CONV_MOTOR_1_A, CONV_MOTOR_1_B, CONV_MOTOR_1_ENABLE),
 
 InterruptIn bat30(Bat_30_PERCENT), bat15(Bat_15_PERCENT),   // battery monitoring
             btn1(BTN_1), btn2(BTN_2),                       // button inputs
-            SW1(SW_1), SW2(SW_2), SW4(SW_4),                // switches
-            IR2(IR_2), IR4(IR_4);                           // IR inputs
+            SW1(SW_1), SW2(SW_2), SW3(SW_3), SW4(SW_4), SW5(SW_5), SW6(SW_6),                // switches
+            IR1(IR_1), IR2(IR_2), IR3(IR_3), IR4(IR_4);                           // IR inputs
 
 Buzzer buzzer(BUZZER);
 
@@ -95,27 +95,26 @@ int main() {
     buzzer = true;
     led2 = 1;
 
-    // wait_us(5000000);
+    wait_us(5000000);
 
-    // nRF24L01.powerUp();
-    // nRF24L01.setTransferSize(TRANSFER_SIZE);
-    // nRF24L01.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
-    // nRF24L01.setRxAddress(NRF24L01_RX_ADDRESS);
-    // nRF24L01.setTxAddress(NRF24L01_TX_ADDRESS);
+    nRF24L01.powerUp();
+    nRF24L01.setTransferSize(TRANSFER_SIZE);
+    nRF24L01.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
+    nRF24L01.setRxAddress(NRF24L01_RX_ADDRESS);
+    nRF24L01.setTxAddress(NRF24L01_TX_ADDRESS);
 
 
 // Display the (default) setup of the nRF24L01+ chip
-    // printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
-    // printf("nRF24L01 Output Power : %d dBm\n",  nRF24L01.getRfOutputPower() );
-    // printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate() );
-    // printf("nRF24L01 Transfer Size: %d bits\n", nRF24L01.getTransferSize(DEFAULT_PIPE));
-    // printf("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress() );
-    // printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress() );
+    printf("nRF24L01 Frequency    : %d MHz\n",  nRF24L01.getRfFrequency() );
+    printf("nRF24L01 Output Power : %d dBm\n",  nRF24L01.getRfOutputPower() );
+    printf("nRF24L01 Data Rate    : %d kbps\n", nRF24L01.getAirDataRate() );
+    printf("nRF24L01 Transfer Size: %d bits\n", nRF24L01.getTransferSize(DEFAULT_PIPE));
+    printf("nRF24L01 TX Address   : 0x%010llX\n", nRF24L01.getTxAddress() );
+    printf("nRF24L01 RX Address   : 0x%010llX\n", nRF24L01.getRxAddress() );
 
+    nRF24L01.setReceiveMode();
 
-    // nRF24L01.setReceiveMode();
-
-    // nRF24L01.enable();
+    nRF24L01.enable();
 
     bat30.rise(bat30PercentIRQ);
     bat15.rise(bat15PercentIRQ);
@@ -123,20 +122,20 @@ int main() {
     btn2.rise(btn2IRQ);
     SW1.rise(SW1IRQ);
     SW2.rise(SW2IRQ);
-    // SW3.rise(SW3IRQ);
+    SW3.rise(SW3IRQ);
     SW4.rise(SW4IRQ);
-    // SW5.rise(SW5IRQ);
-    // SW6.rise(SW6IRQ);
-    // IR1.rise(IRIRQ);
-    // IR2.rise(IRIRQ);
-    // IR3.rise(IRIRQ);
-    // IR4.rise(IRIRQ);
+    SW5.rise(SW5IRQ);
+    SW6.rise(SW6IRQ);
+    IR1.rise(IRIRQ);
+    IR2.rise(IRIRQ);
+    IR3.rise(IRIRQ);
+    IR4.rise(IRIRQ);
 
     LeftMotorThread.start(LeftMotorThreadMethod);
     RightMotorThread.start(RightMotorThreadMethod);
-    // RadioThread.start(RadioReceiveMethod);
+    RadioThread.start(RadioReceiveMethod);
     LEDThread.start(LEDMethod);
-    // IRThread.start(IRMethod);
+    IRThread.start(IRMethod);
     InputThread.start(InputMethod);
     bat30percentThread.start(bat30percentMethod);
     bat15percentThread.start(bat15percentMethod);
@@ -148,7 +147,7 @@ int main() {
 
 }
 
-/*void RadioReceiveMethod(){
+void RadioReceiveMethod(){
     PRINT("Radio Thread Started\n");
     while (true) {
         if (nRF24L01.readable()) {
@@ -271,7 +270,7 @@ int main() {
         
     }
 
-} */
+} 
 
 float ThrottleValue(char* data){
    float floatVal = atof(data);
@@ -376,9 +375,9 @@ void IRMethod(){
             ThisThread::sleep_for(5s);
         } else {
             // disable IRQ Interrupts
-            // IR1.rise(NULL);
+            IR1.rise(NULL);
             IR2.rise(NULL);
-            // IR3.rise(NULL);
+            IR3.rise(NULL);
             IR4.rise(NULL);
         }
     }
@@ -409,7 +408,9 @@ void InputMethod(){
             printf("Litter Basket Emptied - Sensors Reset, Buzzer Renabled\n");
             buzzer = true;
             led2 = 1;
-            rubbishContainerFull = 0;           
+            rubbishContainerFull = 0;   
+            IR2.rise(IRIRQ);
+            IR4.rise(IRIRQ);        
             break;
         case 4: // switch 1 - disable the motors - 4 quick beeps
             printf("Switch 1 Off - Motors Disabled\n");
@@ -531,14 +532,14 @@ void SW2IRQ(){
     SW2.rise(SW2IRQ);
 }
 
-// void SW3IRQ(){
-//     SW3.rise(NULL);
-//     wait_us(5000);
-//     if (SW3 == 1){
-//         InputThread.flags_set(16);
-//     }
-//     SW3.rise(SW3IRQ);
-// }
+void SW3IRQ(){
+    SW3.rise(NULL);
+    wait_us(5000);
+    if (SW3 == 1){
+        InputThread.flags_set(16);
+    }
+    SW3.rise(SW3IRQ);
+}
 
 void SW4IRQ(){
     SW4.rise(NULL);
@@ -549,34 +550,34 @@ void SW4IRQ(){
     SW4.rise(SW4IRQ);
 }
 
-// void SW5IRQ(){
-//     SW5.rise(NULL);
-//     wait_us(5000);
-//     if (SW5 == 1){
-//         InputThread.flags_set(64);
-//     }
-//     SW5.rise(SW5IRQ);
-// }
+void SW5IRQ(){
+    SW5.rise(NULL);
+    wait_us(5000);
+    if (SW5 == 1){
+        InputThread.flags_set(64);
+    }
+    SW5.rise(SW5IRQ);
+}
 
-// void SW6IRQ(){
-//     SW6.rise(NULL);
-//     wait_us(5000);
-//     if (SW6 == 1){
-//         InputThread.flags_set(128);
-//     }
-//     SW6.rise(SW6IRQ);
-// }
+void SW6IRQ(){
+    SW6.rise(NULL);
+    wait_us(5000);
+    if (SW6 == 1){
+        InputThread.flags_set(128);
+    }
+    SW6.rise(SW6IRQ);
+}
 
 void IRIRQ(){
-    // IR1.rise(NULL);
+    IR1.rise(NULL);
     IR2.rise(NULL);
-    // IR3.rise(NULL);
+    IR3.rise(NULL);
     IR4.rise(NULL);
     IRThread.flags_set(1);
     LEDThread.flags_set(1);
-    // IR1.rise(IRIRQ);
+    IR1.rise(IRIRQ);
     IR2.rise(IRIRQ);
-    // IR3.rise(IRIRQ);
+    IR3.rise(IRIRQ);
     IR4.rise(IRIRQ);
 }
 

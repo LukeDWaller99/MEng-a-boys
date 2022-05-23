@@ -21,6 +21,8 @@
 \usepackage[acronym]{glossaries}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
 
 \definecolor{customgreen}{rgb}{0,0.6,0}
 \definecolor{customgray}{rgb}{0.5,0.5,0.5}
@@ -50,8 +52,8 @@
 \renewcommand*{\lstlistingname}{Code}
 \renewcommand{\lstlistlistingname}{Code}
 
-
 \makeglossaries
+\loadglsentries{glossary.tex}
 
 \graphicspath{{images/}}
 
@@ -71,26 +73,6 @@
 
 \begin{document}
 
-\newacronym{arm}{ARM}{Advanced RISC Machines Ltd}
-\newacronym{orca}{ORCA}{On-water Rubbish Collection robot with Automated sensing}
-\newacronym{rf}{RF}{Radio Frequency}
-\newacronym{smt}{SMT}{Surface Mount Technology}
-\newacronym{tht}{THT}{Through Hole Technology}
-\newacronym{rtos}{RTOS}{Real Time Operating System}
-\newacronym{bldcm}{BLDCM}{Brushless DC Motor}
-\newacronym{dc}{DC}{Direct Current}
-\newacronym{pcb}{PCB}{Printed Circuit Board}
-\newacronym{ide}{IDE}{Integrated Development Environment}
-\newacronym{rc}{RC}{Radio Controlled}
-\newacronym{spi}{SPI}{Serial Parallel Interface}
-\newacronym{irq}{IRQ}{Interrupt Request}
-\newacronym{esc}{ESC}{Electronic Speed Controller}
-\newacronym{pwm}{PWM}{Pulse Width Modulation}
-\newacronym{li-po}{Li-Po}{Lithium Polymer}
-\newacronym{li-ion}{Li-Ion}{Lithium Ion} 
-\newacronym{mcu}{MCU}{Microcontroller Unit}
-\newacronym{api}{API}{Application Programming Interface}
-
 							
 \title{\bf PROJ324 - Project O.R.C.A. - On-water Rubbish Collection robot with Automatic sensing} 	
 \author{Luke Waller} 								
@@ -104,8 +86,9 @@
 \section*{Abstract}
 \pagenumbering{roman}
 
-Oceans make up over 70\% of the worlds surface. They are vital to all life on the planet as a large majority of the oxygen on the planet comes from phytoplankton that live near the surface of the water. It is estimated that over 10 million tonnes of litter end up in the ocean each year. It is estimated that by 2050 the amount of plastic in the ocean will outnumber the fish, with about 15\% floating on the surface (1.5 million tonnes). This on-surface that is being targeted by the On-water Rubbish Collection robot with Automated sensing (O.R.C.A). 
-Several solutions to this problem have been created; however, the O.R.C.A based solution aims at a novel application that has previously been left unexplored. O.R.C.A aims to collect rubbish from within in-land bodies of water, plastic chokeholds, using a conveyor-based system to remove the rubbish from the water. 
+Oceans make up over 70\% of the world’s surface. They are vital to all life on the planet as a large majority of the oxygen on the planet comes from phytoplankton that live near the surface of the water. It is estimated that over 10 million tonnes of litter end up in the ocean each year. It is estimated that by 2050 the amount of plastic in the ocean will outnumber the fish, with about 15\% floating on the surface (1.5 million tonnes). This on-surface that is being targeted by the \gls{orca}.
+
+Several solutions to this problem have been created; however, the \gls{orca} based solution aims at a novel application that has previously been left unexplored. \gls{orca} aims to collect rubbish from within in-land bodies of water, plastic chokeholds, using a conveyor-based system to remove the rubbish from the water.
 
 \section*{Keywords} 
 Waste Collection, Microcontroller, Conveyor belt, C++
@@ -140,27 +123,27 @@ The author would also like to thank his family members for their continued suppo
 
 \section{Design Requirements}
 
-The design requirements for this project as outlined in Appendix \ref{app:design_requirements_hardware} and Appendix \ref{app:design_requirements_software} were agreed upon by {SOMEONE - NOT SURE HOW TO PHRASE IAN AND ME}. The table acts a checklist for the project to ensure that the met all of these requirements, this was a dynamic list that was adapted and amended as the project progressed. The core requirements of the project remained the same but some of the higher level attainable aims were adapted as the project progressed. 
+The design requirements for this project as outlined in Appendix \ref{app:design_requirements_hardware} and Appendix \ref{app:design_requirements_software} were agreed upon by the author and their project supervisor. The table acts as a checklist for the project to ensure all the requirements were met. This was a dynamic list that was adapted and amended as the project progressed. The core requirements of the project remained the same but some of the higher level attainable aims were adapted as the project progressed. This was as a result of the critical analysis stages of the project where the feasibility of certain aims was evaluated and these were adapted accordingly. 
 
 \section{Aims and Objectives}
 
-The aims and objectives, which have been listed below, are used as an indicator of success of the project. These were created using the design requirements of the project. The overall success of this project was measured against these aims and objectives. 
+The aims and objectives, which have been listed below, are used as an indicator of the project's success. These were created using the design requirements of the project. The overall success of this project was measured against these aims and objectives: 
 
 1.	Design and create a boat that is capable of floating on water and being driven around by a radio controller and receiver. The craft will need to be an appropriate size such that it can carry all the equipment on board as well as a decent payload of rubbish to be collected. I will need to create a suitable propulsion system, steering system, and make sure the craft is stable both at top speed and when cornering. It is important to make sure the craft is highly controllable and safe to operate. 
 
 2.	Design and create a suitable litter collection system that can collect litter on the surface of water. The system will need to be able to be turned off, not be damaging to wildlife, and be able to collect all types of litter that collect on the surface. 
 
-3.	Combine the litter collection system with the main hull of the boat. Check that the functionality of both components is not impeded by the combination of the two parts together. Get the two parts of the boat controlled separately using a radio controller (as the radio controller that I have is only 3 channels).
+3.	Combine the litter collection system with the main hull of the boat. Check that the functionality of both components is not impeded by the combination of the two parts together. Get the two parts of the boat controlled separately using a radio controller as the currently available radio controller is only 3 channels.
 
 4.	Implement a custom microcontroller based remote control and receiver for the boat that would allow broader uses for the controller. The controller would be able to display some rudimentary values such as, battery charge on the boat, the current capacity of the rubbish collection system, and the status of the litter collection system (operating/not operating).
 
-5.	Add sensors, both active and passive to test for current capacity of the litter collection basket as well as current battery charge. The status would be these combined sensors would be outputted to the controller that would alert the user, alongside stopping the boat when the power is low or when the litter collection basket is full.  
+5.	Add sensors, both active and passive to test for current capacity of the litter collection basket as well as current battery charge. The status of these sensors would be outputted to the controller that would alert the user, alongside stopping the boat when the power is low or when the litter collection basket is full.  
 
-\section{Project Managment}
+\section{Project Management}
 
-The project has had a development lifecycle of approximately 36 weeks and began on the 6\^th September 2021. 
+The project has had a development lifecycle of approximately 36 weeks and began on the 6th September 2021.
 
-The project was split into three phases of development, phase one was research and development of the project and ideas. Phase two was developing prototypes and testing. The final phase, phase three, was finalising the design and build. 
+The project was split into three phases of development. Phase one was research and development of the project and ideas. Phase two was developing prototypes and testing. The final phase was finalising the design and build. 
 
 The project was managed using the following software: 
 
@@ -173,50 +156,82 @@ The project was managed using the following software:
 
 \end{itemize}
 
-The management style for this project followed a similar style used by Roke Manor Research Ltds. agile framework. This framework follows and agile approach to project development \cite{agile_development}, which is evident in the adaptability of the project as it has developed. 
+The management style for this project followed a similar style used by Roke Manor Research Ltds. agile framework. This framework follows an agile approach to project development \cite{agile_development}, which is evident in the adaptability of the project as it has developed.  
 
-The utilised style used to manage the project was extremely effective and when utilised with software packages above, all tasks were executed in an organised manner. For general awareness of time management and deadlines, a Gantt chart was utilised. This worked well for this type of project, a solo project undertaken with the supervision of one party, but would not have scaled well to a project with a larger group and organisational supervision. Due to this utilisation method, setbacks were minimised and able to be accounted for within the initial plan. Any unplanned setbacks were easy to coordinate within such a small working group. 
+The utilised style to manage the project was extremely effective and when utilised with software packages above, all tasks were executed in an organised manner. For general awareness of time management and deadlines, a Gantt chart was utilised. This worked well for this type of project, a solo project undertaken with the supervision of one party, but would not have scaled well to a project with a larger group and organisational supervision. Due to this utilisation method, setbacks were minimised and able to be accounted for within the initial plan. Any unplanned setbacks were easy to coordinate within such a small working group. 
 
 The milestones laid out in the project Gantt Chart for phases 1, 2, and 3 are listed below in Appendix \ref{app:phase_1}, Appendix \ref{app:phase_2}, and Appendix \ref{app:phase_3} respectively.
 
-\subsection{Phase 1 - Autumn Term 2021/22}
+\subsection{Phase 1 - Autumn Term 2021/22}\label{sec:phase_1}
 
-Phase 1 of the project was ensuring that the planning, research, and development was conducted in aline with the agile methodology. The objectives from Phase 1 are outlined in Appendix \ref{app:phase_1}. At this stage, The design requirements and optioneering were considered.  
+Phase 1 of the project was ensuring that the planning, research, and development was conducted in line with the agile methodology. The objectives from Phase 1 are outlined in Appendix \ref{app:phase_1}. At this stage, the design requirements and optioneering were considered.  
 
-From this initial planning phase, a design brief, Gantt Chart, and future steps were created and agreed upon with the project supervisior. A clear set of requirements had been established along with identification of rudimentary concept ideas. The resultant concepts and decision making processes (optioneering) are detailed in section \ref{sec:research} and section \ref{sec:optioneering}.  
+From this initial planning phase, a design brief, Gantt Chart, and future steps were created and agreed upon with the project supervisor. A clear set of requirements had been established along with identification of rudimentary concept ideas. The resultant concepts and decision making processes (optioneering) are detailed in section \ref{sec:research} and section \ref{sec:optioneering}.  
 
-\subsection{Phase 2 - Winter Term 2021/22}
+\subsection{Phase 2 - Winter Term 2021/22}\label{sec:phase_2}
 
-Phase 2 involved undertaking initial prototyping and light development of the work to further the work conducted at the end of Phase 1 and to supplement the work being conducted within Phase 3. Phase 2 ran alongside three full-time university modules. It was used as a basis for the prototyping for the project. During Phase 2, initial designs were created, tested, and evaluated. 
+During Phase 2, initial designs were created, tested, and evaluated. Phase 2 involved undertaking initial prototyping and light development of the work. This was to further the work conducted at the end of Phase 1 and to supplement the work being conducted within Phase 3. Phase 2 ran alongside three full-time university modules. It was used as a basis for the prototyping for the project.  
 
-The second phase helped focus the design requirements for the project, whilst evaluating what would be possible within the given time scaled budget. The use of threads, learned from ELEC351, along with ..., drove the development of my project from an Arduino based solution to an ARM based solution, as this enabled the use of RTOS functionality. 
+The second phase helped focus the design requirements for the project, whilst evaluating what would be possible within the given time scaled budget. The use of threads, learned from \gls{elec351}, along with the development of classes, drove the development of my project from an Arduino based solution to an \gls{arm} based solution. This enabled the use of the \gls{rtos} functionality. 
 
 The initial prototypes produced in Phases 1 and 2 helped me evaluate critical dimensions and functionalities of the final craft.
 
 \subsection{Phase 3 - Spring/Summer Term 2022} 
 
+The final phase of the project was the largest and most time consuming. It required the most development work and planning to conduct. 
+
+The main objectives from phase three are listed in Appendix \ref{app:phase_three}. The project can be split into two main groups: the software and hardware development. 
+
+The software consisted of developing a controller and receiver board for the craft. This required a transmission protocol to be designed along with several libraries to control various devices such as, buzzers, \gls{bldcm}s, and \gls{dc} Motors. 
+
+Most of the hardware for this project was bespoke including, the \gls{pcb}s, Main Body of the Craft and the Conveyor belt. The majority of the hardware to interface with the \gls{pcb}s was off-the shelf as they are well-established and known to work effectively.
+
+Not all of the software was able to be developed without the integration of some hardware. An example of this would be the development of the transmission protocol shown in Appendix \ref{app:transmission_codes}. Without the use of the nRF24L01 \gls{rf} chips being used for the project, it was ineffective to test and debug. As a result of this, the software and hardware were developed in parallel. This also allowed time for manufacturing of components, such as the \gls{pcb}s and 3D printed parts.
+
+Setbacks in both the software and hardware development were experienced. As a result of this, the time accounted for in the Gantt Chart had to be skewed further than previously estimated. Some components ordered in early April of 2022 were still expecting delivery in mid May of 2022. This caused significant setbacks in the project. 
+
+Along with massively increased shipping times, and lack of availability of some vital components, software setbacks were also encountered. The nRF24L01P API made for the \gls{mbed} board was found to be poorly documented and incomplete in parts. This required time to rectify and understand, when ideally it would have been an easy implementation. 
+
+The \gls{pcb}s were another source of delay, once ordered the board arrived within the specified timeframe. Upon inspection, however, these boards, which were supposed to be fully assembled, were totally unpopulated. This required the components to be quickly ordered and then the board to populated by hand. As a result of this, everything was put on hold for a few days until these boards were populated and fully tested. 
+
 \section{Research}
+
+The majority of the coursework for the project was conducted during Phase 1 (§\ref{sec:phase_1}), with some continuation into Phase 2 (§\ref{sec:phase_2}). The follow three concepts were critically evaluated to find their strengths and weaknesses. 
+
+\subsection{Concept Designs - Mechanical Assembly}
+\subsubsection{Concept 1 - Dragged Net Based System}
+Concept 1 features a monohull craft that consists of a net that is dragged. The craft would drive through litter, collecting it with the net as it drives past. 
+
+As this design was complex and required a more unstable monohull design, it was deemed to be the contingency plan and would only be further explored if all other concepts had been deemed impractical.
+
+\subsubsection{Concept 2 - Submerged Basket System}
+Concept 2 uses a catamaran style hull with a gap in the middle. This gap would be filled with a removable basket that sits under the surface of the water. The craft would drive over the top of surface litter collecting it in the basket.  
+
+As this design was similar to other designs currently on the market, this plan was deemed as a backup. It has been proven to be effective but there is little novelty in this design. 
+
+\subsubsection{Concept 3 - Conveyor System with Elevated Basket}
+Concept 3 focuses on a conveyor belt with a raised basket to hold the collected litter. This would be straddled across a catamaran style hull. The excess liquid run off would be filtered and drained back into the water. This would allow basic samples to be taken from the debris  floating in the water. 
 
 \subsection{Concept Designs - Controller and Receiver}
 \subsubsection{Concept 1 - Off the Shelf Solution}
-Controller and Receiver concept 1 was to use an off the shelf system for controlling the craft. This system would be reliable, functional, but it would be expensive and not allow for versatility of inputs and outputs that we would be required. 
+Controller and Receiver concept 1 was to use an off the shelf system for controlling the craft. This system would be reliable, functional, but it would be expensive and not allow for versatility of inputs and outputs that would be required. 
 
-The lack input/output versatility would inhibit the use of smart features on the craft. This does not address any newer technologies or concepts that would be suited to this style of custom RC craft. 
+The lack of input/output versatility would inhibit the use of smart features on the craft. This does not address any newer technologies or concepts that would be suited to this style of custom \gls{rc} craft. 
 
-Therefore it was decided that this concept would be used for initial testing and as contingency plan, final deployment would be using concept, unless this proved to be impractical. 
+Therefore it was decided that this concept would be used for initial testing and as contingency plan. Final deployment would be using this concept, if Concept 2 (§\ref{sec:concept_2}) proved to be impractical. 
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=1\textwidth]{Off_Shelf_RC_System}}
 \caption{Concept 1 - Off the shelf RC Controller and Receiver}
-\label{fig:Custom_RC_System}
+\label{fig:Off_shelf_RC_System}
 \end{figure} 
 
 
 \subsubsection{Concept 2 - Custom RF Based Solution} \label{sec:concept_2}
 
-Concept 2 introduces "smart" features such as custom battery management circuity and litter collection basket capacity sensing. It allowed for a number of inputs and outputs on each system (up to the limit of the board used to control the systems). This would allow for a highly adaptable control system that could be easily adapted for another use-case. The main craft could be changed and the controller system would be easily reusable. Using a microcontroller based system add the ability to add and remove devices as the requirements of the craft change.
+Concept 2 introduces "smart" features such as custom battery management circuity and litter collection basket capacity sensing. It allowed for a number of inputs and outputs on each system (up to the limit of the board used to control the systems). This would allow for a highly adaptable control system that could be easily adapted an alternative use if required. The main craft could be changed and the controller system would be easily reusable. Using a microcontroller based system allows the ability to add and remove devices as the requirements of the craft change.
 
-The downsides of the system are... Fiddly AF, Hard to GET RC working, Required Knowledge of Microcontrollers to utilise full functionality.  
+One of the downsides of this system is that because it is a custom based system, all of the maintenance is required to be done by the user. This requires a lot of work and effort which would not be the case for the off the shelf system. The other issue with this solution is that the \gls{rf} chips can be intermittent during their operation something that is also not present with the off the shelf system.  
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=1\textwidth]{Custom_RC_System}}
@@ -224,7 +239,7 @@ The downsides of the system are... Fiddly AF, Hard to GET RC working, Required K
 \label{fig:Custom_RC_System}
 \end{figure} 
 
-Despite the downsides, this concept had been decided to be the most adaptable and most suited to this application. It is the most complicated of the two concepts; requiring a broad knowledge of embedded systems and battery management technologies. Moreover, the added complexity of the implementation is outweighed by the added functionality and expandability of this system. It was deemed better to design a system that would properly function instead of trying to adapt the correctly available solutions that may not work correct for this purpose.
+Despite the downsides, this concept had been decided to be the most adaptable and most suited to this application. It is the most complicated of the two concepts; requiring a broad knowledge of embedded systems and battery management technologies. Moreover, the added complexity of the implementation is outweighed by the added functionality and expandability of this system. It was deemed better to design a system that would properly function instead of trying to adapt the correctly available solutions that may not work correctly for this purpose.
 
 \section{Optioneering}
 \subsection{Controller}
@@ -247,12 +262,12 @@ The STM32F492 was selected for use within the reciever board for this project. T
 
 Power consumption for this board was not an important consideration because it was being powered by the same battery that is used by the motors and other peripherals. The power draw of these components is signicifantly higher than that of the board.
 
-Like with the Controller Optioneering, AVR's ATMega2560 was also considered for use within the reciever. Once again the the RTOS functionality of the STMicroelection  chip paired with the use of the Mbed studio IDE showed the STM32F492 to be the clear choice for chip selection. Given that it was also an ARM processor like the controller, it would be easy to develop the software for as it would only require the use of one IDE. This meant that code would be easy to write for one of the board and be ported easily for reuse on another controller without having to worry about architecture clashes.       
+Like with the Controller Optioneering, AVR's ATMega2560 was also considered for use within the reciever. Once again the the RTOS functionality of the STMicroelection  chip paired with the use of the Mbed studio IDE showed the STM32F492 to be the clear choice for chip selection. Given that it was also an \gls{arm} processor like the controller, it would be easy to develop the software for as it would only require the use of one IDE. This meant that code would be easy to write for one of the board and be ported easily for reuse on another controller without having to worry about architecture clashes.       
 
 \subsection{Peripherals}
 \subsubsection{RF Transciever}
 
-In order to deliver the functionality shown in Concept 2 [\ref{sec:concept_2}] , an RF module would need to be sourced to allow for control of the craft at range. The nRF24L01 is used widley within embedded systems as a long range transciever device. Although a basic device it is highly capable of sending limited amounts of data quickly, such as the use case for RC receivers. The nRF24L01 comes as part of a discreet packge that contains all of the components that require it to operate correctly. The discreet package is shown in Fig \ref{fig:nRF24L01_package}.
+In order to deliver the functionality shown in Concept 2 [\ref{sec:concept_2}] , an \gls{rf} module would need to be sourced to allow for control of the craft at range. The nRF24L01 is used widley within embedded systems as a long range transciever device. Although a basic device it is highly capable of sending limited amounts of data quickly, such as the use case for RC receivers. The nRF24L01 comes as part of a discreet packge that contains all of the components that require it to operate correctly. The discreet package is shown in Fig \ref{fig:nRF24L01_package}.
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=.4\textwidth]{nRF24L01_package}}
@@ -260,7 +275,7 @@ In order to deliver the functionality shown in Concept 2 [\ref{sec:concept_2}] ,
 \label{fig:nRF24L01_package}
 \end{figure}
 
-The nRF24L01 package uses an 8 pin interface for communicating using SPI with an added chip enabled pin, IRQ pin, 3.3V and ground. This was the only component in which a pre-written library was used. This library was complicated and worked well. As this was not the main focus of the project it was decided that this libray would be used, as it would not detreact from the project. This library was written in Mbed OS so it did not require porting over from another architecture.  
+The nRF24L01 package uses an 8 pin interface for communicating using \gls{spi} with an added chip enabled pin, IRQ pin, 3.3V and ground. This was the only component in which a pre-written library was used. This library was complicated and worked well. As this was not the main focus of the project it was decided that this libray would be used, as it would not detreact from the project. This library was written in Mbed OS so it did not require porting over from another architecture.  
 
 \subsubsection{Brushless DC Motors}
 
@@ -285,12 +300,12 @@ INSERT FIGURE HERE, TAKE PHOTO OF MOTOR
 %\label{fig:a2212_1400KV_BLDCM}
 %\end{figure}
 
-The motors for the conveyor were decided on being  the Dunkermotoren PLG24 DC motor with an attached gearbox with a large reduction. These had an approximate torque of 40Ncm with a gearbox reduction of 353:1. These motors are designed to run at up to 30V. These would lead to the motors being underpowered for this application but as speed was not the defining factor this was not an issue. The only issue with using brushed motors is that they are not waterpoof. This would require a waterproof cowling to cover the motor to ensure that it didn't get damaged by the water. 
+The motors for the conveyor were decided on being  the Dunkermotoren PLG24 DC motor with an attached gearbox with a large reduction. These had an approximate torque of 40Ncm with a gearbox reduction of 353:1. These motors are designed to run at up to 30V. These would lead to the motors being underpowered for this application but as speed was not the defining factor this was not an issue. The only issue with using brushed motors is that they are not waterproof. This would require a waterproof cowling to cover the motor to ensure that it didn't get damaged by the water. 
 
 \subsubsection{Motor Drivers}
 
 
-Both the Brushless and Brushed DC motors for this project would require motor drivers to allow the microcontroller reciever to control the motors correctly. Each type of motor requires a different type of motor driver. To drive the BLDC motors, the included 30A 2-3S ESCs were used. These were generic no-name ESC but worked well for the motors and allowed effective control required for this project. 
+Both the Brushless and Brushed DC motors for this project would require motor drivers to allow the microcontroller receiver to control the motors correctly. Each type of motor requires a different type of motor driver. To drive the BLDC motors, the included 30A 2-3S ESCs were used. These were generic no-name ESC but worked well for the motors and allowed effective control required for this project. 
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=.4\textwidth]{30A_ESC}}
@@ -418,7 +433,7 @@ The high cost of this project is due in part to this project being a prototype, 
 
 Materials were, for the most part, sourced from responsible VAT registered distributors; which was important when selecting components for mass production. The majority of the components were sourced from Farnell, DigiKey US, CPC, or Ooznest. Some of the other components were sourced from Amazon and eBay. These parts could not be varified to be from a responsible distributor, but these components could have been sourced from other locations if the quantity of the components was larger. 
 
-The fabrication of custom SMD PCBs has been included within the BOM for this project as they were considered to be part of the final prototyped solution. Despite these not being a finalised PCB design for further manufacturing, if applicable, it was a cost that was considered during the prototyping phase of the project. The PCBs were important in the production of this project as they allowed the secure mounting of the RF modules. Given that all of the components needed mounting on a structure that would need to be remotely controlled and manoeuvred, the decision to make PCBs was clear. The PCBs were manufactured in Shenzhen, China but JLC-PCB.
+The fabrication of custom SMD PCBs has been included within the BOM for this project as they were considered to be part of the final prototyped solution. Despite these not being a finalised PCB design for further manufacturing, if applicable, it was a cost that was considered during the prototyping phase of the project. The PCBs were important in the production of this project as they allowed the secure mounting of the \gls{rf} modules. Given that all of the components needed mounting on a structure that would need to be remotely controlled and manoeuvred, the decision to make PCBs was clear. The PCBs were manufactured in Shenzhen, China but JLC-PCB.
 
 The project was concluded within time scale set but with a slightly expanded budget. Given further time, this project could have been completed closer to the original budget. Due to the expensive nature of some of the components used however, the budget of £100 would likely have not been sufficient for this project without significant cuts to functionality and/or goals.
 
@@ -428,18 +443,18 @@ The project was concluded within time scale set but with a slightly expanded bud
 \subsubsection{Architecture}
 
 
-The Controller is entierly multi-threaded. The decision was taken to use  multithreaded architecture due to the nature of the system being used; monitoring and controlling sensors with interupts coming from multiple sources. A single threaded architecture was initially used during inital testing. This was found to be impractical as the statemachine used became cumbersome. When communicating using \gls{rf} the controller could not respond to any other commands from any oher devices. This may not have been quick enough to react to any other inputs from the user. 
+The Controller is entirely multi-threaded. The decision was taken to use  multithreaded architecture due to the nature of the system being used; monitoring and controlling sensors with interrupts coming from multiple sources. A single threaded architecture was initially used during initial testing. This was found to be impractical as the statemachine used became cumbersome. When communicating using \gls{rf} the controller could not respond to any other commands from any other devices. This may not have been quick enough to react to any other inputs from the user. 
 
 Because of this, the controller architecture was split into threads, listed in Table \ref{table:threads_for_controller}. Each entry in the table is represented by a thread in the program that is initialised during start-up. 
 
 \begin{table}[H]
 \centering
 \setlength{\arrayrulewidth}{1.5pt}
-\begin{tabular}{|p{0.3\linewidth}|p{0.3\linewidth}|}
+\begin{tabular}{|p{0.4\linewidth}|p{0.4\linewidth}|}
 \hline
 \cellcolor{gray!40}Thread Name & \cellcolor{gray!40}Function \\ 
 \hline
-\cellcolor{gray!20}Radio Thread & \cellcolor{gray!20}Sends data over the RF module\\
+\cellcolor{gray!20}Pot Thread & \cellcolor{gray!20}Polls Values of the Joysticks and sends over \gls{rf}\\
 \hline
 \cellcolor{gray!20}Input Thread & \cellcolor{gray!20}Used to handle inputs when flags raised\\
 \hline
@@ -449,9 +464,9 @@ Because of this, the controller architecture was split into threads, listed in T
 \end{table}
 
 \subsubsection{Serial Communications}\label{sec:serial_communication_1}
-The serial communication for this project was done over SPI using nRF24L01 modules to send data. As there was already an nRF24L01 library written for Mbed \cite{nRF24L01_lib_ref}. This abstracted the serial interface from the user to just writing to the \gls{rf} devices, and allowing the library to handle the rest. 
+The serial communication for this project was done over \gls{spi} using nRF24L01 modules to send data. As there was already an nRF24L01 library written for Mbed \cite{nRF24L01_lib_ref}. This abstracted the serial interface from the user to just writing to the \gls{rf} devices, and allowing the library to handle the rest. 
 
-This library was externally written and whilst it was functional, it was a bit rough aroundthe edges and felt, in parts, to be unfinished. Whilst this functionality was not used, it would have been nice to have a complete library. Despite this, the library was operational and only required the data to be sent across using char arrays, whilst fiddly this was not too difficult to achieve. 
+This library was externally written and whilst it was functional, it was a bit rough around the edges and felt, in parts, to be unfinished. Whilst this functionality was not used, it would have been nice to have a complete library. Despite this, the library was operational and only required the data to be sent across using char arrays, whilst fiddly this was not too difficult to achieve. 
 
 This library could have been re-written to include its missing functionality, but this would have taken up a significant amount of the project given that the serial/\gls{rf} communication was not the main objective.     
 
@@ -464,13 +479,13 @@ nRF24L01P radio(MOSI, MISO, SCK, CSN, CE, IRQ);
 
 Once the object is declared, the code in Code \ref{code:nRF24L01_SETUP} is then used to set up the nRF24L01 so that it can be used correctly. 
 
-\begin{lstlisting}[language=C++,label=code:nRF24L01_SETUP,caption=nRF24L01 Set Up]
+\begin{lstlisting}[language=C++,label=code:nRF24L01_SETUP,caption=nRF24L01 Set Up Transmit Mode]
 radio.powerUp();
 radio.setTransferSize(TRANSFER_SIZE);
 radio.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
 radio.setRxAddress(NRF24L01_RX_ADDRESS);
 radio.setTxAddress(NRF24L01_TX_ADDRESS);
-radio.setReceiveMode();
+radio.setTransmitMode();
 radio.enable();
 \end{lstlisting}
 
@@ -480,11 +495,11 @@ Code \ref{code:nRF24L01_send_data} shows how the data is written to the nRF24L01
 radio.write(char *data, int pipe, int count);
 \end{lstlisting}
 
+The serial communication was conducted using custom transmission protocols, outlined in Appendix \ref{app:transmission_codes}. These were designed to be short, 5-bits, and easy to extract the data from on the other end. This system was used to make the transfer of  data to faster and efficient with hopefully minimal packet loss.
 
+\subsubsection{Buzzer API}\label{sec:buzzer_api}
 
-\subsubsection{Buzzer API}
-
-The buzzer used for this project is a standard piezo buzzer that required a PWM pin to drive at a given frequency. To make the buzzer audible and fit within the western standard of music notation, a class was written to to encapsulate the buzzer functionality, allowing the buzzer to be easily used. 
+The buzzer used for this project is a standard piezo buzzer that required a \gls{pwm} pin to drive at a given frequency. To make the buzzer audible and fit within the western standard of music notation, a class was written to to encapsulate the buzzer functionality, allowing the buzzer to be easily used. 
 
 This buzzer class was inspired by the University of Plymouth's buzzer class written for the Module Support Board. 
 
@@ -501,21 +516,281 @@ This class includes operator overloads such that using the buzzer is easy and in
 
 \subsubsection{Main Code}
 
+The main code on the controller board runs in two separate threads, one for monitoring the button and switch states, and one for monitoring the joysticks and extracting their relative positional data. 
 
+They three buttons and switch are all driven using interrupts. When the interrupts are triggered, the \gls{isr} raises a thread flag which wakes up the thread. The thread then handles this flag then going back into the waiting state where the thread is put to sleep and not scheduled until another event flag is triggered. 
+
+Being an \href{https://os.mbed.com/docs/mbed-os/v6.15/apis/i-o-apis.html}{analogue inputs}, the joysticks cannot be run using the same interrupt based methodology. The joysticks were run using a \href{https://os.mbed.com/docs/mbed-os/v6.15/apis/ticker.html}{ticker}. The ticker is set to create an interrupt every 200ms and runs the joystick ticker \gls{isr}. This wakes up the joystick thread, polls the joystick values, if required it sends the values of \gls{spi} to the nRF24L01 then puts the thread back to sleep until the next ticker interrupt.
+
+If the joystick values have not changed, the new joystick values get stored and then the thread goes back to sleep. This helps reduce power usage and \gls{rf} usage when unnecessary.
+
+\begin{lstlisting}[language=C++,label=code:joysitck_value,caption= Joystick Value to Serial Data to be Sent]
+newLeftPitchVal = abs(newLeftPitchVal);
+sprintf(tempThrottleChar, "%d", newLeftPitchVal);
+fwdLeftPitch[3] = tempThrottleChar[0];
+radio.write(fwdLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);  
+\end{lstlisting}
+
+Code \ref{code:joysitck_value} shows the method of tansfering the data from integer form into the char array that is required to send data over the nRF24L01 device. This is an example of how this library could have been improved for this project. If the nRF24L01 library was able to accept integers to be sent, the code on the controller could have been simpler and easier to understand. 
+
+Despite its complexity, the code for extracting the joystick values worked repeatable and did not cause any detectable false readings.
+                
 
 \subsection{Receiver}
 \subsubsection{Architecture}
+
+The Receiver is entirely multi-threaded. The decision was taken to use a multithreaded architecture due to the nature of the system being used; controlling multiple real time devices that, many of which do not need rapid periodic updating. A single threaded architecture was initially utilised during testing. This was found to be impractical as the number of inputs and outputs became unmanageable using rapid polling. Reading from the \gls{rf} module is a blocking operation. This would cause the program to halt when fetching and reading the data from the \gls{rf} module. This could cause updates to the motor speeds and other sensors to be missed, potentially causing delays to the real time system. 
+
+Because of this, the architecture was split into threads, listed in Table \ref{table:threads_for_reciever}. Each entry in the table is represented by a thread in the program that is initialised during start-up.
+
+\begin{table}[H]
+\centering
+\setlength{\arrayrulewidth}{1.5pt}
+\begin{tabular}{|p{0.4\linewidth}|p{0.4\linewidth}|}
+\hline
+\cellcolor{gray!40}Thread Name & \cellcolor{gray!40}Function \\ 
+\hline
+\cellcolor{gray!20}Left Motor Thread & \cellcolor{gray!20}Controls throttle Values of Left Motor\\
+\hline
+\cellcolor{gray!20}Right Motor Thread & \cellcolor{gray!20}Controls throttle Values of RIght Motor\\
+\hline
+\cellcolor{gray!20}Radio Thread & \cellcolor{gray!20}Used to handle incoming \gls{rf} Data\\
+\hline
+\cellcolor{gray!20}LED Thread & \cellcolor{gray!20}Used to change the LED status'\\
+\hline
+\cellcolor{gray!20}IR Thread & \cellcolor{gray!20}Used to handle interrupt from when litter collection basket is full\\
+\hline
+\cellcolor{gray!20}Input Thread & \cellcolor{gray!20}Used to handle inputs when flags raised\\
+\hline
+\cellcolor{gray!20}Battery 30 Percent Thread & \cellcolor{gray!20}Used to raise warning when battery is at 30 percent\\
+\hline
+\cellcolor{gray!20}Battery 15 Percent Thread & \cellcolor{gray!20}Used to raise warning when battery is at 15 percent\\
+\hline
+\end{tabular}
+\caption{Threads for Receiver}
+\label{table:threads_for_reciever}
+\end{table}
+
 \subsubsection{Serial Communications}
+
+The serial communication for this project was done over \gls{spi} using nRF24L01 modules to send data. An overview of the serial communication can be seen in §\ref{sec:serial_communication_1}.
+
+The main difference in serial communication on the receiver, is that it primarily uses receive mode. Therefore the setup for the \gls{rf} module is almost identical, except that it is initialised into receive mode. 
+
+\begin{lstlisting}[language=C++,label=code:nRF24L01_SETUP_receiver,caption=nRF24L01 Set Up Receive Mode]
+radio.powerUp();
+radio.setTransferSize(TRANSFER_SIZE);
+radio.setAirDataRate(NRF24L01P_DATARATE_2_MBPS);
+radio.setRxAddress(NRF24L01_RX_ADDRESS);
+radio.setTxAddress(NRF24L01_TX_ADDRESS);
+radio.setReceiveMode();
+radio.enable();
+\end{lstlisting} 
+
+The serial communication on the receiver board also used the transmission protocols, outlined in Appendix \ref{app:transmission_codes}. This allows the boards to communicate effectively.
+
+To handle the incoming transmission codes, a separate radio thread is used, as shown in Table \ref{table:threads_for_reciever}. This thread does not cause any external blocking behaviour to any other threads. This allows the system to remain real time. 
+
 \subsubsection{Buzzer API}
-\subsubsection{L2938N API}
-\subsubsection{BLDCM API}
+
+The buzzer \gls{api} used for the receiver is the same as used within the controller. This can be found at §\ref{sec:buzzer_api}.
+
+\subsubsection{L298N API}
+
+The \gls{dc} motors were driven using an off the shelf L298N motor controller. This required a simple \gls{api} to be written. This was to make the motors easier to control by abstracting functionality away from the user. 
+
+This class has been written such that it is thread safe. The object-orientated nature of the class would allow the class to be used on any Mbed project that utilises an L298N to drive \gls{dc} motors. 
+
+This \gls{api} uses four arguments, a motor A, a motor B, an enable, and a motor enabled. The motor enabled argument has a default value so it does not need to be used. If unused, the value will default to 0. This can be seen in Code \ref{code:L298N}.
+
+\begin{lstlisting}[language=C++,label=code:L298N,caption=L298N Class Constructor]
+#include "L298N.h"
+L298N DCMotor1(PinName motorA, PinName motorB, PinName enable, int motorEnabled = 0);
+\end{lstlisting} 
+
+Using this \gls{api}, the motor can be enabled, disabled, and the direction can be set and read. These methods can be seen in Code \ref{code:L298N_methods}.
+
+\begin{lstlisting}[language=C++,label=code:L298N_methods,caption=L298N Class Methods]
+    void setDirection(int direction);
+    void enableMotor();
+    void disableMotor();
+    int direction();
+\end{lstlisting}
+
+Given the nature of the motors being controller, basic \gls{dc} motors, the control was trivial. Despite this, abstracting this control made the motors easier to control within the main body of the code. 
+
+\subsubsection{ESC API}
+
+Unlike the brushed \gls{dc} motors, brushless motors require an \gls{esc} to operate. This requires more complex control to make the motor move. The \gls{esc}s require a \gls{pwm} signal that at 50Hz that varies between 1ms-2ms. This is similar to a servo control signal using a \gls{pwm} output \cite{PWM_control_of_an_ESC}. This class was inspired by the control system for servos. 
+
+This class has been written such that it is thread safe. The object-orientated nature of the class allows the class to be used on any Mbed project that utilises an \gls{esc} that requires a 50Hz signal with a duty cycle varying between 1ms-2ms. 
+
+The \gls{esc} \gls{api} uses  two arguments, the \gls{pwm} pin, and calibrate. The calibrate argument has a default value so this does not need to be used. If unused, the value will default to 0. This can be seen in Code \ref{code:ESC}.
+
+\begin{lstlisting}[language=C++,label=code:ESC,caption=ESC Class Constructor]
+#include "ESC.h"
+ESC brushlessMotor(PinName pin, int calibrate = 0);
+\end{lstlisting}
+
+Using this \gls{api} the motors can be set a certain speed, have the \gls{pwm} value altered, and the value of speed can be read. This can be seen in Code \ref{code:ESC_methods}.
+
+\begin{lstlisting}[language=C++,label=code:ESC_methods,caption=ESC Class Public Methods]
+void write(float speed);
+void setPWM(int PWMValue = DEFAULT_PWM_VALUE);
+float speed();
+\end{lstlisting}
+
+This \gls{api} also contains private members, these are used to connect the \gls{esc}, calibrate the \gls{esc}, and normalise the speed values. These can be seen in Code \ref{code:ESC_private_methods}.
+
+\begin{lstlisting}[language=C++,label=code:ESC_private_methods,caption=ESC Class Private Methods]
+float normalise(float speed)
+void connect();
+void calibrate();
+\end{lstlisting}
+
+The normalise method is used to ensure that a value between 0-1 is written the \gls{esc}. If the value was not between these values, the \gls{esc} may not behave as expected. 
+
+To connect the \gls{esc} the throttle value is set to its minimum value then held there until the \gls{esc} beeps. This can be a varying amount of time therefore 5s was chosen as this would be long enough for the \gls{esc} to connect. The calibration of the \gls{esc} is more complex. It requires the throttle value to be at its maximum value for 4s, then at it's minimum value for 4s. This allows the \gls{esc} to 'learn' the range of values that it is expecting as an input. This calibration should only be required for the first time the \gls{esc} and board are connected together, after this, the board remembers the previous values.
+
 \subsubsection{Main Code}
 
+The main code on the receiver board runs in eight threads. These have been outlined in Table \ref{table:threads_for_reciever}. The left and right motor threads, are for controlling the speed of the motors, the radio thread is for reading the serial data and either raising the appropriate flag for that action of performing an action dictated by the transmission codes. The LED thread is used for turning the LEDs on and off in a thread safe way that can be handled when the scheduler is available to, as these LEDs are less important than the functionality of the motors. The tother remaining four threads are all controlled by flags controlled by interrupts. This allows the inputs to be responsive whilst allowing the system to remain real time. 
+
+When the \gls{ir} sensors get triggered, the \gls{isr} is triggered raising a flag to alert the board that the collection basket is full. This activates the \gls{ir} thread which disables the \gls{ir} \gls{isr}s and triggers the buzzer periodically. 
+
+When the battery level is running low, the battery low input pins are pulled high. This triggers an \gls{isr} which periodically sounds the buzzer,. This alerts the user that the battery is running low.  
+
+Table \ref{table:inputs_main_code} shows the functionality of the buttons and switches on the receiver board. 
+
+\begin{table}[H]
+\centering
+\setlength{\arrayrulewidth}{1.5pt}
+\begin{tabular}{|p{0.4\linewidth}|p{0.4\linewidth}|}
+\hline
+\cellcolor{gray!40}Input Name & \cellcolor{gray!40}Function \\ 
+\hline
+\cellcolor{gray!20} Button 1 & \cellcolor{gray!20} Disable Alarms and deactivate \gls{ir} sensors\\
+\hline
+\cellcolor{gray!20} Button 2 & \cellcolor{gray!20} Litter basket emptied, Resets Sensors and Enables Buzzer\\
+\hline
+\cellcolor{gray!20} Switch 1 & \cellcolor{gray!20} Disable Motors\\
+\hline
+\cellcolor{gray!20} Switch 2& \cellcolor{gray!20} Enable Motors\\
+\hline
+\cellcolor{gray!20} Switch 3 & \cellcolor{gray!20} Not in use\\
+\hline
+\cellcolor{gray!20} Switch 4 & \cellcolor{gray!20} Not in use\\
+\hline
+\cellcolor{gray!20} Switch 5 & \cellcolor{gray!20} Not in use\\
+\hline
+\cellcolor{gray!20} Switch 6 & \cellcolor{gray!20} Not in use\\
+\hline
+\end{tabular}
+\caption{Functionality of Buttons and Switches in the Main Receiver Code }
+\label{table:inputs_main_code}
+\end{table}
+
+
 \section{Hardware Design}
+\subsection{Prototyping}
+
+The initial prototyping started during Phase 2 (§\ref{sec:phase_2}) of the project. The initial prototyping goals were discussed and clearly laid out before any work began. The primary object of the prototyping stage was to create a small scale model craft that fits into testing tank eg. a bath. After that, it would need to be controlled remotely using an \gls{rc} controller. The third aim of prototyping was to investigate how to make a conveyor system working and what the advantages and disadvantages of this system may be. The final aim was to create an approximately 1:1 scale cardboard prototype to do a variety of tests on. 
+
+\subsubsection{Small Scale Design}
+
+The small scale prototype design was made using milkshake bottles and 3D printed \gls{pla} parts. This design was christened the Milkshake Catamaran. The design for this can be seen in Figure \ref{fig:milkshake_catamaran}.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=.6\textwidth]{milkshake_catamaran}}
+\caption{Milkshake Catamaran Prototype}
+\label{fig:milkshake_catamaran}
+\end{figure}
+
+This design was tested for buoyancy and stability in the bath. Being a \gls{catamaran} design, the craft was extremely stable and well balanced. This was encouraging for the future developments of this project. 
+
+Once the base catamaran had been tested, \gls{rc} electronics were added. This enabled the craft to be controlled. This was used to test propulsion systems. The fully loaded \gls{catamaran} can be seen in Figure \ref{fig:milkshake_catamaran_mass}.   
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=.4\textwidth]{milkshake_catamaran_mass}}
+\caption{Milkshake Catamaran with \gls{rc} electronics}
+\label{fig:milkshake_catamaran_mass}
+\end{figure}
+
+From this testing it was discovered that the maximum capacity of this craft was about 670g. This was not surprising as each of the milkshake bottles was 335ml, so the total mass of displaced water was 670g. Given that the weight of the craft including the basic electronics system was 627g, there was very additional capacity for the craft to carry any litter.
+
+From this discovery, it was decided that the scale of this craft would need be larger to accommodate a heavier electronics system, batteries, and the additional overhead to carry any litter that it may collect.
+
+\subsubsection{Conveyor Research}
+
+Early in the project it was decided that a conveyor would be the preferred method of collecting litter. A conveyor belt would provide a suitable level of challenge whilst adding some additional novelty to the design. A conveyor belt would also allow the collected litter to be removed from the water sooner and removing the litter from the craft will not require the whole craft to be removed from the body of water it is operating in. 
+
+One of the biggest issues when looking at the conveyor was the material of the belt. This was vital to get correct in order to create an effective conveyor belt. Table \ref{table:conveyor_materials} shows the pros and cons of each of the considered materials. 
+
+\begin{table}[H]
+\centering
+\setlength{\arrayrulewidth}{1.5pt}
+\begin{tabular}{|p{0.1\linewidth}|p{0.4\linewidth}|p{0.4\linewidth}|}
+\hline
+\cellcolor{gray!40} Material & \cellcolor{gray!40}Pros & \cellcolor{gray!40} Cons \\ 
+\hline
+\cellcolor{gray!20} Linoleum & \cellcolor{gray!20} \tabitem Waterproof & \cellcolor{gray!20} \tabitem Heavy\\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Cheap & \cellcolor{gray!20} \tabitem Coefficient of friction decreases when wet \\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Moderately Flexible & \cellcolor{gray!20} \tabitem Expensive \\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Non-reactive & \cellcolor{gray!20} \\
+\hline
+\cellcolor{gray!20} Cargo Netting & \cellcolor{gray!20} \tabitem Strong & \cellcolor{gray!20} \tabitem Litter may get caught\\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Waterproof & \cellcolor{gray!20} \tabitem Hard to get into a strip \\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Light & \cellcolor{gray!20} \tabitem Easy to get caught in mechanism \\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Cheap & \cellcolor{gray!20} \\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Non-reactive & \cellcolor{gray!20} \\
+\hline
+\cellcolor{gray!20} \gls{rollmat} & \cellcolor{gray!20} \tabitem Waterproof & \cellcolor{gray!20} \tabitem Stretches and Deforms\\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Cheap & \cellcolor{gray!20} \\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Lightweight & \cellcolor{gray!20} \\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Easy to source & \cellcolor{gray!20} \\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Non-reactive & \cellcolor{gray!20} \\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Very Flexible & \cellcolor{gray!20} \\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Coefficient of friction increases when wet & \cellcolor{gray!20} \\
+\hline
+\end{tabular}
+\caption{Material Considerations for Conveyor Belt}
+\label{table:conveyor_materials}
+\end{table} 
+
+It was ultimately decided that \gls{rollmat} would be used for the conveyor belt. It was overall the best material for the job. it had all the best aspects of the other two evaluated materials but without their negatives. 
+
+\Gls{rollmat} is easy to machine. Adding parts to the conveyor belt was as easy as poking a hole in the material with a round file and pushing through a bolt. It was a mixture of this along with the points highlighted in Table \ref{table:conveyor_materials} that made the decision to use this material such an obvious one.  
+
+\subsubsection{1:1 Scale Prototype}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=.5\textwidth]{floating_carboard}}
+\caption{1:1 Scale Cardboard Prototype Hull}
+\label{fig:floating_carboard}
+\end{figure}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=.5\textwidth]{floating_carboard_weighted_down}}
+\caption{1:1 Scale Cardboard Prototype Hull in Water with Additional Load}
+\label{fig:floating_carboard_weighted_down}
+\end{figure}
+
+
+\subsection{CAD Design}
+\subsubsection{Main Craft}
+\subsubsection{Conveyor Belt}
+\subsection{PCB Design}
+\subsubsection{Controller PCB}
+\subsubsection{Receiver PCB}
+
 \section{Testing}
+\subsection{Software Testing}
+\subsection{Hardware Testing}
+
 \section{Assembly}
 \section{Evaluation}
 \section{Further Developments}
+\section{Sustainability and Ethics}
 \section{Conclusion}
 
 \newpage
@@ -573,5 +848,41 @@ Ref & Requirement                                                               
 \hline
 \end{tabular}
 \end{table}
+
+\section{Transmission Codes}\label{app:transmission_codes}
+{\parindent0pt
+The 1 bit denotes the type of device.\\
+The 2 bit denotes the component in that device type.\\
+The 3 and 4 bits denote the specific device instruction.\\
+}
+\begin{itemize}
+\item 1xxx - POTs
+    \begin{itemize}
+        \item x1xx - Left Pitch
+        \item x2xx - Left Roll
+	    \item x3xx - Right Pitch
+		\item x4xx - Right Roll
+		\begin{itemize}
+			\item xx1x - Forwards
+			\item xx0x - Reverse
+			\begin{itemize}
+				\item xxx0 - Value of throttle
+			\end{itemize}
+		\end{itemize}
+     \end{itemize}
+\item 2xxx - Buttons
+	\begin{itemize}
+		\item x1xx - Button 1
+		\item x2xx - Button 2
+		\item x3xx - Button 3
+	\end{itemize}
+\item 3xxx - Switches
+	\begin{itemize}
+		\item xxx1 - Switch On
+		\item xxx0 - Switch Off
+	\end{itemize}
+\end{itemize}
+
+
 
 \end{document}

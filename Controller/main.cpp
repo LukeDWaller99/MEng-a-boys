@@ -44,6 +44,8 @@ DigitalOut led_1(LED_1);
 AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL);   
 Buzzer buzzer(BUZZER);
 
+
+
     char rxData[TRANSFER_SIZE] = {RX_DATA};
     char txData[TRANSFER_SIZE] = {TX_DATA};
 
@@ -78,9 +80,10 @@ char txSW1[TRANSFER_SIZE] = {SW1_ON};
 
 int txDataCnt = TRANSFER_SIZE, rxDataCnt = 0;
 
-Thread ButtonThread, PotThread, RadioThread;
+Thread ButtonThread, PotThread;
 
 Mutex PotLock;
+Ticker joystickTicker;
 
 float potVals[6], oldPotVals[6];
 
@@ -95,6 +98,7 @@ void Btn_3IRQ();
 void Btn_4IRQ();
 void SW_1RisingIRQ();
 void SW_1FallingIRQ();
+void joystickIRQ();
 
 // create an array of outputs for the leds for the output
 int main() {
@@ -119,21 +123,18 @@ int main() {
 
     nRF24L01.enable();
 
-    // printf("%s\n", txData);
-    // nRF24L01.write(txData, 0 , TRANSFER_SIZE);
-
-    switchState = SW_1 == 1 ? 1 : 0;
-    led_1 = switchState;
+    led_1 = SW_1 == 1 ? 1 : 0;
 
     buzzer.chime();
 
     PotThread.start(PotMethod);
     ButtonThread.start(ButtonThreadMethod);
     Btn_1.rise(Btn_1IRQ);
-    // Btn_2.rise(Btn_2IRQ);
+    Btn_2.rise(Btn_2IRQ);
     Btn_3.rise(Btn_3IRQ);
     SW_1.rise(SW_1RisingIRQ);
     SW_1.fall(SW_1FallingIRQ);
+    joystickTicker.attach(joystickIRQ, 200ms);
 
 }
 
@@ -159,18 +160,18 @@ void PotMethod(){
 
     while(true){
 
+        ThisThread::flags_wait_any(0x7fffffff, true);
+
         PotLock.trylock_for(10ms);
         potVals[0] = ((L_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
-        // potVals[1] = ((L_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
+        potVals[1] = ((L_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
         potVals[2] = ((R_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
-        // potVals[3] = ((R_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
+        potVals[3] = ((R_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
 
         newLeftPitchVal     = round(potVals[0]);
-        // printf(" New left Pitch Value : %d\n",newLeftPitchVal);
-        // newLeftRollVal      = round(potVals[1]);
+        newLeftRollVal      = round(potVals[1]);
         newRightPitchVal    = round(potVals[2]);
-        // printf(" New right Pitch Value : %d\n",newRightPitchVal);
-        // newRightRollVal     = round(potVals[3]);
+        newRightRollVal     = round(potVals[3]);
 
         // for left pitch values
         if (oldLeftPitchVal != newLeftPitchVal) {
@@ -178,45 +179,45 @@ void PotMethod(){
                 newLeftPitchVal = abs(newLeftPitchVal);
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
                 tx.fwdLeftPitch[3] = tempThrottleChar[0];
-                // nRF24L01.write(tx.fwdLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);
+                nRF24L01.write(tx.fwdLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Left Pitch: %s\n", tx.fwdLeftPitch);
             } else if(newLeftPitchVal < PITCH_LOWER_LIMIT){ // reverse 
                 newLeftPitchVal = abs(newLeftPitchVal);
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
                 tx.revLeftPitch[3] = tempThrottleChar[0];
-                // nRF24L01.write(tx.revLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);
+                nRF24L01.write(tx.revLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Left Pitch: %s\n", tx.revLeftPitch);
             } else { // equal to zero
                 newLeftPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
                 tx.fwdLeftPitch[3] = tempThrottleChar[0];
-                // nRF24L01.write(tx.fwdLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);
+                nRF24L01.write(tx.fwdLeftPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Left Pitch: %s\n", tx.fwdLeftPitch);
             }
         }
 
-        // // for left roll values
-        // if (oldLeftRollVal != newLeftRollVal) {
-        //     if(newLeftRollVal > ROLL_UPPER_LIMIT){ // forwards
-        //         newLeftRollVal = abs(newLeftRollVal);
-        //         sprintf(tempThrottleChar, "%d", newLeftRollVal);
-        //         tx.fwdLeftRoll[3] = tempThrottleChar[0];
-        //         nRF24L01.write(tx.fwdLeftRoll, DEFAULT_PIPE, TRANSFER_SIZE);
-        //         printf("Left Roll: %s\n", tx.fwdLeftRoll);
-        //     } else if(newLeftRollVal < ROLL_LOWER_LIMIT){ // reverse 
-        //         newLeftRollVal = abs(newLeftRollVal);
-        //         sprintf(tempThrottleChar, "%d", newLeftRollVal);
-        //         tx.revLeftRoll[3] = tempThrottleChar[0];
-        //         nRF24L01.write(tx.revLeftRoll, DEFAULT_PIPE, TRANSFER_SIZE);
-        //         printf("Left Roll: %s\n", tx.revLeftRoll);
-        //     } else { // equal to zero
-        //         newLeftPitchVal = 0;
-        //         sprintf(tempThrottleChar, "%d", newLeftRollVal);
-        //         tx.fwdLeftRoll[3] = tempThrottleChar[0];
-        //         nRF24L01.write(tx.fwdLeftRoll, DEFAULT_PIPE, TRANSFER_SIZE);
-        //         printf("Left Roll: %s\n", tx.fwdLeftRoll);
-        //     }
-        // }
+        // for left roll values
+        if (oldLeftRollVal != newLeftRollVal) {
+            if(newLeftRollVal > ROLL_UPPER_LIMIT){ // forwards
+                newLeftRollVal = abs(newLeftRollVal);
+                sprintf(tempThrottleChar, "%d", newLeftRollVal);
+                tx.fwdLeftRoll[3] = tempThrottleChar[0];
+                nRF24L01.write(tx.fwdLeftRoll, DEFAULT_PIPE, TRANSFER_SIZE);
+                printf("Left Roll: %s\n", tx.fwdLeftRoll);
+            } else if(newLeftRollVal < ROLL_LOWER_LIMIT){ // reverse 
+                newLeftRollVal = abs(newLeftRollVal);
+                sprintf(tempThrottleChar, "%d", newLeftRollVal);
+                tx.revLeftRoll[3] = tempThrottleChar[0];
+                nRF24L01.write(tx.revLeftRoll, DEFAULT_PIPE, TRANSFER_SIZE);
+                printf("Left Roll: %s\n", tx.revLeftRoll);
+            } else { // equal to zero
+                newLeftPitchVal = 0;
+                sprintf(tempThrottleChar, "%d", newLeftRollVal);
+                tx.fwdLeftRoll[3] = tempThrottleChar[0];
+                nRF24L01.write(tx.fwdLeftRoll, DEFAULT_PIPE, TRANSFER_SIZE);
+                printf("Left Roll: %s\n", tx.fwdLeftRoll);
+            }
+        }
 
         // for right pitch values
         if (oldRightPitchVal != newRightPitchVal) {
@@ -224,53 +225,52 @@ void PotMethod(){
                 newRightPitchVal = abs(newRightPitchVal);
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
                 tx.fwdRightPitch[3] = tempThrottleChar[0];
-                // nRF24L01.write(tx.fwdRightPitch, DEFAULT_PIPE, TRANSFER_SIZE);
+                nRF24L01.write(tx.fwdRightPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Right Pitch: %s\n", tx.fwdRightPitch);
             } else if(newRightPitchVal < PITCH_LOWER_LIMIT){ // reverse 
                 newRightPitchVal = abs(newRightPitchVal);
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
                 tx.revRightPitch[3] = tempThrottleChar[0];
-                // nRF24L01.write(tx.revRightPitch, DEFAULT_PIPE, TRANSFER_SIZE);
+                nRF24L01.write(tx.revRightPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Right Pitch: %s\n", tx.revRightPitch);
             } else { // equal to zero
                 newRightPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
                 tx.fwdRightPitch[3] = tempThrottleChar[0];
-                // nRF24L01.write(tx.fwdRightPitch, DEFAULT_PIPE, TRANSFER_SIZE);
+                nRF24L01.write(tx.fwdRightPitch, DEFAULT_PIPE, TRANSFER_SIZE);
                 printf("Right Pitch: %s\n", tx.fwdRightPitch);
             }
         }
 
-        // // for right roll values
-        // if (oldRightRollVal != newRightRollVal) {
-        //     if(newRightRollVal > ROLL_UPPER_LIMIT){ // forwards
-        //         newRightRollVal = abs(newRightRollVal);
-        //         sprintf(tempThrottleChar, "%d", newRightRollVal);
-        //         tx.fwdRightRoll[3] = tempThrottleChar[0];
-        //         // nRF24L01.write(tx.fwdRightRoll, 0, TRANSFER_SIZE);
-        //         printf("Right Roll: %s\n", tx.fwdRightRoll);
-        //     } else if(newRightRollVal < ROLL_LOWER_LIMIT){ // reverse 
-        //         newRightRollVal = abs(newLeftRollVal);
-        //         sprintf(tempThrottleChar, "%d", newRightRollVal);
-        //         tx.revRightRoll[3] = tempThrottleChar[0];
-        //         // nRF24L01.write(tx.revRightRoll, 0, TRANSFER_SIZE);
-        //         printf("Right Roll: %s\n", tx.revRightRoll);
-        //     } else { // equal to zero
-        //         newRightPitchVal = 0;
-        //         sprintf(tempThrottleChar, "%d", newRightRollVal);
-        //         tx.fwdRightRoll[3] = tempThrottleChar[0];
-        //         // nRF24L01.write(tx.fwdRightRoll, 0, TRANSFER_SIZE);
-        //         printf("Right Roll: %s\n", tx.fwdRightRoll);
-        //     }
-        // }
+        // for right roll values
+        if (oldRightRollVal != newRightRollVal) {
+            if(newRightRollVal > ROLL_UPPER_LIMIT){ // forwards
+                newRightRollVal = abs(newRightRollVal);
+                sprintf(tempThrottleChar, "%d", newRightRollVal);
+                tx.fwdRightRoll[3] = tempThrottleChar[0];
+                nRF24L01.write(tx.fwdRightRoll, 0, TRANSFER_SIZE);
+                printf("Right Roll: %s\n", tx.fwdRightRoll);
+            } else if(newRightRollVal < ROLL_LOWER_LIMIT){ // reverse 
+                newRightRollVal = abs(newLeftRollVal);
+                sprintf(tempThrottleChar, "%d", newRightRollVal);
+                tx.revRightRoll[3] = tempThrottleChar[0];
+                nRF24L01.write(tx.revRightRoll, 0, TRANSFER_SIZE);
+                printf("Right Roll: %s\n", tx.revRightRoll);
+            } else { // equal to zero
+                newRightPitchVal = 0;
+                sprintf(tempThrottleChar, "%d", newRightRollVal);
+                tx.fwdRightRoll[3] = tempThrottleChar[0];
+                nRF24L01.write(tx.fwdRightRoll, 0, TRANSFER_SIZE);
+                printf("Right Roll: %s\n", tx.fwdRightRoll);
+            }
+        }
 
         oldLeftPitchVal = newLeftPitchVal;
-        // oldLeftRollVal = newLeftRollVal;
+        oldLeftRollVal = newLeftRollVal;
         oldRightPitchVal = newRightPitchVal;
-        // oldRightRollVal = newRightRollVal;
+        oldRightRollVal = newRightRollVal;
 
         PotLock.unlock();
-        ThisThread::sleep_for(100ms);
     }
 }
 
@@ -289,30 +289,30 @@ void ButtonThreadMethod(){
         case 1:
             printf("Button 1 pressed\n");
             printf("%s\n", tx.BTN1_PRESSED);
-            // nRF24L01.write(tx.BTN1_PRESSED, DEFAULT_PIPE, TRANSFER_SIZE);
+            nRF24L01.write(tx.BTN1_PRESSED, DEFAULT_PIPE, TRANSFER_SIZE);
             break;
         case 2: 
             printf("Button 2 pressed\n");
             printf("%s\n", tx.BTN2_PRESSED);
-            // nRF24L01.write(tx.BTN2_PRESSED, DEFAULT_PIPE, TRANSFER_SIZE);
+            nRF24L01.write(tx.BTN2_PRESSED, DEFAULT_PIPE, TRANSFER_SIZE);
             break;
         case 4:
             printf("Button 3 pressed\n");
             printf("%s\n", tx.BTN3_PRESSED);
-            // nRF24L01.write(tx.BTN3_PRESSED, DEFAULT_PIPE, TRANSFER_SIZE);
+            nRF24L01.write(tx.BTN3_PRESSED, DEFAULT_PIPE, TRANSFER_SIZE);
             break;
         case 8:
             printf("Switch 1 ON\n");
             led_1 = 1;
             txSW1[3] = '1';
-            // nRF24L01.write(txSW1, DEFAULT_PIPE, TRANSFER_SIZE);
+            nRF24L01.write(txSW1, DEFAULT_PIPE, TRANSFER_SIZE);
             printf("Switch 1: %s\n", txSW1);
             break;
         case 16:
             printf("Switch 1 OFF\n");
             led_1  = 0;
             txSW1[3] = '0';
-            // nRF24L01.write(txSW1, DEFAULT_PIPE, TRANSFER_SIZE);
+            nRF24L01.write(txSW1, DEFAULT_PIPE, TRANSFER_SIZE);
             printf("Switch 1: %s\n", txSW1);
             break;
         default:
@@ -372,4 +372,8 @@ void SW_1FallingIRQ(){
     switchState = 1;
     SW_1.rise(SW_1RisingIRQ);
     SW_1.fall(SW_1FallingIRQ);
+}
+
+void joystickIRQ(){
+    PotThread.flags_set(1);
 }

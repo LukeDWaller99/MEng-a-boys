@@ -1,55 +1,33 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2636
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\fmodern\fcharset0 Courier;\f2\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;
-\f3\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red107\green0\blue1;\red15\green112\blue1;
-\red0\green0\blue192;\red35\green38\blue42;\red244\green244\blue244;}
-{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c50196\c0\c0;\cssrgb\c0\c50196\c0;
-\cssrgb\c0\c0\c80000;\cssrgb\c18431\c20000\c21569;\cssrgb\c96471\c96471\c96471;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11480\viewh17440\viewkind0
-\deftab720
-\pard\pardeftab720\partightenfactor0
 
-\f0\fs24 \cf0 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 \
+Transmission Codes 
+The 1 bit denotes the type of device.
+The 2 bit denotes the component in that device type.
+The 3 and 4 bits denote the specific device instruction.
+\begin{itemize}
+\item 1xxxPOTs
+    \begin{itemize}
+        \item x1xx - Left Pitch
+        \item x2xx - Left Roll
+	    \item x3xx - Right Pitch
+		\item x4xx - Right Roll
+		\begin{itemize}
+			\item xx1x - Forwards
+			\item xx0x - Reverse
+			\begin{itemize}
+				\item xxx0 - Value of throttle
+			\end{itemize}
+		\end{itemize}
+     \end{itemize}
+\item 2xxx - Buttons
+	\begin{itemize}
+		\item x1xx - Button 1
+		\item x2xx - Button 2
+		\item x3xx - Button 3
+	\end{itemize}
+\item 3xxx - Switches
+	\begin{itemize}
+		\item xxx1 - Switch On
+		\item xxx0 - Switch Off
+	\end{itemize}
+\end{itemize}
 
-\f1\fs26 \cf3 \strokec3 \\renewcommand\cf0 \strokec2 \{\cf3 \strokec3 \\labelitemii\cf0 \strokec2 \}\{\cf4 \strokec4 $\\star$\cf0 \strokec2 \}\
-\
-Transmission Codes \
-M\
-The 1\cf3 \strokec3 \\textsuperscript\cf0 \strokec2 \{\ul st\ulnone \} bit denotes the type of device.\
-The 2\cf3 \strokec3 \\textsuperscript\cf0 \strokec2 \{\ul nd\ulnone \} bit denotes the component in that device type.\
-The 3\cf3 \strokec3 \\textsuperscript\cf0 \strokec2 \{\ul rd\ulnone \} and 4\cf3 \strokec3 \\textsuperscript\cf0 \strokec2 \{\ul th\ulnone \} bits denote the specific device instruction.\
-\
-\cf5 \strokec5 \\begin\cf0 \strokec2 \{itemize\}\
-\cf3 \strokec3 \\item\cf0 \strokec2  \ul 1xxx\ulnone  - \ul POTs\ulnone \
-     \cf5 \strokec5 \\begin\cf0 \strokec2 \{itemize\} \
-        \cf3 \strokec3 \\item\cf0 \strokec2  \ul x1xx\ulnone  - Left Pitch\
-        \cf3 \strokec3 \\item\cf0 \strokec2  \ul x2xx\ulnone  - Left Roll\
-	   \cf3 \strokec3 \\item\cf0 \strokec2  \ul x3xx\ulnone  - Right Pitch\
-		\cf3 \strokec3 \\item\cf0 \strokec2  \ul x4xx\ulnone  - Right Roll\
-		\cf5 \strokec5 \\begin\cf0 \strokec2 \{itemize\}\
-			\cf3 \strokec3 \\item\cf0 \strokec2  \ul xx1x\ulnone  - Forwards\
-			\cf3 \strokec3 \\item\cf0 \strokec2  \ul xx0x\ulnone  - Reverse\
-			\cf5 \strokec5 \\begin\cf0 \strokec2 \{itemize\}\
-				\cf3 \strokec3 \\item\cf0 \strokec2  \ul xxx0\ulnone  - Value of throttle\
-			\cf5 \strokec5 \\end\cf0 \strokec2 \{itemize\}\
-		\cf5 \strokec5 \\end\cf0 \strokec2 \{itemize\}\
-     \cf5 \strokec5 \\end\cf0 \strokec2 \{itemize\}\
-\cf3 \strokec3 \\item\cf0 \strokec2  \ul 2xxx\ulnone  - Buttons\
-	\cf5 \strokec5 \\begin\cf0 \strokec2 \{itemize\}\
-		\cf3 \strokec3 \\item\cf0 \strokec2  \ul x1xx\ulnone  - Button 1\
-		\cf3 \strokec3 \\item\cf0 \strokec2  \ul x2xx\ulnone  - Button 2\
-		\cf3 \strokec3 \\item\cf0 \strokec2  \ul x3xx\ulnone  - Button 3\
-	\cf5 \strokec5 \\end\cf0 \strokec2 \{itemize\}\
-\cf3 \strokec3 \\item\cf0 \strokec2  \ul 3xxx\ulnone  - Switches\
-	\cf5 \strokec5 \\begin\cf0 \strokec2 \{itemize\}\
-		\cf3 \strokec3 \\item\cf0 \strokec2  \ul xxx1\ulnone  - Switch On\
-		\cf3 \strokec3 \\item\cf0 \strokec2  \ul xxx0\ulnone  - Switch Off\
-	\cf5 \strokec5 \\end\cf0 \strokec2 \{itemize\}\
-\cf5 \strokec5 \\end\cf0 \strokec2 \{itemize\}\
-\pard\pardeftab720\partightenfactor0
-
-\f2 \cf6 \cb7 \outl0\strokewidth0 \
-
-\f3\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
-}

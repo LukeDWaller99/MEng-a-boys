@@ -23,12 +23,12 @@ public:
 
     /** Create an L293D object connected to specific pins
      *
-     * @param pin1 DigitalOut pin for forwards motor operation
-     * @param pin2 DigitalOut pin for reverse motor operation
+     * @param motorA DigitalOut pin for forwards motor operation
+     * @param motorB DigitalOut pin for reverse motor operation
      * @param enable DigitalOut to enable and disable motor
      * @param motorEnabled int to set intial state of the motor
      */
-    L298N(PinName pin1, PinName pin2, PinName enable, int motorEnabled = 0);
+    L298N(PinName motorA, PinName motorB, PinName enable, int motorEnabled = 0);
 
     /** Sets direction of motor
      *

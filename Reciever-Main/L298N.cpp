@@ -1,6 +1,6 @@
 #include "L298N.h"
 
-L298N::L298N(PinName pin1, PinName pin2, PinName enable, int motorEnabled) : _motorA(pin1), _motorB(pin2), _enable(enable){
+L298N::L298N(PinName motorA, PinName motorB, PinName enable, int motorEnabled) : _motorA(motorA), _motorB(motorB), _enable(enable){
     _enable = motorEnabled;
     setDirection(0);
 }
