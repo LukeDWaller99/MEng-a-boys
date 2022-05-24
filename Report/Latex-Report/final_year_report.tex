@@ -23,6 +23,7 @@
 \usepackage{color}
 \usepackage{booktabs}% http://ctan.org/pkg/booktabs
 \newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\usepackage{subfigure}
 
 \definecolor{customgreen}{rgb}{0,0.6,0}
 \definecolor{customgray}{rgb}{0.5,0.5,0.5}
@@ -718,7 +719,60 @@ Once the base catamaran had been tested, \gls{rc} electronics were added. This e
 
 From this testing it was discovered that the maximum capacity of this craft was about 670g. This was not surprising as each of the milkshake bottles was 335ml, so the total mass of displaced water was 670g. Given that the weight of the craft including the basic electronics system was 627g, there was very additional capacity for the craft to carry any litter.
 
-From this discovery, it was decided that the scale of this craft would need be larger to accommodate a heavier electronics system, batteries, and the additional overhead to carry any litter that it may collect.
+From this discovery, it was decided that the scale of this craft would need be larger to accommodate a heavier electronics system, batteries, and the additional overhead to carry any litter that it may collect. 
+
+\subsubsection{1:1 Scale Prototype}
+
+Once the small scale prototype was completed, it was clear that a larger prototype was required. This would allow for an approximate capacity to be calculated as well as to gain a sense of scale for the craft. 
+
+The prototype was made primarily of cardboard and was held together with duct tape. This helped get a rough estimation of size and scale to be used during the \gls{cad} stage of the project. The 1:1 scale prototype can be seen in Figure \ref{fig:floating_carboard}.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=.5\textwidth]{floating_carboard}}
+\caption{1:1 Scale Cardboard Prototype Hull}
+\label{fig:floating_carboard}
+\end{figure}
+
+Once the prototype was constructed, it was then tested in the water at Plymbridge Woods. This area was used as it was a calm, inland body of freshwater that was easy to get to. Although not very heavy, the craft was large and so getting somewhere that didn't require it to be carried large distances was preferable. 
+
+The hull of the craft was waterproofed by attaching waterproof \gls{oxo-bag} plastic bags to the outside of the hull. Although not perfectly bio-degradable, they are much better than the standard \gls{lldpe} bag that are typically used. After this testing was completed, the bag were disposed of in the appropriate manner, as to not increase pollution rates. Figure \ref{fig:floating_carboard_weighted_down} shows the craft in the water.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=.5\textwidth]{floating_carboard_weighted_down}}
+\caption{1:1 Scale Cardboard Prototype Hull in Water with Additional Load}
+\label{fig:floating_carboard_weighted_down}
+\end{figure}
+
+Upon testing, the craft was able to hold at least 15Kg of additional load. The craft was not tested to it's limits because it was made of cardboard and held together with duct tape. Having calculated the volumetric displacement of the hulls, using the cross sectional area multiplied by the length of each of the hull, it was estimated that the approximate buoyancy of this craft was about 40Kg. This was much larger than the tested load that was used. 
+
+After testing the cardboard prototype, the material for the construction of the shell of the main craft. Table \ref{table:materials_analysis} shows the pros and cons of each of the considered materials.  
+
+\begin{table}[H]
+\centering
+\setlength{\arrayrulewidth}{1.5pt}
+\begin{tabular}{|p{0.12\linewidth}|p{0.4\linewidth}|p{0.4\linewidth}|}
+\hline
+\cellcolor{gray!40} Material & \cellcolor{gray!40}Pros & \cellcolor{gray!40} Cons \\ 
+\hline
+\cellcolor{gray!20} Aluminium & \cellcolor{gray!20} \tabitem Strong & \cellcolor{gray!20} \tabitem Expensive\\
+\cellcolor{gray!20} & \cellcolor{gray!20} \tabitem Non-corrosive & \cellcolor{gray!20}  \tabitem Difficult to machine by hand \\
+\cellcolor{gray!20} & \cellcolor{gray!20}  & \cellcolor{gray!20}  \tabitem Heavy \\
+\hline
+\cellcolor{gray!20} Acrylic & \cellcolor{gray!20} \tabitem Light & \cellcolor{gray!20} \tabitem Brittle\\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Easy to machine by hand & \cellcolor{gray!20} \tabitem Not hard wearing \\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Non-corrosive & \cellcolor{gray!20} \tabitem Very Flexible\\
+\hline
+\cellcolor{gray!20} \gls{dibond} & \cellcolor{gray!20} \tabitem Strong & \cellcolor{gray!20} \tabitem Relatively Expensive \\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Lightweight  & \cellcolor{gray!20} \\
+\cellcolor{gray!20}  & \cellcolor{gray!20} \tabitem Easy to machine by hand & \cellcolor{gray!20} \\
+\cellcolor{gray!20}  & \cellcolor{gray!20}  \tabitem Non-corrosive & \cellcolor{gray!20} \\
+\hline
+\end{tabular}
+\caption{Material Considerations for Conveyor Belt}
+\label{table:conveyor_materials}
+\end{table} 
+
+Ultimately \gls{dibond} was chosen for this project as it had all of the positive attributes of the other two materials, without any of the perceived negatives. The main drawback to using the material was the cost. Given that the \gls{dibond} was reused material, cost was not an important factor in the decision making process. 
 
 \subsubsection{Conveyor Research}
 
@@ -759,29 +813,121 @@ One of the biggest issues when looking at the conveyor was the material of the b
 
 It was ultimately decided that \gls{rollmat} would be used for the conveyor belt. It was overall the best material for the job. it had all the best aspects of the other two evaluated materials but without their negatives. 
 
-\Gls{rollmat} is easy to machine. Adding parts to the conveyor belt was as easy as poking a hole in the material with a round file and pushing through a bolt. It was a mixture of this along with the points highlighted in Table \ref{table:conveyor_materials} that made the decision to use this material such an obvious one.  
-
-\subsubsection{1:1 Scale Prototype}
-
-\begin{figure}[H]
-\centerline{\includegraphics[width=.5\textwidth]{floating_carboard}}
-\caption{1:1 Scale Cardboard Prototype Hull}
-\label{fig:floating_carboard}
-\end{figure}
-
-\begin{figure}[H]
-\centerline{\includegraphics[width=.5\textwidth]{floating_carboard_weighted_down}}
-\caption{1:1 Scale Cardboard Prototype Hull in Water with Additional Load}
-\label{fig:floating_carboard_weighted_down}
-\end{figure}
+\Gls{rollmat} is easy to machine. Adding parts to the conveyor belt was as easy as poking a hole in the material with a round file and pushing through a bolt. It was a mixture of this along with the points highlighted in Table \ref{table:conveyor_materials} that made the decision to use this material such an obvious one. 
 
 
 \subsection{CAD Design}
-\subsubsection{Main Craft}
-\subsubsection{Conveyor Belt}
+
+The majority of this project was designed in \gls{f360}. The decision to use \gls{f360} was  make primarily as it was the \gls{cad} package that was used by the university. This allowed access to features that would not be available to non-premium or non-students members. As it was the \gls{cad} package of choice from the university it was already well known and any design levels issues could be sorted quickly and easily. 
+
+The design for \gls{orca} was split into two sections, the main craft assembly and the conveyor assembly. This have been outlined in §\ref{sec:main_craft_cad} and §\ref{sec:conveyor_cad} respectively.
+
+\subsubsection{Main Craft}\label{sec:main_craft_cad}
+
+The main craft was designed using the measurements from the prototype craft. The prototype craft was a good size and shape, it was stable, and it could carry a large capacity of litter without sinking. These were vitally important when evaluating the size that the craft had to be. 
+
+One of the major things to be considered when designing hardware of this size is how it will be constructed, especially with non-ideal working conditions such using the pavement outside.  This was one of the driving thoughts when designing this craft. The other was how to maximise the buoyancy of the craft and how to keep the overall weight down so that it would float. 
+
+It was quickly decided in the design process that the exterior panels would be made out of \gls{dibond} and that the floats would be made out of fibre glass and expanding foam. This was decided so that the floats of the craft would be waterproof and tough. The \gls{dibond} was chosen because it is strong, slightly flexible, and weatherproof. 
+
+Accuracy of measurements for this design were important to be kept sympathetic and not overly precise. This is because all of the exterior panels, base panels, and floats were created by hand. If the measurements were too precise ($<1mm$) which is possible in \gls{f360}, the craft would quickly become very difficult to construct as these slight lack of tolerances add up across the design.
+
+The supporting struts, filter holders, and conveyor holders were decided to be 3D printed. This made sense as they were complex shapes that needed to line up accurately. To attach the panels to the struts it was decided that \gls{rivnut}s would be used. 
+
+Overall the \gls{cad} file contained more than 50 different components with about half of these being planned to be 3D printed. The finalised design for the craft can be seen in Figure \ref{fig:finalised_base_design}. 
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=.4 \textwidth]{finalised_base_design}}
+\caption{\gls{cad} for the Main Craft}
+\label{fig:finalised_base_design}
+\end{figure}
+
+\subsubsection{Conveyor Belt}\label{sec:conveyor_cad}
+
+Once the design of the main craft was completed, the design for the conveyor belt could begin. The conveyor was more complex to design than the main craft. THe majority of the parts on the conveyor are planned to be 3D printed. It needed to fit within the space left on the front of the craft, this limited the width the conveyor could be. 
+
+As the majority of the parts for the conveyor were going to be 3D printed, the tolerances on the parts could be tighter than those on the main craft. This precision was important to maintain as it notoriously difficult to keep conveyor belts tracking straight.
+
+The important parts of the design were to keep it lightweight and simplistic. The top plate of the conveyor is made from \gls{dibond}, the same material as the body panels for this craft. 
+
+For the main struts of the conveyor, 2020 aluminium extrusion was used, that allowed for minor adjustments to tighten the belt and keep it running true. Designing in these tolerances and features was tricky.  
+
+Overall the conveyor belt was designed to be light and strong and able to function effectively without getting caught and snagging. This was the most difficult sub assembly to design and thus took the most amount of time to complete. 
+ 
+\begin{figure}[H]
+\centerline{\includegraphics[width=.4 \textwidth]{finalised_conveyor_design}}
+\caption{\gls{cad} for the Conveyor Belt}
+\label{fig:finalised_conveyor+_design}
+\end{figure}
+
 \subsection{PCB Design}
+
+For this project, two \gls{pcb}s were designed and developed using \gls{kicad}. The decison to use \gls{kicad} was based primarily on the fact that it is open-source, user-friendly, and allowed custom components to be designed for use on the \gls{pcb}s. Because \gls{kicad} is free-to-use software, it required no membership or sign-up processes. 
+
+Another advantage of using this software was the community support. Any issues that were not able to be directly resolved could be investigated and solved quickly with help from the supportive \gls{kicad} community. 
+
+Once both \gls{pcb}s had arrived they were soldered by hand. These \gls{pcb}s were supposed to be fully assembled by JLC-PCB by a misunderstanding during the manufacturing process meant that the board arrived unassembled. Whilst not devastating to this project, it did require a couple of days to fully assemble and test these \gls{pcb}s, something that should have been done at the factory.   
+
+
 \subsubsection{Controller PCB}
+
+Before a \gls{pcb} was designed, a circuit schematic first needed to be developed. This started by evaluating the hardware that was going to be used. This hardware can be seen on the controller side of the finalised block diagram in Figure \ref{fig:finalised_block_diagram}.
+
+The first stage of was to mock up all of the hardware on a breadboard with jumper wires. This would allow the schematic to be drawn up from this, once the hardware is known to be working. This can be seen in Figure \ref{fig:controller_hardware_testing}.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=.4 \textwidth]{controller_hardware_testing}}
+\caption{Breadboard for hardware testing for controller PCB}
+\label{fig:controller_hardware_testing}
+\end{figure}
+
+Once the hardware and schematic were verified, a schematic was created for use with the PCB. This can be seen in Appendix \ref{app:controller_hardware_schematic}.
+
+The hardware on this \gls{pcb} was decided to be \gls{smt} wherever possible. This was to cut down the size of the PCB but also the placing all of the components. There are components on the front and back of the board and \gls{smt} allows these components to be place on adjacent sides right on top of each other. 
+
+Once this had all be decided upon, the final \gls{pcb} could be designed. This is shown in Figure \ref{fig:finalised_PCB_design_controller}.
+
+\begin{figure}[H]
+\centering
+\subfigure[PCB Top]{
+\includegraphics[width=.4\textwidth]{finalised_PCB_design_controller_top}
+}
+\subfigure[PCB Bottom]{
+\includegraphics[width=.4\textwidth]{finalised_PCB_design_controller_bottom}
+}
+\caption{Top and Bottom sides of Controller PCB design}
+\label{fig:finalised_PCB_design_controller}
+\end{figure} 
+
 \subsubsection{Receiver PCB}
+
+Much like with the controller, before a \gls{pcb} was created for the receiver a schematic firstly needed to be created. The first step of this was to evaluate the hardware that needed to be used for this process. This hardware can be seen on the receiver side of the finalised block diagram in Figure \ref{fig:finalised_block_diagram}.
+
+The first step in producing the schematic was to mock all the hardware on breadboards using jumper wires. From this, the hardware can be ested befroe the finalised version of the schematic is drawn up. The breadboard and testing can be seen in Figure \ref{fig:receiver_hardware_testing}.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=.4 \textwidth]{receiver_hardware_testing}}
+\caption{Breadboard for hardware testing for receiver PCB}
+\label{fig:receiver_hardware_testing}
+\end{figure}
+
+Once the schematic and hardware was all verified to be working, a schematic was created for use with the PCB. This can be seen in Appendix \ref{app:receiver_hardware_schematic}.
+
+Much like with the controller board \gls{smt} was chosen to be used wherever possible on this board. This was primarily to keep the board as small as possible. As this was going to be placed on top of the Nucleo-F429ZI board, it needed to fit within the foot print of the board. This required the use of \gls{smt} as this reduces the footprint of components significantly. 
+
+After the schematic had been finalised, the final PCB could be designed. This is show in Figure \ref{fig:finalised_PCB_design_receiver}.
+
+\begin{figure}[H]
+\centering
+\subfigure[PCB Top]{
+\includegraphics[width=.4\textwidth]{finalised_PCB_design_receiver_top}
+}
+\subfigure[PCB Bottom]{
+\includegraphics[width=.4\textwidth]{finalised_PCB_design_receiver_bottom}
+}
+\caption{Top and Bottom sides of Receiver PCB design}
+\label{fig:finalised_PCB_design_receiver}
+\end{figure} 
 
 \section{Testing}
 \subsection{Software Testing}
@@ -883,6 +1029,17 @@ The 3 and 4 bits denote the specific device instruction.\\
 	\end{itemize}
 \end{itemize}
 
+\section{Controller PCB Schematic}\label{app:controller_hardware_schematic}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=1.2 \textwidth, angle = 90]{controller_hardware_schematic}}
+\end{figure}
+
+\section{Receiver PCB Schematic}\label{app:receiver_hardware_schematic}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=1.2 \textwidth, angle = 90]{receiver_hardware_schematic}}
+\end{figure}
 
 
 \end{document}
