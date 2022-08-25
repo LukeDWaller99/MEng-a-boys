@@ -1,5 +1,5 @@
 /**
-@file template.h
+@file class.h
 template class header file.
 Author -
 **/
