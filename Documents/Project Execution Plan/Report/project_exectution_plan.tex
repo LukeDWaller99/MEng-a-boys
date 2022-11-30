@@ -1,0 +1,135 @@
+\documentclass [12pt]{article}
+\usepackage{fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{gensymb}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage[table]{xcolor}
+\usepackage{siunitx}
+\usepackage{indentfirst}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[UKenglish]{datetime}
+\usepackage{setspace}
+\usepackage{hhline}
+\usepackage{lastpage}
+\usepackage[numbers]{natbib}
+\usepackage[acronym]{glossaries}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\usepackage{subfigure}
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{customgreen}{rgb}{0,0.6,0}
+\definecolor{customgray}{rgb}{0.5,0.5,0.5}
+\definecolor{custommauve}{rgb}{0.6,0,0.8}
+
+\graphicspath{{images/}}
+
+\hypersetup
+{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+}
+
+\doublespacing
+
+\begin{document}
+
+\title{\bf Report Title}
+\author{Daniel Cole, Jack Pendlebury, Noah Harvey, Luke Waller}
+\date{\today}
+\maketitle
+\thispagestyle{empty}
+
+\newpage
+\fancyfoot[R]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\tableofcontents
+\newpage
+
+\listoffigures
+\listoftables
+
+\newpage
+\section{Section 1}\label{sec:section_1}
+
+\subsection{Subsection 1}\label{sec:sub_section_1}
+
+%\begin{figure}[H]
+%\centerline{\includegraphics[width=1\textwidth]{image_1}}
+%\caption{Label for Image 1}
+%\label{fig:figure_1}
+%\end{figure}
+
+\begin{table}[H]
+\centering
+\setlength{\arrayrulewidth}{1.5pt}
+\begin{tabular}{|p{0.3\linewidth}|p{0.3\linewidth}|}
+\hline
+\cellcolor{gray!40}Component & \cellcolor{gray!40}Device \\
+\hline
+Controller Microcontroller  & STM32L432KC* \\
+\hline
+Receiver Microcontroller   & STM32F429ZI\\
+\hline
+Brushless DC Motors   & A2212 BLDC Motors \\
+\hline
+BLDC Motor ESC   & Generic no-name 30A ESC\\
+\hline
+Brushed DC Motor   & Dunkermotoren PLG24 \\
+\hline
+Brushed DC Motor Driver  & L298N\\
+\hline
+Controller Batteries   & 18650 Li-Ion Batteries \\
+\hline
+Buzzer   & Generic no-name buzzer \\
+\hline
+12V Regulator & 12V Fixed LDO* \\
+\hline
+5V Regulator & 12V Fixed LDO*\\
+\hline
+3V Regulator & 12V Fixed LDO*\\
+\hline
+\multicolumn{2}{l}{\small *selected due to constrains caused by silicon shortage.} \\
+\end{tabular}
+\caption{Component Selection}
+\label{table:component_selection}
+\end{table}
+
+
+{\parindent0pt
+
+Details on how the controller microcontroller software and hardware was developed and interfaced within the scope of the project can be found in  §\ref{sec:} and §\ref{sec:} respectively.
+
+Details on how the receiver microcontroller software and hardware was developed and interfaced within the scope of the project can be found in  §\ref{sec:} and §\ref{sec:} respectively.
+
+Details on how the ESCs were interfaced with can be found in §\ref{sec:}.
+
+Details on how the L298N was interfaced with can be found in §\ref{sec:}.
+
+Detailed on how the 12V, 5V, and 3V Regulators were interfaced with can be found in §\ref{sec:}.
+
+}
+
+% \newpage
+% \bibliographystyle{IEEEtranN}
+% \bibliography{refs}
+
+\newpage
+\appendix
+
+\section{Appendix 1}\label{app:appendix_1}
+
+
+\end{document}

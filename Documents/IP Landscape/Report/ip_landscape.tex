@@ -1,0 +1,122 @@
+\documentclass [12pt]{article}
+\usepackage{fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{gensymb}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage[table]{xcolor}
+\usepackage{siunitx}
+\usepackage{indentfirst}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[UKenglish]{datetime}
+\usepackage{setspace}
+\usepackage{hhline}
+\usepackage{lastpage}
+\usepackage[numbers]{natbib}
+\usepackage[acronym]{glossaries}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\usepackage{subfigure}
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{customgreen}{rgb}{0,0.6,0}
+\definecolor{customgray}{rgb}{0.5,0.5,0.5}
+\definecolor{custommauve}{rgb}{0.6,0,0.8}
+
+\graphicspath{{images/}}
+
+\hypersetup
+{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+}
+
+\doublespacing
+
+\begin{document}
+
+\title{\bf Report Title}
+\author{Daniel Cole, Jack Pendlebury, Noah Harvey, Luke Waller}
+\date{\today}
+\maketitle
+\thispagestyle{empty}
+
+\newpage
+\fancyfoot[R]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\tableofcontents
+\newpage
+
+\listoffigures
+\listoftables
+
+\newpage
+\section{Patent Landscape Analysis}\label{sec:PLA}
+
+\section{Project Overview}\label{sec:project_overview}
+\subsection{Project Details}\label{sec:project_details}
+\subsection{Inspiration}\label{sec:inspiration}
+\subsection{Intended Market}\label{sec:intended_market}
+\subsection{Safety and Ethical Considerations}\label{sec:SAEC}
+\subsection{Market Competition}\label{sec:market_competition}
+\subsection{Design Requirements}\label{sec:design_requirements}
+
+\section{HEVCS Key Constituent Parts}\label{sec:constituent_parts}
+
+\section{Patent Research}\label{sec:patent_research}
+\subsection{Under Vehicle Technology}\label{sec:under_vehilce_technology}
+\subsection{Breakaway Connectors}\label{sec:breakaway_connectors}
+\subsection{Curb and Step Navigation}\label{sec:curb_step_navigation}
+\subsection{EV Charging}\label{sec:ev_charging}
+
+%\begin{figure}[H]
+%\centerline{\includegraphics[width=1\textwidth]{image_1}}
+%\caption{Label for Image 1}
+%\label{fig:figure_1}
+%\end{figure}
+
+% §\ref{sec:section} to reference a section
+% \ref{app:appendix} to reference an appendix
+% \cite{} to refer to bib
+
+\begin{table}[H]
+\centering
+\setlength{\arrayrulewidth}{1.5pt}
+\begin{tabular}{|p{0.7\linewidth}|c|}
+\hline
+\cellcolor{gray!40}Search Term & \cellcolor{gray!40}No. of Results \\
+\hline
+ti = "magnetic" AND (ti any "break away" OR ti any "pull apart") & 508 \\
+\hline
+ti = "magnetic" AND (ti any "break away" OR ti any "pull apart") AND ti = "Connector"  & 5 \\
+\hline
+ti = "magnetic" AND (ti any "break away" OR ti any "pull apart") AND ti = "Connector" AND (ctxt = "electrical" OR ctxt = "electronic") & 2 \\
+\hline
+\end{tabular}
+\caption{Component Selection}
+\label{table:search_terms_1}
+\end{table}
+
+
+% \newpage
+% \bibliographystyle{IEEEtranN}
+% \bibliography{refs}
+
+\newpage
+\appendix
+
+\section{Appendix 1}\label{app:appendix_1}
+
+
+\end{document}
