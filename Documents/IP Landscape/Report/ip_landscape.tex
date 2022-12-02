@@ -87,6 +87,52 @@
 \section{Patent Research}\label{sec:patent_research}
 \subsection{Under Vehicle Technology}\label{sec:under_vehilce_technology}
 \subsection{Breakaway Connectors}\label{sec:breakaway_connectors}
+\subsection{Search Strategies}
+\subsubsection{Strategy 1}
+Using the advanced search functionality of espacenet to filter results based on a search terms inclusion in just the title, the phrase “magnetic” and “break away” was used and returned a single patent. 
+Similar combinations with less strict filters returned more results, with “parallel” AND “cable” AND “magnetic” returning 29 results. 
+\subsubsection{Strategy 2}
+An alternate strategy was attempted, by placing emphasis on the break-away/pull-apart functionality of the connector. This led to the following results:
+\begin{table}[H]
+    \centering
+    \setlength{\arrayrulewidth}{1.5pt}
+    \begin{tabular}{|p{0.7\linewidth}|c|}
+    \hline
+    \cellcolor{gray!40}Search Term & \cellcolor{gray!40}No. of Results \\
+    \hline
+    ti = “magnetic” AND (ti any “break away” OR ti any “pull apart”) & 508 \\
+    \hline
+    ti = “magnetic” AND (ti any “break away” OR ti any “pull apart”) AND ti = “Connector” & 5 \\
+    \hline
+    ti = “magnetic” AND (ti any “break away” OR ti any “pull apart”) AND ti = “Connector” AND (ctxt = “electrical” OR ctxt = “electronic”) & 2 \\
+    \hline
+    \end{tabular}
+    \caption{Breakaway Connector Search Terms 1}
+    \label{table:breakaway_connector_search_strat_2}
+\end{table}
+Of the two patents found at the conclusion of this search strategy, only one had relevance to the project. Despite use of logic OR statements to look for synonyms and word variants, this search strategy was overly specialised and too narrow. To remedy this, a third strategy was employed.
+\subsubsection{Strategy 3}
+\begin{table}[H]
+    \centering
+    \setlength{\arrayrulewidth}{1.5pt}
+    \begin{tabular}{|p{0.7\linewidth}|c|}
+    \hline
+    \cellcolor{gray!40}Search Term & \cellcolor{gray!40}No. of Results \\
+    \hline
+    ti = “magnetic” AND ti = “Connector” AND (ti = “electrical” OR ti = “electronic”) & 149 \\
+    \hline
+    ti = “magnetic” AND (ti = “Connector” OR ti = “Socket”) AND ti = “parallel” & 2 \\
+    \hline
+    ti = “magnetic” AND (ti = “Connector” OR ti = “Socket”) AND (ti = “parallel” OR ti = “data”) & 25 \\
+    \hline
+    (ti = “magnetic” AND (ti = “Connector” OR ti = “Socket”) AND (ti = “parallel” OR ti = “data”)) NOT ctxt = “power” & 22 \\
+    \hline
+    (ti = “magnetic” AND (ti = “Connector” OR ti = “Socket”) AND (ti = “parallel” OR ti = “data”)) NOT (ctxt = “power” OR ctxt = “USB”) & 16\\
+    \hline
+    \end{tabular}
+    \caption{Breakaway Connector Search Terms 1}
+    \label{table:breakaway_connector_search_strat_3}
+\end{table}
 \subsection{Curb and Step Navigation}\label{sec:curb_step_navigation}
 \subsubsection{Patent 1 - Stair traversing device}
 
