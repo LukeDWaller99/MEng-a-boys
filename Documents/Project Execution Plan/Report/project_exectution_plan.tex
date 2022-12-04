@@ -58,6 +58,386 @@
 \tableofcontents
 \newpage
 
+\newpage
+\section{Project Overview}\label{sec:section_1}
+\subsection{Business Justification}\label{sec:business_justification}
+%%%%reference in here
+The HEVCS aims to overcome challenges related to the lack of EV charging infrastructure in a world where the number of EVs on the road is growing at an increased rate every year. Solutions to incorporate EV charging points into our homes, carparks, and workplaces will not overcome the barriers created by the way in which pre-existing infrastructure has been designed. Over 60% of UK homes do not have access to a garage or a driveway in which an EV charging port could be safely installed, stripping away a large proportion of the population’s ability to own an electric powered vehicle (INSERT REFERENCES). 
+
+\subsection{Sirmon Industries Sponsorship}\label{sec:sponsorship}
+Sirmon Industries are a design consulting firm with a wide range of experience in many engineering disciplines. They have conducted work across many sectors such as film industry props, special effects for the entertainment industry, passenger information systems, outdoor display systems, as well as home domestic equipment and high-end industrial products. The company provide a bespoke service covering all stages of the development process. This includes the planning phases, project direction, and project scope. They offer a full suite of software design, in addition to their hardware and mechanical engineering capabilities, including PCB design and embedded systems. Their online presence and portfolio documents rapid prototyping and development for a wide range of products, providing inspiration to those who share the same enthusiasm for innovation in their fields.
+
+The sponsorship opportunity was a result of Sirmon identifying a problem that is becoming increasingly prevalent in day-to-day life and seeking university students to create a prototype for their master’s project.
+
+\subsection{European Social Fund Grant}\label{sec:esf_grant}
+The University of Plymouth receives grants from the European Social Fund (ESF) to enhance students’ learning and development of skills. The ESF aids students to overcome the barriers associated with accepting opportunities by donating the necessary financial funding and sourcing additional sponsorship from external companies, such as Sirmon Industries. In return, the organisation request timesheets detailing the time spent on each project related activity. These are accompanied by Smart Specialisation Curriculum and Engagement reports with overviews of the project, group members and methodology. 
+After securing the grant, an academic and technical support assistance was assigned to the group. Jo Byrne’s role is defined in greater detail in section (REFER TO SECTION), as the team must provide regular updates on work progression and collaboration with Sirmon Industries.
+
+
+\subsection{Design Requirements}\label{sec:design_requirements}
+The scope of the project has been defined by the following requirements: \\
+
+1.	The platform must abide by class 2 mobility scooter legislation and the respective highway regulations to be road legal. \\
+2.	The platform must be able to navigate the home, roads and pavements and the relevant obstacles such as kerbs and a maximum of three steps while transporting the payload from the user’s home to their car. \\
+3.	The platform must be always controlled by the user via a tethered connection to move. Upon disconnection, the device enters an immobilised state. \\
+4.	The robot must be capable of acknowledging hazards, such as too steep a slope, too many steps and obstructions. In these cases, the robot must refuse to tackle such obstacles and override the user’s inputs. \\
+5.	The platform must be stored safely within the docking station that minimises the space in which it occupies whilst it charges the EV battery. \\
+6.	The platform must be able to drive underneath EV’s with a ground clearance of 155mm and above and lock itself securely to the vehicle. \\
+7.	The platform will not attempt to traverse inclines/declines greater than 20 degrees. \\
+
+\subsection{Deliverables}\label{sec:deliverables}
+
+\begin{table}[H]
+    \centering
+    \setlength{\arrayrulewidth}{1.5pt}
+    \begin{tabular}{|c| p{0.8\textwidth}|}
+    \hline
+    \cellcolor{gray!40}Deliverable & \cellcolor{gray!40}Details \\
+    \hline
+    1 & The creation of a wheeled platform capable of supporting a 100KG payload. \\
+    \hline
+    2 & A wired, tethered controller for the platform, capable of controlling all functions.
+    The connector will be of a magnetic breakaway design, immobilising the motors if the link is broken. \\
+    \hline
+    3 & The platform’s total height must be less than 150mm. \\
+    \hline
+    4 & The platform will be able to move in all four cardinal directions via use of the mecanum wheels, to ‘strafe’ underneath parked vehicles. \\
+    \hline
+    5 & The platform will be able to drive, and navigate, upon a maximum of a 20-degree inclination. \\
+    \hline
+    6 & The platform will be able to navigate a maximum of 3 standard sized steps, as well as kerbs of a reasonable height. \\
+    \hline
+    7 & The platform will make use of sensors to assist the user in navigating around obstacles. \\
+    \hline
+    8 & The platform will comply with all relevant ‘invalid carriage’ legislation, to allow it to be used on the pavements without penalty. \\
+    \hline 
+    9 & An android app will be used to gather telemetry from the platform and be used to lock and unlock the motors. \\
+    \hline
+    \end{tabular}
+    \caption{Deliverables}
+    \label{table:deliverables}
+\end{table}
+
+\subsection{Milestones}\label{sec:milestones}
+
+\subsubsection{Milestone 1 - Static Motor Test Platform}
+A static motor test platform, using the drive motors, ESCs, and desired gearing system, controlled using a static control panel. This platform will be used to demonstrate operation of the motors and ESCs, as well as to measure the functional torque of the drive system.
+
+\subsubsection{Milestone 2 - Handheld Controller, Breakaway Connector, and Immobiliser}
+The platform in milestone one will be augmented with the handheld controller, complete with magnetic breakaway connector. This will be used to test controller technologies, and safety features. Any changes to the safety cut-off will be tested on this platform first.
+
+\subsubsection{Milestone 3 - Mobile Aluminium Chassis}
+The proven technologies from milestone two will be added to a mobile aluminium extrusion chassis. This will be used to test internal component layouts and mecanum wheel functionality. The platform must be able to drive in all directions on a flat surface.  
+
+\subsubsection{Milestone 4 - Mobile Weight Bearing Chassis}
+With the internal layout and motor control functionality demonstrated, the aluminium chassis will be replaced with one that can support the full battery payload weight, without compromising functionality.
+
+\subsubsection{Milestone 5 - Platform with Object Avoidance}
+Milestone four’s upgraded chassis will have the object sensing and ranging user assistance features added. This milestone will not be passed until all sensors are functional, and the platform can correctly sense impending collisions and drops beyond the specified three step limit.
+
+\subsubsection{Milestone 6 - Platform with Step/Kerb Navigation}
+The object avoidance features in the prior milestone will be used to facilitate step climbing and descent. The system will use the milestone 5 sensor array to prevent it from descending inclines beyond the three-step limit for safety reasons.
+
+\subsection{Key Constituent Parts}\label{sec:key_constituent_parts}
+
+\begin{table}[H]
+    \centering
+    \setlength{\arrayrulewidth}{1.5pt}
+    \begin{tabular}{|c| p{0.8\textwidth}|}
+    \hline
+    \cellcolor{gray!40}Key Component & \cellcolor{gray!40}Description \\
+    \hline
+    Load Bearing Chassis & A rectangular based chassis containing the control systems, motors, drivetrain, sensor mounting points, and space for the payload. Internal systems will be attached using a modular rail system to facilitate easy replacement. The chassis must be no taller than 150mm.\\
+    \hline
+    Controller & A handheld controller, connected via a breakaway connector, that allows the user to control the functions of the system. This will allow the user to drive the platform using two analogue sticks, one for each wheel. The user will be alerted should any of the sensor assemblies detect an obstacle, or if the ranging detects that a descent is further than three steps. An LCD screen will report the system status to the user. Will either be battery powered or powered through the tethered connector.\\
+    \hline
+    Sensor Assemblies & Adjustable, modular sensor assemblies for mounting on the chassis. Their aspect and bearing can be adjusted to provide the desired coverage. While each assembly may have different sensors within it, each mounting bracket will be the same, so sensors can be repositioned at will.\\
+    \hline
+    Controller Connection cable & The controller connection cable will make use of a magnetic breakaway feature. Should the platform be in a position where it begins to run away from the user, the force will disconnect the controller. This will prevent the user from being pulled over and trigger the safety locks within the motor assembly, preventing further runaway movement of the platform. This connector will be 10 pins, with a central ground. \\
+    \hline
+    Central Control Unit & The central control unit will be mounted using modular rails described above and will contain the microcontroller as well as all the necessary interfaces to communicate with the sensor assembly suite and motor drivers. \\
+    \hline
+    Motor Assembly and Drivetrain & The motors, pulley drivetrain, and ESC motor controllers, will be mounted to the chassis. These will be connected to the central control unit with control lines.\\
+    \hline
+    \end{tabular}
+    \caption{Key Constituent Parts}
+    \label{table:key_constituent_parts}
+\end{table}
+
+\subsection{Predicted Challenges}\label{sec:predicted_challenges}
+
+\subsubsection{Project Requirements}
+The stated battery payload capacity of 15kWh minimum places a heavy burden on the chassis. Depending on the specific power cells purchased, the total EV battery payload is expected to fall between 70 and 120 kgs. Given the environmental navigation requirement specified in requirement two, the chassis must be able to withstand this weight in conditions where not all wheels are contacting the ground, or sections of the chassis are unsupported. 
+
+While strength is a requirement, it is also equally important to balance strength vs weight. With such a heavy payload, any additional weight is unnecessary strain on the drive system. More weight means more torque needed from the motors, more strength in the wheels, and a more sophisticated obstacle navigation system. The weight is additionally constrained by legislature pertaining to the classification of electrically driven vehicles, and the restrictions therein. 
+
+Safety of both the user and other pedestrians is also a significant concern. At the limit of 4 mph (1.8 m/s), a 100KG chassis will have significant kinetic energy, and with the torque required to move such a weight, significant injury could be caused to a pedestrian. Impacts with terrain and obstacles could cause heavy damage to both property and to the platform, with a risk of compromising the battery payload. 
+
+Given the challenging height requirement of 155mm, to fit under 53% of modern electric vehicles   the team collected data for, the design will have tight spatial requirements placed upon it. Ensuring that the design is compact enough to fit underneath a vehicle will provide a significant challenge; a focus on compact design methodologies will have to be maintained throughout all related components of the design. 
+
+
+\subsubsection{Sponsorship Challenges}
+The team must allocate more time to discuss the project’s progress amongst themselves, the supervisors and Sirmon. Sirmon must be involved in each project stage and have time dedicated to discussing and fulfilling the requirements they defined in the scope. In order to keep the meetings concise to increase time efficient, Zoom meetings involve the team giving an overview of the week’s output. The necessary documents are emailed to allow Sirmon to read them in their own time. 
+
+The technical work completed will be documented in detail using OneNote, in a manner that allows another team member, who did not initially carry out the task, to replicate the work. The critical design ideas and developments will be stored in the form of sketches. This will include anything between rough drawings, wiring diagrams and brainstorms to maintenance tests. The problems that arise will be reported, along with any necessary information of the scenario in which the problem occurred. Then, upon finding a solution, a detailed step by step guide of how this was achieved will also be created. All of which will be made accessible to supervisors and Sirmon.
+
+Additional reports required for the sponsorship must be completed alongside the technical work and course related reports. To complete these reports in an efficient manner, the material they require is summarised by the team at the end of each working week. These summarise are tailored to meeting the criteria of the debriefs provided by the sponsorship team. 
+
+\subsubsection{HEVCS Build and Operation}
+
+The platform must be built by those who have signed the risk assessments, and in a safe environment with the necessary safety equipment. The platform must be stored in a secure room, and in a safe manner. Once the system is operational, and driving test are being conducted via the controller, the testing area must be clearly marked, and no members of the public can be present.
+
+The global shortage of electronic components has had and continues to have massive ramifications for any project. With the shortage of semiconductors, many microcontrollers have long lead times, consequently ordering microcontrollers for this project would not be feasible. The team will be using Nucelo-F429ZI boards that they already own to help alleviate the supply chain issue on microcontrollers. Other factors, such as global warming and the Russian invasion of Ukraine, have also supplemented supply chain issues. Global warming has cause draughts, fires, and flooding all over the globe which has affected suppliers’ ability to produce the raw materials for manufacturing components. Russia’s invasion of Ukraine has impacted the supply of Neon gas, which is a commonly used when laser cutting, causing manufacturers to struggle with the demand for their products (https://blog.matric.com/electronic-component-shortages-update). Due to these factors, the team may struggle to order components for the HEVCS platform within the time scale of the project. The inflated prices will make procuring the components within the budget more challenging. 
+
+
+\section{Project Management}\label{sec:project_management}
+
+\subsection{Project Management Analysis}\label{sec:project_management_analysis}
+The first step in the process of selecting a project management method was defining what core values are important to the team and the customer. A meeting was held to discuss individual team members opinions to highlight the common methods, procedures, and techniques that the chosen methodology should possess. This ensured that the project management techniques used were catered to the research problem and focused on accommodating to the project’s deliverables. 
+
+Overall, the team wanted to define roles and split the tasking to suit the individual’s strengths and skills. This then expanded to involve a requirement for the tasks to be justified, return beneficial outputs and be a good use of time and resources. With the milestones outlined alongside the customer, and incorporating the team’s previous experiences, the larger and more complex tasks were highlighted. Stakeholders expressed a concern that the team acknowledge, and began to break the tasks down into smaller, more achievable goals. 
+
+Whilst researching how to overcome complex obstacles, the agile methodology was discussed for its ability to adapt to challenges and accommodate to sudden change of approach. On the contrary, the waterfall methodology raised multiple concerns which the team felt would be detrimental to the project’s outputs. To select a suitable approach, various models were analysed in more depth, along with considerations into the IET’s encouraged methodology training and ISO series 21502 from the International Organisation for Standardization.
+
+The project management analysis meeting took another approach that featured outlining what processes or situations would have a negative impact on the project. This raised the common issues that occur from poor communication, organisation, and file management, but also the prevalent challenge of purchasing parts from within the UK when facing stock shortages and extended wait times. The team then discussed altering the project plan to focus on completing health and safety documents that would allow for component and part orders to be placed well in advance of the build phase. The GANTT chart was additionally altered to include shorter meetings with the team to discuss purchasing components needed down the line, ready for the next build/design iteration. Again, agile methodology would greatly mitigate the risk of a delay in obtaining parts, and therefore the progress of the project, by altering the tasks orders. 
+
+\subsection{Agile Methodology}\label{sec:agile}
+The methodology defines a set of principles, tools and techniques that are used to plan, execute, and manage the project. With a team consisting of four members with varying schedules, an agile methodology would accommodate self-organisation for all individuals. The project planning itself, along with the management of the tasks being defined, has adaptivity as a key paradigm. This enables evolutionary development which facilitates prompt delivery of progressive achievements that are not necessarily in order, unlike waterfall project management. By using such a responsive methodology, with regular review, the team can adjust tasking and focus on continuous improvement in all aspects. 
+
+Within the agile methodology consists of multiple values, the first being that your team is your most valuable resource. All the processes involved only work if the team members are performing well. By focusing on how the team communicates, shares ideas and support one another, the quality of the output is also increased. Regular engagement from the customer, Sirmon Industries, enforced the importance of collaboration and feedback. This benefited the project's evolution from idea to final product while creating a collaborative space to communicate openly. 
+
+\subsection{Waterfall Methodology}\label{sec:waterfall}
+The waterfall approach to project management is based on linear progression, from planning to execution. Tasking is carried out sequentially, with design, development and testing happening in turn (ref). It requires each stage to be completed before the next phase begins, which does have its advantages. Whilst working on one phase, there is the guarantee of easier project management and the potential to complete tasks efficiently. On the other hand, the project’s progress can be halted due to delays within a single phases task completion. 
+
+This method relies heavily on the project requirements being stated, and made permanent, at the start of the planning phase. The team and customer discussed previous experiences of carrying out similar projects and shared the concern that the requirements and the order of tasking cannot be permanently fixed.  Implementation of software and new components for testing does not always go to plan, or resemble a smooth and linear process, and challenges can arise before the deployment phase is reached. The methodology used for this project must accommodate the development of various aspects simultaneously, with the ability to adapt or adjust the tasking as the project advances. 
+
+
+
+\subsection{Methodology Analysis}\label{sec:methodology_analysis}
+Each team member rated the various principles of project management by their importance. This information has been documented in the methodology research spreadsheet, along with a scoring system for each approaches performance to the respective principle. The table below shows the personal importance ratings, and the average score of each principle.
+
+!!!!!!!!!!!!!! \\
+FIGURE HERE \\
+!!!!!!!!!!!!!!!!! \\
+ROLES AND responsibilities LINK HERE \\
+
+This exercise highlighted that the team valued communication, quality assurance, and organisation and time management. As the project develops, the skills that the team members have obtained from previous experience, and the importance of the principles to them as individuals, will have a direct impact on the development of the project. 
+
+The table can be used to assign tasks based on the differences between the individual’s opinions, assigning the principle’s related responsibilities to the members who rated them highest. For example, Jack felt that tailoring the project methodology to the environment and scenario was of high importance. The rest of the team did not share this opinion, so when discussing the ways in which the methodology could be adapted for this scenario, Jack was able to lead the conversation and bring a different skill set. Further tasking allocations are discussed in the roles and responsibilities section. 
+
+This activity also outlined the principles that obtained the lowest levels of importance, provoking reflective discussions between team members. The first outcome that arose from this discovery was the steps the team could make to prevent these. The GANTT chart and meeting minutes template will include scheduled discussions specifically for discussing business justification and budget management.
+
+\subsection{Chosen and Adapted Methodology}\label{sec:chosen_methodology}
+While researching the IET’s suggestions for project methodology, a course that detailed seven principles, themes and processes which combined to create the \cite{PRINCE2} agile and process-based approach to project management. All the key attributes detailed in the overview of this widely adapted training course were used to outline the team’s approach to this project. This also provided a checklist in which the various methodologies could be scored against to adapt specific elements to suit this project. Each principle, theme and process has been discussed individually to apply the most suitable methodology to each. Adaptions to the principles have been made according to wish methodology’s approach the team gave a higher score in the methodology analysis table below.
+
+!!!!!!!!!!!!! \\
+FIGURE HERE \\
+AND REFERENCE HERE!!! \\
+!!!!!!!!!!!!!!!! \\
+
+
+\subsection{PRINCE2: The 7 Principles}\label{sec:7_principles}
+
+\textbf{Business Justification} \\
+Continued business justification. There is a requirement for a product such as the HEVCS, and therefore there is a strong business justification. The project must continue to incorporate the important features that would return an investment for the time and resources. 
+
+\textbf{Learning from Experience} \\
+Learn from experience. The team consist of members with previous experience of carrying out projects from start to finish, alongside the customer who would be described as a ‘serial inventor’. These experiences keep the goals realistic, achievable and provide valuable lessons learned. During this project a log with be kept, documenting what individual team members have learned, from both positive and negative experiences.
+
+\textbf{Defining Roles and Responsibilities} \\
+Define roles and responsibilities. The team have written personal statements that detail their skills, previous jobs and general interests that relate to the project. A discussion was held to define the role of all members and their tasking as the team recognise the importance of utilising an individual’s assets. The team are made aware of their tasks in meetings through action assignment, by task delegation in the Kanban board and from continuous communication. Each written element has an original author, then a checker to proofread, followed by an overall approval meeting to finalise that element of the project.
+
+\textbf{Managing Stages} \\
+Manage by stages refers to breaking down the more challenging elements of the project, as stated in the predicted challenges section of the project overview. Different approaches are taken depending on the task at hand. The team have defined the stages of development for both hardware and software elements of the project.
+
+\textbf{Managing Exceptions}\\
+Manage by exception defines the managers input and level of intervention. This project, being sponsored, has various levels of management that require different levels of communication and intervention. This is explained in more detail within the team organisation section.
+
+\textbf{Focus on Products}\\
+Focus on the product and what its expected features are. The product requirements have been analysed in the specification document. 
+
+\textbf{Tailor to the Environment}\\
+Tailor to environment refers to the scalability of the PRINCE2 methodology, allowing projects to alter the principles to suit their needs – well suited to a university project with different requirements from academic and industrial viewpoints.
+
+\subsection{PRINCE2: The 7 Themes}\label{sec:7_themes}
+These themes provide a regular reminder of the aims of the project, and the focal outcomes which should be in the forefront of the work carried out. They can often be related to areas of knowledge that the principles must operate within when the methodology is put into practice. Similar to the waterfall method, these themes are decided upon at the start of the project planning and monitored continuously from that point on. The project itself can then be tracked by referring to these themes.
+
+\textbf{Business Case}\\
+By referring to the business case, the project can always seek to accomplish the goals it was designed to fulfil. 
+
+\textbf{Organisation}\\
+Organisation of roles and responsibilities earlier on in the project sets a solid developmental plan from which the team members can begin to produce outcomes. It must be noted that the responsibilities can change in accordance with the project’s developments. For example, if another task has a higher priority but the team member with the most knowledge in that area is ill, another member can step in. 
+
+\textbf{Quality}\\
+Quality can often be an abstract concept as there are so many elements of the project that must be completed to a certain standard. The written communication and documentation must be of high quality to be understood by stakeholders. Each piece of software requires quality assurance, the hardware must be assembled from good quality products and the product itself must be of good quality. Different people can have different standards when referring to something that is of high quality. The important of discussing these standards and what the team set out to achieve has been discussed in more detail for each principle. Testing schemas will be written for both hardware and software at component level.
+
+\textbf{Planning}\\
+Planning refers to the timescale, cost, and targets in the form of milestones for the project. It gives the team a set of goals that can be achieved by breaking down the work into separate tasks. This document, the project execution plan, incorporates the goals and tools for how to achieve them into one single plan.  
+	
+\textbf{Risk}\\
+Risk have been identified, assessed, and had preventive measures put in place to apply a certain degree of control over the project. The various types of risk have been discussed in more detail within the health and safety and commercial risk evaluation.
+
+\textbf{Change}\\
+Various elements of the project can be subject to change, but the decisions made in relation to the change must be agreed on by the team and Sirmon. The methodology use must not prevent change but enable it by utilising the most appropriate tools to identify the best alternative. 
+
+\textbf{Progress}\\
+Progress can be shown by transforming the tasking into outputs that, when illustrated by the GANTT chart, can present an overview of regular achievements. It is important to track progress and witness regular developments in the project to plan the next steps accordingly, and with an element of strategical flow. It can also highlight incomplete tasks which are taking longer than expected.
+
+\subsection{PRINCE2: The 7 Processes}\label{sec:7_processes}
+The processes define the order in which the project is progressed, and the outcomes that require assessment before starting the next stage. With each process overseen by the team members and presented to Sirmon, the management of tasks responsibility and review development are carried out regularly throughout each stage. 
+
+\textbf{Project Start Up}\\
+Starting up a project requires answering logistical questions about the project and its purpose. It will detail the tasks in respect to linear milestones that constitute a successful project. It then develops into a plan that demonstrates how a task will be done and who will do it. This if often expanded from the specification of the project and its scope.
+
+\textbf{Initiating a Project}\\
+Initiating a project outlines the performance targets and milestones that the project aims to achieve. The team does not have a single project manager, but it does have Sirmon as the customer outlining their requirements. The time, cost and scope are all relative to the university’s project brief and incorporate the thoughts of the project supervisor.
+	
+\textbf{Directing a Project}\\
+Directing of the project is managed by the team as they define their own direction and boundaries for each milestone. Upon completion of a milestone, the evidence and demonstration are provided to both Sirmon and the project supervisor. It is then up to a discussion to ensure all parties agree. 
+	
+\textbf{Controlling a Stage}\\
+Controlling a stage through creating of smaller tasks, which are assigned to individual members, is not the job of one single group member. Meetings are held to facilitate such decisions, and tasks are delegated according to those who are most suited to the job. Each member has the authority to express their opinion on the way in which a task has been carried out, or the product of the task itself.
+
+\textbf{Managing Product Delivery}\\
+Managing product delivery refers to the communication that dictates the acceptance of the next stage of the project, its execution, and final delivery. Although the dates are set out in the GANTT chart, the team felt it was important to communicate with Sirmon when starting new tasks. This allows the team to being the task with all the relevant information from all parties and finalise exactly what the proposed outcome should be. 
+	
+\textbf{Managing Stage Boundaries}\\
+Managing stage boundaries would usually require the board to review the tasking and outcome to determine whether the project is to advance further. For this project, it involves a review of the outcomes from a section of the tasking being completed. Scheduling reviews between stages allows the wider team to discuss lesson learned and how the management of the project could be improved. 
+	
+\textbf{Closing a Project}\\
+Closing a project includes an evaluation of the product against the initial business case. If the project is to be developed further, the next actions are also identified. If possible, further testing and operational maintenance should be carried out before customers have access to the product. 
+
+\section{Critical Path}\label{sec:critical_path}
+
+\subsection{Stages of Development}\label{sec:stages_of_development}
+
+\subsection{Stage 1}
+
+Duration: 1 week
+  
+\textbf{Motor Testing}\\ 
+This is to ensure that the motors are functioning as they should and operating within the parameters set by the software and ESC. 3D printed brackets will secure the motors during the testing and development phase. The team will carry out torque, speed, braking and immobilisation tests. The testing software will be written for a nucleo board. Programmable routines will be used to run the various tests.
+ 
+Only upon completion of these tests will the motors enter the next stage of development.
+ 
+\textbf{Results Indicative of Successfully Completed Stage}\\
+1.	A reusable motor testing platform
+2.	The motors operate as expected, having passed control tests
+3.	The motors can achieve the speed controls set by the controller
+4.	The motor speed is limited 4mph
+5.	When the controller is not connected, the motors are immobilised
+
+\subsection{Stage 2}
+
+Duration: 1 week
+ 
+\textbf{Controller Design}\\
+Designing a controller that can operate the motors, from breadboard to PCB design. Safety features will be testeding to ensure that the controller inputs remain restricted by system overrides values. For example, full throttle does not drive the motors at a speed above 4mph. Additionally, the breakaway cable will be designed and implemented. 
+
+!!!!!!!!\\
+figure of controller system \\
+!!!!!!!!!!! \\
+
+\textbf{Results Indicative of Successfully Completed Stage}\\
+1.	Motors respond to user inputs from the controller\\
+2.	The breakaway cable's functions work as intended\\
+3.	Motors are immobilised when the breakaway cable is disconnected\\
+
+
+\subsection{Stage 3}
+
+Duration: 2 weeks
+ 
+\textbf{Assemble a Chassis}\\
+Create a chassis out of aluminium extrusion that abides by legislation for mobility scooters and will fit underneath EVs with a ground clearance of 155mm. 
+ 
+\textbf{Power System Integration}\\
+The motors and power systems are mounted to the chassis, and the platform’s ability to be navigated by a user with the remote is trialled in a closed environment.
+ 
+\textbf{Results Indicative of Successfully Completed Stage}\\
+1.	A chassis with a high standard of structural integrity \\
+2.	The maximum height of the platform is under 150mm\\
+3.	The chassis and motors are combined to create a mobile platform\\
+4.	The user inputs on the controller perform the correct functions\\
+5.	The platform is mobile and can travel on flat surfaces\\
+
+
+\subsection{Stage 4}
+Duration: 3 weeks
+ 
+\textbf{Weight Bearing Chassis}\\
+The chassis is upgraded to support the weight of the payload, a 100kg battery, without compromising functionality. 
+ 
+\textbf{Battery Management System}\\
+All electronic equipment necessary to display the current capacity of the platforms power and the charging battery's power are installed.
+ 
+\textbf{Results Indicative of Successfully Completed Stage}\\
+1.	The chassis rigidity is sufficient\\
+2.	The chassis can transport the required payload on various terrains\\
+3.	The system power system can be charged and monitored\\
+4.	The payload battery can be charged and monitored\\
+
+\subsection{Stage 5}
+
+Duration: 2 weeks
+
+\textbf{Object Avoidance}\\
+The LiDAR system will be implemented to incorporate object sensing and ranging into the user assisting features. 
+ 
+\textbf{Step and Incline Management System}\\
+Software implemented to immobilise the motors when the user attempts to drive the platform up or down a set of three or more steps or an incline of more than 20 degrees. The calculations for these boundaries have been calculated and documented in the project’s OneNote.
+ 
+\textbf{Lights and Alarms}\\
+The installation of a lighting system that abides by the relevant laws, detailed in the relevant legislation section, for a class 2 mobility scooter. 
+ 
+\textbf{Results Indicative of Successfully Completed Stage}\\
+1.	Relevant vehicle legislative requirements are met\\
+2.	The LiDAR can detect objects within a specified distance and highlight them as a potential hazard\\
+3.	When hazards are identified, the platform will enter an immobilised state and override the user’s input if a collision is going to occur\\
+4.	The system will not attempt to traverse inclines/declines greater than 20 degrees\\
+5.	The platform can determine the appropriate drop it can attempt to traverse, with the maximum drop being defined as three steps\\
+
+\section{Ethical Conduct}\label{sec:ethics}
+\subsection{IET Rules of Conduct}\label{sec:IET_rules_of_conduct}
+The IET have provided guidance to support its members in taking responsibility for their decisions and acting in an ethical manner. The Rules of Conduct (ref), written in accordance with Byelaw 31 (ref), are used to aid individuals in meeting professional standards and principles adopted in the engineering industry. By joining the IET, all the team members working on this project have made a commitment to take an ethical stance that considers society, the environment, and the requirements of the employer. In addition to this each individual should manage conflicting interests from team members, the university and sponsor with integrity. With this project being sponsored and conducted within a university, all members have a duty to uphold the reputation and standards of Sirmon Industries and the University of Plymouth. 
+
+\subsection{Ethical Principles - Engineering Council}\label{sec:ethical_principles_engc}
+
+The Engineering Council and the Royal Academy of Engineering produced a Statement of Ethical Principles that details the four ethical principles that engineers must follow to maintain and enhance the wellbeing of society. It is a requirement that IET members observe and enforce these principles to uphold the reputation of the organisation.
+
+\subsubsection{Honesty and Integrity}
+
+All members must remain honest, fair, trustworthy, and open to discussion. The team must act responsibly and consider how their actions as individuals affect others, especially the reputation of Sirmon and the university. The project itself is confidential and all information related to the project 
+should be treated as such. 
+
+\subsubsection{Respect for Life, Law, Public Good and The Environment}
+
+The platform must obey all applicable laws and regulations, along with the acknowledgement of physical, cyber and data security. The project itself sets out to overcome obstacles that the public encounter when they wish to use an EV but have no access to a charging point. By developing such a solution, the quality of the natural environment is increased by decreasing the number of traditional fuel ran vehicles on the road. 
+
+\subsubsection{Accuracy and Rigour}
+
+All individuals within the group acknowledge the duty of care required to complete such a project. It is essential that all tasks are conducted by those who have adequate knowledge and technical understanding of the skills required. Additionally, risk assessments must be completed before the equipment and components are acquired. This is to ensure that risks have been identified, managed, and mitigated.
+
+\subsubsection{Leadership and Communication}
+
+All stakeholders must be made aware of the current tasking of the project through various forms of communication. Regular meetings must be held and used to raise concerns and plan the next tasks. The group itself does not contain a leader as all members operate as equals, promoting equality and inclusion. Every individual involved in the project and its various aspects must promote honesty and respect. This approach is also encouraged when challenging statements and concerns to remain professional. 
+
+
+\subsection{University of Plymouth's Research Ethics}
+
+As the HEVCS platform is not storing data, or putting names to any data that may collected, the Research Ethics are not breached and therefore do not need to be evaluated for this project (REF). 
+https://www.plymouth.ac.uk/research/governance/research-ethics-policy
+
+\subsection{Application of Ethical Conduct}
+Engineer’s must limit any danger of injury or damage to the environment, including private and public property. To mitigate the risk of either occurring, the platform will only operate when the owner is physically tethered to the system via wired controller. There will be sensors used to cut off power to the motors when obstacles (be it objects or humans) are in the way. There will be security measures in place to unlock the platform from its stored state, with further implementations to ensure that. 
+ 
+The platform will not obstruct public pathways, as it will be stowed underneath the car or on the user’s property. The user has the responsibility to safely secure the platform within their home while it charges or locked to their car. If the device is not in use, it will be stored inside their home. If there is an obstruction preventing the user from placing their charging platform underneath their car, or within the vicinity of their own parking space – they must make the informed decision that it is not safe to charge their vehicle. 
+ 
+The way in which the platform is manoeuvred for storage will use the drive train to aid with lifting the system into place. This will ensure it is accessible to disabled people and the elderly. The mounting station in which the platform will be stowed in while engineers would install charging, in the same manner that EV charging ports are installed into the user’s home. The due diligence regarding safe placement of the station, power limitations and other safety factors will be conducted by the installation engineer.
+The use of a LiDAR could be cause for concern if the data from the sensor is being utilised for anything other than object avoidance. That data could be used to create a map of the user’s home, which could a breach in security. As the LiDAR sensors are only used in a reactionary capacity, none of the data from the sensors is being stored and therefor is not accessible outside of the system. This negates the privacy concern of using these sensors for the project.  
+
+
+
 \listoffigures
 \listoftables
 
@@ -285,7 +665,7 @@ The platform will be made to abide class 2 invalid carriage legislation REF HERE
 \subsubsection{Highway Regulations}
 The platform must be built to follow the legislation for a class 2 invalid carriage, detailed in the Use of Invalid Carriages \cite{Invalid_Legislation} on Highways Regulations. This device must be mechanically propelled and incapable of exceeding 4mph. The maximum unladen weight of the platform is 113.4kg, where the definition of ‘unladen carriage’ is inclusive of the weight of water, fuel, power equipment for the platform itself and the propulsion equipment. It does not include the weight of any other load, including the weight of the EV batteries that the robot will transport. 
 
-The maximum dimensions of the platform are a product of the hallway, doors, and entrance dimensions within the home, as well as the distance between wheels on the most common EVs. With a maximum height of 155mm, the device would be able to successfully transport a payload underneath 53% of the most common EVs. As class 2 mobility scooters are made to be used indoors, their dimensions determined the maximum length and width is 1000mm and 500mm, respectively. 
+The maximum dimensions of the platform are a product of the hallway, doors, and entrance dimensions within the home, as well as the distance between wheels on the most common EVs. With a maximum height of 155mm, the device would be able to successfully transport a payload underneath 53\% of the most common EVs. As class 2 mobility scooters are made to be used indoors, their dimensions determined the maximum length and width is 1000mm and 500mm, respectively. 
 
 \subsubsection{Road Traffic Act 1972}
 Other requirements include the functionality of a lights as a motor vehicle would under the Road Traffic Act 1972 \cite{Road_Traffic}. It must also be capable of breaking within a reasonable distance, in all conditions, and remaining stationary on a slope of gradient 1m over a horizontal distance of 5m. The braking system required to hold the platform stationary cannot rely on the limiting of electrical current, hydraulic or pneumatic devices. 
