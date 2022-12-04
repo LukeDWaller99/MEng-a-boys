@@ -86,6 +86,128 @@
 
 \section{Patent Research}\label{sec:patent_research}
 \subsection{Under Vehicle Technology}\label{sec:under_vehilce_technology}
+
+\subsubsection{Search Strategies}
+
+The advanced search tool was used to locate the following phrases in the title or abstract. The phrases started with list various words related to how the technology would be placed under a vehicle to develop an understanding of the language used in existing patents. Then, the use of the bitwise OR function was used when multiple words and phrases were used to describe existing technology.
+
+\subsubsection{Search Strategy 1}
+
+\begin{table}[H]
+    \centering
+    \setlength{\arrayrulewidth}{1.5pt}
+    \begin{tabular}{|p{0.7\linewidth}|c|}
+    \hline
+    \cellcolor{gray!40}Search Term & \cellcolor{gray!40}No. of Results \\
+    \hline
+    ta any “carriage” AND ta any “underneath vehicle” & 28,241 \\
+    \hline
+    ta any “platform” AND ta any “underneath vehicle” & 2,030 \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND ta any “under electric vehicle” & 266,484 \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND ta any “under electric vehicle” AND ta any “electric vehicle” & 179,323 \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND ta any “under vehicle” AND ta any “electric vehicle” & 105,202 \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND ta any “underneath electric vehicle” AND ta any “electric vehicle” & 179,323 \\
+    \hline
+    \end{tabular}
+    \caption{Under Vehicle Technology Search Terms 1}
+    \label{table:under_vehicle__search_strat_1}
+\end{table}
+
+The search strategy continued to use the phrase “under electric vehicle” rather than “under vehicle” and it returned more results and was more relevant to the project. Altering the phrase to say “underneath electric vehicle” had no effect on the patents returned. 
+
+\subsubsection{Search Strategy 2}
+
+\begin{table}[H]
+    \centering
+    \setlength{\arrayrulewidth}{1.5pt}
+    \begin{tabular}{|p{0.7\linewidth}|c|}
+    \hline
+    \cellcolor{gray!40}Search Term & \cellcolor{gray!40}No. of Results \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND ta any “underneath electric vehicle” AND ta any “charge” & 3,059 \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND ta any “underneath electric vehicle” AND ta any “charge” AND ta any “electric vehicle” & 3,078 \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND ta any “underneath electric vehicle” AND ta any “charge” AND ta any “user driven” & 538 \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND ta any “under electric vehicle” AND ta any “charge” AND ta any “electric vehicle” AND ta any “user driven” & 528 \\    
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND ta any “under electric vehicle” AND ta any “charge” AND ta any “electric vehicle” AND ta any “manned” & 2 \\
+    \hline
+    \end{tabular}
+    \caption{Under Vehicle Technology Search Terms 2}
+    \label{table:under_vehicle__search_strat_2}
+\end{table}
+
+The phrase “manned” was too specific and returned patents where the platforms were intended for use underwater. The HECVS will not go underwater, and so there is no potential for infringement of these patents. The search term was then returned to the original phrase of “user driven”.
+
+\subsubsection{Search Strategy 3}
+
+\begin{table}[H]
+    \centering
+    \setlength{\arrayrulewidth}{1.5pt}
+    \begin{tabular}{|p{0.7\linewidth}|c|}
+    \hline
+    \cellcolor{gray!40}Search Term & \cellcolor{gray!40}No. of Results \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND ta any “under electric vehicle” AND ta any “charge” AND ta any “electric vehicle” AND ta any “user driven” AND ta any “remote control” & 182 \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND ta any “under electric vehicle” AND ta any “charging” AND ta any “electric vehicle” AND ta any “manned” AND ta any “remote control” & 447 \\
+    \hline
+    \end{tabular}
+    \caption{Under Vehicle Technology Search Terms 3}
+    \label{table:under_vehicle_search_strat_3}
+\end{table}
+
+There was a large difference in the number of results returned depending on whether the phrase “charge” or “charging” was used, so the search field was updated to return patents containing either phrase. 
+
+\subsubsection{Search Strategy 4}
+
+\begin{table}[H]
+    \centering
+    \setlength{\arrayrulewidth}{1.5pt}
+    \begin{tabular}{|p{0.7\linewidth}|c|}
+    \hline
+    \cellcolor{gray!40}Search Term & \cellcolor{gray!40}No. of Results \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND (ta any “charge” OR ta any “charging”) AND ta any “under electric vehicle” AND ta any “electric vehicle” AND ta any “user driven” AND ta any “remote control” & 537 \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND (ta any “charge” OR ta any “charging”) AND ta any “under electric vehicle” AND ta any “electric vehicle” AND ta any “user driven” AND ta any “remote control” AND ta any “battery” & 148 \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND (ta any “charge” OR ta any “charging”) AND ta any “under electric vehicle” AND ta any “electric vehicle” AND ta any “user driven” AND ta any “remote control” AND ta any “load” & 12 \\
+    \hline
+    (ta any “platform” OR ta any “carriage”) AND (ta any “charge” OR ta any “charging”) AND ta any “under electric vehicle” AND ta any “electric vehicle” AND ta any “user driven” AND ta any “remote control” AND ta any “load carrying” & 21 \\
+    \hline
+    \end{tabular}
+    \caption{Under Vehicle Technology Search Terms 4}
+    \label{table:under_vehicle_search_strat_4}
+\end{table}
+
+The search term “load carrying” returned nine more results that “transporting” and “bearing”, showing that the generalised term for transporting a load was more widely used. When the search term was altered to return results with either the “load carrying” or “load” mentioned within the title or abstract, the number of results returned was still 21. The single worded phrase “load” was sufficient in identifying relevant patents with the correct intended use. 
+
+
+\textbf{Final Search Term}
+
+\begin{table}[H]
+    \centering
+    \setlength{\arrayrulewidth}{1.5pt}
+    \begin{tabular}{|p{0.7\linewidth}|c|}
+    \hline
+    \cellcolor{gray!40}Search Term & \cellcolor{gray!40}No. of Results \\
+    \hline
+    ta any “under electric vehicle” AND (ta any “platform” OR ta any “carriage”) AND ta any “electric vehicle” AND ta any “remote control” AND (ta any “charging” OR ta any “charge”) AND ta any “stationary vehicle” AND ta any “user driven” AND ta any “load” AND ta any “battery” & 8 \\
+    \hline
+    \end{tabular}
+    \caption{Under Vehicle Technology Final Search Terms}
+    \label{table:under_vehicle_final_search_strat}
+\end{table}
+
+
+
 \subsection{Breakaway Connectors}\label{sec:breakaway_connectors}
 \subsubsection{Search Strategies}
 \textbf{Strategy 1}\\
