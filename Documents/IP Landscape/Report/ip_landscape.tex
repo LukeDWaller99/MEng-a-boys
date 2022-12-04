@@ -106,7 +106,7 @@ The purpose of the landscape is to ensure that the patent applicant will not inf
 \section{Project Overview}\label{sec:project_overview}
 \subsection{Project Details}\label{sec:project_details}
 
-The (H E V C S means what now?) HEVCS provides a means to charge an electric vehicle for those without adequate space to install charging equipment at home, whilst easing the strain on existing charging infrastructure.
+The Home Electric Vehicle Charging System (HEVCS) provides a means to charge an electric vehicle for those without adequate space to install charging equipment at home, whilst easing the strain on existing charging infrastructure.
 Given that the majority of UK homes within cities lack dedicated parking, an electric vehicle (EV) becomes a less desirable option for personl use.
 These issues arrise when using a standard plug-in system to charge their EV from their home.
 There are significant logistcal problems that arise from trying to charge vehicles when not near the users home, such as lack of public charging infrastructure and having to use large cables that would run across the pavement.
@@ -166,6 +166,66 @@ The scope of the project has been defined by the following requirements:
 
 
 \section{HEVCS Key Constituent Parts}\label{sec:constituent_parts}
+
+\subsection{Under Vehicle Technology}
+
+One of the most important features of the device is that it can fit underneath electric vehicles. To determine the maximum dimensions of the platform, data was gathered to analyse trends in ground clearance. This data is documented in the electric vehicle dimensions spreadsheet. The data set used contained 34 of the most common EVs, their respective ground clearance and battery capacity. To summarise, a platform with a maximum height of 155mm would fit beneath 53\% of the EVs. 
+
+The platforms key design characteristics include a chassis consisting of aluminium extrusion, corner plates and various nuts and bolts. Mounted to the chassis will have four driven and two passive wheels. In addition to these, two arms will be attached to the front of the carriage to traverse up and down steps. 
+
+The platform will transport the mechanical propulsion equipment and electronics, as well as the payload of the EV battery. The power will be sourced from rechargeable golf caddy batteries with the appropriate adapters to power motors and electrical equipment independently. Each system has been designed to be modular and operate independently, while communicating with each one another. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width = 8cm]{PlatformHardware.png}
+    \caption{HEVCS Platform Electronic Systems Diagram}
+\end{figure}
+
+The propulsion system will utilise pulleys and gear boxes to increase the torque of the motors to aid their intended use. Additional arms will be mounted to the chassis to assist the system with traversing steps. These motors will control wheels that can be manipulated to overcome obscure edges and angles.
+
+The safety module serves to fulfil the lighting and alarm requirements for the platform to be road legal. The battery management system will display the information about the current capacity of the platform’s battery and the EV battery it will carry. The propulsion module is used to control the motors to transport the carriage from the user’s home to the EV.
+
+The power module includes the batteries that power the motors and electronics within different modules using appropriate power adapters. The battery management system will measure the capacity of the batteries mounted within the platform, and the payload battery. The payload battery is used to charge the EV’s battery. The serial communication will be used between the different modules inside the HEVCS, as well as with the controller. 
+
+Both the payload battery and the system battery are charged within the home from the mains plug. The system battery, which powers the motors and electrical equipment, is also charged from home mains power and is not connected to the payload battery. The user is required to switch on the mains power and connect a cable to the HEVCS platform.
+
+The system interfaces with the EV in a physical manner only. There are no wireless connections or communications to or from the HEVCS platform. The first physical connection is from the payload battery to the EV’s battery, which is done by the user with an off the shelf charging cable. The payload battery can then transfer its charge to the EV’s battery. The controller interfaces with the platform through a magnetic breakaway cable that the user must also connect themselves. The platform will not move if this controller is not connected, disconnection during operation results in immobilisation. The controller is powered via the cabled connection from the HEVCS. 
+
+Brackets will be included in the design to provide users options for additional security measures, such as chains or clamps, which will be off the shelf products for mounting mechanisms such as the towing anchor for the car. They will not interface with the electronics of the HEVCS platform or the EV itself. 
+
+The arrears for patent research have been determined as devices that are capable of going underneath vehicles, platforms capable of traversing kerb/steps and platforms capable of charging EV’s. 
+
+\subsection{Magnetic Breakaway Cable}
+
+The magnetic breakaway cable connector will feature a magnetic design, using a single lug to control the rotation of the connector. The cable will be male-to-male, with a ten-pin connector at each end. Each pin will be a spring-loaded pogo-pin, ensuring quality of connection. The prototype connector housing will be 3D printed.
+
+The pins will be arranged in a circular manner around the central magnet. The magnets at each end will be connected, to act as a ground. The ten pins will be allocated thusly:
+
+\begin{table}[H]
+    \centering
+    \setlength{\arrayrulewidth}{1.5pt}
+    \begin{tabular}{|p{0.7\linewidth}|c|}
+    \hline
+    \cellcolor{gray!40}Allocation & \cellcolor{gray!40}No. of Pins\\
+    \hline
+    SPI Bus 0 & 3 \\
+    \hline
+    SPI Bus 1 & 3 \\
+    \hline
+    Controller Connection Detect & 1 \\
+    \hline
+    Unallocated & 3 \\
+   \hline
+    \end{tabular}
+    \caption{Breakaway Pin Allocations}
+    \label{table:breakaway_pin_allocations}
+\end{table}
+
+The unallocated pins could be used for an additional SPI bus, or alternatively to provide power for the controller if battery power is not used.
+
+The connection will be maintained using the strength of the central magnets. Should the HEVCS platform get too far away from the user, such as in event of a drive failure or incapacitation of the user, the force will disconnect the controller. This will trigger the safety protocols of the platform, immobilising it.
+
+The female connector will be made with PCB pads as the contacts, arranged circularly around a magnet. This magnet will be grounded, to be used as the ground in the connector wire. The cable will be wrapped in a PVC mesh to provide durability.
 
 \section{Patent Research}\label{sec:patent_research}
 When performing research into the IP landscape surrounding a project, it is important to filter patents to only include relevant results. As one of leading patent databases, Espacenet was used to find patents. One of the most helpful features of Espacenet is the advanced search features available, with support for Boolean logic as well as filtering based on report section.
