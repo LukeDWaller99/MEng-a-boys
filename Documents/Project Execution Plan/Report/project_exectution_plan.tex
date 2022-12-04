@@ -62,68 +62,82 @@
 \listoftables
 
 \newpage
-\section{Section 1}\label{sec:section_1}
 
-\subsection{Subsection 1}\label{sec:sub_section_1}
+\section{Health and Safety}\label{sec:health_and_safety}
+\subsection{Risk Assessment}\label{sec:risk_assessment}
 
-\cite{PRINCE2}
-
-%\begin{figure}[H]
-%\centerline{\includegraphics[width=1\textwidth]{image_1}}
-%\caption{Label for Image 1}
-%\label{fig:figure_1}
-%\end{figure}
-
-\begin{table}[H]
-\centering
-\setlength{\arrayrulewidth}{1.5pt}
-\begin{tabular}{|p{0.3\linewidth}|p{0.3\linewidth}|}
-\hline
-\cellcolor{gray!40}Component & \cellcolor{gray!40}Device \\
-\hline
-Controller Microcontroller  & STM32L432KC* \\
-\hline
-Receiver Microcontroller   & STM32F429ZI\\
-\hline
-Brushless DC Motors   & A2212 BLDC Motors \\
-\hline
-BLDC Motor ESC   & Generic no-name 30A ESC\\
-\hline
-Brushed DC Motor   & Dunkermotoren PLG24 \\
-\hline
-Brushed DC Motor Driver  & L298N\\
-\hline
-Controller Batteries   & 18650 Li-Ion Batteries \\
-\hline
-Buzzer   & Generic no-name buzzer \\
-\hline
-12V Regulator & 12V Fixed LDO* \\
-\hline
-5V Regulator & 12V Fixed LDO*\\
-\hline
-3V Regulator & 12V Fixed LDO*\\
-\hline
-\multicolumn{2}{l}{\small *selected due to constrains caused by silicon shortage.} \\
-\end{tabular}
-\caption{Component Selection}
-\label{table:component_selection}
-\end{table}
+A Risk Assessment has been conducted to critically evaluate the risks involved with the project's operation. This includes their severity, and the best way to mitigate them. 
+The Risk Assessment is a useful document for tracking and monitoring the risks of the project. 
+This document serves as a safe practises guide for operating dangerous tools and machinery.
 
 
-{\parindent0pt
+For the Risk Assessment, refer to the separate document.
 
-Details on how the controller microcontroller software and hardware was developed and interfaced within the scope of the project can be found in  §\ref{sec:} and §\ref{sec:} respectively.
+\subsection{COSHH Forms}\label{sec:coshh_forms}
 
-Details on how the receiver microcontroller software and hardware was developed and interfaced within the scope of the project can be found in  §\ref{sec:} and §\ref{sec:} respectively.
+A series of control of substances hazardous to health (COSHH) forms have been completed in accordance with manufacturers recommendations. 
+The COSHH forms outline the safe usage for substances that are potentially damaging to both the user's health and the environment. 
+These forms are a useful aid for tracking and monitoring the potentially harmful substances used within the project. 
+These documents serve as safe practise guides for working with dangerous substances.
 
-Details on how the ESCs were interfaced with can be found in §\ref{sec:}.
 
-Details on how the L298N was interfaced with can be found in §\ref{sec:}.
+For the COSHH forms, please refer to the separate documents.
 
-Detailed on how the 12V, 5V, and 3V Regulators were interfaced with can be found in §\ref{sec:}.
+\subsection{Saftey Measures}\label{sec:safety_measures}
 
-}
+Given the large form factor and heavy payload requirements of the HEVCS platform, following appropriate safety measures and protocols will be vital in ensuring the wellbeing of the team members. 
+Before beginning any hardware development, all participating members will be required to read the relevant risk assessments and COSHH forms for the activity they are undertaking. 
+This will ensure the safest possible working environment in which team members are aware of the risks of any given activity, and how to mitigate against them. 
+If these protocols are not followed it could lead to potentially life altering or fatal accidents. 
+As a result of this, multiple safety measures have been considered and implemented. 
+These have been outlined below.
 
+
+Safety measures involve collision avoidance by using LiDAR sensors that detect obstacles around the platform, activating the brakes before impact. 
+The motors will also be stopped if the platform is trying to be driven down a slope greater than 20 degrees or a set of steps with a larger  than specified appropriate drop. 
+Thresholds will be set to stop the platform from traversing terrain it is not capable of.
+
+
+The controller for the platform will utilise a breakaway connector which disconnects from the platform when it moves too far from the operator, causing the platform to halt operation, immobilising the motors. 
+The platform will also enter an immobilised state of operation if the controller becomes unresponsive at any point.
+
+
+When testing the platform, a safe environment will be utilised. Only persons required to be in attendance will be allowed within the testing environment. 
+For full scale testing of a new firmware version uploaded to the platform, only the team members are allowed to be within the testing environment. 
+For finalised testing, the platform will be subjected to all environments that it is likely to experience in daily use, such as dark roads and uneven flooring.
+
+
+To reduce the risk of a bug in firmware being uploaded to the full-scale platform, a series of small-scale mock-ups and testing rigs will be made and utilised.
+
+
+Safe coding practises will be observed when writing and uploading code onto the platform. 
+These include changes to the code being checked, and a testing procedure being run before approval to upload the code is given. 
+This will implement a three-step code approval process starting with a test bench, continued into a small-scale model before being uploaded onto the full-sized platform. 
+Before changes to the code are uploaded onto the full-sized platform, the changes must be reviewed and approved by another member of the group.
+
+
+Any safety critical sections of code will require the previously outlined levels of approval with further safety measures being implemented. 
+The safety critical code must be checked and approved by all members of the group. 
+This will involve a full review by the team including an outline of the changes presented by the group member who implemented them.
+Safety critical elements of the code are defined as any code that modifies the locomotion of the platform or adapts how the platform behaves when the controller is disconnected. 
+
+\section{Internationalisation - Global Market}\label{sec:internationalisation}
+
+Introducing the HEVCS to the global market is highly achievable but would need to be done with several considerations in mind.
+Given the nature of charging batteries from within the home, suitable infrastructure would need to be evaluated.
+Given that the UK runs off 230V 50Hz AC power, the HEVCS will be designed to run off these ratings. 
+This would work throughout Europe, due to the voltages being harmonised in 2003 (when the UK was still part of the European Union (EU))\cite{UK_Voltage_Change}, meaning that only the plug connected to the platform would need to be changed. 
+Using a universal plug connection, such as an IEC 60320, would allow the charging circuitry to be universal in any country that uses the same power levels as the UK.
+Other locations, such as the United States of America (USA), use 120Vac so would require differing power circuit to be implemented\cite{Voltages_And_Frequencies}. 
+
+
+Along with charging circuitry, the HEVCS platform would need to be checked against the plurality of local legislation. 
+Local regulations for step height, doorframe size, and curb dimensions, would need to be checked and if required, the design may need to be adapted to accommodate global regulations. 
+
+
+The platforms classification may also need to be adapted, depending on the specific country requirements. 
+This could be anything from adapting the size of the platform, to reducing its payload. 
+Some of these may require a considerable redesign to accommodate regional legislation.
 \newpage
 \bibliographystyle{IEEEtranN}
 \bibliography{refs}
