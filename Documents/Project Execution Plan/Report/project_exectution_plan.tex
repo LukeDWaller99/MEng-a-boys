@@ -194,7 +194,7 @@ While strength is a requirement, it is also equally important to balance strengt
 
 Safety of both the user and other pedestrians is also a significant concern. At the limit of 4 mph (1.8 m/s), a 100KG chassis will have significant kinetic energy, and with the torque required to move such a weight, significant injury could be caused to a pedestrian. Impacts with terrain and obstacles could cause heavy damage to both property and to the platform, with a risk of compromising the battery payload.
 
-Given the challenging height requirement of 155mm, to fit under 53\% of modern electric vehicles   the team collected data for, the design will have tight spatial requirements placed upon it. Ensuring that the design is compact enough to fit underneath a vehicle will provide a significant challenge; a focus on compact design methodologies will have to be maintained throughout all related components of the design.
+Given the challenging height requirement of 155mm, to fit under 53\% of modern electric vehicles the team collected data for \ref{app:Car_Dimensions}, the design will have tight spatial requirements placed upon it. Ensuring that the design is compact enough to fit underneath a vehicle will provide a significant challenge; a focus on compact design methodologies will have to be maintained throughout all related components of the design.
 
 
 \subsubsection{Sponsorship Challenges}
@@ -208,7 +208,7 @@ Additional reports required for the sponsorship must be completed alongside the 
 
 The platform must be built by those who have signed the risk assessments, and in a safe environment with the necessary safety equipment. The platform must be stored in a secure room, and in a safe manner. Once the system is operational, and driving test are being conducted via the controller, the testing area must be clearly marked, and no members of the public can be present.
 
-The global shortage of electronic components has had and continues to have massive ramifications for any project. With the shortage of semiconductors, many microcontrollers have long lead times, consequently ordering microcontrollers for this project would not be feasible. The team will be using Nucelo-F429ZI boards that they already own to help alleviate the supply chain issue on microcontrollers. Other factors, such as global warming and the Russian invasion of Ukraine, have also supplemented supply chain issues. Global warming has cause draughts, fires, and flooding all over the globe which has affected suppliers’ ability to produce the raw materials for manufacturing components. Russia’s invasion of Ukraine has impacted the supply of Neon gas, which is a commonly used when laser cutting, causing manufacturers to struggle with the demand for their products (https://blog.matric.com/electronic-component-shortages-update). Due to these factors, the team may struggle to order components for the HEVCS platform within the time scale of the project. The inflated prices will make procuring the components within the budget more challenging.
+The global shortage of electronic components has had and continues to have massive ramifications for any project. With the shortage of semiconductors, many microcontrollers have long lead times, consequently ordering microcontrollers for this project would not be feasible. The team will be using Nucelo-F429ZI boards that they already own to help alleviate the supply chain issue on microcontrollers. Other factors, such as global warming and the Russian invasion of Ukraine, have also supplemented supply chain issues. Global warming has cause draughts, fires, and flooding all over the globe which has affected suppliers’ ability to produce the raw materials for manufacturing components. Russia’s invasion of Ukraine has impacted the supply of Neon gas, which is a commonly used when laser cutting, causing manufacturers to struggle with the demand for their products \cite{Supply_Chain}. Due to these factors, the team may struggle to order components for the HEVCS platform within the time scale of the project. The inflated prices will make procuring the components within the budget more challenging.
 
 \section{Legal Requirements}
 \subsection{Legal Restrictions of Use}
@@ -315,7 +315,7 @@ Risk have been identified, assessed, and had preventive measures put in place to
 Various elements of the project can be subject to change, but the decisions made in relation to the change must be agreed on by the team and Sirmon. The methodology use must not prevent change but enable it by utilising the most appropriate tools to identify the best alternative.
 
 \textbf{Progress}\\
-Progress can be shown by transforming the tasking into outputs that, when illustrated by the GANTT chart, can present an overview of regular achievements. It is important to track progress and witness regular developments in the project to plan the next steps accordingly, and with an element of strategical flow. It can also highlight incomplete tasks which are taking longer than expected.
+Progress can be shown by transforming the tasking into outputs that, when illustrated by the GANTT chart \ref{app:Gantt_Chart}, can present an overview of regular achievements. It is important to track progress and witness regular developments in the project to plan the next steps accordingly, and with an element of strategical flow. It can also highlight incomplete tasks which are taking longer than expected.
 
 \subsection{PRINCE2: The 7 Processes}\label{sec:7_processes}
 The processes define the order in which the project is progressed, and the outcomes that require assessment before starting the next stage. With each process overseen by the team members and presented to Sirmon, the management of tasks responsibility and review development are carried out regularly throughout each stage.
@@ -769,6 +769,25 @@ Some of these may require a considerable redesign to accommodate regional legisl
 \newpage
 \bibliographystyle{IEEEtranN}
 \bibliography{refs}
+
+\newpage
+\appendix
+
+\section{Car Dimensions}\label{app:Car_Dimensions}
+
+\begin{figure}[H]
+    \centerline{\includegraphics[width=1\textwidth]{CarDimensions.png}}
+    \caption{Car dimensions research}
+    \label{fig:CarDimensions}
+\end{figure}
+
+\section{Gantt Chart}\label{app:Gantt_Chart}
+
+\begin{figure}[H]
+    \centerline{\includegraphics[width=1\textwidth]{GanttChart.png}}
+    \caption{Gantt Chart}
+    \label{fig:GanttChart}
+\end{figure}
 
 
 \end{document}
