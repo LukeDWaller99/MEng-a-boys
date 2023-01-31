@@ -1,5 +1,0 @@
-Phase 2 involved undertaking initial prototyping and light development of the work to further the work conducted at the end of Phase 1 and to supplement the work being conducted within Phase 3. Phase 2 ran alongside three full-time university modules. It was used as a basis for the prototyping for the project. During Phase 2, initial designs were created, tested, and evaluated. 
-
-The second phase helped focus the design requirements for the project, whilst evaluating what would be possible within the given time scaled budget. The use of threads, learned from ELEC351, along with the development of classes, drove the development of my project from an Arduino based solution to an ARM based solution, as this enabled the use of RTOS functionality. 
-
-The initial prototypes produced in Phases 1 and 2 helped me evaluate critical dimensions and functionalities of the final craft. 

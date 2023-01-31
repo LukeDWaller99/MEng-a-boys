@@ -1,3 +1,0 @@
-Phase 1 of the project was ensuring that the planning, research, and development was conducted in aline with the agile methodology. The objectives from Phase 1 are outlined in Appendix \ref{app:phase_1}. At this stage, The design requirements and optioneering were considered.  
-
-From this initial planning phase, a design brief, Gantt Chart, and future steps were created and agreed upon with the project supervisior. A clear set of requirements had been established along with identification of rudimentary concept ideas. The resultant concepts and decision making processes (optioneering) are detailed in section \ref{sec:research} and section \ref{sec:optioneering}.  

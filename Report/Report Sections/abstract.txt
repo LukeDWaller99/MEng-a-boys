@@ -1,4 +1,0 @@
-Oceans make up over 70% of the worlds surface. They are vital to all life on the planet as a large majority of the oxygen on the planet comes from phytoplankton that live near the surface of the water. It is estimated that over 10 million tonnes of litter end up in the ocean each year. It is estimated that by 2050 the amount of plastic in the ocean will outnumber the fish, with about 15% floating on the surface (1.5 million tonnes). This on-surface that is being targeted by the On-water Rubbish Collection robot with Automated sensing (O.R.C.A). 
-Several solutions to this problem have been created; however, the O.R.C.A based solution aims at a novel application that has previously been left unexplored. O.R.C.A aims to collect rubbish from within in-land bodies of water, plastic chokeholds, using a conveyor-based system to remove the rubbish from the water. 
-
-Keywords: Waste Collection, Microcontroller, Conveyor belt, C++
