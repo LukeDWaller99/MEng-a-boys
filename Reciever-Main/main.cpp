@@ -2,7 +2,25 @@
     @file Main.cpp
     Main file for Final Year project Receiver - Luke Waller
 **/
+#include <mbed.h>
+#include "ESC.h"
+#include "PinNames.h"
 
+#define SeroPin PE_6
+
+ESC servo(SeroPin);
+
+int main(){
+    while(true){
+    wait_us(5000000);
+    servo.write(1.0f);
+    wait_us(5000000);
+    servo.write(0.0f);
+    }
+
+}
+
+/*
 #include <cstdio>
 #include <mbed.h>
 #include <nRF24L01P.h>
@@ -584,4 +602,4 @@ void IRIRQ(){
 void flipOutput(DigitalOut pin){
     pin = !pin; 
 }
-
+*/
