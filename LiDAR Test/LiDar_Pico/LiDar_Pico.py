@@ -2,6 +2,28 @@ import pimoroni_i2c
 import breakout_vl53l5cx
 import time
 
+#fun little number to find the average of a list
+def average(lst):
+    return sum(lst)/len(lst)
+
+def grab_left(distances,mode):
+    left_edge_data = []
+    for i in range(mode):
+    # Calculate the index of the sensor on the left edge of the current row
+        left_edge_index = i * mode
+    # Append the sensor data at the calculated index to the left_edge_data list
+        left_edge_data.append(distances[left_edge_index])
+    return left_edge_data
+
+def grab_right(distances,mode):
+    right_edge_data = []
+    for i in range(mode):
+    # Calculate the index of the sensor on the right edge of the current row
+        right_edge_index = i * mode + (mode - 1)
+    # Append the sensor data at the calculated index to the right_edge_data list
+        right_edge_data.append(distances[right_edge_index])
+    return right_edge_data
+
 # The VL53L5CX requires a firmware blob to start up.
 # Make sure you upload "vl53l5cx_firmware.bin" via Thonny to the root of your filesystem
 # You can find it here: https://github.com/ST-mirror/VL53L5CX_ULD_driver/blob/no-fw/lite/en/vl53l5cx_firmware.bin
@@ -9,9 +31,12 @@ import time
 PINS_BREAKOUT_GARDEN = {"sda": 4, "scl": 5}
 PINS_PICO_EXPLORER = {"sda": 20, "scl": 21}
 
+sensor_mode = 4;
+
 # Sensor startup time is proportional to i2c baudrate
 # HOWEVER many sensors may not run at > 400KHz (400000)
 i2c = pimoroni_i2c.PimoroniI2C(**PINS_BREAKOUT_GARDEN, baudrate=2_000_000)
+
 
 print("Starting up sensor...")
 t_sta = time.ticks_ms()
@@ -20,7 +45,8 @@ t_end = time.ticks_ms()
 print("Done in {}ms...".format(t_end - t_sta))
 
 # Make sure to set resolution and other settings *before* you start ranging
-sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
+#sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
+sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
 sensor.start_ranging()
 
 while True:
@@ -29,8 +55,22 @@ while True:
         # it includes average readings as "distance_avg" and "reflectance_avg"
         # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
         data = sensor.get_data()
+        data_length = len(data.distance)
         print("{}mm {}% (avg: {}mm {}%)".format(
             data.distance[0],
             data.reflectance[0],
             data.distance_avg,
             data.reflectance_avg))
+        print("TL={} TR={} BL={} BR={}".format(
+            data.distance[55],
+            data.distance[63],
+            data.distance[0],
+            data.distance[7]))
+        lst_low= data.distance[0:8]
+        lst_top= data.distance[-8:64]
+        print("TOP={} LOW={} LEFT={} RIGHT={}".format(
+            average(lst_top),
+            average(lst_low),
+            average(grab_left(data.distance,sensor_mode)),
+            average(grab_right(data.distance,sensor_mode))))
+        print("Number of distance samples:",data_length)
