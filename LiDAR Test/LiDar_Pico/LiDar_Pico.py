@@ -2,6 +2,7 @@ import pimoroni_i2c
 import breakout_vl53l5cx
 import time
 #this is normally bad, but it's my module so meh
+#MAKE SURE THIS FILE IS PRESENT ON THE BOARD FIRST! IF IT CAN'T FIND IT, THAT'S WHY!
 from L_Proc import *
 
 #fun little number to find the average of a list
@@ -31,8 +32,10 @@ t_end = time.ticks_ms()
 print("Done in {}ms...".format(t_end - t_sta))
 
 # Make sure to set resolution and other settings *before* you start ranging
-#sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
-sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
+if sensor_mode == 4:
+    sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
+else:
+    sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
 sensor.start_ranging()
 
 while True:
