@@ -1,6 +1,10 @@
 #VL53 data processing functions - J Pendlebury 2023
 # Use these functions to do stuff to the arrays passed by the ToF sensors.
 
+#this function takes the distance list and finds the dimensions - 4x4 or 8x8
+# RET: 4 if 4x4, 8 if 8x8 mode
+def calc_mode(distances):
+    return int(len(distances)**(1/2))
 def grab_left(distances,mode):
     left_edge_data = []
     for i in range(mode):
@@ -18,3 +22,4 @@ def grab_right(distances,mode):
     # Append the sensor data at the calculated index to the right_edge_data list
         right_edge_data.append(distances[right_edge_index])
     return right_edge_data
+
