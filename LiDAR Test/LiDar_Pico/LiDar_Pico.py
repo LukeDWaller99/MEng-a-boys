@@ -31,7 +31,7 @@ t_end = time.ticks_ms()
 print("Done in {}ms...".format(t_end - t_sta))
 
 # Make sure to set resolution and other settings *before* you start ranging
-if sensor_mode == 8:
+if sensor_mode == 4:
     sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
 else:
     sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
@@ -44,4 +44,7 @@ while True:
         # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
         data = sensor.get_data()
         diag_print(data, sensor_mode)
+        print(centre_grid(data.distance, sensor_mode))
+        print("Average: {}".format(
+            centre_grid_avg(centre_grid(data.distance, sensor_mode))))
         

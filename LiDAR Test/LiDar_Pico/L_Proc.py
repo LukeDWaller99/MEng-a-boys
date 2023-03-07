@@ -24,11 +24,11 @@ def diag_print(data,sensor_mode):
         data.reflectance[0],
         data.distance_avg,
         data.reflectance_avg))
-    print("TL={} TR={} BL={} BR={}".format(
-        data.distance[55],
-        data.distance[63],
-        data.distance[0],
-        data.distance[7]))
+#     print("TL={} TR={} BL={} BR={}".format(
+#         data.distance[55],
+#         data.distance[63],
+#         data.distance[0],
+#         data.distance[7]))
     lst_low= data.distance[0:8]
     lst_top= data.distance[-8:64]
     print("TOP={} LOW={} LEFT={} RIGHT={}".format(
@@ -109,13 +109,13 @@ def centre_grid(distances,mode):
     - A list of the middle 4 readings in the sensor grid.
     """
     # Extract the middle 2x2 grid of readings from the center of the sensor grid
-    if grid_size == 4:
+    if mode == 4:
         middle_readings = [
             distances[5], distances[6],
             distances[9], distances[10]
         ]
     # Extract the middle 4x4 grid of readings from the center of the sensor grid
-    elif grid_size == 8:
+    elif mode == 8:
         middle_readings = [
             distances[19], distances[20], distances[21], distances[22],
             distances[27], distances[28], distances[29], distances[30],
