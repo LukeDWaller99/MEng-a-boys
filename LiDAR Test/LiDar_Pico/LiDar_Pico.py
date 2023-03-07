@@ -6,8 +6,7 @@ import time
 from L_Proc import *
 
 #fun little number to find the average of a list
-def average(lst):
-    return sum(lst)/len(lst)
+
 
 
 
@@ -44,22 +43,5 @@ while True:
         # it includes average readings as "distance_avg" and "reflectance_avg"
         # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
         data = sensor.get_data()
-        data_length = len(data.distance)
-        print("{}mm {}% (avg: {}mm {}%)".format(
-            data.distance[0],
-            data.reflectance[0],
-            data.distance_avg,
-            data.reflectance_avg))
-        print("TL={} TR={} BL={} BR={}".format(
-            data.distance[55],
-            data.distance[63],
-            data.distance[0],
-            data.distance[7]))
-        lst_low= data.distance[0:8]
-        lst_top= data.distance[-8:64]
-        print("TOP={} LOW={} LEFT={} RIGHT={}".format(
-            average(lst_top),
-            average(lst_low),
-            average(grab_left(data.distance,sensor_mode)),
-            average(grab_right(data.distance,sensor_mode))))
-        print("Number of distance samples:",data_length)
+        diag_print(data, sensor_mode)
+        
