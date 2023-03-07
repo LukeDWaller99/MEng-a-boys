@@ -3,6 +3,38 @@
 
 #this function takes the distance list and finds the dimensions - 4x4 or 8x8
 # RET: 4 if 4x4, 8 if 8x8 mode
+
+def diag_print(distances,mode):
+    """
+    Prints default diagnostic infomation, including basic outputs.
+    
+    Args:
+    - distances: A list of distance readings from a square sensor grid.
+    - mode: An integer representing sensor mode
+
+    Returns:
+    NULL
+    """
+    data_length = len(distances)
+        print("{}mm {}% (avg: {}mm {}%)".format(
+            data.distance[0],
+            data.reflectance[0],
+            data.distance_avg,
+            data.reflectance_avg))
+        print("TL={} TR={} BL={} BR={}".format(
+            data.distance[55],
+            data.distance[63],
+            data.distance[0],
+            data.distance[7]))
+        lst_low= data.distance[0:8]
+        lst_top= data.distance[-8:64]
+        print("TOP={} LOW={} LEFT={} RIGHT={}".format(
+            average(lst_top),
+            average(lst_low),
+            average(grab_left(data.distance,sensor_mode)),
+            average(grab_right(data.distance,sensor_mode))))
+        print("Number of distance samples:",data_length)
+
 def calc_mode(distances):
     """
     Uses powers to find the sensor mode. By taking the square root of the length of the data list,
