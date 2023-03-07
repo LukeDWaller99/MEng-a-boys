@@ -32,7 +32,7 @@ t_end = time.ticks_ms()
 print("Done in {}ms...".format(t_end - t_sta))
 
 # Make sure to set resolution and other settings *before* you start ranging
-if sensor_mode == 4:
+if sensor_mode == 8:
     sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
 else:
     sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
