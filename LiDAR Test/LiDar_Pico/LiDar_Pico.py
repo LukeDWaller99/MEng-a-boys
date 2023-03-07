@@ -1,28 +1,14 @@
 import pimoroni_i2c
 import breakout_vl53l5cx
 import time
+#this is normally bad, but it's my module so meh
+from L_Proc import *
 
 #fun little number to find the average of a list
 def average(lst):
     return sum(lst)/len(lst)
 
-def grab_left(distances,mode):
-    left_edge_data = []
-    for i in range(mode):
-    # Calculate the index of the sensor on the left edge of the current row
-        left_edge_index = i * mode
-    # Append the sensor data at the calculated index to the left_edge_data list
-        left_edge_data.append(distances[left_edge_index])
-    return left_edge_data
 
-def grab_right(distances,mode):
-    right_edge_data = []
-    for i in range(mode):
-    # Calculate the index of the sensor on the right edge of the current row
-        right_edge_index = i * mode + (mode - 1)
-    # Append the sensor data at the calculated index to the right_edge_data list
-        right_edge_data.append(distances[right_edge_index])
-    return right_edge_data
 
 # The VL53L5CX requires a firmware blob to start up.
 # Make sure you upload "vl53l5cx_firmware.bin" via Thonny to the root of your filesystem
