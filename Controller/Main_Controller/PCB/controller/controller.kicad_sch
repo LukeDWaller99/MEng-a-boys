@@ -15370,7 +15370,7 @@
     (property "Value" "SW_SPST" (at 205.5114 74.93 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Button_Switch_SMD:SW_Push_1P1T_NO_6x6mm_H9.5mm" (at 205.74 77.47 0)
+    (property "Footprint" "My_library:Toggle_Switch_10TC605" (at 205.74 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 205.74 77.47 0)
