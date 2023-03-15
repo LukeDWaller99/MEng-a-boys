@@ -12,6 +12,11 @@ led1 = Pin(13,Pin.OUT)
 led2 = Pin(12, Pin.OUT)
 led3 = Pin(11, Pin.OUT)
 
+vl1 = Pin(16, Pin.OUT)
+vl2 = Pin(17, Pin.OUT)
+
+vl1.value(0)
+vl2.value(1)
 
 # The VL53L5CX requires a firmware blob to start up.
 # Make sure you upload "vl53l5cx_firmware.bin" via Thonny to the root of your filesystem
