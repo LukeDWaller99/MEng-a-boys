@@ -1,10 +1,11 @@
 """
 Transistor bus class
-Will take pointers to six gpio pins, and allow them to be toggled easily
+Will take pointers to n gpio pins, and allow them to be toggled easily
 """
 from machine import Pin
 
 class Tran_Bus:
+    tran_pins = []
     def __init__(self, pin_list):
         """
         Constructor for the Transistor Bus.
@@ -17,4 +18,9 @@ class Tran_Bus:
         self.tran_pins += [Pin(pin_number, Pin.OUT) for pin_number in pin_list]
         print("Initialising complete. Initialised {} pins".format(
             len(self.tran_pins)))
-        
+    
+    def __str__(self):
+        return 'Tran Bus has ' + str(len(self.tran_pins)) + ' pins: ' + str(self.tran_pins)
+    
+    def all_off(self):
+        pass
