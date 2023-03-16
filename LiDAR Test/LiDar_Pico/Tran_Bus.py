@@ -23,4 +23,13 @@ class Tran_Bus:
         return 'Tran Bus has ' + str(len(self.tran_pins)) + ' pins: ' + str(self.tran_pins)
     
     def all_off(self):
-        pass
+        for pin in self.tran_pins:
+            pin.value(0)
+            
+    def all_on(self):
+        for pin in self.tran_pins:
+            pin.value(1)
+            
+    def enable(self,pin):
+        self.all_off()
+        self.tran_pins[pin].value(1)
