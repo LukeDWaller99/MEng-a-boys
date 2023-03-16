@@ -7,6 +7,7 @@ from machine import Pin
 class Tran_Bus:
     tran_pins = []
     pin_args = [] #store for repr call
+    current_enable = 0;
     def __init__(self, pin_list):
         """
         Constructor for the Transistor Bus.
@@ -37,4 +38,5 @@ class Tran_Bus:
             
     def enable(self,pin):
         self.all_off()
+        self.current_enable = pin
         self.tran_pins[pin].value(1)
