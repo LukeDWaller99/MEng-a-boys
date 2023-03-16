@@ -23,7 +23,7 @@ class Tran_Bus:
             len(self.tran_pins)))
     
     def __str__(self):
-        return 'Tran Bus has ' + str(len(self.tran_pins)) + ' pins: ' + str(self.tran_pins)
+        return 'Tran Bus has ' + str(len(self.tran_pins)) + ' pins: ' + str(self.tran_pins) + ' Enabled: ' +self.current_enable
     
     def __repr__(self):
         return str(self.tran_pins)
