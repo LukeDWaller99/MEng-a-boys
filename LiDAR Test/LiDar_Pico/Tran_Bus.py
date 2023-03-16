@@ -6,6 +6,7 @@ from machine import Pin
 
 class Tran_Bus:
     tran_pins = []
+    pin_args = [] #store for repr call
     def __init__(self, pin_list):
         """
         Constructor for the Transistor Bus.
@@ -13,6 +14,7 @@ class Tran_Bus:
         - pin_list
         """
         print("Initialising Tran Bus")
+        self.pin_args = pin_list
         print("Pin args: {}".format(
             pin_list))
         self.tran_pins += [Pin(pin_number, Pin.OUT) for pin_number in pin_list]
@@ -21,6 +23,9 @@ class Tran_Bus:
     
     def __str__(self):
         return 'Tran Bus has ' + str(len(self.tran_pins)) + ' pins: ' + str(self.tran_pins)
+    
+    def __repr__(self):
+        return str(self.tran_pins)
     
     def all_off(self):
         for pin in self.tran_pins:

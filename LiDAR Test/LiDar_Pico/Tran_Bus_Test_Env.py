@@ -17,6 +17,5 @@ while True:
     bus.all_off()
     time.sleep(1)
     for x in range(3):
-        print(x)
         bus.enable(x)
         time.sleep(1)
