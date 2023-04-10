@@ -70,10 +70,10 @@ while True:
         # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
         data = sensor.get_data()
         #diag_print(data, sensor_mode)
-        print(centre_grid(data.distance, sensor_mode))
+        #print(centre_grid(data.distance, sensor_mode))
         cent_reading = int(centre_grid_avg(centre_grid(data.distance, sensor_mode)))
-        print("Average: {}".format(
-            cent_reading))
+        #print("Average: {}".format(
+        #    cent_reading))
         t_end2 = time.ticks_ms()
         print("Sensing done in {}ms...".format(t_end2 - t_start))
         ##now, do the LEDS
@@ -89,6 +89,5 @@ while True:
             led1.value(0)
             led2.value(0)
             led3.value(1)
-            t_start = time.ticks_ms()
         iterations = iterations +1
         print(iterations)
