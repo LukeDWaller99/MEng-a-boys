@@ -651,14 +651,3 @@ TSWLatexianTemp*
 
 # xwatermark package
 *.xwm
-
-# KiCad
-*-bak
-*-backups
-*-cache*
-*-bak*
-_autosave*
-\#auto_saved_files\#
-
-.DS_Storex
-
