@@ -3,8 +3,9 @@ import breakout_vl53l5cx
 from machine import Pin
 import time
 #this is normally bad, but it's my module so meh
-#MAKE SURE THIS FILE IS PRESENT ON THE BOARD FIRST! IF IT CAN'T FIND IT, THAT'S WHY!
+#MAKE SURE THESE FILES IS PRESENT ON THE BOARD FIRST! IF IT CAN'T FIND IT, THAT'S WHY!
 from L_Proc import *
+from Tran_Bus import *
     
 #LED pins, for debugging only
 led1 = Pin(13,Pin.OUT)
@@ -25,8 +26,9 @@ vl2.value(0)
 PINS_BREAKOUT_GARDEN = {"sda": 4, "scl": 5}
 PINS_PICO_EXPLORER = {"sda": 20, "scl": 21}
 
-sensor_mode = 4;
+sensor_mode = 8
 
+iterations = 0
 # Sensor startup time is proportional to i2c baudrate
 # HOWEVER many sensors may not run at > 400KHz (400000)
 i2c = pimoroni_i2c.PimoroniI2C(**PINS_BREAKOUT_GARDEN, baudrate=2_000_000)
@@ -64,6 +66,7 @@ while True:
     vl2.value(0)
     t_start = time.ticks_ms()
     if sensor.data_ready():
+        print("Reading sensor 1")
         # "data" is a namedtuple (attrtuple technically)
         # it includes average readings as "distance_avg" and "reflectance_avg"
         # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
@@ -92,6 +95,7 @@ while True:
     vl1.value(0)
     vl2.value(1)
     if sensor.data_ready():
+        print("Reading sensor 2")
         # "data" is a namedtuple (attrtuple technically)
         # it includes average readings as "distance_avg" and "reflectance_avg"
         # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
@@ -116,3 +120,5 @@ while True:
             led1.value(0)
             led2.value(0)
             led3.value(1)
+        iterations = iterations +1
+        print(iterations)

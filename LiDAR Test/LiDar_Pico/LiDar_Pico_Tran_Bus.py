@@ -5,27 +5,30 @@ import time
 #this is normally bad, but it's my module so meh
 #MAKE SURE THIS FILE IS PRESENT ON THE BOARD FIRST! IF IT CAN'T FIND IT, THAT'S WHY!
 from L_Proc import *
-    
+from Tran_Bus import *    
 #LED pins, for debugging only
 led1 = Pin(13,Pin.OUT)
 led2 = Pin(12, Pin.OUT)
 led3 = Pin(11, Pin.OUT)
 
 #lidar pins
-vl1 = Pin(16, Pin.OUT)
-vl2 = Pin(17, Pin.OUT)
+lidar_control_pins = [16,17]
+#vl1 = Pin(16, Pin.OUT)
+#vl2 = Pin(17, Pin.OUT)
 #default 1 to active
-vl1.value(1)
-vl2.value(0)
-
+#vl1.value(1)
+#vl2.value(0)
+bus = Tran_Bus(lidar_control_pins)
+bus.all_off()
+bus.enable(0)
 # The VL53L5CX requires a firmware blob to start up.
 # Make sure you upload "vl53l5cx_firmware.bin" via Thonny to the root of your filesystem
 # You can find it here: https://github.com/ST-mirror/VL53L5CX_ULD_driver/blob/no-fw/lite/en/vl53l5cx_firmware.bin
 
 PINS_BREAKOUT_GARDEN = {"sda": 4, "scl": 5}
 PINS_PICO_EXPLORER = {"sda": 20, "scl": 21}
-
-sensor_mode = 4;
+iterations=0
+sensor_mode = 8
 
 # Sensor startup time is proportional to i2c baudrate
 # HOWEVER many sensors may not run at > 400KHz (400000)
@@ -44,8 +47,7 @@ else:
     sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
 sensor.start_ranging()
 #connect to sensor 2
-vl1.value(0)
-vl2.value(1)
+bus.enable(1)
 print("Starting up sensor...")
 t_sta = time.ticks_ms()
 sensor = breakout_vl53l5cx.VL53L5CX(i2c)
@@ -60,8 +62,7 @@ else:
 sensor.start_ranging()
 
 while True:
-    vl1.value(1)
-    vl2.value(0)
+    bus.enable(0)
     t_start = time.ticks_ms()
     if sensor.data_ready():
         # "data" is a namedtuple (attrtuple technically)
@@ -89,8 +90,7 @@ while True:
             led2.value(0)
             led3.value(1)
             t_start = time.ticks_ms()
-    vl1.value(0)
-    vl2.value(1)
+    bus.enable(1)
     if sensor.data_ready():
         # "data" is a namedtuple (attrtuple technically)
         # it includes average readings as "distance_avg" and "reflectance_avg"
@@ -116,3 +116,5 @@ while True:
             led1.value(0)
             led2.value(0)
             led3.value(1)
+        iterations = iterations +1
+        print(iterations)
