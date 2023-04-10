@@ -40,3 +40,10 @@ class Tran_Bus:
         self.all_off()
         self.current_enable = pin
         self.tran_pins[pin].value(1)
+        
+    def advance(self):
+        if self.current_enable is None:
+            self.enable(0)
+        else:
+            next_pin = (self.current_enable + 1) % len(self.tran_pins)
+            self.enable(next_pin)

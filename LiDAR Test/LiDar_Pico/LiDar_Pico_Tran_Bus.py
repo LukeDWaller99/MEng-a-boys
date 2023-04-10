@@ -62,7 +62,7 @@ else:
 sensor.start_ranging()
 
 while True:
-    bus.enable(0)
+    bus.advance()
     t_start = time.ticks_ms()
     if sensor.data_ready():
         # "data" is a namedtuple (attrtuple technically)
@@ -90,31 +90,5 @@ while True:
             led2.value(0)
             led3.value(1)
             t_start = time.ticks_ms()
-    bus.enable(1)
-    if sensor.data_ready():
-        # "data" is a namedtuple (attrtuple technically)
-        # it includes average readings as "distance_avg" and "reflectance_avg"
-        # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
-        data = sensor.get_data()
-        #diag_print(data, sensor_mode)
-        print(centre_grid(data.distance, sensor_mode))
-        cent_reading = int(centre_grid_avg(centre_grid(data.distance, sensor_mode)))
-        print("Average: {}".format(
-            cent_reading))
-        t_end2 = time.ticks_ms()
-        print("Sensing done in {}ms...".format(t_end2 - t_start))
-        ##now, do the LEDS
-        if cent_reading < 50:
-            led1.value(1)
-            led2.value(0)
-            led3.value(0)
-        elif (cent_reading > 50) and (cent_reading < 150):
-            led1.value(0)
-            led2.value(1)
-            led3.value(0)
-        else:
-            led1.value(0)
-            led2.value(0)
-            led3.value(1)
         iterations = iterations +1
         print(iterations)
