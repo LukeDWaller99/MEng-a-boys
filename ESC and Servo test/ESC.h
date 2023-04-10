@@ -6,11 +6,11 @@
 #ifndef __ESC_H__
 #define __ESC_H__
 
-#define PWM_OFFSET          1500.0f
+#define PWM_MIN             500.0f
+#define PWM_MID_POINT       1000.0f
+#define PWM_MAX             1500.0f
 #define PWM_RANGE           1000.0f
 #define ESC_CALIBRATE_TIME  4000000
-#define MIN_THROTTLE        -1.0f
-#define MAX_THROTTLE        1.0f
 #define DEFAULT_PWM_VALUE   20
 
 /**

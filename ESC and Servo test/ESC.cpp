@@ -30,13 +30,14 @@ ESC& ESC::operator= (int on_off){
 float ESC::normalise(float speed){
 
     float clampedValue = 0;
+    clampedValue = PWM_MID_POINT + speed * PWM_MIN;
 
-    if (speed < MIN_THROTTLE) {
-        speed = MIN_THROTTLE;
-    } else if (speed > MAX_THROTTLE) {
-        speed = MAX_THROTTLE;
+    if (clampedValue < PWM_MIN) {
+        clampedValue = PWM_MIN;
+    }
+    if (clampedValue > PWM_MAX) {
+        clampedValue = PWM_MAX;
     }
 
-    clampedValue = speed * PWM_RANGE + PWM_OFFSET;
     return clampedValue;
 }
