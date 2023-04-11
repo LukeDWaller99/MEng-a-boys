@@ -20,7 +20,6 @@ lidar_control_pins = [16,17]
 #vl2.value(0)
 bus = Tran_Bus(lidar_control_pins)
 bus.all_off()
-bus.enable(0)
 # The VL53L5CX requires a firmware blob to start up.
 # Make sure you upload "vl53l5cx_firmware.bin" via Thonny to the root of your filesystem
 # You can find it here: https://github.com/ST-mirror/VL53L5CX_ULD_driver/blob/no-fw/lite/en/vl53l5cx_firmware.bin
@@ -34,32 +33,20 @@ sensor_mode = 8
 # HOWEVER many sensors may not run at > 400KHz (400000)
 i2c = pimoroni_i2c.PimoroniI2C(**PINS_BREAKOUT_GARDEN, baudrate=2_000_000)
 
+#boot all sensors
+for x in range(2):
+    bus.advance()
+    print("Starting up sensor...")
+    t_sta = time.ticks_ms()
+    sensor = breakout_vl53l5cx.VL53L5CX(i2c)
+    t_end = time.ticks_ms()
+    print("Done in {}ms...".format(t_end - t_sta))
 
-print("Starting up sensor...")
-t_sta = time.ticks_ms()
-sensor = breakout_vl53l5cx.VL53L5CX(i2c)
-t_end = time.ticks_ms()
-print("Done in {}ms...".format(t_end - t_sta))
-
-if sensor_mode == 4:
-    sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
-else:
-    sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
-sensor.start_ranging()
-#connect to sensor 2
-bus.enable(1)
-print("Starting up sensor...")
-t_sta = time.ticks_ms()
-sensor = breakout_vl53l5cx.VL53L5CX(i2c)
-t_end = time.ticks_ms()
-print("Done in {}ms...".format(t_end - t_sta))
-
-# Make sure to set resolution and other settings *before* you start ranging
-if sensor_mode == 4:
-    sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
-else:
-    sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
-sensor.start_ranging()
+    if sensor_mode == 4:
+        sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
+    else:
+        sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
+    sensor.start_ranging()
 
 while True:
     bus.advance()

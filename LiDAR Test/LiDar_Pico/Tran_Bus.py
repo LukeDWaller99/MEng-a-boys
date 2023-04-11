@@ -31,6 +31,7 @@ class Tran_Bus:
     def all_off(self):
         for pin in self.tran_pins:
             pin.value(0)
+        current_enable = None
             
     def all_on(self):
         for pin in self.tran_pins:
