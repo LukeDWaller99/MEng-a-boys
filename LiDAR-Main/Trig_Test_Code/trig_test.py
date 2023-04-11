@@ -1,26 +1,17 @@
-from math import *
+from LiDAR_Trig import *
+import time
 
-def cos_law(b,c,A):
-    return sqrt(pow(b,2)+pow(c,2)-(2*b*c*(cos(radians(A)))))
-
-def sine_law(side1,side2,angle):
-    return asin((side1/side2)*sin(radians(angle)))
-L1=50 #c
-L2=120 #b
+L1=120 #c
+L2=90 #b
 A = 11.125
-c=L1
-b=L2
-#cosine law for a
-a = sqrt(pow(b,2)+pow(c,2)-(2*b*c*(cos(radians(A)))))
-#sine law for b
-B = sine_law(L2,a,A)
-B = degrees(B)
-if (L2>L1):
-    B = 180-B
-C = 180-A-B
-print(a)
-print(L2)
-print(L1)
-print(A)
-print(B)
-print(C)
+stat_list = tri_stats(L1,L2,A)
+print(stat_list)
+t_sta = time.ticks_ms()
+iterations=100000
+for x in range(iterations):
+    stat_list = tri_stats(L1,L2,A)
+t_end = time.ticks_ms()
+duration = t_end - t_sta
+print(duration)
+avg_duration = duration/iterations
+print(avg_duration)
