@@ -2,6 +2,7 @@ import pimoroni_i2c
 import breakout_vl53l5cx
 from machine import Pin
 import time
+import micropython
 #this is normally bad, but it's my module so meh
 #MAKE SURE THIS FILE IS PRESENT ON THE BOARD FIRST! IF IT CAN'T FIND IT, THAT'S WHY!
 from L_Proc import *
@@ -27,11 +28,11 @@ bus.all_off()
 PINS_BREAKOUT_GARDEN = {"sda": 4, "scl": 5}
 PINS_PICO_EXPLORER = {"sda": 20, "scl": 21}
 iterations=0
-sensor_mode = 4
+sensor_mode = 8
 
 # Sensor startup time is proportional to i2c baudrate
 # HOWEVER many sensors may not run at > 400KHz (400000)
-i2c = pimoroni_i2c.PimoroniI2C(**PINS_BREAKOUT_GARDEN, baudrate=2_000_000)
+i2c = pimoroni_i2c.PimoroniI2C(**PINS_BREAKOUT_GARDEN, baudrate=1_000_000)
 
 #boot all sensors
 t_sta = time.ticks_ms()
@@ -78,3 +79,4 @@ while True:
         iterations = iterations +1
         print(iterations)
         time.sleep(0.01)
+        micropython.mem_info()
