@@ -27,30 +27,29 @@ bus.all_off()
 PINS_BREAKOUT_GARDEN = {"sda": 4, "scl": 5}
 PINS_PICO_EXPLORER = {"sda": 20, "scl": 21}
 iterations=0
-sensor_mode = 8
+sensor_mode = 4
 
 # Sensor startup time is proportional to i2c baudrate
 # HOWEVER many sensors may not run at > 400KHz (400000)
 i2c = pimoroni_i2c.PimoroniI2C(**PINS_BREAKOUT_GARDEN, baudrate=2_000_000)
 
 #boot all sensors
+t_sta = time.ticks_ms()
 for x in range(2):
     bus.advance()
     print("Starting up sensor...")
-    t_sta = time.ticks_ms()
     sensor = breakout_vl53l5cx.VL53L5CX(i2c)
-    t_end = time.ticks_ms()
-    print("Done in {}ms...".format(t_end - t_sta))
-
     if sensor_mode == 4:
         sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
     else:
         sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
     sensor.start_ranging()
+t_end = time.ticks_ms()
+print("Done in {}ms...".format(t_end - t_sta))
 
 while True:
     bus.advance()
-    t_start = time.ticks_ms()
+    #t_start = time.ticks_ms()
     if sensor.data_ready():
         # "data" is a namedtuple (attrtuple technically)
         # it includes average readings as "distance_avg" and "reflectance_avg"
@@ -61,8 +60,8 @@ while True:
         cent_reading = int(centre_grid_avg(centre_grid(data.distance, sensor_mode)))
         #print("Average: {}".format(
         #    cent_reading))
-        t_end2 = time.ticks_ms()
-        print("Sensing done in {}ms...".format(t_end2 - t_start))
+       #t_end2 = time.ticks_ms()
+       # print("Sensing done in {}ms...".format(t_end2 - t_start))
         ##now, do the LEDS
         if cent_reading < 50:
             led1.value(1)
@@ -78,3 +77,4 @@ while True:
             led3.value(1)
         iterations = iterations +1
         print(iterations)
+        time.sleep(0.01)
