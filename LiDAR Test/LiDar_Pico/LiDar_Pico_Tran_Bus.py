@@ -12,6 +12,9 @@ from Tran_Bus import *
 led1 = Pin(13,Pin.OUT)
 led2 = Pin(12, Pin.OUT)
 led3 = Pin(11, Pin.OUT)
+internal_led = Pin(25, Pin.OUT)
+int_led = 0;
+
 #lidar pins
 lidar_control_pins = [16,17]
 #vl1 = Pin(16, Pin.OUT)
@@ -49,23 +52,26 @@ t_end = time.ticks_ms()
 print("Done in {}ms...".format(t_end - t_sta))
 gc.enable()
 while True:
-    
-    #bus.advance()
+    t_loop_sta = time.ticks_ms()
+    bus.advance()
     #t_start = time.ticks_ms()
     if sensor.data_ready():
+        print(bus.current_enable)
+        int_led = int_led ^ 1
+        internal_led.value(int_led)
         # "data" is a namedtuple (attrtuple technically)
         # it includes average readings as "distance_avg" and "reflectance_avg"
         # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
         data = sensor.get_data()
         #diag_print(data, sensor_mode)
-        print(centre_grid(data.distance, sensor_mode))
-        #cent_reading = int(centre_grid_avg(centre_grid(data.distance, sensor_mode)))
+        #print(centre_grid(data.distance, sensor_mode))
+        cent_reading = int(centre_grid_avg(centre_grid(data.distance, sensor_mode)))
         #print("Average: {}".format(
         #    cent_reading))
-       #t_end2 = time.ticks_ms()
-       # print("Sensing done in {}ms...".format(t_end2 - t_start))
+        #t_end2 = time.ticks_ms()
+        #print("Sensing done in {}ms...".format(t_end2 - t_start))
         ##now, do the LEDS
-        cent_reading = 100
+        #cent_reading = 100
         if cent_reading < 50:
             led1.value(1)
             led2.value(0)
@@ -80,6 +86,7 @@ while True:
             led3.value(1)
         iterations = iterations +1
         print(iterations)
-        time.sleep(0.01)
-        micropython.mem_info()
-        gc.collect()
+        #micropython.mem_info()
+        gc.collect()	##clean up memory
+        t_loop_end = time.ticks_ms()
+        print("Loop done in {}ms...".format(t_loop_end - t_loop_sta))
