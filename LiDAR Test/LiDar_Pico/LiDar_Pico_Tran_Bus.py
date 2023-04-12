@@ -90,3 +90,4 @@ while True:
         gc.collect()	##clean up memory
         t_loop_end = time.ticks_ms()
         print("Loop done in {}ms...".format(t_loop_end - t_loop_sta))
+        time.sleep(0.025)
