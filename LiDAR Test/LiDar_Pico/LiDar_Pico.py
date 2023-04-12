@@ -6,7 +6,9 @@ import time
 #MAKE SURE THESE FILES IS PRESENT ON THE BOARD FIRST! IF IT CAN'T FIND IT, THAT'S WHY!
 from L_Proc import *
 from Tran_Bus import *
-    
+
+import gc
+gc.collect()
 #LED pins, for debugging only
 led1 = Pin(13,Pin.OUT)
 led2 = Pin(12, Pin.OUT)
@@ -102,7 +104,7 @@ while True:
         data = sensor.get_data()
         #diag_print(data, sensor_mode)
         print(centre_grid(data.distance, sensor_mode))
-        cent_reading = int(centre_grid_avg(centre_grid(data.distance, sensor_mode)))
+        #cent_reading = int(centre_grid_avg(centre_grid(data.distance, sensor_mode)))
         print("Average: {}".format(
             cent_reading))
         t_end2 = time.ticks_ms()
@@ -122,3 +124,4 @@ while True:
             led3.value(1)
         iterations = iterations +1
         print(iterations)
+        #gc.collect()
