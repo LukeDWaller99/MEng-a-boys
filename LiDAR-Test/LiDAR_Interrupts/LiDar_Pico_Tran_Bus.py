@@ -7,7 +7,8 @@ import gc
 #this is normally bad, but it's my module so meh
 #MAKE SURE THIS FILE IS PRESENT ON THE BOARD FIRST! IF IT CAN'T FIND IT, THAT'S WHY!
 from L_Proc import *
-from Tran_Bus import *    
+from Tran_Bus import *
+from LiDAR_Handler import *
 #LED pins, for debugging only
 led1 = Pin(13,Pin.OUT)
 led2 = Pin(12, Pin.OUT)
@@ -18,8 +19,10 @@ int_led = 0;
 #lidar pins
 lidar_control_pins = [16,17]
 #interrupt lines
-interrupt1 = Pin(14, Pin.IN)
-interrupt2 = Pin(15, Pin.IN)
+#interrupt1 = Pin(14, Pin.IN)
+interrupt1 = LiDAR_Handler(14)
+#interrupt2 = Pin(15, Pin.IN)
+interrupt2 = LiDAR_Handler(15)
 bus = Tran_Bus(lidar_control_pins)
 bus.all_off()
 # The VL53L5CX requires a firmware blob to start up.
@@ -29,7 +32,7 @@ bus.all_off()
 PINS_BREAKOUT_GARDEN = {"sda": 4, "scl": 5}
 PINS_PICO_EXPLORER = {"sda": 20, "scl": 21}
 iterations=0
-sensor_mode = 8
+sensor_mode = 4
 
 # Sensor startup time is proportional to i2c baudrate
 # HOWEVER many sensors may not run at > 400KHz (400000)
@@ -61,21 +64,22 @@ print("Done in {}ms...".format(t_end - t_sta))
 gc.enable()
 
 #enable interrupts
-interrupt1.irq(trigger=Pin.IRQ_RISING, handler=sensor1_callback)
-interrupt2.irq(trigger=Pin.IRQ_RISING, handler=sensor2_callback)
+#interrupt1.irq(trigger=Pin.IRQ_RISING, handler=sensor1_callback)
+#interrupt2.irq(trigger=Pin.IRQ_RISING, handler=sensor2_callback)
 while True:
     t_loop_sta = time.ticks_ms()
     #bus.advance()
     #t_start = time.ticks_ms()
-    while (int1_flag == 0 and int2_flag == 0): #wait until a flag goes high
+    while (interrupt1.status_flag == 0 and interrupt2.status_flag == 0): #wait until a flag goes high
         pass
-    if (int1_flag==1):
+    if (interrupt1.status_flag==1):
         bus.enable(0)
-        int1_flag = 0
+        interrupt1.clear()
     else:
         bus.enable(1)
-        int2_flag=0
+        interrupt2.clear()
     if sensor.data_ready():
+        print("read")
         print(bus.current_enable)
         int_led = int_led ^ 1
         internal_led.value(int_led)
@@ -96,7 +100,7 @@ while True:
             led1.value(1)
             led2.value(0)
             led3.value(0)
-        elif (cent_reading > 50) and (cent_reading < 150):
+        elif (cent_reading > 50) and (cent_reading < 250):
             led1.value(0)
             led2.value(1)
             led3.value(0)
@@ -110,4 +114,4 @@ while True:
         gc.collect()##clean up memory
         t_loop_end = time.ticks_ms()
         print("Loop done in {}ms...".format(t_loop_end - t_loop_sta))
-        #time.sleep(0.025)
+        time.sleep(0.25)
