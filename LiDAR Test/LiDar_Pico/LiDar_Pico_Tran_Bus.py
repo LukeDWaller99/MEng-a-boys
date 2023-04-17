@@ -50,7 +50,7 @@ for x in range(2):
     sensor.start_ranging()
 t_end = time.ticks_ms()
 print("Done in {}ms...".format(t_end - t_sta))
-gc.enable()
+#gc.enable()
 while True:
     t_loop_sta = time.ticks_ms()
     bus.advance()
@@ -86,8 +86,8 @@ while True:
             led3.value(1)
         iterations = iterations +1
         print(iterations)
-        #micropython.mem_info()
-        gc.collect()	##clean up memory
+        micropython.mem_info()
+        gc.collect()##clean up memory
         t_loop_end = time.ticks_ms()
         print("Loop done in {}ms...".format(t_loop_end - t_loop_sta))
         time.sleep(0.025)
