@@ -60,11 +60,21 @@ t_end = time.ticks_ms()
 print("Done in {}ms...".format(t_end - t_sta))
 gc.enable()
 
-
+#enable interrupts
+interrupt1.irq(trigger=Pin.IRQ_RISING, handler=sensor1_callback)
+interrupt2.irq(trigger=Pin.IRQ_RISING, handler=sensor2_callback)
 while True:
     t_loop_sta = time.ticks_ms()
-    bus.advance()
+    #bus.advance()
     #t_start = time.ticks_ms()
+    while (int1_flag == 0 and int2_flag == 0): #wait until a flag goes high
+        pass
+    if (int1_flag==1):
+        bus.enable(0)
+        int1_flag = 0
+    else:
+        bus.enable(1)
+        int2_flag=0
     if sensor.data_ready():
         print(bus.current_enable)
         int_led = int_led ^ 1
