@@ -17,11 +17,9 @@ int_led = 0;
 
 #lidar pins
 lidar_control_pins = [16,17]
-#vl1 = Pin(16, Pin.OUT)
-#vl2 = Pin(17, Pin.OUT)
-#default 1 to active
-#vl1.value(1)
-#vl2.value(0)
+#interrupt lines
+interrupt1 = Pin(14, Pin.IN)
+interrupt2 = Pin(15, Pin.IN)
 bus = Tran_Bus(lidar_control_pins)
 bus.all_off()
 # The VL53L5CX requires a firmware blob to start up.
@@ -36,7 +34,17 @@ sensor_mode = 8
 # Sensor startup time is proportional to i2c baudrate
 # HOWEVER many sensors may not run at > 400KHz (400000)
 i2c = pimoroni_i2c.PimoroniI2C(**PINS_BREAKOUT_GARDEN, baudrate=1_000_000)
-
+#sensor callbacks
+int1_flag = 0
+int2_flag = 0
+def sensor1_callback(sensor):
+    global int1_flag
+    print("int1")
+    int1_flag=1
+def sensor2_callback(sensor):
+    global int2_flag
+    print("int2")
+    int2_flag=1
 #boot all sensors
 t_sta = time.ticks_ms()
 for x in range(2):
@@ -51,6 +59,8 @@ for x in range(2):
 t_end = time.ticks_ms()
 print("Done in {}ms...".format(t_end - t_sta))
 gc.enable()
+
+
 while True:
     t_loop_sta = time.ticks_ms()
     bus.advance()
@@ -90,4 +100,4 @@ while True:
         gc.collect()##clean up memory
         t_loop_end = time.ticks_ms()
         print("Loop done in {}ms...".format(t_loop_end - t_loop_sta))
-        time.sleep(0.025)
+        #time.sleep(0.025)
