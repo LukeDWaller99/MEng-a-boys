@@ -70,9 +70,9 @@ while True:
     t_loop_sta = time.ticks_ms()
     #bus.advance()
     #t_start = time.ticks_ms()
-    while (interrupt1.status_flag == 0 and interrupt2.status_flag == 0): #wait until a flag goes high
+    while (interrupt1.get_flag() == 0 and interrupt2.get_flag() == 0): #wait until a flag goes high
         pass
-    if (interrupt1.status_flag==1):
+    if (interrupt1.get_flag()==1):
         bus.enable(0)
         interrupt1.clear()
     else:
