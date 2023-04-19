@@ -37,6 +37,9 @@ class Tran_Bus:
         for pin in self.tran_pins:
             pin.value(1)
             
+    def get_len(self):
+        return len(self.tran_pins)
+            
     def enable(self,pin):
         self.all_off()
         self.current_enable = pin
