@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "VL53L5CX_KiCAD")(type "KiCad")(uri "C:/Users/jackj/Git/MEng-a-boys/LiDAR-Main/VL53L5CX_KiCAD.kicad_sym")(options "")(descr ""))
+  (lib (name "HEVCS_Sensors")(type "KiCad")(uri "C:/Users/jackj/Git/MEng-a-boys/LiDAR-Main/HEVCS_Sensors.kicad_sym")(options "")(descr ""))
+)
