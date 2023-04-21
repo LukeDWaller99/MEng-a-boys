@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "HEVCS_Sensor_Footprints")(type "KiCad")(uri "C:/Users/jackj/Git/MEng-a-boys/LiDAR-Main/Schematic/HEVCS_Sensor_Footprints.pretty")(options "")(descr ""))
+)

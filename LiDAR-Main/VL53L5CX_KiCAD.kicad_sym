@@ -23,6 +23,9 @@
       )
     )
     (symbol "VL53L5CX_Pimoroni_1_1"
+      (text "VL53L5CX" (at 1.27 -8.89 900)
+        (effects (font (size 1.27 1.27)))
+      )
       (pin output line (at 10.16 -12.7 180) (length 2.54)
         (name "GND" (effects (font (size 1.27 1.27))))
         (number "" (effects (font (size 1.27 1.27))))
