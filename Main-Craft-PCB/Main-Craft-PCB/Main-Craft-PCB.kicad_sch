@@ -6224,6 +6224,13 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
+  (global_label "BATT_1_IN" (shape input) (at 360.68 140.335 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 0fb7681c-ddb1-43e3-8bbb-2cf693ad6602)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 348.4004 140.335 0)
+      (effects (font (size 1.27 1.27)) (justify right) hide)
+    )
+  )
   (global_label "SOL_4" (shape input) (at 26.67 187.325 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 10877b00-b529-437a-947a-0d53046d3f71)
@@ -7148,6 +7155,13 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
+  (global_label "BATT_2_IN" (shape input) (at 360.68 142.875 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid d34dbfae-c866-4169-8ef8-fe22403cbf2f)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 348.4004 142.875 0)
+      (effects (font (size 1.27 1.27)) (justify right) hide)
+    )
+  )
   (global_label "BATT_2_IN" (shape input) (at 127.635 46.355 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid d5ab765e-1b6c-4fcf-9adb-8b818c75fb80)
@@ -7302,6 +7316,13 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
+  (global_label "BATT_4_IN" (shape input) (at 360.68 147.955 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid ef234f3b-7566-4744-a7d2-36673df31296)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 348.4004 147.955 0)
+      (effects (font (size 1.27 1.27)) (justify right) hide)
+    )
+  )
   (global_label "S500_3" (shape input) (at 194.31 265.43 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid f0465c45-d2c6-4796-bd34-6e846b65dbc3)
@@ -7372,11 +7393,18 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
+  (global_label "BATT_3_IN" (shape input) (at 360.68 145.415 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid ff50799c-c4ed-4317-a5ad-7487a68a2c8f)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 348.4004 145.415 0)
+      (effects (font (size 1.27 1.27)) (justify right) hide)
+    )
+  )
 
   (symbol (lib_id "power:Earth") (at 386.08 28.575 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 0073fd73-3bfc-4a20-88c8-a74b8b9ae891)
-    (property "Reference" "#PWR02" (at 386.08 34.925 0)
+    (property "Reference" "#PWR0157" (at 386.08 34.925 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 386.08 32.385 0)
@@ -7392,7 +7420,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR02") (unit 1)
+          (reference "#PWR0157") (unit 1)
         )
       )
     )
@@ -7427,7 +7455,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0148") (unit 1)
+          (reference "#PWR059") (unit 1)
         )
       )
     )
@@ -7475,7 +7503,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U1") (unit 5)
+          (reference "U9") (unit 5)
         )
       )
     )
@@ -7510,7 +7538,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0159") (unit 1)
+          (reference "#PWR04") (unit 1)
         )
       )
     )
@@ -7558,7 +7586,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U1") (unit 3)
+          (reference "U9") (unit 3)
         )
       )
     )
@@ -7567,7 +7595,7 @@
   (symbol (lib_id "power:+5V") (at 379.095 163.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 04fc05bc-7215-4a80-ba3c-2d2b4e5a7c1d)
-    (property "Reference" "#PWR092" (at 379.095 167.64 0)
+    (property "Reference" "#PWR0150" (at 379.095 167.64 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 379.476 159.4358 0)
@@ -7583,7 +7611,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR092") (unit 1)
+          (reference "#PWR0150") (unit 1)
         )
       )
     )
@@ -7618,7 +7646,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR013") (unit 1)
+          (reference "#PWR0155") (unit 1)
         )
       )
     )
@@ -7627,7 +7655,7 @@
   (symbol (lib_id "power:+5V") (at 273.05 177.165 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 05a84f8f-c31d-4c73-893c-d2f85e3ffe0e)
-    (property "Reference" "#PWR09" (at 273.05 180.975 0)
+    (property "Reference" "#PWR095" (at 273.05 180.975 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 273.431 172.7708 0)
@@ -7643,7 +7671,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR09") (unit 1)
+          (reference "#PWR095") (unit 1)
         )
       )
     )
@@ -7679,7 +7707,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R27") (unit 1)
+          (reference "R26") (unit 1)
         )
       )
     )
@@ -7688,7 +7716,7 @@
   (symbol (lib_id "Device:C") (at 363.22 43.18 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 065fbe1d-f364-49b8-b121-f6ca7eecbb11)
-    (property "Reference" "C29" (at 365.76 42.545 0)
+    (property "Reference" "C27" (at 365.76 42.545 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100nF" (at 365.76 45.085 0)
@@ -7705,7 +7733,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C29") (unit 1)
+          (reference "C27") (unit 1)
         )
       )
     )
@@ -7741,7 +7769,7 @@
   (symbol (lib_id "power:Earth") (at 312.42 241.3 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0813b57c-5689-4b63-9285-8e37a9383a69)
-    (property "Reference" "#PWR087" (at 312.42 247.65 0)
+    (property "Reference" "#PWR0116" (at 312.42 247.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 312.42 245.11 0)
@@ -7757,7 +7785,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR087") (unit 1)
+          (reference "#PWR0116") (unit 1)
         )
       )
     )
@@ -7882,7 +7910,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R5") (unit 1)
+          (reference "R4") (unit 1)
         )
       )
     )
@@ -7891,7 +7919,7 @@
   (symbol (lib_id "power:Earth") (at 133.35 151.765 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 0b381331-5ea3-4a58-b3b9-23a7f333509a)
-    (property "Reference" "#PWR0145" (at 133.35 158.115 0)
+    (property "Reference" "#PWR012" (at 133.35 158.115 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 133.35 155.575 0)
@@ -7907,7 +7935,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0145") (unit 1)
+          (reference "#PWR012") (unit 1)
         )
       )
     )
@@ -7938,7 +7966,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R10") (unit 1)
+          (reference "R9") (unit 1)
         )
       )
     )
@@ -8053,7 +8081,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR022") (unit 1)
+          (reference "#PWR088") (unit 1)
         )
       )
     )
@@ -8098,7 +8126,7 @@
   (symbol (lib_id "74xx:74HC14") (at 219.71 44.45 0) (unit 2)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0d5ca3b3-9bd5-4283-bab1-3aee144fcbcd)
-    (property "Reference" "U9" (at 220.345 50.8 0)
+    (property "Reference" "U8" (at 220.345 50.8 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "74HC14" (at 220.98 48.895 0)
@@ -8127,7 +8155,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U9") (unit 2)
+          (reference "U8") (unit 2)
         )
       )
     )
@@ -8162,7 +8190,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR034") (unit 1)
+          (reference "#PWR0105") (unit 1)
         )
       )
     )
@@ -8266,7 +8294,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C32") (unit 1)
+          (reference "C30") (unit 1)
         )
       )
     )
@@ -8275,7 +8303,7 @@
   (symbol (lib_id "power:+12V") (at 141.605 99.695 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 0fe07631-3204-4e90-ab2e-74264ca9de14)
-    (property "Reference" "#PWR0141" (at 141.605 103.505 0)
+    (property "Reference" "#PWR017" (at 141.605 103.505 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 141.605 95.885 0)
@@ -8291,7 +8319,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0141") (unit 1)
+          (reference "#PWR017") (unit 1)
         )
       )
     )
@@ -8358,7 +8386,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0140") (unit 1)
+          (reference "#PWR016") (unit 1)
         )
       )
     )
@@ -8393,7 +8421,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0166") (unit 1)
+          (reference "#PWR025") (unit 1)
         )
       )
     )
@@ -8429,7 +8457,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R23") (unit 1)
+          (reference "R22") (unit 1)
         )
       )
     )
@@ -8438,7 +8466,7 @@
   (symbol (lib_id "Device:R") (at 265.43 193.675 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1176111c-f8ab-4949-8b76-f27fefada13c)
-    (property "Reference" "R25" (at 263.652 194.8434 0)
+    (property "Reference" "R24" (at 263.652 194.8434 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "4K7" (at 263.652 192.532 0)
@@ -8455,7 +8483,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R25") (unit 1)
+          (reference "R24") (unit 1)
         )
       )
     )
@@ -8490,7 +8518,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0115") (unit 1)
+          (reference "#PWR082") (unit 1)
         )
       )
     )
@@ -8525,7 +8553,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR016") (unit 1)
+          (reference "#PWR0140") (unit 1)
         )
       )
     )
@@ -8534,7 +8562,7 @@
   (symbol (lib_id "power:+3V3") (at 386.08 35.56 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 12f09e18-eea2-43b2-b6ab-b0a99b047c2b)
-    (property "Reference" "#PWR07" (at 386.08 39.37 0)
+    (property "Reference" "#PWR0158" (at 386.08 39.37 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 386.08 32.385 0)
@@ -8550,7 +8578,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR07") (unit 1)
+          (reference "#PWR0158") (unit 1)
         )
       )
     )
@@ -8559,7 +8587,7 @@
   (symbol (lib_id "power:+3V3") (at 356.87 17.145 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 133b5520-1abe-4503-b40e-7aec7da6704b)
-    (property "Reference" "#PWR03" (at 356.87 20.955 0)
+    (property "Reference" "#PWR0141" (at 356.87 20.955 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 356.87 13.97 0)
@@ -8575,7 +8603,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR03") (unit 1)
+          (reference "#PWR0141") (unit 1)
         )
       )
     )
@@ -8610,7 +8638,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0151") (unit 1)
+          (reference "#PWR0165") (unit 1)
         )
       )
     )
@@ -8619,7 +8647,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 396.875 240.03 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 152f213e-dfd2-4b06-a86f-1370dad19033)
-    (property "Reference" "J18" (at 398.78 241.3 0)
+    (property "Reference" "J27" (at 398.78 241.3 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "VESC_4" (at 398.78 238.76 0)
@@ -8637,7 +8665,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J18") (unit 1)
+          (reference "J27") (unit 1)
         )
       )
     )
@@ -8776,7 +8804,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R19") (unit 1)
+          (reference "R18") (unit 1)
         )
       )
     )
@@ -8812,7 +8840,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 174.625 211.455 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1805355d-8455-46b8-8c34-a77f47aedb76)
-    (property "Reference" "J23" (at 177.165 212.09 0)
+    (property "Reference" "J5" (at 177.165 212.09 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "LEDS" (at 177.165 214.63 0)
@@ -8829,7 +8857,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J23") (unit 1)
+          (reference "J5") (unit 1)
         )
       )
     )
@@ -8860,7 +8888,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C2") (unit 1)
+          (reference "C1") (unit 1)
         )
       )
     )
@@ -8936,7 +8964,7 @@
   (symbol (lib_id "power:+5V") (at 292.735 177.165 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 19bcf43c-ddbc-460b-8579-ce41a2fd1711)
-    (property "Reference" "#PWR078" (at 292.735 180.975 0)
+    (property "Reference" "#PWR0108" (at 292.735 180.975 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 293.116 172.7708 0)
@@ -8952,7 +8980,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR078") (unit 1)
+          (reference "#PWR0108") (unit 1)
         )
       )
     )
@@ -8993,7 +9021,7 @@
   (symbol (lib_id "Device:R") (at 379.095 175.26 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1ab7d6ec-0a46-4a8c-a019-83ad82c33427)
-    (property "Reference" "R61" (at 377.317 176.4284 0)
+    (property "Reference" "R59" (at 377.317 176.4284 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "2K2" (at 377.317 174.117 0)
@@ -9010,7 +9038,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R61") (unit 1)
+          (reference "R59") (unit 1)
         )
       )
     )
@@ -9019,7 +9047,7 @@
   (symbol (lib_id "power:+5V") (at 224.79 248.285 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1b04daad-7a7b-4783-b527-a0d7a99c4cdc)
-    (property "Reference" "#PWR0149" (at 224.79 252.095 0)
+    (property "Reference" "#PWR060" (at 224.79 252.095 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 221.615 246.38 0)
@@ -9035,7 +9063,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0149") (unit 1)
+          (reference "#PWR060") (unit 1)
         )
       )
     )
@@ -9044,7 +9072,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 215.265 189.23 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1b15d670-9314-4648-bb68-80abcdfb76c0)
-    (property "Reference" "J9" (at 217.805 189.865 0)
+    (property "Reference" "J13" (at 217.805 189.865 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "SOL_1" (at 217.805 192.405 0)
@@ -9061,7 +9089,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J9") (unit 1)
+          (reference "J13") (unit 1)
         )
       )
     )
@@ -9092,7 +9120,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R15") (unit 1)
+          (reference "R14") (unit 1)
         )
       )
     )
@@ -9101,7 +9129,7 @@
   (symbol (lib_id "power:+12V") (at 351.79 109.22 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1c4a40df-aedf-46c4-8975-a4c000bf7360)
-    (property "Reference" "#PWR056" (at 351.79 113.03 0)
+    (property "Reference" "#PWR0139" (at 351.79 113.03 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 351.79 105.41 0)
@@ -9117,7 +9145,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR056") (unit 1)
+          (reference "#PWR0139") (unit 1)
         )
       )
     )
@@ -9163,7 +9191,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 230.505 251.46 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1dfe27ce-be46-43f0-afbb-4e76de92200f)
-    (property "Reference" "J5" (at 234.315 248.285 0)
+    (property "Reference" "J15" (at 234.315 248.285 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "RELAY_1" (at 233.045 255.27 90)
@@ -9181,7 +9209,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J5") (unit 1)
+          (reference "J15") (unit 1)
         )
       )
     )
@@ -9248,7 +9276,7 @@
   (symbol (lib_id "Device:R") (at 273.05 227.33 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1f5d6356-1ad3-4ed2-96ec-52aeb45597bf)
-    (property "Reference" "R34" (at 271.272 228.4984 0)
+    (property "Reference" "R33" (at 271.272 228.4984 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "150R" (at 271.272 226.187 0)
@@ -9265,7 +9293,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R34") (unit 1)
+          (reference "R33") (unit 1)
         )
       )
     )
@@ -9361,7 +9389,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "SW_3") (unit 1)
+          (reference "SW_2") (unit 1)
         )
       )
     )
@@ -9396,7 +9424,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0112") (unit 1)
+          (reference "#PWR079") (unit 1)
         )
       )
     )
@@ -9431,7 +9459,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0150") (unit 1)
+          (reference "#PWR070") (unit 1)
         )
       )
     )
@@ -9440,7 +9468,7 @@
   (symbol (lib_id "power:+12V") (at 398.145 110.49 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 2232ba36-4441-4697-8d35-951d0a713515)
-    (property "Reference" "#PWR014" (at 398.145 114.3 0)
+    (property "Reference" "#PWR0162" (at 398.145 114.3 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 398.145 106.68 0)
@@ -9456,7 +9484,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR014") (unit 1)
+          (reference "#PWR0162") (unit 1)
         )
       )
     )
@@ -9537,7 +9565,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 174.625 227.965 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 226feefe-bb81-4beb-92b4-e5dd6e9f668a)
-    (property "Reference" "J25" (at 177.165 228.6 0)
+    (property "Reference" "J7" (at 177.165 228.6 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "LEDS" (at 177.165 231.14 0)
@@ -9554,7 +9582,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J25") (unit 1)
+          (reference "J7") (unit 1)
         )
       )
     )
@@ -9589,7 +9617,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR052") (unit 1)
+          (reference "#PWR0136") (unit 1)
         )
       )
     )
@@ -9624,7 +9652,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR036") (unit 1)
+          (reference "#PWR0112") (unit 1)
         )
       )
     )
@@ -9716,7 +9744,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0138") (unit 1)
+          (reference "#PWR09") (unit 1)
         )
       )
     )
@@ -9783,7 +9811,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0107") (unit 1)
+          (reference "#PWR056") (unit 1)
         )
       )
     )
@@ -9792,7 +9820,7 @@
   (symbol (lib_id "power:+5V") (at 398.78 163.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 29a88a8b-5435-4dfa-a618-abbda638ef77)
-    (property "Reference" "#PWR094" (at 398.78 167.64 0)
+    (property "Reference" "#PWR0163" (at 398.78 167.64 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 399.161 159.4358 0)
@@ -9808,7 +9836,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR094") (unit 1)
+          (reference "#PWR0163") (unit 1)
         )
       )
     )
@@ -9890,7 +9918,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR099") (unit 1)
+          (reference "#PWR057") (unit 1)
         )
       )
     )
@@ -9925,7 +9953,7 @@
   (symbol (lib_id "power:Earth") (at 398.78 189.23 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2c7e07c6-7001-40d1-8757-093111844200)
-    (property "Reference" "#PWR095" (at 398.78 195.58 0)
+    (property "Reference" "#PWR0164" (at 398.78 195.58 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 398.78 193.04 0)
@@ -9941,7 +9969,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR095") (unit 1)
+          (reference "#PWR0164") (unit 1)
         )
       )
     )
@@ -9976,7 +10004,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR046") (unit 1)
+          (reference "#PWR0130") (unit 1)
         )
       )
     )
@@ -10012,7 +10040,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R36") (unit 1)
+          (reference "R35") (unit 1)
         )
       )
     )
@@ -10048,7 +10076,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R13") (unit 1)
+          (reference "R12") (unit 1)
         )
       )
     )
@@ -10057,7 +10085,7 @@
   (symbol (lib_id "74xx:74HC14") (at 219.075 127 0) (mirror x) (unit 5)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2f1e733d-fdf8-4d35-83a0-1c9dafbfd5cd)
-    (property "Reference" "U9" (at 219.075 120.65 0)
+    (property "Reference" "U8" (at 219.075 120.65 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "74HC14" (at 219.075 122.555 0)
@@ -10086,7 +10114,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U9") (unit 5)
+          (reference "U8") (unit 5)
         )
       )
     )
@@ -10122,7 +10150,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C31") (unit 1)
+          (reference "C29") (unit 1)
         )
       )
     )
@@ -10158,7 +10186,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R24") (unit 1)
+          (reference "R23") (unit 1)
         )
       )
     )
@@ -10188,7 +10216,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0143") (unit 1)
+          (reference "#PWR035") (unit 1)
         )
       )
     )
@@ -10197,7 +10225,7 @@
   (symbol (lib_id "power:+5V") (at 273.05 215.9 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 309b289b-bda8-4891-9180-1ea8c09dc1a4)
-    (property "Reference" "#PWR076" (at 273.05 219.71 0)
+    (property "Reference" "#PWR097" (at 273.05 219.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 273.431 211.5058 0)
@@ -10213,7 +10241,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR076") (unit 1)
+          (reference "#PWR097") (unit 1)
         )
       )
     )
@@ -10248,7 +10276,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR059") (unit 1)
+          (reference "#PWR0153") (unit 1)
         )
       )
     )
@@ -10283,7 +10311,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR053") (unit 1)
+          (reference "#PWR0137") (unit 1)
         )
       )
     )
@@ -10292,7 +10320,7 @@
   (symbol (lib_name "+5V_2") (lib_id "power:+5V") (at 161.29 125.095 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 32146b69-c4fa-44e9-8b3b-9b82d9a5c28c)
-    (property "Reference" "#PWR0120" (at 161.29 128.905 0)
+    (property "Reference" "#PWR024" (at 161.29 128.905 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 161.29 121.285 0)
@@ -10308,7 +10336,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0120") (unit 1)
+          (reference "#PWR024") (unit 1)
         )
       )
     )
@@ -10338,7 +10366,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0105") (unit 1)
+          (reference "#PWR045") (unit 1)
         )
       )
     )
@@ -10373,7 +10401,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0114") (unit 1)
+          (reference "#PWR081") (unit 1)
         )
       )
     )
@@ -10444,7 +10472,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0117") (unit 1)
+          (reference "#PWR076") (unit 1)
         )
       )
     )
@@ -10479,7 +10507,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR048") (unit 1)
+          (reference "#PWR0132") (unit 1)
         )
       )
     )
@@ -10488,7 +10516,7 @@
   (symbol (lib_id "74xx:74HC14") (at 219.075 142.24 0) (unit 6)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3538789e-b864-478c-b689-5191bccb7ef3)
-    (property "Reference" "U9" (at 221.615 145.415 0)
+    (property "Reference" "U8" (at 221.615 145.415 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "74HC14" (at 221.615 147.955 0)
@@ -10517,7 +10545,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U9") (unit 6)
+          (reference "U8") (unit 6)
         )
       )
     )
@@ -10585,7 +10613,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R31") (unit 1)
+          (reference "R30") (unit 1)
         )
       )
     )
@@ -10621,7 +10649,7 @@
   (symbol (lib_id "Device:R") (at 121.92 189.865 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 39a72589-3903-4d7c-af97-13823e10b1f0)
-    (property "Reference" "R4" (at 120.142 191.0334 0)
+    (property "Reference" "R2" (at 120.142 191.0334 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1K" (at 120.142 188.722 0)
@@ -10638,7 +10666,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R4") (unit 1)
+          (reference "R2") (unit 1)
         )
       )
     )
@@ -10673,7 +10701,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR069") (unit 1)
+          (reference "#PWR054") (unit 1)
         )
       )
     )
@@ -10682,7 +10710,7 @@
   (symbol (lib_id "power:+12V") (at 168.91 210.185 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3c4faad6-bed4-49e8-a866-d13de6e522b4)
-    (property "Reference" "#PWR0167" (at 168.91 213.995 0)
+    (property "Reference" "#PWR030" (at 168.91 213.995 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 172.72 208.28 0)
@@ -10698,7 +10726,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0167") (unit 1)
+          (reference "#PWR030") (unit 1)
         )
       )
     )
@@ -10707,7 +10735,7 @@
   (symbol (lib_id "Device:R") (at 398.78 175.26 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3cbc2588-0215-4723-9f95-0e7d3c6a2fc8)
-    (property "Reference" "R64" (at 397.002 176.4284 0)
+    (property "Reference" "R62" (at 397.002 176.4284 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1K" (at 397.002 174.117 0)
@@ -10724,7 +10752,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R64") (unit 1)
+          (reference "R62") (unit 1)
         )
       )
     )
@@ -10733,7 +10761,7 @@
   (symbol (lib_id "power:Earth") (at 273.05 202.565 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3d042b34-4702-4f78-ac81-a85396fcd60c)
-    (property "Reference" "#PWR010" (at 273.05 208.915 0)
+    (property "Reference" "#PWR096" (at 273.05 208.915 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 273.05 206.375 0)
@@ -10749,7 +10777,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR010") (unit 1)
+          (reference "#PWR096") (unit 1)
         )
       )
     )
@@ -10758,7 +10786,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 396.875 207.01 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3d07b6d2-b064-494b-9f86-908361f2d751)
-    (property "Reference" "J15" (at 398.78 208.28 0)
+    (property "Reference" "J24" (at 398.78 208.28 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "VESC_1" (at 398.78 205.74 0)
@@ -10776,7 +10804,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J15") (unit 1)
+          (reference "J24") (unit 1)
         )
       )
     )
@@ -10807,7 +10835,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C5") (unit 1)
+          (reference "C4") (unit 1)
         )
       )
     )
@@ -10875,7 +10903,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C30") (unit 1)
+          (reference "C28") (unit 1)
         )
       )
     )
@@ -10910,7 +10938,7 @@
   (symbol (lib_id "power:+5V") (at 196.85 248.285 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 41c01185-a36a-4f05-b7fd-95d933a8dd4d)
-    (property "Reference" "#PWR0164" (at 196.85 252.095 0)
+    (property "Reference" "#PWR042" (at 196.85 252.095 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 193.675 246.38 0)
@@ -10926,7 +10954,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0164") (unit 1)
+          (reference "#PWR042") (unit 1)
         )
       )
     )
@@ -10961,7 +10989,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR025") (unit 1)
+          (reference "#PWR090") (unit 1)
         )
       )
     )
@@ -10991,7 +11019,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0104") (unit 1)
+          (reference "#PWR038") (unit 1)
         )
       )
     )
@@ -11037,7 +11065,7 @@
   (symbol (lib_id "74xx:74HC14") (at 219.075 94.615 0) (mirror x) (unit 4)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 427e4172-896a-4607-b50e-119fa267c8c1)
-    (property "Reference" "U9" (at 218.44 100.965 0)
+    (property "Reference" "U8" (at 218.44 100.965 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "74HC14" (at 219.71 99.06 0)
@@ -11066,7 +11094,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U9") (unit 4)
+          (reference "U8") (unit 4)
         )
       )
     )
@@ -11075,7 +11103,7 @@
   (symbol (lib_id "power:+5V") (at 332.105 177.165 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 431dc95c-fd8e-4200-8e52-aef79cc2a27f)
-    (property "Reference" "#PWR082" (at 332.105 180.975 0)
+    (property "Reference" "#PWR0119" (at 332.105 180.975 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 332.486 172.7708 0)
@@ -11091,7 +11119,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR082") (unit 1)
+          (reference "#PWR0119") (unit 1)
         )
       )
     )
@@ -11126,7 +11154,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR020") (unit 1)
+          (reference "#PWR086") (unit 1)
         )
       )
     )
@@ -11156,7 +11184,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0100") (unit 1)
+          (reference "#PWR037") (unit 1)
         )
       )
     )
@@ -11191,7 +11219,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR067") (unit 1)
+          (reference "#PWR064") (unit 1)
         )
       )
     )
@@ -11226,7 +11254,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0125") (unit 1)
+          (reference "#PWR072") (unit 1)
         )
       )
     )
@@ -11330,7 +11358,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0133") (unit 1)
+          (reference "#PWR032") (unit 1)
         )
       )
     )
@@ -11361,7 +11389,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C8") (unit 1)
+          (reference "C7") (unit 1)
         )
       )
     )
@@ -11433,7 +11461,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR031") (unit 1)
+          (reference "#PWR0102") (unit 1)
         )
       )
     )
@@ -11442,7 +11470,7 @@
   (symbol (lib_id "power:Earth") (at 292.735 202.565 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4a3ad424-ce90-4a66-aabc-058019312ffc)
-    (property "Reference" "#PWR079" (at 292.735 208.915 0)
+    (property "Reference" "#PWR0109" (at 292.735 208.915 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 292.735 206.375 0)
@@ -11458,7 +11486,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR079") (unit 1)
+          (reference "#PWR0109") (unit 1)
         )
       )
     )
@@ -11515,7 +11543,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0134") (unit 1)
+          (reference "#PWR018") (unit 1)
         )
       )
     )
@@ -11545,7 +11573,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0132") (unit 1)
+          (reference "#PWR031") (unit 1)
         )
       )
     )
@@ -11554,7 +11582,7 @@
   (symbol (lib_id "power:Earth") (at 168.275 145.415 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 4daccd94-5dac-4295-970b-993408b93b32)
-    (property "Reference" "#PWR0122" (at 168.275 151.765 0)
+    (property "Reference" "#PWR027" (at 168.275 151.765 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 168.275 149.225 0)
@@ -11570,7 +11598,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0122") (unit 1)
+          (reference "#PWR027") (unit 1)
         )
       )
     )
@@ -11634,7 +11662,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R21") (unit 1)
+          (reference "R20") (unit 1)
         )
       )
     )
@@ -11670,7 +11698,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R14") (unit 1)
+          (reference "R13") (unit 1)
         )
       )
     )
@@ -11773,7 +11801,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0156") (unit 1)
+          (reference "#PWR034") (unit 1)
         )
       )
     )
@@ -11808,7 +11836,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0124") (unit 1)
+          (reference "#PWR071") (unit 1)
         )
       )
     )
@@ -11838,7 +11866,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0101") (unit 1)
+          (reference "#PWR043") (unit 1)
         )
       )
     )
@@ -11874,7 +11902,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C22") (unit 1)
+          (reference "C20") (unit 1)
         )
       )
     )
@@ -11909,7 +11937,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR023") (unit 1)
+          (reference "#PWR0100") (unit 1)
         )
       )
     )
@@ -11918,7 +11946,7 @@
   (symbol (lib_id "power:+12V") (at 121.92 178.435 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 5a32c371-1aa9-45a2-86ad-5829e6d81e4b)
-    (property "Reference" "#PWR0158" (at 121.92 182.245 0)
+    (property "Reference" "#PWR05" (at 121.92 182.245 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 121.92 174.625 0)
@@ -11934,7 +11962,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0158") (unit 1)
+          (reference "#PWR05") (unit 1)
         )
       )
     )
@@ -11980,7 +12008,7 @@
   (symbol (lib_id "power:Earth") (at 168.275 156.845 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 5a82b3c9-4bbc-4905-b7b7-35a472fd9ea9)
-    (property "Reference" "#PWR0128" (at 168.275 163.195 0)
+    (property "Reference" "#PWR028" (at 168.275 163.195 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 168.275 160.655 0)
@@ -11996,7 +12024,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0128") (unit 1)
+          (reference "#PWR028") (unit 1)
         )
       )
     )
@@ -12031,7 +12059,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR043") (unit 1)
+          (reference "#PWR0127") (unit 1)
         )
       )
     )
@@ -12062,7 +12090,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R6") (unit 1)
+          (reference "R5") (unit 1)
         )
       )
     )
@@ -12130,7 +12158,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C23") (unit 1)
+          (reference "C21") (unit 1)
         )
       )
     )
@@ -12165,7 +12193,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR072") (unit 1)
+          (reference "#PWR050") (unit 1)
         )
       )
     )
@@ -12200,7 +12228,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR055") (unit 1)
+          (reference "#PWR0146") (unit 1)
         )
       )
     )
@@ -12209,7 +12237,7 @@
   (symbol (lib_id "74xx:74HC14") (at 219.075 79.375 0) (unit 3)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5f3c11d1-e0fe-4023-9a0c-e550d877218a)
-    (property "Reference" "U9" (at 219.71 73.025 0)
+    (property "Reference" "U8" (at 219.71 73.025 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "74HC14" (at 219.71 74.93 0)
@@ -12238,7 +12266,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U9") (unit 3)
+          (reference "U8") (unit 3)
         )
       )
     )
@@ -12247,7 +12275,7 @@
   (symbol (lib_id "power:Earth") (at 379.095 189.23 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 605745e4-e5bf-4ae3-bfa4-581e6d5c774c)
-    (property "Reference" "#PWR093" (at 379.095 195.58 0)
+    (property "Reference" "#PWR0151" (at 379.095 195.58 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 379.095 193.04 0)
@@ -12263,7 +12291,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR093") (unit 1)
+          (reference "#PWR0151") (unit 1)
         )
       )
     )
@@ -12298,7 +12326,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0118") (unit 1)
+          (reference "#PWR077") (unit 1)
         )
       )
     )
@@ -12333,7 +12361,7 @@
   (symbol (lib_id "My_Library.lib:pi_pico") (at 62.23 262.89 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 611e65e1-7b44-4412-860b-7cce8f2d9e2b)
-    (property "Reference" "U8" (at 73.66 230.505 0)
+    (property "Reference" "U2" (at 73.66 230.505 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Pi Pico" (at 73.66 232.41 0)
@@ -12388,7 +12416,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U8") (unit 1)
+          (reference "U2") (unit 1)
         )
       )
     )
@@ -12444,7 +12472,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0123") (unit 1)
+          (reference "#PWR011") (unit 1)
         )
       )
     )
@@ -12453,7 +12481,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 174.625 219.71 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 635f7638-ac0c-4e13-b299-aa5a011857d5)
-    (property "Reference" "J24" (at 177.165 220.345 0)
+    (property "Reference" "J6" (at 177.165 220.345 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "LEDS" (at 177.165 222.885 0)
@@ -12470,7 +12498,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J24") (unit 1)
+          (reference "J6") (unit 1)
         )
       )
     )
@@ -12542,7 +12570,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR073") (unit 1)
+          (reference "#PWR049") (unit 1)
         )
       )
     )
@@ -12551,7 +12579,7 @@
   (symbol (lib_id "power:Earth") (at 356.87 46.99 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 651b8377-9ce7-4f63-9a40-79d10ac7675b)
-    (property "Reference" "#PWR06" (at 356.87 53.34 0)
+    (property "Reference" "#PWR0144" (at 356.87 53.34 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 356.87 50.8 0)
@@ -12567,7 +12595,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR06") (unit 1)
+          (reference "#PWR0144") (unit 1)
         )
       )
     )
@@ -12634,7 +12662,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0131") (unit 1)
+          (reference "#PWR010") (unit 1)
         )
       )
     )
@@ -12669,7 +12697,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR074") (unit 1)
+          (reference "#PWR061") (unit 1)
         )
       )
     )
@@ -12678,7 +12706,7 @@
   (symbol (lib_id "power:+5V") (at 312.42 177.165 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 65e6f90f-8d47-4c67-91c4-67a27ef689ca)
-    (property "Reference" "#PWR080" (at 312.42 180.975 0)
+    (property "Reference" "#PWR0113" (at 312.42 180.975 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 312.801 172.7708 0)
@@ -12694,7 +12722,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR080") (unit 1)
+          (reference "#PWR0113") (unit 1)
         )
       )
     )
@@ -12730,7 +12758,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C36") (unit 1)
+          (reference "C34") (unit 1)
         )
       )
     )
@@ -12770,7 +12798,7 @@
   (symbol (lib_id "power:+12V") (at 143.51 21.59 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 66c91934-fd3a-4061-b1ee-0978ec69d82a)
-    (property "Reference" "#PWR0135" (at 143.51 25.4 0)
+    (property "Reference" "#PWR022" (at 143.51 25.4 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 143.51 17.78 0)
@@ -12786,7 +12814,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0135") (unit 1)
+          (reference "#PWR022") (unit 1)
         )
       )
     )
@@ -12821,7 +12849,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR030") (unit 1)
+          (reference "#PWR0101") (unit 1)
         )
       )
     )
@@ -12857,7 +12885,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C37") (unit 1)
+          (reference "C35") (unit 1)
         )
       )
     )
@@ -12925,7 +12953,7 @@
   (symbol (lib_id "power:Earth") (at 332.105 202.565 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 68aa09fc-b084-4c3d-8698-767b10cd4d7f)
-    (property "Reference" "#PWR083" (at 332.105 208.915 0)
+    (property "Reference" "#PWR0120" (at 332.105 208.915 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 332.105 206.375 0)
@@ -12941,7 +12969,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR083") (unit 1)
+          (reference "#PWR0120") (unit 1)
         )
       )
     )
@@ -12976,7 +13004,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR045") (unit 1)
+          (reference "#PWR0129") (unit 1)
         )
       )
     )
@@ -13008,7 +13036,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "SW_2") (unit 1)
+          (reference "SW_1") (unit 1)
         )
       )
     )
@@ -13017,7 +13045,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 230.505 267.97 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6a2af1e6-0aa1-4b74-a57b-391f46b04836)
-    (property "Reference" "J7" (at 234.315 264.795 0)
+    (property "Reference" "J17" (at 234.315 264.795 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "RELAY_3" (at 233.045 271.78 90)
@@ -13035,7 +13063,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J7") (unit 1)
+          (reference "J17") (unit 1)
         )
       )
     )
@@ -13080,7 +13108,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 245.11 218.44 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 6beefce3-4230-4f1d-a25c-02e1957053fe)
-    (property "Reference" "J13" (at 247.65 219.075 0)
+    (property "Reference" "J20" (at 247.65 219.075 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "SOL_4" (at 247.65 221.615 0)
@@ -13097,7 +13125,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J13") (unit 1)
+          (reference "J20") (unit 1)
         )
       )
     )
@@ -13106,7 +13134,7 @@
   (symbol (lib_id "power:+12V") (at 207.01 185.42 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 6c4d8f70-b7b3-4b6a-948f-e3d1f0c3a5dc)
-    (property "Reference" "#PWR015" (at 207.01 189.23 0)
+    (property "Reference" "#PWR051" (at 207.01 189.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 207.01 181.61 0)
@@ -13122,7 +13150,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR015") (unit 1)
+          (reference "#PWR051") (unit 1)
         )
       )
     )
@@ -13157,7 +13185,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR019") (unit 1)
+          (reference "#PWR085") (unit 1)
         )
       )
     )
@@ -13166,7 +13194,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 202.565 267.97 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6e5ccdcd-f377-47d4-9e4b-7a96bb6ac1e7)
-    (property "Reference" "J21" (at 206.375 264.795 0)
+    (property "Reference" "J11" (at 206.375 264.795 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "S500_3" (at 205.105 271.78 90)
@@ -13184,7 +13212,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J21") (unit 1)
+          (reference "J11") (unit 1)
         )
       )
     )
@@ -13215,7 +13243,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C13") (unit 1)
+          (reference "C12") (unit 1)
         )
       )
     )
@@ -13261,7 +13289,7 @@
   (symbol (lib_id "power:Earth") (at 292.735 241.3 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 716cdc30-18a8-4ca1-b1d3-b57b378f5d95)
-    (property "Reference" "#PWR085" (at 292.735 247.65 0)
+    (property "Reference" "#PWR0111" (at 292.735 247.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 292.735 245.11 0)
@@ -13277,7 +13305,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR085") (unit 1)
+          (reference "#PWR0111") (unit 1)
         )
       )
     )
@@ -13308,7 +13336,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C3") (unit 1)
+          (reference "C2") (unit 1)
         )
       )
     )
@@ -13343,7 +13371,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR041") (unit 1)
+          (reference "#PWR0125") (unit 1)
         )
       )
     )
@@ -13521,7 +13549,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U2") (unit 1)
+          (reference "U1") (unit 1)
         )
       )
     )
@@ -13582,7 +13610,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR054") (unit 1)
+          (reference "#PWR0138") (unit 1)
         )
       )
     )
@@ -13618,7 +13646,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C26") (unit 1)
+          (reference "C24") (unit 1)
         )
       )
     )
@@ -13627,7 +13655,7 @@
   (symbol (lib_id "power:+12V") (at 207.01 215.265 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 755b5227-3c18-4985-a255-5039402bc401)
-    (property "Reference" "#PWR068" (at 207.01 219.075 0)
+    (property "Reference" "#PWR053" (at 207.01 219.075 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 207.01 211.455 0)
@@ -13643,7 +13671,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR068") (unit 1)
+          (reference "#PWR053") (unit 1)
         )
       )
     )
@@ -13652,7 +13680,7 @@
   (symbol (lib_id "power:Earth") (at 168.275 168.275 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 75c9cc00-f90f-4edf-9eae-90cba38adc65)
-    (property "Reference" "#PWR0129" (at 168.275 174.625 0)
+    (property "Reference" "#PWR029" (at 168.275 174.625 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 168.275 172.085 0)
@@ -13668,7 +13696,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0129") (unit 1)
+          (reference "#PWR029") (unit 1)
         )
       )
     )
@@ -13677,7 +13705,7 @@
   (symbol (lib_id "Device:C") (at 363.22 24.765 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 75e833df-d13a-41fd-b552-ea83217b0dc9)
-    (property "Reference" "C28" (at 365.76 24.13 0)
+    (property "Reference" "C26" (at 365.76 24.13 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100nF" (at 365.76 26.67 0)
@@ -13694,7 +13722,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C28") (unit 1)
+          (reference "C26") (unit 1)
         )
       )
     )
@@ -13755,7 +13783,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR062") (unit 1)
+          (reference "#PWR0107") (unit 1)
         )
       )
     )
@@ -13849,7 +13877,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR049") (unit 1)
+          (reference "#PWR0133") (unit 1)
         )
       )
     )
@@ -13858,7 +13886,7 @@
   (symbol (lib_id "Device:R") (at 371.475 180.34 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 79494b61-93db-4ce7-80c4-5fadb7ed21e0)
-    (property "Reference" "R60" (at 369.697 181.5084 0)
+    (property "Reference" "R58" (at 369.697 181.5084 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "4K7" (at 369.697 179.197 0)
@@ -13875,7 +13903,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R60") (unit 1)
+          (reference "R58") (unit 1)
         )
       )
     )
@@ -13910,7 +13938,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0108") (unit 1)
+          (reference "#PWR041") (unit 1)
         )
       )
     )
@@ -13919,7 +13947,7 @@
   (symbol (lib_id "Device:C") (at 392.43 24.765 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 797835bf-35de-4c98-9727-1c7eb79a6fea)
-    (property "Reference" "C33" (at 394.97 24.13 0)
+    (property "Reference" "C31" (at 394.97 24.13 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100nF" (at 394.97 26.67 0)
@@ -13936,7 +13964,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C33") (unit 1)
+          (reference "C31") (unit 1)
         )
       )
     )
@@ -13971,7 +13999,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR017") (unit 1)
+          (reference "#PWR083") (unit 1)
         )
       )
     )
@@ -14007,7 +14035,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R32") (unit 1)
+          (reference "R31") (unit 1)
         )
       )
     )
@@ -14079,7 +14107,7 @@
   (symbol (lib_id "Device:R") (at 273.05 188.595 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 7d979bcd-ed24-41c2-a476-3df089b70837)
-    (property "Reference" "R33" (at 271.272 189.7634 0)
+    (property "Reference" "R32" (at 271.272 189.7634 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "150R" (at 271.272 187.452 0)
@@ -14096,7 +14124,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R33") (unit 1)
+          (reference "R32") (unit 1)
         )
       )
     )
@@ -14131,7 +14159,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0110") (unit 1)
+          (reference "#PWR067") (unit 1)
         )
       )
     )
@@ -14162,7 +14190,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C12") (unit 1)
+          (reference "C11") (unit 1)
         )
       )
     )
@@ -14193,7 +14221,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R9") (unit 1)
+          (reference "R8") (unit 1)
         )
       )
     )
@@ -14256,7 +14284,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C20") (unit 1)
+          (reference "C18") (unit 1)
         )
       )
     )
@@ -14291,7 +14319,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR032") (unit 1)
+          (reference "#PWR0103") (unit 1)
         )
       )
     )
@@ -14300,7 +14328,7 @@
   (symbol (lib_id "74xx:74HC14") (at 219.71 29.21 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 819e57b0-ad07-45cb-96b0-39b2ed1eff51)
-    (property "Reference" "U9" (at 220.345 22.86 0)
+    (property "Reference" "U8" (at 220.345 22.86 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "74HC14" (at 220.98 24.765 0)
@@ -14329,7 +14357,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U9") (unit 1)
+          (reference "U8") (unit 1)
         )
       )
     )
@@ -14400,7 +14428,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0119") (unit 1)
+          (reference "#PWR078") (unit 1)
         )
       )
     )
@@ -14409,7 +14437,7 @@
   (symbol (lib_id "power:Earth") (at 312.42 202.565 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 83594b77-471d-4654-88ca-71e91ecf1801)
-    (property "Reference" "#PWR081" (at 312.42 208.915 0)
+    (property "Reference" "#PWR0114" (at 312.42 208.915 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 312.42 206.375 0)
@@ -14425,7 +14453,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR081") (unit 1)
+          (reference "#PWR0114") (unit 1)
         )
       )
     )
@@ -14470,7 +14498,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 202.565 251.46 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 847f4258-91b2-4c4a-b53b-0183d8b2346f)
-    (property "Reference" "J19" (at 206.375 248.285 0)
+    (property "Reference" "J9" (at 206.375 248.285 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "S500_1" (at 205.105 255.27 90)
@@ -14488,7 +14516,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J19") (unit 1)
+          (reference "J9") (unit 1)
         )
       )
     )
@@ -14600,7 +14628,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR027") (unit 1)
+          (reference "#PWR092") (unit 1)
         )
       )
     )
@@ -14631,7 +14659,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R7") (unit 1)
+          (reference "R6") (unit 1)
         )
       )
     )
@@ -14666,7 +14694,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0162") (unit 1)
+          (reference "#PWR014") (unit 1)
         )
       )
     )
@@ -14696,7 +14724,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR096") (unit 1)
+          (reference "#PWR039") (unit 1)
         )
       )
     )
@@ -14731,7 +14759,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0153") (unit 1)
+          (reference "#PWR069") (unit 1)
         )
       )
     )
@@ -14766,7 +14794,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR051") (unit 1)
+          (reference "#PWR0135") (unit 1)
         )
       )
     )
@@ -14796,7 +14824,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0102") (unit 1)
+          (reference "#PWR044") (unit 1)
         )
       )
     )
@@ -14831,7 +14859,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0109") (unit 1)
+          (reference "#PWR058") (unit 1)
         )
       )
     )
@@ -14895,7 +14923,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C17") (unit 1)
+          (reference "C16") (unit 1)
         )
       )
     )
@@ -14931,7 +14959,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R28") (unit 1)
+          (reference "R27") (unit 1)
         )
       )
     )
@@ -15002,7 +15030,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR050") (unit 1)
+          (reference "#PWR0134") (unit 1)
         )
       )
     )
@@ -15037,7 +15065,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0116") (unit 1)
+          (reference "#PWR075") (unit 1)
         )
       )
     )
@@ -15136,7 +15164,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR060") (unit 1)
+          (reference "#PWR0154") (unit 1)
         )
       )
     )
@@ -15231,7 +15259,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R8") (unit 1)
+          (reference "R7") (unit 1)
         )
       )
     )
@@ -15302,7 +15330,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR011") (unit 1)
+          (reference "#PWR0149") (unit 1)
         )
       )
     )
@@ -15337,7 +15365,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR063") (unit 1)
+          (reference "#PWR0160") (unit 1)
         )
       )
     )
@@ -15372,7 +15400,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR033") (unit 1)
+          (reference "#PWR0104") (unit 1)
         )
       )
     )
@@ -15408,7 +15436,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C27") (unit 1)
+          (reference "C25") (unit 1)
         )
       )
     )
@@ -15443,7 +15471,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR026") (unit 1)
+          (reference "#PWR091") (unit 1)
         )
       )
     )
@@ -15478,7 +15506,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR039") (unit 1)
+          (reference "#PWR0123") (unit 1)
         )
       )
     )
@@ -15513,7 +15541,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR061") (unit 1)
+          (reference "#PWR0152") (unit 1)
         )
       )
     )
@@ -15544,7 +15572,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C4") (unit 1)
+          (reference "C3") (unit 1)
         )
       )
     )
@@ -15575,7 +15603,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C6") (unit 1)
+          (reference "C5") (unit 1)
         )
       )
     )
@@ -15610,7 +15638,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR021") (unit 1)
+          (reference "#PWR087") (unit 1)
         )
       )
     )
@@ -15646,7 +15674,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R62") (unit 1)
+          (reference "R60") (unit 1)
         )
       )
     )
@@ -15655,7 +15683,7 @@
   (symbol (lib_id "power:+5V") (at 292.735 215.9 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a1352400-bc62-489a-a92e-3611eafe0b2c)
-    (property "Reference" "#PWR084" (at 292.735 219.71 0)
+    (property "Reference" "#PWR0110" (at 292.735 219.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 293.116 211.5058 0)
@@ -15671,7 +15699,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR084") (unit 1)
+          (reference "#PWR0110") (unit 1)
         )
       )
     )
@@ -15680,7 +15708,7 @@
   (symbol (lib_name "+5V_3") (lib_id "power:+5V") (at 153.67 233.045 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a1743791-9d9a-4480-a950-75115f8793bc)
-    (property "Reference" "#PWR0161" (at 153.67 236.855 0)
+    (property "Reference" "#PWR023" (at 153.67 236.855 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 153.67 229.87 0)
@@ -15696,7 +15724,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0161") (unit 1)
+          (reference "#PWR023") (unit 1)
         )
       )
     )
@@ -15731,7 +15759,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0111") (unit 1)
+          (reference "#PWR068") (unit 1)
         )
       )
     )
@@ -15766,7 +15794,7 @@
   (symbol (lib_id "power:Earth") (at 124.46 146.685 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a31ac1e0-61fa-4947-a15e-2191fddb00ae)
-    (property "Reference" "#PWR0147" (at 124.46 153.035 0)
+    (property "Reference" "#PWR07" (at 124.46 153.035 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 124.46 150.495 0)
@@ -15782,7 +15810,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0147") (unit 1)
+          (reference "#PWR07") (unit 1)
         )
       )
     )
@@ -15791,7 +15819,7 @@
   (symbol (lib_id "power:+5V") (at 359.41 163.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a35162a2-6876-440d-89da-2e3267c8a85a)
-    (property "Reference" "#PWR090" (at 359.41 167.64 0)
+    (property "Reference" "#PWR0147" (at 359.41 167.64 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 359.791 159.4358 0)
@@ -15807,7 +15835,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR090") (unit 1)
+          (reference "#PWR0147") (unit 1)
         )
       )
     )
@@ -15837,7 +15865,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0103") (unit 1)
+          (reference "#PWR055") (unit 1)
         )
       )
     )
@@ -15846,7 +15874,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 174.625 236.22 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a4064458-dda4-4a6a-b34b-83e81dabb01a)
-    (property "Reference" "J26" (at 177.165 236.855 0)
+    (property "Reference" "J8" (at 177.165 236.855 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "LEDS" (at 177.165 239.395 0)
@@ -15863,7 +15891,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J26") (unit 1)
+          (reference "J8") (unit 1)
         )
       )
     )
@@ -15872,7 +15900,7 @@
   (symbol (lib_id "Device:C") (at 392.43 43.18 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a78bfd38-1f2b-4b95-907b-7097f80d291f)
-    (property "Reference" "C34" (at 394.97 42.545 0)
+    (property "Reference" "C32" (at 394.97 42.545 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100nF" (at 394.97 45.085 0)
@@ -15889,7 +15917,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C34") (unit 1)
+          (reference "C32") (unit 1)
         )
       )
     )
@@ -15956,7 +15984,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0139") (unit 1)
+          (reference "#PWR015") (unit 1)
         )
       )
     )
@@ -16056,7 +16084,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U1") (unit 6)
+          (reference "U9") (unit 6)
         )
       )
     )
@@ -16087,7 +16115,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R18") (unit 1)
+          (reference "R17") (unit 1)
         )
       )
     )
@@ -16122,7 +16150,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR012") (unit 1)
+          (reference "#PWR0145") (unit 1)
         )
       )
     )
@@ -16152,7 +16180,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0130") (unit 1)
+          (reference "#PWR020") (unit 1)
         )
       )
     )
@@ -16187,7 +16215,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR071") (unit 1)
+          (reference "#PWR066") (unit 1)
         )
       )
     )
@@ -16196,7 +16224,7 @@
   (symbol (lib_id "Device:R") (at 283.845 278.13 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ae03ac6d-cc41-437c-b6e9-4fa653ca9c75)
-    (property "Reference" "R2" (at 282.067 276.9616 0)
+    (property "Reference" "R40" (at 282.067 276.9616 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "47K" (at 282.067 279.273 0)
@@ -16213,7 +16241,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R2") (unit 1)
+          (reference "R40") (unit 1)
         )
       )
     )
@@ -16243,7 +16271,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0155") (unit 1)
+          (reference "#PWR033") (unit 1)
         )
       )
     )
@@ -16274,7 +16302,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C7") (unit 1)
+          (reference "C6") (unit 1)
         )
       )
     )
@@ -16283,7 +16311,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 230.505 259.715 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b01d8c4c-4359-46a2-91cf-a30990be22af)
-    (property "Reference" "J6" (at 234.315 256.54 0)
+    (property "Reference" "J16" (at 234.315 256.54 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "RELAY_2" (at 233.045 263.525 90)
@@ -16301,7 +16329,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J6") (unit 1)
+          (reference "J16") (unit 1)
         )
       )
     )
@@ -16377,7 +16405,7 @@
   (symbol (lib_id "power:+12V") (at 236.855 214.63 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid b082ebe2-f26c-4ae5-98f0-9c00a8b41794)
-    (property "Reference" "#PWR070" (at 236.855 218.44 0)
+    (property "Reference" "#PWR065" (at 236.855 218.44 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 236.855 210.82 0)
@@ -16393,7 +16421,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR070") (unit 1)
+          (reference "#PWR065") (unit 1)
         )
       )
     )
@@ -16428,7 +16456,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0127") (unit 1)
+          (reference "#PWR074") (unit 1)
         )
       )
     )
@@ -16437,7 +16465,7 @@
   (symbol (lib_id "power:Earth") (at 356.87 28.575 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid b0ea9461-e8f4-4357-9c4a-44ef1c0e1f1e)
-    (property "Reference" "#PWR04" (at 356.87 34.925 0)
+    (property "Reference" "#PWR0142" (at 356.87 34.925 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 356.87 32.385 0)
@@ -16453,7 +16481,35 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR04") (unit 1)
+          (reference "#PWR0142") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Connector_Generic:Conn_01x04") (at 365.76 142.875 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid b1f5bf20-d243-4e2e-9953-0ed7fc427730)
+    (property "Reference" "J23" (at 368.3 143.51 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "BAT_IN" (at 368.3 146.05 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "My_library:Conn_01x04_MOLEX" (at 365.76 142.875 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 365.76 142.875 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid c8da0a51-22b0-4b1c-8065-16799d3cc493))
+    (pin "2" (uuid f815d01c-e78d-44d9-a1cb-a457e294ecfc))
+    (pin "3" (uuid 809535ba-9f68-4907-b8c2-f757ccc6ca6c))
+    (pin "4" (uuid 30d5232a-abd4-493f-b84e-8a3ac91ba039))
+    (instances
+      (project "Main-Craft-PCB"
+        (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
+          (reference "J23") (unit 1)
         )
       )
     )
@@ -16515,7 +16571,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR064") (unit 1)
+          (reference "#PWR0161") (unit 1)
         )
       )
     )
@@ -16524,7 +16580,7 @@
   (symbol (lib_id "Device:C_Polarized") (at 403.225 137.16 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b250c3c7-6872-4ccf-9b36-8d6f766fb2dc)
-    (property "Reference" "C1" (at 403.225 147.955 0)
+    (property "Reference" "C36" (at 403.225 147.955 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "470uF" (at 400.685 145.415 0)
@@ -16541,7 +16597,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C1") (unit 1)
+          (reference "C36") (unit 1)
         )
       )
     )
@@ -16550,7 +16606,7 @@
   (symbol (lib_id "power:Earth") (at 273.05 241.3 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b2e16f3e-d4a9-4119-824d-5234b5c4a2dc)
-    (property "Reference" "#PWR077" (at 273.05 247.65 0)
+    (property "Reference" "#PWR098" (at 273.05 247.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 273.05 245.11 0)
@@ -16566,7 +16622,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR077") (unit 1)
+          (reference "#PWR098") (unit 1)
         )
       )
     )
@@ -16575,7 +16631,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 202.565 259.715 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b4637b76-57bc-47b6-b5d0-68d831a831eb)
-    (property "Reference" "J20" (at 206.375 256.54 0)
+    (property "Reference" "J10" (at 206.375 256.54 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "S500_2" (at 205.105 263.525 90)
@@ -16593,7 +16649,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J20") (unit 1)
+          (reference "J10") (unit 1)
         )
       )
     )
@@ -16628,7 +16684,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0126") (unit 1)
+          (reference "#PWR073") (unit 1)
         )
       )
     )
@@ -16664,7 +16720,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C35") (unit 1)
+          (reference "C33") (unit 1)
         )
       )
     )
@@ -16700,7 +16756,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C19") (unit 1)
+          (reference "C17") (unit 1)
         )
       )
     )
@@ -16731,7 +16787,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R16") (unit 1)
+          (reference "R15") (unit 1)
         )
       )
     )
@@ -16767,7 +16823,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C24") (unit 1)
+          (reference "C22") (unit 1)
         )
       )
     )
@@ -16776,7 +16832,7 @@
   (symbol (lib_id "power:+12V") (at 142.875 50.8 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid b8050858-1cdc-4350-96be-a74798384ecb)
-    (property "Reference" "#PWR0136" (at 142.875 54.61 0)
+    (property "Reference" "#PWR021" (at 142.875 54.61 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 142.875 46.99 0)
@@ -16792,7 +16848,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0136") (unit 1)
+          (reference "#PWR021") (unit 1)
         )
       )
     )
@@ -16827,7 +16883,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0152") (unit 1)
+          (reference "#PWR040") (unit 1)
         )
       )
     )
@@ -16862,7 +16918,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR028") (unit 1)
+          (reference "#PWR093") (unit 1)
         )
       )
     )
@@ -16897,7 +16953,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0157") (unit 1)
+          (reference "#PWR06") (unit 1)
         )
       )
     )
@@ -17008,7 +17064,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U1") (unit 7)
+          (reference "U9") (unit 7)
         )
       )
     )
@@ -17039,7 +17095,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R1") (unit 1)
+          (reference "R3") (unit 1)
         )
       )
     )
@@ -17048,7 +17104,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 245.11 189.23 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid bb888e35-2b51-4bb3-8eb9-daec875e997d)
-    (property "Reference" "J12" (at 247.65 189.865 0)
+    (property "Reference" "J19" (at 247.65 189.865 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "SOL_3" (at 247.65 192.405 0)
@@ -17065,7 +17121,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J12") (unit 1)
+          (reference "J19") (unit 1)
         )
       )
     )
@@ -17100,7 +17156,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR018") (unit 1)
+          (reference "#PWR084") (unit 1)
         )
       )
     )
@@ -17136,7 +17192,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 396.875 229.235 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bdbf76bb-ed05-4ddd-a2b6-20b63cf6d023)
-    (property "Reference" "J17" (at 398.78 230.505 0)
+    (property "Reference" "J26" (at 398.78 230.505 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "VESC_3" (at 398.78 227.965 0)
@@ -17154,7 +17210,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J17") (unit 1)
+          (reference "J26") (unit 1)
         )
       )
     )
@@ -17163,7 +17219,7 @@
   (symbol (lib_id "power:Earth") (at 332.105 241.3 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bf676ef1-64f1-493b-9527-f926fc0d5582)
-    (property "Reference" "#PWR089" (at 332.105 247.65 0)
+    (property "Reference" "#PWR0122" (at 332.105 247.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 332.105 245.11 0)
@@ -17179,7 +17235,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR089") (unit 1)
+          (reference "#PWR0122") (unit 1)
         )
       )
     )
@@ -17220,7 +17276,7 @@
   (symbol (lib_id "Device:R") (at 359.41 175.26 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c0cf3738-5cad-4431-b975-e4850a48c804)
-    (property "Reference" "R58" (at 357.632 176.4284 0)
+    (property "Reference" "R57" (at 357.632 176.4284 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1K" (at 357.632 174.117 0)
@@ -17237,7 +17293,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R58") (unit 1)
+          (reference "R57") (unit 1)
         )
       )
     )
@@ -17402,7 +17458,7 @@
   (symbol (lib_id "power:+3V3") (at 356.87 35.56 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid c739bb22-318e-4f95-b620-5782928721c8)
-    (property "Reference" "#PWR05" (at 356.87 39.37 0)
+    (property "Reference" "#PWR0143" (at 356.87 39.37 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 356.87 32.385 0)
@@ -17418,7 +17474,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR05") (unit 1)
+          (reference "#PWR0143") (unit 1)
         )
       )
     )
@@ -17477,7 +17533,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C10") (unit 1)
+          (reference "C9") (unit 1)
         )
       )
     )
@@ -17512,7 +17568,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR040") (unit 1)
+          (reference "#PWR0124") (unit 1)
         )
       )
     )
@@ -17583,7 +17639,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR029") (unit 1)
+          (reference "#PWR094") (unit 1)
         )
       )
     )
@@ -17592,7 +17648,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 252.73 248.92 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cfed79a0-f5b0-43e1-ad22-f2fc307bbf7d)
-    (property "Reference" "J11" (at 251.46 246.38 0)
+    (property "Reference" "J21" (at 251.46 246.38 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "PWR_IN" (at 249.555 254 0)
@@ -17609,7 +17665,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J11") (unit 1)
+          (reference "J21") (unit 1)
         )
       )
     )
@@ -17639,7 +17695,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR098") (unit 1)
+          (reference "#PWR048") (unit 1)
         )
       )
     )
@@ -17674,7 +17730,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR038") (unit 1)
+          (reference "#PWR0118") (unit 1)
         )
       )
     )
@@ -17710,7 +17766,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R12") (unit 1)
+          (reference "R11") (unit 1)
         )
       )
     )
@@ -17719,7 +17775,7 @@
   (symbol (lib_id "power:+12V") (at 52.07 19.685 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d3c6d89b-41e4-466d-9644-df98c89d5981)
-    (property "Reference" "#PWR0165" (at 52.07 23.495 0)
+    (property "Reference" "#PWR01" (at 52.07 23.495 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 52.07 15.875 0)
@@ -17735,7 +17791,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0165") (unit 1)
+          (reference "#PWR01") (unit 1)
         )
       )
     )
@@ -17796,7 +17852,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0113") (unit 1)
+          (reference "#PWR080") (unit 1)
         )
       )
     )
@@ -17826,7 +17882,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0144") (unit 1)
+          (reference "#PWR036") (unit 1)
         )
       )
     )
@@ -17888,7 +17944,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR037") (unit 1)
+          (reference "#PWR0117") (unit 1)
         )
       )
     )
@@ -17918,7 +17974,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0106") (unit 1)
+          (reference "#PWR046") (unit 1)
         )
       )
     )
@@ -17950,7 +18006,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "SW_1") (unit 1)
+          (reference "SW_3") (unit 1)
         )
       )
     )
@@ -18012,7 +18068,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R37") (unit 1)
+          (reference "R36") (unit 1)
         )
       )
     )
@@ -18021,7 +18077,7 @@
   (symbol (lib_id "power:+5V") (at 332.105 215.9 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid da35bfaa-4c7b-41c8-a78e-f1679f207d42)
-    (property "Reference" "#PWR088" (at 332.105 219.71 0)
+    (property "Reference" "#PWR0121" (at 332.105 219.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 332.486 211.5058 0)
@@ -18037,7 +18093,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR088") (unit 1)
+          (reference "#PWR0121") (unit 1)
         )
       )
     )
@@ -18046,7 +18102,7 @@
   (symbol (lib_id "74xx:74HC14") (at 208.915 165.735 270) (unit 7)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid daf2d0dc-10aa-4716-bcb1-b2f1d8b1f097)
-    (property "Reference" "U9" (at 208.915 156.845 90)
+    (property "Reference" "U8" (at 208.915 156.845 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "74HC14" (at 208.915 159.385 90)
@@ -18075,7 +18131,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U9") (unit 7)
+          (reference "U8") (unit 7)
         )
       )
     )
@@ -18147,7 +18203,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR035") (unit 1)
+          (reference "#PWR0106") (unit 1)
         )
       )
     )
@@ -18193,7 +18249,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 230.505 276.225 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid dbf558f0-0a56-4f4c-b8ea-17c6fe4e5d13)
-    (property "Reference" "J8" (at 234.315 273.05 0)
+    (property "Reference" "J18" (at 234.315 273.05 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "RELAY_3" (at 233.045 280.035 90)
@@ -18211,7 +18267,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J8") (unit 1)
+          (reference "J18") (unit 1)
         )
       )
     )
@@ -18220,7 +18276,7 @@
   (symbol (lib_name "+5V_2") (lib_id "power:+5V") (at 134.62 127.635 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid dc4b303e-c4fd-4b1d-b6e9-ffaad813adf1)
-    (property "Reference" "#PWR0146" (at 134.62 131.445 0)
+    (property "Reference" "#PWR013" (at 134.62 131.445 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 134.62 123.825 0)
@@ -18236,7 +18292,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0146") (unit 1)
+          (reference "#PWR013") (unit 1)
         )
       )
     )
@@ -18281,7 +18337,7 @@
   (symbol (lib_id "power:+12V") (at 275.59 271.145 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid dd6ece8d-32b8-4bd0-a0a9-adbfe8e830af)
-    (property "Reference" "#PWR0154" (at 275.59 274.955 0)
+    (property "Reference" "#PWR099" (at 275.59 274.955 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 275.59 267.335 0)
@@ -18297,7 +18353,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0154") (unit 1)
+          (reference "#PWR099") (unit 1)
         )
       )
     )
@@ -18332,7 +18388,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0163") (unit 1)
+          (reference "#PWR02") (unit 1)
         )
       )
     )
@@ -18404,7 +18460,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C21") (unit 1)
+          (reference "C19") (unit 1)
         )
       )
     )
@@ -18434,7 +18490,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0137") (unit 1)
+          (reference "#PWR08") (unit 1)
         )
       )
     )
@@ -18443,7 +18499,7 @@
   (symbol (lib_id "power:Earth") (at 168.275 133.985 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid e0bd0eb9-5174-4994-807e-70427c98584c)
-    (property "Reference" "#PWR0121" (at 168.275 140.335 0)
+    (property "Reference" "#PWR026" (at 168.275 140.335 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 168.275 137.795 0)
@@ -18459,7 +18515,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0121") (unit 1)
+          (reference "#PWR026") (unit 1)
         )
       )
     )
@@ -18468,7 +18524,7 @@
   (symbol (lib_id "power:+5V") (at 312.42 215.9 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e0cbcd04-b86f-41bf-8efc-451fb2e86a69)
-    (property "Reference" "#PWR086" (at 312.42 219.71 0)
+    (property "Reference" "#PWR0115" (at 312.42 219.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 312.801 211.5058 0)
@@ -18484,7 +18540,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR086") (unit 1)
+          (reference "#PWR0115") (unit 1)
         )
       )
     )
@@ -18493,7 +18549,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 202.565 276.225 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e0d0d53f-cf17-4d88-822f-25db3f265249)
-    (property "Reference" "J22" (at 206.375 273.05 0)
+    (property "Reference" "J12" (at 206.375 273.05 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "S500_4" (at 205.105 280.035 90)
@@ -18511,7 +18567,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J22") (unit 1)
+          (reference "J12") (unit 1)
         )
       )
     )
@@ -18555,7 +18611,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J14") (unit 1)
+          (reference "J22") (unit 1)
         )
       )
     )
@@ -18600,7 +18656,7 @@
   (symbol (lib_id "power:+12V") (at 142.24 71.12 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid e268b074-e8fa-4286-a8b9-59125482e381)
-    (property "Reference" "#PWR0142" (at 142.24 74.93 0)
+    (property "Reference" "#PWR019" (at 142.24 74.93 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 142.24 67.31 0)
@@ -18616,7 +18672,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0142") (unit 1)
+          (reference "#PWR019") (unit 1)
         )
       )
     )
@@ -18651,7 +18707,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR047") (unit 1)
+          (reference "#PWR0131") (unit 1)
         )
       )
     )
@@ -18686,7 +18742,7 @@
   (symbol (lib_id "Device:R") (at 265.43 232.41 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e3a9d8b1-3420-4236-a9a5-fea35a554491)
-    (property "Reference" "R26" (at 263.652 233.5784 0)
+    (property "Reference" "R25" (at 263.652 233.5784 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "4K7" (at 263.652 231.267 0)
@@ -18703,7 +18759,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R26") (unit 1)
+          (reference "R25") (unit 1)
         )
       )
     )
@@ -18775,7 +18831,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R30") (unit 1)
+          (reference "R29") (unit 1)
         )
       )
     )
@@ -18811,7 +18867,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C18") (unit 1)
+          (reference "C15") (unit 1)
         )
       )
     )
@@ -18842,7 +18898,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C9") (unit 1)
+          (reference "C8") (unit 1)
         )
       )
     )
@@ -18873,7 +18929,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R20") (unit 1)
+          (reference "R19") (unit 1)
         )
       )
     )
@@ -18972,7 +19028,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R11") (unit 1)
+          (reference "R10") (unit 1)
         )
       )
     )
@@ -19020,7 +19076,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U1") (unit 1)
+          (reference "U9") (unit 1)
         )
       )
     )
@@ -19051,7 +19107,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C15") (unit 1)
+          (reference "C14") (unit 1)
         )
       )
     )
@@ -19087,7 +19143,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R40") (unit 1)
+          (reference "R39") (unit 1)
         )
       )
     )
@@ -19185,7 +19241,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR024") (unit 1)
+          (reference "#PWR089") (unit 1)
         )
       )
     )
@@ -19215,7 +19271,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR097") (unit 1)
+          (reference "#PWR047") (unit 1)
         )
       )
     )
@@ -19250,7 +19306,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR065") (unit 1)
+          (reference "#PWR052") (unit 1)
         )
       )
     )
@@ -19285,7 +19341,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR075") (unit 1)
+          (reference "#PWR062") (unit 1)
         )
       )
     )
@@ -19316,7 +19372,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C14") (unit 1)
+          (reference "C13") (unit 1)
         )
       )
     )
@@ -19325,7 +19381,7 @@
   (symbol (lib_id "power:Earth") (at 386.08 46.99 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid ed291575-19e3-4c80-9ee4-d46f0eacad2b)
-    (property "Reference" "#PWR08" (at 386.08 53.34 0)
+    (property "Reference" "#PWR0159" (at 386.08 53.34 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 386.08 50.8 0)
@@ -19341,7 +19397,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR08") (unit 1)
+          (reference "#PWR0159") (unit 1)
         )
       )
     )
@@ -19376,7 +19432,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR0160") (unit 1)
+          (reference "#PWR03") (unit 1)
         )
       )
     )
@@ -19450,7 +19506,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U1") (unit 2)
+          (reference "U9") (unit 2)
         )
       )
     )
@@ -19498,7 +19554,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "U1") (unit 4)
+          (reference "U9") (unit 4)
         )
       )
     )
@@ -19507,7 +19563,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x03") (at 396.875 218.44 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f1c1311f-8d9c-47be-ace5-60c97d59120d)
-    (property "Reference" "J16" (at 398.78 219.71 0)
+    (property "Reference" "J25" (at 398.78 219.71 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "VESC_2" (at 398.78 217.17 0)
@@ -19525,7 +19581,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J16") (unit 1)
+          (reference "J25") (unit 1)
         )
       )
     )
@@ -19561,7 +19617,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R39") (unit 1)
+          (reference "R38") (unit 1)
         )
       )
     )
@@ -19570,7 +19626,7 @@
   (symbol (lib_id "power:Earth") (at 359.41 189.23 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f2b16667-1c31-4daf-9073-c2851ac3db92)
-    (property "Reference" "#PWR091" (at 359.41 195.58 0)
+    (property "Reference" "#PWR0148" (at 359.41 195.58 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "Earth" (at 359.41 193.04 0)
@@ -19586,7 +19642,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR091") (unit 1)
+          (reference "#PWR0148") (unit 1)
         )
       )
     )
@@ -19595,7 +19651,7 @@
   (symbol (lib_id "power:+3V3") (at 386.08 17.145 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f2e3c1d2-1d16-4ed9-8c56-75f8c864d74c)
-    (property "Reference" "#PWR01" (at 386.08 20.955 0)
+    (property "Reference" "#PWR0156" (at 386.08 20.955 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 386.08 13.97 0)
@@ -19611,7 +19667,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR01") (unit 1)
+          (reference "#PWR0156") (unit 1)
         )
       )
     )
@@ -19620,7 +19676,7 @@
   (symbol (lib_id "power:+12V") (at 236.855 185.42 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f32ef501-c6db-4a5b-a3b2-48480c87354f)
-    (property "Reference" "#PWR066" (at 236.855 189.23 0)
+    (property "Reference" "#PWR063" (at 236.855 189.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+12V" (at 236.855 181.61 0)
@@ -19636,7 +19692,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR066") (unit 1)
+          (reference "#PWR063") (unit 1)
         )
       )
     )
@@ -19698,7 +19754,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R38") (unit 1)
+          (reference "R37") (unit 1)
         )
       )
     )
@@ -19734,7 +19790,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R35") (unit 1)
+          (reference "R34") (unit 1)
         )
       )
     )
@@ -19769,7 +19825,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR044") (unit 1)
+          (reference "#PWR0128") (unit 1)
         )
       )
     )
@@ -19847,7 +19903,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 215.265 219.075 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f81785ec-0c28-4c4a-875b-f77bc7c11391)
-    (property "Reference" "J10" (at 217.805 219.71 0)
+    (property "Reference" "J14" (at 217.805 219.71 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "SOL_2" (at 217.805 222.25 0)
@@ -19864,7 +19920,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "J10") (unit 1)
+          (reference "J14") (unit 1)
         )
       )
     )
@@ -19909,7 +19965,7 @@
   (symbol (lib_id "Device:R") (at 121.92 182.245 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f9c0fda3-698d-47b9-839d-7c4b96443574)
-    (property "Reference" "R3" (at 120.142 183.4134 0)
+    (property "Reference" "R1" (at 120.142 183.4134 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1K" (at 120.142 181.102 0)
@@ -19926,7 +19982,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R3") (unit 1)
+          (reference "R1") (unit 1)
         )
       )
     )
@@ -19988,7 +20044,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C11") (unit 1)
+          (reference "C10") (unit 1)
         )
       )
     )
@@ -20024,7 +20080,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "C25") (unit 1)
+          (reference "C23") (unit 1)
         )
       )
     )
@@ -20059,7 +20115,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "#PWR042") (unit 1)
+          (reference "#PWR0126") (unit 1)
         )
       )
     )
@@ -20068,7 +20124,7 @@
   (symbol (lib_id "Device:R") (at 391.16 180.34 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid fc46f3b8-a074-48c5-a54c-20c0bccd7f37)
-    (property "Reference" "R63" (at 389.382 181.5084 0)
+    (property "Reference" "R61" (at 389.382 181.5084 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "4K7" (at 389.382 179.197 0)
@@ -20085,7 +20141,7 @@
     (instances
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R63") (unit 1)
+          (reference "R61") (unit 1)
         )
       )
     )
@@ -20121,7 +20177,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R29") (unit 1)
+          (reference "R28") (unit 1)
         )
       )
     )
@@ -20185,7 +20241,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R22") (unit 1)
+          (reference "R21") (unit 1)
         )
       )
     )
@@ -20216,7 +20272,7 @@
       )
       (project "Main-Craft-PCB"
         (path "/88ba3439-d07a-4812-a2ad-cc150b041ad9"
-          (reference "R17") (unit 1)
+          (reference "R16") (unit 1)
         )
       )
     )
