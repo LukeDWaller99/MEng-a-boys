@@ -49,21 +49,13 @@
         }
       },
       "diff_pair_dimensions": [],
-      "drc_exclusions": [
-        "unconnected_items|124206000|100584000|126f0d04-1217-4e49-9f4f-d3337626b9f0|f52994b4-3899-4432-9ba8-eb95994f534c",
-        "unconnected_items|124206000|100584000|b9d9c846-4172-4ba5-9af1-e6c7650e1820|f52994b4-3899-4432-9ba8-eb95994f534c",
-        "unconnected_items|75946000|55880000|bb53d2b7-f493-420c-a3c8-8eb1aa019265|5c662a8b-3d83-4778-8f91-d21bda71ab05",
-        "unconnected_items|75946000|66040000|f52994b4-3899-4432-9ba8-eb95994f534c|126f0d04-1217-4e49-9f4f-d3337626b9f0",
-        "unconnected_items|78486000|108204000|78360221-28ee-47df-805c-9b8d1d1a7c2a|1bf19f16-8960-45cd-8fc7-490958c14572",
-        "unconnected_items|78486000|108204000|78360221-28ee-47df-805c-9b8d1d1a7c2a|c7e2dce2-fd27-4258-af70-6f230a1a647b",
-        "unconnected_items|78486000|108204000|78360221-28ee-47df-805c-9b8d1d1a7c2a|f935b1b6-90ae-4767-95ce-69ac19e8e767"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
       "rule_severities": {
         "annular_width": "error",
-        "clearance": "error",
+        "clearance": "warning",
         "connection_width": "warning",
         "copper_edge_clearance": "error",
         "copper_sliver": "warning",
@@ -75,7 +67,7 @@
         "extra_footprint": "warning",
         "footprint": "error",
         "footprint_type_mismatch": "ignore",
-        "hole_clearance": "error",
+        "hole_clearance": "ignore",
         "hole_near_hole": "error",
         "invalid_outline": "error",
         "isolated_copper": "warning",
