@@ -1,6 +1,6 @@
 {
   "board": {
-    "active_layer": 37,
+    "active_layer": 0,
     "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_netclasses": [],
@@ -12,8 +12,6 @@
       "L_ROLL",
       "L_PITCH",
       "RESET",
-      "Net-(ASCEND2-A)",
-      "unconnected-(ASCEND2-C-Pad3)",
       "MOTOR_MODE_2_SB"
     ],
     "high_contrast_mode": 0,
