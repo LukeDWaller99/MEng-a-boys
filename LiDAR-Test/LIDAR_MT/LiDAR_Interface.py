@@ -43,9 +43,9 @@ class LiDAR_Interface:
                     t_loop_end = time.ticks_ms()
                     print("Loop done in {}ms...".format(t_loop_end - t_loop_sta))
     def __init__(self,lidar_control_pins,lidar_interrupt_pins):
-        PINS_BREAKOUT_GARDEN = {"sda": 4, "scl": 5}
+        PINS_BREAKOUT_GARDEN = {"sda": 20, "scl": 21}
         self.data = 0
-        self.bus = Tran_Bus([16,17])
+        self.bus = Tran_Bus(lidar_control_pins)
         self.bus.all_off()
         #create interrupts
         self.interrupt_lines = []
