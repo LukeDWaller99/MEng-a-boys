@@ -69,9 +69,9 @@
       (subtractmaskfromsilk false)
       (outputformat 1)
       (mirror false)
-      (drillshape 1)
+      (drillshape 0)
       (scaleselection 1)
-      (outputdirectory "")
+      (outputdirectory "Gerbers/")
     )
   )
 
@@ -188,7 +188,7 @@
   (gr_text "HEVCS" (at 97.5 118) (layer "F.SilkS") (tstamp 06acf282-f2a0-4443-91f8-d28fdd7b4fcc)
     (effects (font (size 1 1) (thickness 0.1)) (justify left bottom))
   )
-  (gr_text "DC, LW, JP, NH" (at 94.4 119.3) (layer "F.SilkS") (tstamp 9b6d6978-1c7b-460a-be84-17823c800df5)
+  (gr_text "DC, JP, LW, NH" (at 94.4 119.3) (layer "F.SilkS") (tstamp 9b6d6978-1c7b-460a-be84-17823c800df5)
     (effects (font (size 1 1) (thickness 0.1)) (justify left bottom))
   )
 
