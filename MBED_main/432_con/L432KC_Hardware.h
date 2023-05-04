@@ -1,0 +1,10 @@
+#ifndef __L432KC_HARDWARE_H__
+#define __L432KC_HARDWARE_H__
+//NUCLEO-L432KC HARDWARE
+
+#define L4_USER_LED_GREEN PB_3
+
+
+
+
+#endif

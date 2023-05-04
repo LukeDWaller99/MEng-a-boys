@@ -7,10 +7,8 @@
 #include "ThisThread.h"
 #include "hardware.h"
 
-
 DigitalIn Switch_1(SWITCH_1);
 DigitalIn Switch_2(SWITCH_2);
-
 
 DigitalOut Switch_1_led(SWITCH_1_LED);
 DigitalOut Switch_2_led(SWITCH_2_LED);

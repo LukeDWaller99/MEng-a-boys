@@ -13,4 +13,7 @@
 #define SWITCH_1_LED PF_9
 #define SWITCH_2_LED PG_1
 
+
+//NUCLEO-L432KC HARDWARE
+
 #endif
