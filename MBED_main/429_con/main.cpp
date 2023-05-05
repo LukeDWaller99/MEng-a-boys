@@ -19,7 +19,7 @@ DigitalOut USER_GREEN(USER_LED_GREEN);
 DigitalOut USER_RED(USER_LED_RED);
 DigitalOut USER_BLUE(USER_LED_BLUE);
 
-// Blinking rate in milliseconds
+
 #define BLINKING_RATE     500ms
 
 
