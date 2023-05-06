@@ -3,6 +3,10 @@
 //NUCLEO-F429ZI HARDWARE
 
 #include <PinNames.h>
+#include "ThisThread.h"
+#include <mbed.h>
+#include <cstdio>
+#include <cstdlib>
 
 //onboard peripherals
 #define USR_BTN PC_13
@@ -35,10 +39,10 @@
 #define SWITCH_2 PD_1
 
 
-// input buttons
-#define BTN1    PF_5 // D1
-#define BTN2    PF_10 // D6
-#define BTN3    PF_0 // A2
+// // input buttons
+// #define BTN1    PF_5 // D1
+// #define BTN2    PF_10 // D6
+// #define BTN3    PF_0 // A2
 
 // General LEDs
 #define LED_1 PD_14

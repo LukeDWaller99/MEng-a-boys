@@ -4,7 +4,7 @@
 // Blinking rate in milliseconds
 #define BLINKING_RATE     500ms
 
-TextLCD::TextLCD();
+//TextLCD::TextLCD();
 
 int main()
 {
