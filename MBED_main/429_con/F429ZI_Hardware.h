@@ -1,12 +1,7 @@
 #ifndef __HARDWARE_H__
 #define __HARDWARE_H__
 //NUCLEO-F429ZI HARDWARE
-
-#include <PinNames.h>
-#include "ThisThread.h"
 #include <mbed.h>
-#include <cstdio>
-#include <cstdlib>
 
 //onboard peripherals
 #define USR_BTN PC_13
@@ -26,18 +21,17 @@
 #define R_ROLL  PA_3 
 
 //SWITCHES
-#define ASCEND PB_9
-#define DESCEND PB_8
-#define MOTOR_MODE_1 PF_2
-#define MOTOR_MODE_2 PH_1
-#define LIGHTS PG_2
-#define MOTOR_EN PF_10
-#define MOTOR_DE PF_5
-#define BRAKE_MODE PC_11
-#define REV_MODE PC_12
-#define SWITCH_1 PD_0
-#define SWITCH_2 PD_1
-
+#define ASCEND PB_9 //3
+#define DESCEND PB_8 //4
+#define MOTOR_MODE_1 PF_2  //5
+#define MOTOR_MODE_2 PH_1  //6
+#define LIGHTS PG_2 //7
+#define MOTOR_EN PF_10 //8
+#define MOTOR_DE PF_5 //9
+#define BRAKE_MODE PC_11 //10
+#define REV_MODE PC_12 //11
+#define SWITCH_1 PD_0 //1
+#define SWITCH_2 PD_1 //2
 
 // // input buttons
 // #define BTN1    PF_5 // D1
@@ -63,7 +57,6 @@
 // Buzzer and Vibration Motor
 #define BUZZER  PA_6
 #define VIB_MOTOR PA_5
-
 
 //Collision LEDs
 #define COL_SENSE_1 PE_7
