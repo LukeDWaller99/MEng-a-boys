@@ -6,12 +6,12 @@
 
 //LCD
 #define LCD_RS D1
-#define LCD_E A6
+#define LCD_E D0
 #define LCD_RW A7
-#define LCD_D4 D4
-#define LCD_D5 D5
-#define LCD_D6 D6
-#define LCD_D7 D7
+#define LCD_D4 D3
+#define LCD_D5 D4
+#define LCD_D6 D5
+#define LCD_D7 D6
 
 
 #endif
