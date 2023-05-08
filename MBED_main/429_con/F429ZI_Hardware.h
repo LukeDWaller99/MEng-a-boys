@@ -33,6 +33,7 @@
 #define REV_MODE PC_12 //11
 #define SWITCH_1 PD_0 //1
 #define SWITCH_2 PD_1 //2
+#define KILL_SWITCH PC_8
 
 // // input buttons
 // #define BTN1    PF_5 // D1
@@ -71,8 +72,3 @@
 
 
 #endif
-
-// void SW_BRAKE_IRQ();
-// void SW_REV_IRQ();
-// void SW_M_EN_IRQ();
-// void SW_M_DE_IRQ(); 
