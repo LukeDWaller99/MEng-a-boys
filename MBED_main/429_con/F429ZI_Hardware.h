@@ -13,6 +13,7 @@
 #define CLK_1 PB_3
 #define MISO_1 PB_4
 #define MOSI_1 PB_5
+#define CS_1 PD_14
 
 // joystick pins
 #define L_PITCH PC_3   
@@ -70,3 +71,8 @@
 
 
 #endif
+
+// void SW_BRAKE_IRQ();
+// void SW_REV_IRQ();
+// void SW_M_EN_IRQ();
+// void SW_M_DE_IRQ(); 
