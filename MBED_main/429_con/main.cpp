@@ -6,8 +6,8 @@
 #include "DigitalOut.h"
 #include "InterruptIn.h"
 
-// SPI spi(MOSI_1, MISO_1, CLK_1);
-// DigitalOut CS(CS_1);
+SPI spi(MOSI_1, MISO_1, CLK_1);
+DigitalOut CS(CS_1);
 
 //Onboard Peripherals 
 //InterruptIn USER_BTN(USR_BTN);
@@ -100,11 +100,11 @@ void collisionLEDs(){
 int main()
 {   
     printf("Starting Board...\n");
-        // //SPI BUSINESS
-    // CS = 1; //deselect
-    // spi.format(8, 3); //8-bit data
-    // spi.frequency(1000000); //1MHz CLK
-	// CS = 0; //select
+    //SPI BUSINESS
+    int valueToSlave = 20;
+    spi.format(8, 3); //8-bit data
+    spi.frequency(1000000); //1MHz CLK
+	int counter = 1;
     // spi.write(0x8F); //WhoAmI
     // int whoami= spi.write(0x00);
     // printf("WhoAmI: 0x%X\n", whoami);
@@ -114,6 +114,16 @@ int main()
     switchMonitor.start(switchMonitorMethod);
 
     while (true){
+        printf("Count: %d . Sending Value: %d . \n", counter, valueToSlave);
+        CS = 0;
+        int dataFromSlave = spi.write(valueToSlave);
+        CS = 1;
+        printf("From Slave: %d\n", dataFromSlave);
+        valueToSlave++;
+        USER_BLUE = 1;
+        wait_us(1000000);
+        USER_BLUE = 0;
+        
         collisionLEDs();
     }   
 }
@@ -277,8 +287,8 @@ void switchDetection(){
     SW_M_EN.fall(SW_M_EN_IRQ);
     SW_M_DE.rise(SW_M_DE_IRQ);
     SW_M_DE.fall(SW_M_DE_IRQ);
-    // SW_KILL.rise(SW_KILL_IRQ);
-    // SW_KILL.fall(SW_KILL_IRQ);
+    //SW_KILL.rise(SW_KILL_IRQ);
+   //SW_KILL.fall(SW_KILL_IRQ);
 }
 
 void switchMonitorMethod(){

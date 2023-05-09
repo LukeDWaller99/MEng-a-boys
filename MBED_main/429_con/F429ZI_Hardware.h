@@ -13,7 +13,7 @@
 #define CLK_1 PB_3
 #define MISO_1 PB_4
 #define MOSI_1 PB_5
-#define CS_1 PD_14
+#define CS_1 PD_13
 
 // joystick pins
 #define L_PITCH PC_3   
