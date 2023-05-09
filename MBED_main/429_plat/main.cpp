@@ -1,22 +1,22 @@
-/* mbed Microcontroller Library
- * Copyright (c) 2019 ARM Limited
+/*
+ * Copyright (c) 2006-2020 Arm Limited and affiliates.
  * SPDX-License-Identifier: Apache-2.0
  */
-
-#include "mbed.h"
-
-
-// Blinking rate in milliseconds
-#define BLINKING_RATE     500ms
-
+#include <mbed.h>
+#include "F429ZI_Platform.h"
+#include "PinNames.h"
+SPISlave device(MOSI_1, MISO_1, SCK_1, PE_1); // mosi, miso, sclk, ssel
 
 int main()
 {
-    // Initialise the digital pin LED1 as an output
-    DigitalOut led(LED1);
-
-    while (true) {
-        led = !led;
-        ThisThread::sleep_for(BLINKING_RATE);
-    }
+    device.format(8,3);
+    device.frequency(1000000);
+    // device.reply(0x00);              // Prime SPI with first reply
+    // while (1) {
+    //     if (device.receive()) {
+    //         int v = device.read();   // Read byte from master
+    //         v = (v + 1) % 0x100;     // Add one to it, modulo 256
+    //         device.reply(v);         // Make this the next reply
+    //     }
+    // }
 }
