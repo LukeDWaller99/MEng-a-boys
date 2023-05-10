@@ -5,6 +5,7 @@
 #define BLINKING_RATE     500ms
 
 //SPI spi(MOSI, MISO, SCK);
+//this one must be set as slave
 SPISlave spi(MOSI, MISO, SCK, SSEL);
 
 char foo[20] = "noah smells";
