@@ -7,8 +7,11 @@
 #include "PinNames.h"
 SPISlave device(MOSI_1, MISO_1, SCK_1, PE_1); // mosi, miso, sclk, ssel
 
+
 int main()
 {
+    //spi.setSSEL(CS_R);
+    SPI.setSSEL(CS_R);
     device.format(8,3);
     device.frequency(1000000);
     // device.reply(0x00);              // Prime SPI with first reply
