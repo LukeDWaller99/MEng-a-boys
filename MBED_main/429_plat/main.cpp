@@ -1,25 +1,22 @@
-/*
- * Copyright (c) 2006-2020 Arm Limited and affiliates.
- * SPDX-License-Identifier: Apache-2.0
- */
-#include <mbed.h>
-#include "F429ZI_Platform.h"
-#include "PinNames.h"
-SPISlave device(MOSI_1, MISO_1, SCK_1, PE_1); // mosi, miso, sclk, ssel
+#include "mbed.h"
 
+SPISlave myspi(PB_5, PB_4, PB_3, PA_4); // mosi, miso, sclk, nSS
 
-int main()
-{
-    //spi.setSSEL(CS_R);
-    SPI.setSSEL(CS_R);
-    device.format(8,3);
-    device.frequency(1000000);
-    // device.reply(0x00);              // Prime SPI with first reply
-    // while (1) {
-    //     if (device.receive()) {
-    //         int v = device.read();   // Read byte from master
-    //         v = (v + 1) % 0x100;     // Add one to it, modulo 256
-    //         device.reply(v);         // Make this the next reply
-    //     }
-    // }
+int main() {
+    
+    myspi.frequency(1000000);
+
+    myspi.format(8, 0);
+    myspi.reply(0x5A);
+    //myspi.format(16, 0);
+    //myspi.reply(0x5A69);
+
+    while(1) {
+         if (myspi.receive()) {
+             
+             int data = myspi.read();
+             printf("Recieved %2x\n", data);
+             myspi.reply(data); // Read byte from master and transmit it at the next transaction
+         } 
+    }
 }
