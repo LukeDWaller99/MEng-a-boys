@@ -1,6 +1,7 @@
 #include "mbed.h"
 #include "LCD.h"
 #include "L432KC_Hardware.h"
+#include "ThisThread.h"
 // Blinking rate in milliseconds
 #define BLINKING_RATE     500ms
 
@@ -37,7 +38,7 @@ int main()
             spi.reply(++reply);
             printf("Recieved: %d . Next Reply: %d \n", valueFromMaster, reply);
         }
-        led = !led;
-        ThisThread::sleep_for(BLINKING_RATE);
+        // led = !led;
+        // ThisThread::sleep_for(BLINKING_RATE);
     }
 }
