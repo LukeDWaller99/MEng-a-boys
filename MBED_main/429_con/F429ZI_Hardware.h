@@ -9,6 +9,18 @@
 #define USER_LED_BLUE PB_7
 #define USER_LED_RED PB_14
 
+//SPI PINS DEFINED ON PCB
+// #define CLK_1 PB_3
+// #define MISO_1 PB_4
+// #define MOSI_1 PB_5
+
+//SPI PINS DEFINED IN EXAMPLES
+//#define CS_1 PD_13
+#define CLK_2 D13   //PA_5
+#define MISO_2 PB_5 //PA_7 or PB_5 - D11
+#define MOSI_2 D12 //PA_6
+
+
 //Comms
 #define CLK_1 PB_3
 #define MISO_1 PB_4
@@ -57,8 +69,8 @@
 #define BRAKE_LED PC_11
 
 // Buzzer and Vibration Motor
-#define BUZZER  PA_6
-#define VIB_MOTOR PA_5
+// #define BUZZER  PA_6
+// #define VIB_MOTOR PA_5
 
 //Collision LEDs
 #define COL_SENSE_1 PE_7

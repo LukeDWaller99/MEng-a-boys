@@ -1,15 +1,12 @@
-#include <mbed.h>
 #include "F429ZI_Hardware.h"
 #include <ThisThread.h>
 #include <rtos.h>
 #include "DigitalIn.h"
 #include "DigitalOut.h"
 #include "InterruptIn.h"
+#include "mbed.h"
 
-SPI spi(MOSI_1, MISO_1, CLK_1);
-DigitalOut CS(CS_1);
-
-//Onboard Peripherals 
+//Onboard Peripherals
 //InterruptIn USER_BTN(USR_BTN);
 DigitalOut USER_GREEN(USER_LED_GREEN);
 DigitalOut USER_RED(USER_LED_RED);
@@ -17,7 +14,7 @@ DigitalOut USER_BLUE(USER_LED_BLUE);
 
 InterruptIn SW_1(SWITCH_1);
 InterruptIn SW_2(SWITCH_2);
-InterruptIn SW_BUZZ(BUZZER);
+//InterruptIn SW_BUZZ(BUZZER);
 InterruptIn SW_ASCEND(ASCEND);
 InterruptIn SW_DESCEND(DESCEND);
 InterruptIn SW_LIGHTS(LIGHTS);
@@ -56,19 +53,18 @@ Thread switchMonitor;
 
 void switchMonitorMethod();
 void switchDetection();
-void SW_1_IRQ(); 
-void SW_2_IRQ(); 
-void SW_ASC_IRQ(); 
-void SW_DESC_IRQ(); 
-// void SW_MODE_1_IRQ(); 
-// void SW_MODE_2_IRQ(); 
+void SW_1_IRQ();
+void SW_2_IRQ();
+void SW_ASC_IRQ();
+void SW_DESC_IRQ();
+// void SW_MODE_1_IRQ();
+// void SW_MODE_2_IRQ();
 void SW_LIGHTS_IRQ();
 void SW_BRAKE_IRQ();
 void SW_REV_IRQ();
 void SW_M_EN_IRQ();
-void SW_M_DE_IRQ(); 
+void SW_M_DE_IRQ();
 //void SW_KILL_IRQ();
-
 
 void collisionLEDs(){
     C_LED_1 = 1;
@@ -97,36 +93,57 @@ void collisionLEDs(){
     C_LED_8 = 0;
 }
 
-int main()
-{   
-    printf("Starting Board...\n");
-    //SPI BUSINESS
-    int valueToSlave = 20;
-    spi.format(8, 3); //8-bit data
-    spi.frequency(1000000); //1MHz CLK
-	int counter = 1;
-    // spi.write(0x8F); //WhoAmI
-    // int whoami= spi.write(0x00);
-    // printf("WhoAmI: 0x%X\n", whoami);
-    
-    //SWITCHY BUSINESS
-    switchDetection();
-    switchMonitor.start(switchMonitorMethod);
 
-    while (true){
-        printf("Count: %d . Sending Value: %d . \n", counter, valueToSlave);
-        CS = 0;
-        int dataFromSlave = spi.write(valueToSlave);
-        CS = 1;
-        printf("From Slave: %d\n", dataFromSlave);
-        valueToSlave++;
-        USER_BLUE = 1;
-        wait_us(1000000);
-        USER_BLUE = 0;
+SPI myspi(PB_5, PB_4, PB_3); // mosi, miso, sclk
+
+DigitalOut cs(PA_4); //For L432 Controller
+
+//define another for F429 Platform
+
+// Serial pc(SERIAL_TX, SERIAL_RX); // TX, RX
+
+int main() {
+    printf("Starting F429 Controller Board\n");
+    volatile uint8_t data_read = 0;
+    volatile uint8_t data_write = 0;
+
+    myspi.frequency(1000000);
+    myspi.format(8, 0);
+
+    printf("\nSPI 8-bit test launched\n");
+
+    while (1) {
+
+        cs = 0;
+        data_read = myspi.write(data_write);
+        cs = 1;
+        printf("sent 0x%2x, read: 0x%2x   ", data_write, data_read);
         
-        collisionLEDs();
-    }   
+        if ((uint8_t)(data_read + 1) == (uint8_t)data_write) {
+            printf("OK\n");
+        } else {
+            printf("*FAIL*\n");
+        }
+    
+    wait_us(10000000);
+    data_write++;
+
+    }
 }
+
+
+// int main()
+// {
+//     printf("Starting Board...\n");
+
+//     //SWITCHY BUSINESS
+//     switchDetection();
+//     switchMonitor.start(switchMonitorMethod);
+
+//     while (true){
+//         collisionLEDs();
+//     }
+// }
 
 void SW_1_IRQ(){
     SW_1.rise(NULL);
@@ -134,7 +151,7 @@ void SW_1_IRQ(){
     wait_us(5000);
     if (SW_1 == 1) {
         switchMonitor.flags_set(11);
-    }  
+    }
     if (SW_1 == 0){
         switchMonitor.flags_set(10);
     }
@@ -300,7 +317,7 @@ void switchMonitorMethod(){
 
         switch (flag) {
 
-            case 00: 
+            case 00:
             printf("Kill Switch Activated\n");
             SW_KILL_LED = 1;
             break;
@@ -310,7 +327,7 @@ void switchMonitorMethod(){
             SW_KILL_LED = 0;
             break;
 
-            case 10: 
+            case 10:
             printf("SW 1 Activated\n");
             SW_1_LED = 1;
             break;
@@ -399,8 +416,7 @@ void switchMonitorMethod(){
             printf("Disengage Motors Switch Deactivated\n");
             SW_M_DE_LED = 0;
             break;
-            
+
         }
     }
 }
-
