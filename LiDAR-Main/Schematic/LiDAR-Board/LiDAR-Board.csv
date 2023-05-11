@@ -1,0 +1,6 @@
+"#","Reference","Qty","Value","Footprint","DNP"
+"1","J1","1","Conn_01x04","HEVCS_Sensor_Footprints:Conn_01x04_MOLEX",""
+"2","Q1, Q2","2","BC817","Package_TO_SOT_SMD:SOT-23",""
+"3","R1, R2","2","10K","Resistor_SMD:R_0603_1608Metric",""
+"4","U1","1","Pico","HEVCS_Sensor_Footprints:Pi_Pico",""
+"5","U2, U3, U4","3","~","HEVCS_Sensor_Footprints:Conn_01x05_MOLEX",""
