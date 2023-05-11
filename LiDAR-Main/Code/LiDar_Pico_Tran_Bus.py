@@ -27,12 +27,15 @@ int_pins = [16,17]
 uart = UART(0, baudrate = 9600, tx=Pin(0), rx=Pin(1))
 uart.init(bits=8, parity=None, stop=2)
 led = Pin ("LED",Pin.OUT)
-
+data_2='beans'
+num=177
+num_bytes = num.to_bytes(8, "big")
 #kick thread off
 interface = LiDAR_Interface(lidar_control_pins,int_pins)
 def thread2():
     while True:
-        uart.write('beans')
+        #uart.write(bytes(data_2,'utf-8')	)
+        uart.write(str(num))
         time.sleep(1)
 gc.enable()
 thread2()

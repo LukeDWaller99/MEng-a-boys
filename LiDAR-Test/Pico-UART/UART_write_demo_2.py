@@ -12,7 +12,8 @@ while True:
         data = uart.readline()
         t_stop=time.ticks_cpu()
         print(t_stop-t_sta)
+        print(data.decode('UTF-8'))
         print(data)
-        if data.decode('UTF-8') == "beans":
-            led.toggle()
+        #if data.decode('UTF-8') == "beans":
+        led.toggle()
     time.sleep(1)
