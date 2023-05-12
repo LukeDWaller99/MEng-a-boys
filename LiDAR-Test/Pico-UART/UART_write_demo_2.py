@@ -10,8 +10,6 @@ while True:
     #signal to the LiDAR board that we want a reading
     print("requesting")
     uart.write('s') #for send
-    while not uart.any(): #wait until a response
-        pass
     if uart.any():
         t_sta=time.ticks_cpu()
         data = uart.readline()

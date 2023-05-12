@@ -37,11 +37,11 @@ def thread2():
         if uart.any():
             uart_in_data=uart.readline()
             print(uart_in_data)
-            if uart_in_data=='s':
+            if uart_in_data==b's':
         #uart.write(str(num))
         #print("interface reading: ")
         #print(interface.avg_reading)
                 uart.write(str(interface.avg_reading))
-        time.sleep(1)
+        time.sleep(0.1)
 gc.enable()
 thread2()
