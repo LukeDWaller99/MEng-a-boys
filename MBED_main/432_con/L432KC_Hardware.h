@@ -22,10 +22,10 @@
 //D-PAD BUTTONS
 #define D_UP A0 //PA_0
 #define D_LEFT A2 //PA_3
-//#define D_RIGHT D11 //PB_5 same as MOSI
-//#define D_DOWN A3 //PA_4 same as CS?
-//#define D_SEL D12 //PB_4 same as MISO
-//#define D_BACK D13 //PB_3 same as SCK
+#define D_RIGHT D11 //PB_5 same as MOSI
+#define D_DOWN A3 //PA_4 same as CS?
+#define D_SEL D12 //PB_4 same as MISO
+#define D_BACK D13 //PB_3 same as SCK
 
 // //SPI Pins - AS IN MANUAL
 // #define MOSI PA_12 //D2

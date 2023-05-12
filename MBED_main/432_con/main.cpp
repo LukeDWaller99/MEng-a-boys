@@ -24,7 +24,7 @@ void back_IRQ();
 
 char foo [16]= "noah smells";
 
-SPISlave myspi(PB_5, PB_4, PB_3, PA_4); // mosi, miso, sclk, nSS
+SPISlave myspi(PA_12, PA_11, PA_1, PB_0); // mosi, miso, sclk, nSS
 LCD LCD(LCD_RS, LCD_RW, LCD_E, LCD_D4, LCD_D5, LCD_D6, LCD_D7);
 int main() {
     printf("L432 Controller Board Started\n");
