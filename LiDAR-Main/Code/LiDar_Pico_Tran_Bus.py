@@ -38,12 +38,13 @@ def thread2():
             uart_in_data=uart.readline()
             print(uart_in_data)
             if uart_in_data==b's':
+            #if uart_in_data.find(b's'):
         #uart.write(str(num))
         #print("interface reading: ")
         #print(interface.avg_reading)
                 #uart.write(str(interface.avg_readings[0]))
                 uart.write(f"{interface.avg_readings[0]},{interface.avg_readings[1]}")
-        time.sleep(0.1)
+        time.sleep(0.01)
         print(interface.avg_readings)
 gc.enable()
 gc.threshold(100000) #prevents memory errors
