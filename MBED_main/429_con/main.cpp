@@ -95,28 +95,27 @@ void collisionLEDs(){
 
 
 SPI myspi(PB_5, PB_4, PB_3); // mosi, miso, sclk
+//same as the pins defined on PCB
 
-DigitalOut cs(PA_4); //For L432 Controller
+//DigitalOut cs(PA_4); //For L432 Controller
 
-//define another for F429 Platform
-
-// Serial pc(SERIAL_TX, SERIAL_RX); // TX, RX
 
 int main() {
     printf("Starting F429 Controller Board\n");
     volatile uint8_t data_read = 0;
     volatile uint8_t data_write = 0;
-
+    switchDetection();
+    switchMonitor.start(switchMonitorMethod);
     myspi.frequency(1000000);
     myspi.format(8, 0);
 
     printf("\nSPI 8-bit test launched\n");
 
     while (1) {
-
-        cs = 0;
+        collisionLEDs();
+        //cs = 0;
         data_read = myspi.write(data_write);
-        cs = 1;
+        //cs = 1;
         printf("sent 0x%2x, read: 0x%2x   ", data_write, data_read);
         
         if ((uint8_t)(data_read + 1) == (uint8_t)data_write) {
@@ -125,25 +124,11 @@ int main() {
             printf("*FAIL*\n");
         }
     
-    wait_us(10000000);
+    wait_us(100000000);
     data_write++;
 
     }
 }
-
-
-// int main()
-// {
-//     printf("Starting Board...\n");
-
-//     //SWITCHY BUSINESS
-//     switchDetection();
-//     switchMonitor.start(switchMonitorMethod);
-
-//     while (true){
-//         collisionLEDs();
-//     }
-// }
 
 void SW_1_IRQ(){
     SW_1.rise(NULL);
