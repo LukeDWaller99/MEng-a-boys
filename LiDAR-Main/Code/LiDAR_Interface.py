@@ -21,6 +21,7 @@ class LiDAR_Interface:
                 if (self.interrupt_lines[0].get_flag()):
                     self.bus.enable(0)
                     self.interrupt_lines[0].clear()
+                    last_interrupt = 0
                     if self.debug==1:
                         t_t1s=time.ticks_ms()
                         print("T1 interval {}ms...".format(t_t1s - t_t1))
@@ -28,10 +29,12 @@ class LiDAR_Interface:
                 else:
                     self.bus.enable(1)
                     self.interrupt_lines[1].clear()
+                    last_interrupt = 1
                     if self.debug==1:
                         t_t2s=time.ticks_ms()
                         print("T2 interval {}ms...".format(t_t2s - t_t2))
                         t_t2=time.ticks_ms()
+                print(last_interrupt)
                 if self.sensor.data_ready():
                     if self.debug ==1:
                         print("read")
@@ -43,7 +46,7 @@ class LiDAR_Interface:
                     #print(centre_grid(data.distance, sensor_mode))
                     cent_reading = int(centre_grid_avg(centre_grid(self.data.distance, self.sensor_mode)))
                     print(cent_reading)
-                    self.avg_reading = cent_reading
+                    self.avg_readings[last_interrupt] = cent_reading
                     #micropython.mem_info()
                     if self.debug == 1:
                         t_loop_end = time.ticks_ms()
@@ -52,7 +55,7 @@ class LiDAR_Interface:
         PINS_BREAKOUT_GARDEN = {"sda": 20, "scl": 21}
         self.debug = 0
         self.data = 0
-        self.avg_reading = 0
+        self.avg_readings = [0,0]
         self.bus = Tran_Bus(lidar_control_pins)
         self.bus.all_off()
         #create interrupts
