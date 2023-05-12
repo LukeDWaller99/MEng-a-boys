@@ -24,7 +24,7 @@ lidar_control_pins = [18,19]
 int_pins = [16,17]
 
 #UART TIME
-uart = UART(0, baudrate = 9600, tx=Pin(0), rx=Pin(1))
+uart = UART(0, baudrate = 115200, tx=Pin(0), rx=Pin(1))
 uart.init(bits=8, parity=None, stop=2)
 led = Pin ("LED",Pin.OUT)
 num=177
@@ -46,4 +46,5 @@ def thread2():
         time.sleep(0.1)
         print(interface.avg_readings)
 gc.enable()
+gc.threshold(100000) #prevents memory errors
 thread2()

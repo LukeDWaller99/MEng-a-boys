@@ -5,6 +5,8 @@ import pimoroni_i2c
 import breakout_vl53l5cx
 import time
 import _thread
+import micropython
+import gc
 class LiDAR_Interface:
      #hardcoded
     sensor_mode = 4
@@ -47,10 +49,11 @@ class LiDAR_Interface:
                     cent_reading = int(centre_grid_avg(centre_grid(self.data.distance, self.sensor_mode)))
                     print(cent_reading)
                     self.avg_readings[last_interrupt] = cent_reading
-                    #micropython.mem_info()
+                    micropython.mem_info()
                     if self.debug == 1:
                         t_loop_end = time.ticks_ms()
                         print("Loop done in {}ms...".format(t_loop_end - t_loop_sta))
+                    
     def __init__(self,lidar_control_pins,lidar_interrupt_pins):
         PINS_BREAKOUT_GARDEN = {"sda": 20, "scl": 21}
         self.debug = 0
@@ -72,6 +75,7 @@ class LiDAR_Interface:
                 self.sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
             else:
                 self.sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
+            self.sensor.set_ranging_frequency_hz(10)
             self.sensor.start_ranging()
         t_end = time.ticks_ms()
         print("Done in {}ms...".format(t_end - t_sta))
