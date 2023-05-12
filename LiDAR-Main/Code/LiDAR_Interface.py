@@ -10,9 +10,10 @@ class LiDAR_Interface:
     sensor_mode = 4
     def f_sensing_loop(self):
             while True:
-                t_loop_sta = time.ticks_ms()
-                t_t1=time.ticks_ms()
-                t_t2=time.ticks_ms()
+                while self.debug == 1:
+                    t_loop_sta = time.ticks_ms()
+                    t_t1=time.ticks_ms()
+                    t_t2=time.ticks_ms()
                 #bus.advance()
                 #t_start = time.ticks_ms()
                 while (self.interrupt_lines[0].get_flag() == 0 and self.interrupt_lines[1].get_flag() == 0): #wait until a flag goes high
@@ -20,17 +21,20 @@ class LiDAR_Interface:
                 if (self.interrupt_lines[0].get_flag()):
                     self.bus.enable(0)
                     self.interrupt_lines[0].clear()
-                    t_t1s=time.ticks_ms()
-                    print("T1 interval {}ms...".format(t_t1s - t_t1))
-                    t_t1=time.ticks_ms()
+                    if self.debug==1:
+                        t_t1s=time.ticks_ms()
+                        print("T1 interval {}ms...".format(t_t1s - t_t1))
+                        t_t1=time.ticks_ms()
                 else:
                     self.bus.enable(1)
                     self.interrupt_lines[1].clear()
-                    t_t2s=time.ticks_ms()
-                    print("T2 interval {}ms...".format(t_t2s - t_t2))
-                    t_t2=time.ticks_ms()
+                    if self.debug==1:
+                        t_t2s=time.ticks_ms()
+                        print("T2 interval {}ms...".format(t_t2s - t_t2))
+                        t_t2=time.ticks_ms()
                 if self.sensor.data_ready():
-                    print("read")
+                    if self.debug ==1:
+                        print("read")
                     # "data" is a namedtuple (attrtuple technically)
                     # it includes average readings as "distance_avg" and "reflectance_avg"
                     # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
@@ -39,12 +43,16 @@ class LiDAR_Interface:
                     #print(centre_grid(data.distance, sensor_mode))
                     cent_reading = int(centre_grid_avg(centre_grid(self.data.distance, self.sensor_mode)))
                     print(cent_reading)
+                    self.avg_reading = cent_reading
                     #micropython.mem_info()
-                    t_loop_end = time.ticks_ms()
-                    print("Loop done in {}ms...".format(t_loop_end - t_loop_sta))
+                    if self.debug == 1:
+                        t_loop_end = time.ticks_ms()
+                        print("Loop done in {}ms...".format(t_loop_end - t_loop_sta))
     def __init__(self,lidar_control_pins,lidar_interrupt_pins):
         PINS_BREAKOUT_GARDEN = {"sda": 20, "scl": 21}
+        self.debug = 0
         self.data = 0
+        self.avg_reading = 0
         self.bus = Tran_Bus(lidar_control_pins)
         self.bus.all_off()
         #create interrupts
@@ -66,3 +74,5 @@ class LiDAR_Interface:
         print("Done in {}ms...".format(t_end - t_sta))
         second_thread = _thread.start_new_thread(self.f_sensing_loop,[])
         
+    def set_debug(self,new_val):
+        self.debug=new_val

@@ -7,10 +7,10 @@ led = Pin ("LED",Pin.OUT)
 
 
 while True:
-    t_sta=time.ticks_cpu()
-    uart.write('Hello World')
-    t_stop=time.ticks_cpu()
-    print(t_stop-t_sta)
+    #t_sta=time.ticks_cpu()
+    #uart.write('Hello World')
+    #t_stop=time.ticks_cpu()
+    #print(t_stop-t_sta)
     if uart.any():
         data = uart.read()
         print(data)

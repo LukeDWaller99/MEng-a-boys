@@ -7,6 +7,11 @@ led = Pin ("LED",Pin.OUT)
 
 
 while True:
+    #signal to the LiDAR board that we want a reading
+    print("requesting")
+    uart.write('s') #for send
+    while not uart.any(): #wait until a response
+        pass
     if uart.any():
         t_sta=time.ticks_cpu()
         data = uart.readline()
@@ -14,6 +19,5 @@ while True:
         print(t_stop-t_sta)
         print(data.decode('UTF-8'))
         print(data)
-        #if data.decode('UTF-8') == "beans":
         led.toggle()
-    time.sleep(1)
+    time.sleep(0.5)
