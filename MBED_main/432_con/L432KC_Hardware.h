@@ -5,19 +5,19 @@
 #define L4_USER_LED_GREEN PB_3
 
 // //SPARE
-#define SP_D7 D7
-#define SP_D8 D8
-#define SP_A4 A4
-#define SP_A5 A5
+// #define SP_D7 D7
+// #define SP_D8 D8
+// #define SP_A4 A4
+// #define SP_A5 A5
 
 //LCD
-#define LCD_RS D1 //PA_9
-#define LCD_E A6 //PA_7
+#define LCD_RS D1 //PA_9 was a4 d1work
+#define LCD_E D0 //PA_7 was a6 d0works
 #define LCD_RW A7 //PA_2
 #define LCD_D4 D4 //PB_7
 #define LCD_D5 D5 //PB_6
 #define LCD_D6 D6 //PB_1
-#define LCD_D7 D9 //PA_8
+#define LCD_D7 D9 //PA_8 was D9
 
 //SPI
 #define mosi D2 //PA_12 
