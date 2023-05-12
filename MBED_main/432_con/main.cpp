@@ -7,11 +7,11 @@
 #define BLINKING_RATE     500ms
 
 InterruptIn UP(D_UP);
-//InterruptIn DOWN(D_DOWN);
+InterruptIn DOWN(D_DOWN);
 InterruptIn LEFT(D_LEFT);
-// InterruptIn RIGHT(D_RIGHT);
-// InterruptIn SEL(D_SEL);
-// InterruptIn BACK(D_BACK);
+InterruptIn RIGHT(D_RIGHT);
+//InterruptIn SEL(D_SEL); //IRQ CHANNEL CONFLICT
+//InterruptIn BACK(D_BACK); //IRQ CHANNEL CONFLICT
 Thread dpadMonitor;
 void dpadMonitorMethod();
 void dpadDetection();
@@ -24,7 +24,7 @@ void back_IRQ();
 
 char foo [16]= "noah smells";
 
-SPISlave myspi(PA_12, PA_11, PA_1, PB_0); // mosi, miso, sclk, nSS
+SPISlave myspi(mosi, miso, SCK, CS); // mosi, miso, sclk, nSS
 LCD LCD(LCD_RS, LCD_RW, LCD_E, LCD_D4, LCD_D5, LCD_D6, LCD_D7);
 int main() {
     printf("L432 Controller Board Started\n");
@@ -44,12 +44,12 @@ int main() {
 }
 
 void up_IRQ(){
-    UP.rise(NULL);
-    wait_us(500);
-    if (UP == 1){
-        dpadMonitor.flags_set(1);
-    }
-    UP.rise(up_IRQ);
+    // UP.rise(NULL);
+    // wait_us(500);
+    // if (UP == 1){
+    //     dpadMonitor.flags_set(1);
+    // }
+    // UP.rise(up_IRQ);
 }
 
 void down_IRQ(){
@@ -62,12 +62,12 @@ void down_IRQ(){
 }
 
 void left_IRQ(){
-    LEFT.rise(NULL);
-    wait_us(500);
-    if (LEFT == 1){
-        dpadMonitor.flags_set(3);
-    }
-    LEFT.rise(left_IRQ);
+    // LEFT.rise(NULL);
+    // wait_us(500);
+    // if (LEFT == 1){
+    //     dpadMonitor.flags_set(3);
+    // }
+    // LEFT.rise(left_IRQ);
 }
 
 void right_IRQ(){
@@ -98,12 +98,12 @@ void back_IRQ(){
 }
 
 void dpadDetection(){
-    UP.rise(up_IRQ);
-    // DOWN.rise(down_IRQ);
-    LEFT.rise(left_IRQ);
-    // RIGHT.rise(right_IRQ);
-    // SEL.rise(sel_IRQ);
-    // BACK.rise(back_IRQ);
+    // UP.rise(up_IRQ);
+    // // DOWN.rise(down_IRQ);
+    // LEFT.rise(left_IRQ);
+    // // RIGHT.rise(right_IRQ);
+    // // SEL.rise(sel_IRQ);
+    // // BACK.rise(back_IRQ);
 }
 
 void dpadMonitorMethod(){

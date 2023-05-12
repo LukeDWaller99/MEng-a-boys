@@ -19,11 +19,17 @@
 #define LCD_D6 D6 //PB_1
 #define LCD_D7 D9 //PA_8
 
+//SPI
+#define mosi D2 //PA_12 
+#define miso D10 //PA_11
+#define SCK  A1 //PA_1
+#define CS D3 //PB_0 // mosi, miso, sclk, nSS
+
 //D-PAD BUTTONS
 #define D_UP A0 //PA_0
 #define D_LEFT A2 //PA_3
-#define D_RIGHT D11 //PB_5 same as MOSI
-#define D_DOWN A3 //PA_4 same as CS?
+#define D_RIGHT D11 //PB_5
+#define D_DOWN A3 //PA_4
 #define D_SEL D12 //PB_4 same as MISO
 #define D_BACK D13 //PB_3 same as SCK
 
