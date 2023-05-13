@@ -34,14 +34,14 @@
 #define R_ROLL  PA_3 
 
 //SWITCHES
-#define ASCEND PB_9 //3
-#define DESCEND PB_8 //4
+#define ASCEND PB_8 //3
+#define DESCEND PB_9 //4
 #define MOTOR_MODE_1 PF_2  //5
 #define MOTOR_MODE_2 PH_1  //6
 #define LIGHTS PG_2 //7
 #define MOTOR_EN PF_10 //8
 #define MOTOR_DE PF_5 //9
-#define BRAKE_MODE PC_11 //10
+#define BRAKE_MODE PD_2 //10
 #define REV_MODE PC_12 //11
 #define SWITCH_1 PD_0 //1
 #define SWITCH_2 PD_1 //2

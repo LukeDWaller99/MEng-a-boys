@@ -303,103 +303,103 @@ void switchMonitorMethod(){
         switch (flag) {
 
             case 00:
-            printf("Kill Switch Activated\n");
-            SW_KILL_LED = 1;
-            break;
-
-            case 01:
             printf("Kill Switch Deactivated\n");
             SW_KILL_LED = 0;
             break;
 
-            case 10:
-            printf("SW 1 Activated\n");
-            SW_1_LED = 1;
+            case 01:
+            printf("Kill Switch Activated\n");
+            SW_KILL_LED = 1;
             break;
 
-            case 11:
+            case 10:
             printf("SW 1 Deactivated\n");
             SW_1_LED = 0;
             break;
 
+            case 11:
+            printf("SW 1 Activated\n");
+            SW_1_LED = 1;
+            break;
+
             case 20:
-            printf("SW 2 Activated\n");
+            printf("SW 2 Deactivated\n");
             SW_2_LED = 1;
             break;
 
             case 21:
-            printf("SW 2 Deactivated\n");
-            SW_2_LED = 0;
+            printf("SW 2 Activated\n");
+            SW_2_LED = 1;
             break;
 
             case 30:
-            printf("Ascend Switch Activated\n");
-            SW_ASC_LED = 1;
-            break;
-
-            case 31:
             printf("Ascend Switch Deactivated\n");
             SW_ASC_LED = 0;
             break;
 
-            case 40:
-            printf("Descend Switch Activated\n");
-            SW_DESC_LED = 1;
+            case 31:
+            printf("Ascend Switch Activated\n");
+            SW_ASC_LED = 1;
             break;
 
-            case 41:
+            case 40:
             printf("Descend Switch Deactivated\n");
             SW_DESC_LED = 0;
             break;
 
+            case 41:
+            printf("Descend Switch Activated\n");
+            SW_DESC_LED = 1;
+            break;
+
             case 50:
             printf("Lights Switch Activated\n");
-            SW_LIGHTS_LED = 1;
+            SW_LIGHTS_LED = 0;
             break;
 
             case 51:
             printf("Lights Switch Deactivated\n");
-            SW_LIGHTS_LED = 0;
+            SW_LIGHTS_LED = 1;
             break;
 
             case 60:
             printf("Brake Switch Activated\n");
-            SW_BRAKE_LED = 1;
+            SW_BRAKE_LED = 0;
             break;
 
             case 61:
             printf("Brake Switch Deactivated\n");
-            SW_BRAKE_LED = 0;
+            SW_BRAKE_LED = 1;
             break;
 
             case 70:
             printf("Reverse Switch Activated\n");
-            SW_REV_LED = 1;
-            break;
-
-            case 71:
-            printf("Reverse Switch Deactivated\n");
             SW_REV_LED = 0;
             break;
 
-            case 80:
-            printf("Engage Motors Switch Activated\n");
-            SW_M_EN_LED = 1;
+            case 71:
+            printf("Reverse Switch Activated\n");
+            SW_REV_LED = 1;
             break;
 
-            case 81:
+            case 80:
             printf("Engage Motors Switch Deactivated\n");
             SW_M_EN_LED = 0;
             break;
 
+            case 81:
+            printf("Engage Motors Switch Activated\n");
+            SW_M_EN_LED = 1;
+            break;
+
             case 90:
-            printf("Disengage Motors Switch Activated\n");
-            SW_M_DE_LED = 1;
+            printf("Disengage Motors Switch Deactivated\n");
+            SW_M_DE_LED = 0;
             break;
 
             case 91:
-            printf("Disengage Motors Switch Deactivated\n");
-            SW_M_DE_LED = 0;
+            printf("Disengage Motors Switch Activated\n");
+            SW_M_DE_LED = 1;
             break;
 
         }
