@@ -1,9 +1,11 @@
 #include "mbed.h"
 
-SPISlave myspi(PB_5, PB_4, PB_3, PA_4); // mosi, miso, sclk, nSS
+SPISlave myspi(PB_5, PB_4, PB_3, PA_4); // mosi, miso, sclk, nSS worked
+
+//SPISlave myspi(PF_8, PF_9, PF_7, PA_4);//spi5
 
 int main() {
-    
+    printf("board started\n");
     myspi.frequency(1000000);
 
     myspi.format(8, 0);
