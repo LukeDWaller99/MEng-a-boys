@@ -113,22 +113,27 @@ int main() {
 
     while (1) {
         collisionLEDs();
-        //cs = 0;
-        data_read = myspi.write(data_write);
-        //cs = 1;
-        printf("sent 0x%2x, read: 0x%2x   ", data_write, data_read);
+    //     //cs = 0;
+    //     data_read = myspi.write(data_write);
+    //     //cs = 1;
+    //     printf("sent 0x%2x, read: 0x%2x   ", data_write, data_read);
         
-        if ((uint8_t)(data_read + 1) == (uint8_t)data_write) {
-            printf("OK\n");
-        } else {
-            printf("*FAIL*\n");
-        }
+    //     if ((uint8_t)(data_read + 1) == (uint8_t)data_write) {
+    //         printf("OK\n");
+    //     } else {
+    //         printf("*FAIL*\n");
+    //     }
     
-    wait_us(100000000);
-    data_write++;
+    // wait_us(100000000);
+    // data_write++;
 
     }
 }
+
+//JOYSTICK CONTROLS
+
+
+
 
 void SW_1_IRQ(){
     SW_1.rise(NULL);
@@ -305,6 +310,9 @@ void switchMonitorMethod(){
             case 00:
             printf("Kill Switch Deactivated\n");
             SW_KILL_LED = 0;
+            // myspi.lock(); //try lock?
+            
+            // myspi.unlock();
             break;
 
             case 01:
