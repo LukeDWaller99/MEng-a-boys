@@ -16,7 +16,7 @@ from LiDAR_Interface import *
 led1 = Pin(13,Pin.OUT)
 led2 = Pin(12, Pin.OUT)
 led3 = Pin(11, Pin.OUT)
-internal_led = Pin(25, Pin.OUT)
+
 int_led = 0;
 
 #lidar pins
@@ -35,7 +35,7 @@ def thread2():
         #wait until data is requested
         if uart.any():
             uart_in_data=uart.readline()
-            print(uart_in_data)
+            #print(uart_in_data)
             if uart_in_data==b's':
             #if uart_in_data.find(b's'):
         #uart.write(str(num))
@@ -44,7 +44,6 @@ def thread2():
                 #uart.write(str(interface.avg_readings[0]))
                 uart.write(f"{interface.avg_readings[0]},{interface.avg_readings[1]}")
         #time.sleep(0.01)
-        #print(interface.avg_readings)
 gc.enable()
 gc.threshold(150000) #prevents memory errors
 thread2()

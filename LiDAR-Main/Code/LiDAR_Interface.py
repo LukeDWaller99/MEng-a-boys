@@ -11,64 +11,23 @@ import machine
 class LiDAR_Interface:
      #hardcoded
     sensor_mode = 4
-    def f_sensing_loop(self):
-            while True:
-                while self.debug == 1:
-                    t_loop_sta = time.ticks_ms()
-                    t_t1=time.ticks_ms()
-                    t_t2=time.ticks_ms()
-                #bus.advance()
-                #t_start = time.ticks_ms()
-                while (self.interrupt_lines[0].get_flag() == 0 and self.interrupt_lines[1].get_flag() == 0): #wait until a flag goes high
-                    pass
-                if (self.interrupt_lines[0].get_flag()):
-                    self.bus.enable(0)
-                    self.interrupt_lines[0].clear()
-                    last_interrupt = 0
-                    if self.debug==1:
-                        t_t1s=time.ticks_ms()
-                        print("T1 interval {}ms...".format(t_t1s - t_t1))
-                        t_t1=time.ticks_ms()
-                else:
-                    self.bus.enable(1)
-                    self.interrupt_lines[1].clear()
-                    last_interrupt = 1
-                    if self.debug==1:
-                        t_t2s=time.ticks_ms()
-                        print("T2 interval {}ms...".format(t_t2s - t_t2))
-                        t_t2=time.ticks_ms()
-                print(last_interrupt)
-                
-                if self.sensor.data_ready():
-                    if self.debug ==1:
-                        print("read")
-                    # "data" is a namedtuple (attrtuple technically)
-                    # it includes average readings as "distance_avg" and "reflectance_avg"
-                    # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
-                    #machine.disable_irq()
-                    self.data = self.sensor.get_data()
-                    #machine.enable_irq()
-                    #diag_print(data, sensor_mode)
-                    #print(centre_grid(data.distance, sensor_mode))
-                    cent_reading = int(centre_grid_avg(centre_grid(self.data.distance, self.sensor_mode)))
-                    print(cent_reading)
-                    self.avg_readings[last_interrupt] = cent_reading
-                    
-                    micropython.mem_info()
-                    if self.debug == 1:
-                        t_loop_end = time.ticks_ms()
-                        print("Loop done in {}ms...".format(t_loop_end - t_loop_sta))
-                    
     def __init__(self,lidar_control_pins,lidar_interrupt_pins):
         PINS_BREAKOUT_GARDEN = {"sda": 20, "scl": 21}
         self.debug = 0
         self.data = 0
         self.avg_readings = [0,0]
+        self.sense_ref=self.sense
         self.bus = Tran_Bus(lidar_control_pins)
         self.bus.all_off()
+        self.thread_flag = 0 #thread flag for sensing loop
+        self.last_interrupt=0
+        self.internal_led = Pin(25, Pin.OUT)
         #create interrupts
-        self.interrupt_lines = []
-        self.interrupt_lines += [LiDAR_Handler(pin_number) for pin_number in lidar_interrupt_pins]
+        #self.interrupt_lines = []
+        #self.interrupt_lines += [LiDAR_Handler(pin_number) for pin_number in lidar_interrupt_pins]
+        self.flag1=0
+        self.flag2=0
+        
         #initialise sensors
         i2c = pimoroni_i2c.PimoroniI2C(**PINS_BREAKOUT_GARDEN, baudrate=1_000_000)
         t_sta = time.ticks_ms()
@@ -80,11 +39,56 @@ class LiDAR_Interface:
                 self.sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
             else:
                 self.sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
-            self.sensor.set_ranging_frequency_hz(8)
+            self.sensor.set_ranging_frequency_hz(5)
             self.sensor.start_ranging()
         t_end = time.ticks_ms()
         print("Done in {}ms...".format(t_end - t_sta))
-        second_thread = _thread.start_new_thread(self.f_sensing_loop,[])
         
+        self.interrupt_pin1 = Pin(16, Pin.IN) #assign pin
+        self.interrupt_pin1.irq(trigger=Pin.IRQ_RISING, handler=self.callback1)
+        self.interrupt_pin2 = Pin(17, Pin.IN) #assign pin
+        self.interrupt_pin2.irq(trigger=Pin.IRQ_RISING, handler=self.callback2)
+        second_thread = _thread.start_new_thread(self.sense,[])
+    def sense(self):
+        #while self.thread_flag==0:
+        #    pass
+        while True:
+            while (self.flag1 == 0 and self.flag2 == 0): #wait until a flag goes high
+                pass
+            if (self.flag1 and self.last_interrupt==1):
+                self.bus.enable(0)
+                self.flag1=0
+                self.last_interrupt = 0
+            elif (self.flag2 and self.last_interrupt==0):
+                self.bus.enable(1)
+                self.flag2=0
+                self.last_interrupt = 1
+            else:
+                continue
+            print(self.last_interrupt)
+            if self.sensor.data_ready():
+                    # "data" is a namedtuple (attrtuple technically)
+                    # it includes average readings as "distance_avg" and "reflectance_avg"
+                    # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
+                machine.disable_irq()
+                self.data = self.sensor.get_data()
+                machine.enable_irq()
+                    #diag_print(data, sensor_mode)
+                    #print(centre_grid(data.distance, sensor_mode))
+                cent_reading = int(centre_grid_avg(centre_grid(self.data.distance, self.sensor_mode)))
+                print(cent_reading)
+                self.avg_readings[self.last_interrupt] = cent_reading
+            
+            print("")
+            self.thread_flag=0
+    def callback1(self,sensor):
+        #self.bus.enable(0) #swap sensor
+        #self.internal_led.toggle()
+        self.flag1=1
+        self.thread_flag=1
+    def callback2(self,sensor):
+        #self.bus.enable(1) #swap sensor
+        self.flag2=1
+        self.thread_flag=1
     def set_debug(self,new_val):
         self.debug=new_val
