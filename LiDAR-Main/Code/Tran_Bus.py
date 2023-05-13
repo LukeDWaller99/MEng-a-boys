@@ -5,15 +5,15 @@ Will take pointers to n gpio pins, and allow them to be toggled easily
 from machine import Pin
 
 class Tran_Bus:
-    tran_pins = []
-    pin_args = [] #store for repr call
-    current_enable = 0;
     def __init__(self, pin_list):
         """
         Constructor for the Transistor Bus.
         Args:
         - pin_list
         """
+        self.tran_pins = []
+        self.pin_args = [] #store for repr call
+        self.current_enable = 0;
         print("Initialising Tran Bus")
         self.pin_args = pin_list
         print("Pin args: {}".format(

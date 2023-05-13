@@ -7,6 +7,7 @@ import time
 import _thread
 import micropython
 import gc
+import machine
 class LiDAR_Interface:
      #hardcoded
     sensor_mode = 4
@@ -37,18 +38,22 @@ class LiDAR_Interface:
                         print("T2 interval {}ms...".format(t_t2s - t_t2))
                         t_t2=time.ticks_ms()
                 print(last_interrupt)
+                
                 if self.sensor.data_ready():
                     if self.debug ==1:
                         print("read")
                     # "data" is a namedtuple (attrtuple technically)
                     # it includes average readings as "distance_avg" and "reflectance_avg"
                     # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
+                    #machine.disable_irq()
                     self.data = self.sensor.get_data()
+                    #machine.enable_irq()
                     #diag_print(data, sensor_mode)
                     #print(centre_grid(data.distance, sensor_mode))
                     cent_reading = int(centre_grid_avg(centre_grid(self.data.distance, self.sensor_mode)))
                     print(cent_reading)
                     self.avg_readings[last_interrupt] = cent_reading
+                    
                     micropython.mem_info()
                     if self.debug == 1:
                         t_loop_end = time.ticks_ms()
@@ -75,7 +80,7 @@ class LiDAR_Interface:
                 self.sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
             else:
                 self.sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
-            self.sensor.set_ranging_frequency_hz(10)
+            self.sensor.set_ranging_frequency_hz(8)
             self.sensor.start_ranging()
         t_end = time.ticks_ms()
         print("Done in {}ms...".format(t_end - t_sta))
