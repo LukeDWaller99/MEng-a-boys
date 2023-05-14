@@ -6,9 +6,10 @@ uart.init(bits=8, parity=None, stop=2)
 led = Pin ("LED",Pin.OUT)
 
 mux = MUX4([3,4])
+mux.select(0)
 while True:
     #signal to the LiDAR board that we want a reading
-    mux.select(0)
+    
     print("requesting")
     uart.write('s') #for send
     if uart.any():
@@ -21,4 +22,4 @@ while True:
         data_list=(data.decode('UTF-8')).split(',')
         print(data_list)
         led.toggle()
-    time.sleep(0.05)
+    time.sleep(0.025)
