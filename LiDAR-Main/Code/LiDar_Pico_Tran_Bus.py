@@ -24,7 +24,7 @@ lidar_control_pins = [18,19]
 int_pins = [16,17]
 
 #UART TIME
-uart = UART(0, baudrate = 57600, tx=Pin(0), rx=Pin(1))
+uart = UART(0, baudrate = 115200, tx=Pin(0), rx=Pin(1))
 uart.init(bits=8, parity=None, stop=2)
 led = Pin ("LED",Pin.OUT)
 

@@ -29,7 +29,7 @@ class LiDAR_Interface:
         self.flag2=0
         
         #initialise sensors
-        i2c = pimoroni_i2c.PimoroniI2C(**PINS_BREAKOUT_GARDEN, baudrate=1_000_000)
+        i2c = pimoroni_i2c.PimoroniI2C(**PINS_BREAKOUT_GARDEN, baudrate=2_000_000)
         t_sta = time.ticks_ms()
         for x in range(self.bus.get_len()):
             self.bus.advance()
@@ -39,11 +39,12 @@ class LiDAR_Interface:
                 self.sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
             else:
                 self.sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
-            self.sensor.set_ranging_frequency_hz(5)
+            self.sensor.set_ranging_frequency_hz(45)
             self.sensor.start_ranging()
         t_end = time.ticks_ms()
         print("Done in {}ms...".format(t_end - t_sta))
         
+        #create interrupts
         self.interrupt_pin1 = Pin(16, Pin.IN) #assign pin
         self.interrupt_pin1.irq(trigger=Pin.IRQ_RISING, handler=self.callback1)
         self.interrupt_pin2 = Pin(17, Pin.IN) #assign pin
@@ -55,30 +56,31 @@ class LiDAR_Interface:
         while True:
             while (self.flag1 == 0 and self.flag2 == 0): #wait until a flag goes high
                 pass
-            if (self.flag1 and self.last_interrupt==1):
-                self.bus.enable(0)
-                self.flag1=0
-                self.last_interrupt = 0
-            elif (self.flag2 and self.last_interrupt==0):
-                self.bus.enable(1)
-                self.flag2=0
-                self.last_interrupt = 1
-            else:
-                continue
+#             if (self.flag1):
+#                 self.bus.enable(0)
+#                 self.flag1=0
+#                 self.last_interrupt = 0
+#             elif (self.flag2):
+#                 self.bus.enable(1)
+#                 self.flag2=0
+#                 self.last_interrupt = 1
+            self.bus.enable(0)
+            self.flag1=0
+            self.last_interrupt = 0
             print(self.last_interrupt)
             if self.sensor.data_ready():
-                    # "data" is a namedtuple (attrtuple technically)
-                    # it includes average readings as "distance_avg" and "reflectance_avg"
-                    # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
-                machine.disable_irq()
                 self.data = self.sensor.get_data()
-                machine.enable_irq()
-                    #diag_print(data, sensor_mode)
-                    #print(centre_grid(data.distance, sensor_mode))
                 cent_reading = int(centre_grid_avg(centre_grid(self.data.distance, self.sensor_mode)))
                 print(cent_reading)
                 self.avg_readings[self.last_interrupt] = cent_reading
-            
+            #read the second sensor
+            self.bus.enable(1)
+            self.last_interrupt=1
+            if self.sensor.data_ready():
+                self.data = self.sensor.get_data()
+                cent_reading = int(centre_grid_avg(centre_grid(self.data.distance, self.sensor_mode)))
+                print(cent_reading)
+                self.avg_readings[self.last_interrupt] = cent_reading
             print("")
             self.thread_flag=0
     def callback1(self,sensor):

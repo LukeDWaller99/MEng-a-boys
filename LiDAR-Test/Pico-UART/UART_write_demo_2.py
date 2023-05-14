@@ -1,7 +1,7 @@
 from machine import Pin,UART
 import time
 
-uart = UART(0, baudrate = 57600, tx=Pin(0), rx=Pin(1))
+uart = UART(0, baudrate = 115200, tx=Pin(0), rx=Pin(1))
 uart.init(bits=8, parity=None, stop=2)
 led = Pin ("LED",Pin.OUT)
 
@@ -20,4 +20,4 @@ while True:
         data_list=(data.decode('UTF-8')).split(',')
         print(data_list)
         led.toggle()
-    time.sleep(0.1)
+    time.sleep(0.05)
