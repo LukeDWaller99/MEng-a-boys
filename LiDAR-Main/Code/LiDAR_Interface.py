@@ -56,22 +56,14 @@ class LiDAR_Interface:
         while True:
             while (self.flag1 == 0 and self.flag2 == 0): #wait until a flag goes high
                 pass
-#             if (self.flag1):
-#                 self.bus.enable(0)
-#                 self.flag1=0
-#                 self.last_interrupt = 0
-#             elif (self.flag2):
-#                 self.bus.enable(1)
-#                 self.flag2=0
-#                 self.last_interrupt = 1
             self.bus.enable(0)
             self.flag1=0
             self.last_interrupt = 0
-            print(self.last_interrupt)
+            #print(self.last_interrupt)
             if self.sensor.data_ready():
                 self.data = self.sensor.get_data()
                 cent_reading = int(centre_grid_avg(centre_grid(self.data.distance, self.sensor_mode)))
-                print(cent_reading)
+                #print(cent_reading)
                 self.avg_readings[self.last_interrupt] = cent_reading
             #read the second sensor
             self.bus.enable(1)
@@ -79,9 +71,9 @@ class LiDAR_Interface:
             if self.sensor.data_ready():
                 self.data = self.sensor.get_data()
                 cent_reading = int(centre_grid_avg(centre_grid(self.data.distance, self.sensor_mode)))
-                print(cent_reading)
+                #print(cent_reading)
                 self.avg_readings[self.last_interrupt] = cent_reading
-            print("")
+            #print("")
             self.thread_flag=0
     def callback1(self,sensor):
         #self.bus.enable(0) #swap sensor

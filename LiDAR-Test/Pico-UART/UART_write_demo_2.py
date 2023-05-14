@@ -1,13 +1,14 @@
 from machine import Pin,UART
 import time
-
+from MUX4 import *
 uart = UART(0, baudrate = 115200, tx=Pin(0), rx=Pin(1))
 uart.init(bits=8, parity=None, stop=2)
 led = Pin ("LED",Pin.OUT)
 
-
+mux = MUX4([3,4])
 while True:
     #signal to the LiDAR board that we want a reading
+    mux.select(0)
     print("requesting")
     uart.write('s') #for send
     if uart.any():

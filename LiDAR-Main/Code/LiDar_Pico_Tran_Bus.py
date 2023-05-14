@@ -35,7 +35,7 @@ def thread2():
         #wait until data is requested
         if uart.any():
             uart_in_data=uart.readline()
-            #print(uart_in_data)
+            print(uart_in_data)
             if uart_in_data==b's':
             #if uart_in_data.find(b's'):
         #uart.write(str(num))
