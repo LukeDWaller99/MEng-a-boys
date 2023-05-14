@@ -7,10 +7,32 @@
 #include "mbed.h"
 
 //Joysticks
-
 AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL);
 Mutex PotLock;
 Thread potThread;
+
+const int joystickMask = 0b00;
+int output = 0b00000000;
+
+const int leftPitchPosMask = 0b00000111;
+const int leftPitchNegMask = 0b00001111;
+const int leftPitchZeroMask = 0b00000000;
+
+const int leftRollPosMask = 0b00010111;
+const int leftRollNegMask = 0b00011111;
+const int leftRollZeroMask = 0b00010000;
+
+const int rightPitchPosMask = 0b00100111;
+const int rightPitchNegMask = 0b00101111;
+const int rightPitchZeroMask = 0b01000000;
+
+const int rightRollPosMask = 0b00110111;
+const int rightRollNegMask = 0b00111111;
+const int rightRollZeroMask = 0b00110000;
+
+//transmission codes
+int joystickData;
+
 float potVals[6], oldPotVals[6];
 
 struct stickData{
@@ -38,32 +60,23 @@ DigitalOut USER_GREEN(USER_LED_GREEN);
 DigitalOut USER_RED(USER_LED_RED);
 DigitalOut USER_BLUE(USER_LED_BLUE);
 
-InterruptIn SW_1(SWITCH_1);
-InterruptIn SW_2(SWITCH_2);
+InterruptIn SW_1(SWITCH_1), SW_2(SWITCH_2);
 //InterruptIn SW_BUZZ(BUZZER);
-InterruptIn SW_ASCEND(ASCEND);
-InterruptIn SW_DESCEND(DESCEND);
+InterruptIn SW_ASCEND(ASCEND), SW_DESCEND(DESCEND);
 InterruptIn SW_LIGHTS(LIGHTS);
 InterruptIn SW_BRAKE(BRAKE_MODE);
 InterruptIn SW_REV(REV_MODE);
 //InterruptIn SW_M_MODE_1(MOTOR_MODE_1);
 //InterruptIn SW_M_MODE_2(MOTOR_MODE_2);
-InterruptIn SW_M_EN(MOTOR_EN);
-InterruptIn SW_M_DE(MOTOR_DE);
+InterruptIn SW_M_EN(MOTOR_EN), SW_M_DE(MOTOR_DE);
 //InterruptIn SW_KILL(KILL_SWITCH);
 
-DigitalOut SW_1_LED(SWITCH_1_LED);
-DigitalOut SW_2_LED(SWITCH_2_LED);
-DigitalOut SW_ASC_LED(ASCEND_LED);
-DigitalOut SW_DESC_LED(DESCEND_LED);
-DigitalOut M_MODE_1_LED(MOTOR_MODE_1_LED);
-DigitalOut M_MODE_2_LED(MOTOR_MODE_2_LED);
-DigitalOut SW_BRAKE_LED(BRAKE_LED);
-DigitalOut SW_REV_LED(REV_LED);
-DigitalOut SW_KILL_LED(KILL_LED);
+DigitalOut SW_1_LED(SWITCH_1_LED), SW_2_LED(SWITCH_2_LED);
+DigitalOut SW_ASC_LED(ASCEND_LED), SW_DESC_LED(DESCEND_LED);
+DigitalOut M_MODE_1_LED(MOTOR_MODE_1_LED), M_MODE_2_LED(MOTOR_MODE_2_LED);
+DigitalOut SW_BRAKE_LED(BRAKE_LED), SW_REV_LED(REV_LED), SW_KILL_LED(KILL_LED);
 DigitalOut SW_LIGHTS_LED(LIGHTS_LED);
-DigitalOut SW_M_EN_LED(EN_LED);
-DigitalOut SW_M_DE_LED(DE_LED);
+DigitalOut SW_M_EN_LED(EN_LED), SW_M_DE_LED(DE_LED);
 
 //COLLISION LEDS
 DigitalOut C_LED_1(COL_SENSE_1);
@@ -471,10 +484,10 @@ void PotMethod(){
         ThisThread::flags_wait_any(0x7fffffff, true);
 
         PotLock.trylock_for(10ms);
-        potVals[0] = ((L_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
-        potVals[1] = ((L_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
-        potVals[2] = ((R_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
-        potVals[3] = ((R_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
+        potVals[0] = ((L_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 7;
+        potVals[1] = ((L_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 7;
+        potVals[2] = ((R_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 7;
+        potVals[3] = ((R_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 7;
 
         newLeftPitchVal     = round(potVals[0]);
         newLeftRollVal      = round(potVals[1]);
@@ -485,29 +498,34 @@ void PotMethod(){
         if (oldLeftPitchVal != newLeftPitchVal) {
             if(newLeftPitchVal > PITCH_UPPER_LIMIT){ // forwards
                 newLeftPitchVal = abs(newLeftPitchVal);
-                sprintf(tempThrottleChar, "%d", newLeftPitchVal);
-                tx.fwdLeftPitch[3] = tempThrottleChar[0];
+                printf(tempThrottleChar, "%d", newLeftPitchVal);
                 
-                //SPI
+                //postive +7, negative -7
+                output = leftPitchPosMask & newLeftPitchVal;
+                //pos 0000 0111, 
+                myspi.write(output);
 
-
-                printf("Left Pitch: %s\n", tx.fwdLeftPitch);
+                printf("Left Pitch: %x\n", output);
             } else if(newLeftPitchVal < PITCH_LOWER_LIMIT){ // reverse 
                 newLeftPitchVal = abs(newLeftPitchVal);
-                sprintf(tempThrottleChar, "%d", newLeftPitchVal);
-                tx.revLeftPitch[3] = tempThrottleChar[0];
+                printf(tempThrottleChar, "%d", newLeftPitchVal);
                 
-                //SPI
+                //neg 0000 1111
+                output = leftPitchNegMask & newLeftPitchVal;
+                myspi.write(output);
+                
 
-                printf("Left Pitch: %s\n", tx.revLeftPitch);
+                printf("Left Pitch: %x\n", output);
             } else { // equal to zero
                 newLeftPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newLeftPitchVal);
                 tx.fwdLeftPitch[3] = tempThrottleChar[0];
                 
-                //SPI
+                // zero 0000 0000
+                output = leftPitchZeroMask & newLeftPitchVal;
+                myspi.write(output);
 
-                printf("Left Pitch: %s\n", tx.fwdLeftPitch);
+                printf("Left Pitch: %x\n", output);
             }
         }
 
@@ -518,25 +536,31 @@ void PotMethod(){
                 sprintf(tempThrottleChar, "%d", newLeftRollVal);
                 tx.fwdLeftRoll[3] = tempThrottleChar[0];
                 
-                //SPI
+                //pos 0001 0111
+                output = leftRollPosMask & newLeftRollVal;
+                myspi.write(output);
 
-                printf("Left Roll: %s\n", tx.fwdLeftRoll);
+                printf("Left Roll: %x\n", output);
             } else if(newLeftRollVal < ROLL_LOWER_LIMIT){ // reverse 
                 newLeftRollVal = abs(newLeftRollVal);
                 sprintf(tempThrottleChar, "%d", newLeftRollVal);
                 tx.revLeftRoll[3] = tempThrottleChar[0];
                
-                //SPI
+                //neg 0001 1111
+                output = leftRollNegMask & newLeftRollVal;
+                myspi.write(output);
 
-                printf("Left Roll: %s\n", tx.revLeftRoll);
+                printf("Left Roll: %x\n", output);
             } else { // equal to zero
                 newLeftPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newLeftRollVal);
                 tx.fwdLeftRoll[3] = tempThrottleChar[0];
                 
-                //SPI
+                //zero 0001 0000
+                output = leftRollZeroMask & newLeftRollVal;
+                myspi.write(output);
 
-                printf("Left Roll: %s\n", tx.fwdLeftRoll);
+                printf("Left Roll: %x\n", output);
             }
         }
 
@@ -547,25 +571,32 @@ void PotMethod(){
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
                 tx.fwdRightPitch[3] = tempThrottleChar[0];
                 
-                //SPI
+                //pos 0010 0111
+                output = rightPitchPosMask & newRightPitchVal;
+                myspi.write(output);
+                
 
-                printf("Right Pitch: %s\n", tx.fwdRightPitch);
+                printf("Right Pitch: %x\n", output);
             } else if(newRightPitchVal < PITCH_LOWER_LIMIT){ // reverse 
                 newRightPitchVal = abs(newRightPitchVal);
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
                 tx.revRightPitch[3] = tempThrottleChar[0];
                 
-                //SPI
+                //neg 0010 1111
+                output = rightPitchNegMask & newRightPitchVal;
+                myspi.write(output);
 
-                printf("Right Pitch: %s\n", tx.revRightPitch);
+                printf("Right Pitch: %x\n", output);
             } else { // equal to zero
                 newRightPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newRightPitchVal);
                 tx.fwdRightPitch[3] = tempThrottleChar[0];
                 
-                //SPI
+                //zero 0010 0000
+                output = rightPitchZeroMask & newRightPitchVal;
+                myspi.write(output);
 
-                printf("Right Pitch: %s\n", tx.fwdRightPitch);
+                printf("Right Pitch: %x\n", output);
             }
         }
 
@@ -576,25 +607,31 @@ void PotMethod(){
                 sprintf(tempThrottleChar, "%d", newRightRollVal);
                 tx.fwdRightRoll[3] = tempThrottleChar[0];
                 
-                //SPI
+                //pos 0011 0111
+                output = rightRollPosMask & newRightRollVal;
+                myspi.write(output);
 
-                printf("Right Roll: %s\n", tx.fwdRightRoll);
+                printf("Right Roll: %x\n", output);
             } else if(newRightRollVal < ROLL_LOWER_LIMIT){ // reverse 
                 newRightRollVal = abs(newLeftRollVal);
                 sprintf(tempThrottleChar, "%d", newRightRollVal);
                 tx.revRightRoll[3] = tempThrottleChar[0];
                 
-                //SPI
+                //neg 0011 1111
+                output = rightRollNegMask & newRightRollVal;
+                myspi.write(output);
 
-                printf("Right Roll: %s\n", tx.revRightRoll);
+                printf("Right Roll: %x\n", output);
             } else { // equal to zero
                 newRightPitchVal = 0;
                 sprintf(tempThrottleChar, "%d", newRightRollVal);
                 tx.fwdRightRoll[3] = tempThrottleChar[0];
                 
-                //SPI
+                //zero 0011 0000
+                output = rightRollNegMask & newRightRollVal;
+                myspi.write(output);
 
-                printf("Right Roll: %s\n", tx.fwdRightRoll);
+                printf("Right Roll: %x\n", output);
             }
         }
 
