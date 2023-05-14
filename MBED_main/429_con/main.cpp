@@ -6,6 +6,32 @@
 #include "InterruptIn.h"
 #include "mbed.h"
 
+//Joysticks
+
+AnalogIn L_Pitch(L_PITCH), L_Roll(L_ROLL), R_Pitch(R_PITCH), R_Roll(R_ROLL);
+Mutex PotLock;
+Thread potThread;
+float potVals[6], oldPotVals[6];
+
+struct stickData{
+    char fwdLeftPitch[TRANSFER_SIZE] = {LEFT_PITCH_FWD}, 
+        fwdLeftRoll[TRANSFER_SIZE] = {LEFT_ROLL_FWD}, 
+        fwdRightPitch[TRANSFER_SIZE] = {RIGHT_PITCH_FWD}, 
+        fwdRightRoll[TRANSFER_SIZE] = {RIGHT_ROLL_FWD}, 
+        fwdLeftPitchTemp[TRANSFER_SIZE], 
+        fwdLeftRollTemp[TRANSFER_SIZE], 
+        fwdRightPitchTemp[TRANSFER_SIZE], 
+        fwdRightRollTemp[TRANSFER_SIZE],
+        revLeftPitch[TRANSFER_SIZE] = {LEFT_PITCH_REV}, 
+        revLeftRoll[TRANSFER_SIZE] = {LEFT_ROLL_REV}, 
+        revRightPitch[TRANSFER_SIZE] = {RIGHT_PITCH_REV}, 
+        revRightRoll[TRANSFER_SIZE] = {RIGHT_PITCH_REV}, 
+        revLeftPitchTemp[TRANSFER_SIZE], 
+        revLeftRollTemp[TRANSFER_SIZE], 
+        revRightPitchTemp[TRANSFER_SIZE], 
+        revRightRollTemp[TRANSFER_SIZE];
+};
+
 //Onboard Peripherals
 //InterruptIn USER_BTN(USR_BTN);
 DigitalOut USER_GREEN(USER_LED_GREEN);
@@ -49,8 +75,10 @@ DigitalOut C_LED_6(COL_SENSE_6);
 DigitalOut C_LED_7(COL_SENSE_7);
 DigitalOut C_LED_8(COL_SENSE_8);
 
+Ticker joystickTicker;
 Thread switchMonitor;
 
+void joystickIRQ();
 void switchMonitorMethod();
 void switchDetection();
 void SW_1_IRQ();
@@ -102,6 +130,10 @@ SPI myspi(PB_5, PB_4, PB_3); // mosi, miso, sclk
 
 int main() {
     printf("Starting F429 Controller Board\n");
+
+    //wait and see!!!!!
+    joystickTicker.attach(joystickIRQ, 200ms);
+
     volatile uint8_t data_read = 0;
     volatile uint8_t data_write = 0;
     switchDetection();
@@ -411,5 +443,166 @@ void switchMonitorMethod(){
             break;
 
         }
+    }
+}
+
+void PotMethod(){
+
+    printf("Pot Thread Started\n");
+
+    stickData tx;
+
+    int oldLeftPitchVal = 0;
+    int newLeftPitchVal = 0;
+
+    int oldLeftRollVal = 0;
+    int newLeftRollVal = 0;
+
+    int oldRightPitchVal = 0;
+    int newRightPitchVal = 0;
+
+    int oldRightRollVal = 0;
+    int newRightRollVal = 0;
+
+    char tempThrottleChar[2];
+
+    while(true){
+
+        ThisThread::flags_wait_any(0x7fffffff, true);
+
+        PotLock.trylock_for(10ms);
+        potVals[0] = ((L_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
+        potVals[1] = ((L_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
+        potVals[2] = ((R_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
+        potVals[3] = ((R_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 9;
+
+        newLeftPitchVal     = round(potVals[0]);
+        newLeftRollVal      = round(potVals[1]);
+        newRightPitchVal    = round(potVals[2]);
+        newRightRollVal     = round(potVals[3]);
+
+        // for left pitch values
+        if (oldLeftPitchVal != newLeftPitchVal) {
+            if(newLeftPitchVal > PITCH_UPPER_LIMIT){ // forwards
+                newLeftPitchVal = abs(newLeftPitchVal);
+                sprintf(tempThrottleChar, "%d", newLeftPitchVal);
+                tx.fwdLeftPitch[3] = tempThrottleChar[0];
+                
+                //SPI
+
+
+                printf("Left Pitch: %s\n", tx.fwdLeftPitch);
+            } else if(newLeftPitchVal < PITCH_LOWER_LIMIT){ // reverse 
+                newLeftPitchVal = abs(newLeftPitchVal);
+                sprintf(tempThrottleChar, "%d", newLeftPitchVal);
+                tx.revLeftPitch[3] = tempThrottleChar[0];
+                
+                //SPI
+
+                printf("Left Pitch: %s\n", tx.revLeftPitch);
+            } else { // equal to zero
+                newLeftPitchVal = 0;
+                sprintf(tempThrottleChar, "%d", newLeftPitchVal);
+                tx.fwdLeftPitch[3] = tempThrottleChar[0];
+                
+                //SPI
+
+                printf("Left Pitch: %s\n", tx.fwdLeftPitch);
+            }
+        }
+
+        // for left roll values
+        if (oldLeftRollVal != newLeftRollVal) {
+            if(newLeftRollVal > ROLL_UPPER_LIMIT){ // forwards
+                newLeftRollVal = abs(newLeftRollVal);
+                sprintf(tempThrottleChar, "%d", newLeftRollVal);
+                tx.fwdLeftRoll[3] = tempThrottleChar[0];
+                
+                //SPI
+
+                printf("Left Roll: %s\n", tx.fwdLeftRoll);
+            } else if(newLeftRollVal < ROLL_LOWER_LIMIT){ // reverse 
+                newLeftRollVal = abs(newLeftRollVal);
+                sprintf(tempThrottleChar, "%d", newLeftRollVal);
+                tx.revLeftRoll[3] = tempThrottleChar[0];
+               
+                //SPI
+
+                printf("Left Roll: %s\n", tx.revLeftRoll);
+            } else { // equal to zero
+                newLeftPitchVal = 0;
+                sprintf(tempThrottleChar, "%d", newLeftRollVal);
+                tx.fwdLeftRoll[3] = tempThrottleChar[0];
+                
+                //SPI
+
+                printf("Left Roll: %s\n", tx.fwdLeftRoll);
+            }
+        }
+
+        // for right pitch values
+        if (oldRightPitchVal != newRightPitchVal) {
+            if(newRightPitchVal > PITCH_UPPER_LIMIT){ // forwards
+                newRightPitchVal = abs(newRightPitchVal);
+                sprintf(tempThrottleChar, "%d", newRightPitchVal);
+                tx.fwdRightPitch[3] = tempThrottleChar[0];
+                
+                //SPI
+
+                printf("Right Pitch: %s\n", tx.fwdRightPitch);
+            } else if(newRightPitchVal < PITCH_LOWER_LIMIT){ // reverse 
+                newRightPitchVal = abs(newRightPitchVal);
+                sprintf(tempThrottleChar, "%d", newRightPitchVal);
+                tx.revRightPitch[3] = tempThrottleChar[0];
+                
+                //SPI
+
+                printf("Right Pitch: %s\n", tx.revRightPitch);
+            } else { // equal to zero
+                newRightPitchVal = 0;
+                sprintf(tempThrottleChar, "%d", newRightPitchVal);
+                tx.fwdRightPitch[3] = tempThrottleChar[0];
+                
+                //SPI
+
+                printf("Right Pitch: %s\n", tx.fwdRightPitch);
+            }
+        }
+
+        // for right roll values
+        if (oldRightRollVal != newRightRollVal) {
+            if(newRightRollVal > ROLL_UPPER_LIMIT){ // forwards
+                newRightRollVal = abs(newRightRollVal);
+                sprintf(tempThrottleChar, "%d", newRightRollVal);
+                tx.fwdRightRoll[3] = tempThrottleChar[0];
+                
+                //SPI
+
+                printf("Right Roll: %s\n", tx.fwdRightRoll);
+            } else if(newRightRollVal < ROLL_LOWER_LIMIT){ // reverse 
+                newRightRollVal = abs(newLeftRollVal);
+                sprintf(tempThrottleChar, "%d", newRightRollVal);
+                tx.revRightRoll[3] = tempThrottleChar[0];
+                
+                //SPI
+
+                printf("Right Roll: %s\n", tx.revRightRoll);
+            } else { // equal to zero
+                newRightPitchVal = 0;
+                sprintf(tempThrottleChar, "%d", newRightRollVal);
+                tx.fwdRightRoll[3] = tempThrottleChar[0];
+                
+                //SPI
+
+                printf("Right Roll: %s\n", tx.fwdRightRoll);
+            }
+        }
+
+        oldLeftPitchVal = newLeftPitchVal;
+        oldLeftRollVal = newLeftRollVal;
+        oldRightPitchVal = newRightPitchVal;
+        oldRightRollVal = newRightRollVal;
+
+        PotLock.unlock();
     }
 }

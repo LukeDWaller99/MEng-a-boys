@@ -33,6 +33,25 @@
 #define R_PITCH PC_0
 #define R_ROLL  PA_3 
 
+#define PITCH_UPPER_LIMIT  1 
+#define PITCH_LOWER_LIMIT  -1
+#define ROLL_UPPER_LIMIT   1
+#define ROLL_LOWER_LIMIT   -1
+
+#define TRANSFER_SIZE   5
+#define MULTIPLYING_FACTOR  2.0f
+#define POT_OFFSET          1.0f
+
+#define LEFT_PITCH_FWD  '1','1','0','0','\0'
+#define LEFT_ROLL_FWD   '1','2','0','0','\0'
+#define RIGHT_PITCH_FWD '1','3','0','0','\0'
+#define RIGHT_ROLL_FWD  '1','4','0','0','\0'
+
+#define LEFT_PITCH_REV  '1','1','1','0','\0'
+#define LEFT_ROLL_REV   '1','2','1','0','\0'
+#define RIGHT_PITCH_REV '1','3','1','0','\0'
+#define RIGHT_ROLL_REV  '1','4','1','0','\0'
+
 //SWITCHES
 #define ASCEND PB_8 //3
 #define DESCEND PB_9 //4
