@@ -41,6 +41,7 @@ while True:
             pass
         else:
             print("wake thread 2")
+            data_list.append(mux.get_chan())
             data_proc.set_data(data_list)
             data_proc.wake()
         

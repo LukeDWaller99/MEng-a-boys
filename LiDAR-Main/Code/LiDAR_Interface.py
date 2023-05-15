@@ -46,6 +46,7 @@ class LiDAR_Interface:
         self.interrupt_pin1.irq(trigger=Pin.IRQ_RISING, handler=self.callback1)
         self.interrupt_pin2 = Pin(17, Pin.IN) #assign pin
         self.interrupt_pin2.irq(trigger=Pin.IRQ_RISING, handler=self.callback2)
+        self.wdt=machine.WDT(timeout=8000) #watchdog timer to catch lock-ups. Resets after eight seconds.
         second_thread = _thread.start_new_thread(self.sense,[])
     def sense(self):
         #while self.thread_flag==0:
@@ -72,6 +73,7 @@ class LiDAR_Interface:
                 self.avg_readings[self.last_interrupt] = cent_reading
             #print("")
             self.thread_flag=0
+            self.wdt.feed()	#feed watchdog
     def callback1(self,sensor):
         #self.bus.enable(0) #swap sensor
         #self.internal_led.toggle()
