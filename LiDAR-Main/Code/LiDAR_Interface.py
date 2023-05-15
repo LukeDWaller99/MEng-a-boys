@@ -22,9 +22,6 @@ class LiDAR_Interface:
         self.thread_flag = 0 #thread flag for sensing loop
         self.last_interrupt=0
         self.internal_led = Pin(25, Pin.OUT)
-        #create interrupts
-        #self.interrupt_lines = []
-        #self.interrupt_lines += [LiDAR_Handler(pin_number) for pin_number in lidar_interrupt_pins]
         self.flag1=0
         self.flag2=0
         

@@ -1,6 +1,7 @@
 from machine import Pin,UART,I2C
-import time
+import time,_thread
 from MUX4 import *
+from Data_Processor import *
 uart = UART(0, baudrate = 115200, tx=Pin(0), rx=Pin(1))
 uart.init(bits=8, parity=None, stop=2)
 led = Pin ("LED",Pin.OUT)
@@ -8,16 +9,15 @@ led = Pin ("LED",Pin.OUT)
 sda_pin = Pin(8, Pin.PULL_UP)
 scl_pin = Pin(9, Pin.PULL_UP)
 
-i2c = I2C(0,sda=sda_pin,scl=scl_pin,freq=400000)  
+i2c = I2C(0,sda=sda_pin,scl=scl_pin,freq=400000)  #1M casues lockup, leave at 800K
 
 mux = MUX4([2,3])
 mux.select(3)
 
-dev_list=i2c.scan()                      # scan for peripherals, returning a list of 7-bit addresses
-TARGET_ADDR = dev_list[0]
-i2c.writeto(TARGET_ADDR, b'LIVE')         # write 3 bytes to peripheral with 7-bit address 42
-
+data_proc = Data_Processor([sda_pin,scl_pin])
 while True:
+    #engage second thread
+    
     #signal to the LiDAR board that we want a reading
     
     print("requesting")
@@ -32,10 +32,16 @@ while True:
         data_list=(data.decode('UTF-8')).split(',')
         print(data_list)
         led.toggle()
-        print(int(data_list[0],10))
-        if (int(data_list[0],10)<100) or (int(data_list[0],10)<100):
-            print("SEND I2C")
-            i2c.writeto(TARGET_ADDR,b'STOP')
+        try:
+            print(int(data_list[0],10))
+        except:
+            print("invalid data")
+            data_list=[None]
+        if data_list==None:
+            pass
         else:
-            i2c.writeto(TARGET_ADDR,b'GO')
+            print("wake thread 2")
+            data_proc.set_data(data_list)
+            data_proc.wake()
+        
     time.sleep(0.025)
