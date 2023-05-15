@@ -42,3 +42,6 @@ class MUX4:
         method to get current setting
         """
         return self.current_chan
+    def advance(self):
+        self.current_chan = (self.current_chan + 1) % 4
+        self.select(self.current_chan)
