@@ -17,10 +17,10 @@ Mutex PotLock;
 Thread switchMonitor, PotThread;
 Ticker joystickTicker;
 
-int output = 0b00000000;
+int output = 0;
 
 const int leftPitchPosMask = 0b00000111;
-const int leftPitchNegMask = 0b00001111;
+const int leftPitchNegMask = 0b00000111;
 const int leftPitchZeroMask = 0b00000000;
 
 const int leftRollPosMask = 0b00010111;
@@ -150,28 +150,37 @@ int main() {
   wait_us(10000);
   USER_BLUE = 0;
   // wait and see!!!!!
-  joystickTicker.attach(joystickIRQ, 200ms);
+  //joystickTicker.attach(joystickIRQ, 200ms);
 
   // switchDetection();
   // switchMonitor.start(switchMonitorMethod);
   CS = 1;
-  // myspi.frequency(1000000);
+  myspi.frequency(1000000);
   myspi.format(8, 0);
 
   printf("\nSPI 8-bit test launched\n");
-  CS = 0;
-  myspi.write(0b00000000);
-  CS = 1;
-  int data = 0b00000000;
-  // while (1) {
+//   CS = 0;
+//   myspi.write(0b00000000);
+//   CS = 1;
+    int data = 0;
+  float rawLPitch;
+//   while (1) {
+//             rawLPitch = L_Pitch.read(); 
+//             printf("L_P: %d\n", rawLPitch);
+//             CS = 0;
+//             myspi.write(rawLPitch);
+//             CS = 1;
+//             wait_us(1000000);
+//   }
 
-  //     printf("data: %d\n", data);
-  //     CS = 0;
-  //     myspi.write(data);
-  //     CS = 1;
-  //     data++;
-  //     wait_us(1000000/4);
-  // }
+while(1){
+      printf("data: %d\n", data);
+      CS = 0;
+      myspi.write(data);
+      CS = 1;
+      data++;
+      wait_us(1000000);
+   }
   //     //CS = 0;
   // myspi.write(0b00000000);
   //     //CS = 1;
@@ -506,7 +515,7 @@ void PotMethod() {
     ThisThread::flags_wait_any(0x7fffffff, true);
 
     PotLock.trylock_for(10ms);
-    printf("LPitch In : %f\n", L_Pitch.read());
+    //printf("LPitch In : %f\n", L_Pitch.read());
     potVals[0] = ((L_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 7;
     potVals[1] = ((L_Roll.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 7;
     potVals[2] = ((R_Pitch.read() * MULTIPLYING_FACTOR) - POT_OFFSET) * 7;
@@ -521,31 +530,33 @@ void PotMethod() {
     if (oldLeftPitchVal != newLeftPitchVal) {
       if ((newLeftPitchVal > 0) && (newLeftPitchVal < 8)) { // forwards
         newLeftPitchVal = abs(newLeftPitchVal);
-        printf("+ Left Pitch Val %d\n", newLeftPitchVal);
+        //printf("+ Left Pitch Val %d\n", newLeftPitchVal);
           // postive +7, negative -7
           output = leftPitchPosMask & newLeftPitchVal;
-          printf("Left Pos: %d\n", output);
+        //   printf("Left Pos: %d\n", output);
           // pos 0000 0111,
+          printf("+ Output : %d\n", output);
           CS = 0;
           myspi.write(output);
           CS = 1;
-          printf("+ Left Pitch: %d\n", output);
+          //printf("+ Left Pitch: %d\n", output);
 
-      } else if ((newLeftPitchVal > 8) && (newLeftPitchVal < 16)) { // reverse
+      } else if ((newLeftPitchVal < 0) && (newLeftPitchVal > -8)) { // reverse
         newLeftPitchVal = abs(newLeftPitchVal);
-        printf("- Left Pitch Val %d\n", newLeftPitchVal);
+        //printf("- Left Pitch Val %d\n", newLeftPitchVal);
 
           // neg 0000 1111
-          output = leftPitchNegMask & newLeftPitchVal;
+          output = leftPitchNegMask & (newLeftPitchVal + 8);
+          printf("- Output : %d\n", output);
           CS = 0;
           myspi.write(output);
           CS = 1;
 
-          printf("- Left Pitch: %d\n", output);
+          //printf("- Left Pitch: %d\n", output);
 
       } else { // equal to zero
         newLeftPitchVal = 0;
-        printf(" 0 Left Pitch Val%d\n", newLeftPitchVal);
+        //printf(" 0 Left Pitch Val %d\n", newLeftPitchVal);
 
         // zero 0000 0000
         output = leftPitchZeroMask & newLeftPitchVal;
