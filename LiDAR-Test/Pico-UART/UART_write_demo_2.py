@@ -13,8 +13,9 @@ i2c = I2C(0,sda=sda_pin,scl=scl_pin,freq=400000)
 mux = MUX4([2,3])
 mux.select(3)
 
-i2c.scan()                      # scan for peripherals, returning a list of 7-bit addresses
-i2c.writeto(0x50, b'LIVE')         # write 3 bytes to peripheral with 7-bit address 42
+dev_list=i2c.scan()                      # scan for peripherals, returning a list of 7-bit addresses
+TARGET_ADDR = dev_list[0]
+i2c.writeto(TARGET_ADDR, b'LIVE')         # write 3 bytes to peripheral with 7-bit address 42
 
 while True:
     #signal to the LiDAR board that we want a reading
@@ -34,7 +35,7 @@ while True:
         print(int(data_list[0],10))
         if (int(data_list[0],10)<100) or (int(data_list[0],10)<100):
             print("SEND I2C")
-            i2c.writeto(0x50,b'STOP')
+            i2c.writeto(TARGET_ADDR,b'STOP')
         else:
-            i2c.writeto(0x50,b'GO')
+            i2c.writeto(TARGET_ADDR,b'GO')
     time.sleep(0.025)
