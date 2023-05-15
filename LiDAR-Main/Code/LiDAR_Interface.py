@@ -10,7 +10,7 @@ import gc
 import machine
 class LiDAR_Interface:
      #hardcoded
-    sensor_mode = 4
+    sensor_mode = 8
     def __init__(self,lidar_control_pins,lidar_interrupt_pins):
         PINS_BREAKOUT_GARDEN = {"sda": 20, "scl": 21}
         self.debug = 0

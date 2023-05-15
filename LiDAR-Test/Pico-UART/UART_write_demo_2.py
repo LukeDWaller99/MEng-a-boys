@@ -5,8 +5,8 @@ uart = UART(0, baudrate = 115200, tx=Pin(0), rx=Pin(1))
 uart.init(bits=8, parity=None, stop=2)
 led = Pin ("LED",Pin.OUT)
 
-mux = MUX4([3,4])
-mux.select(0)
+mux = MUX4([2,3])
+mux.select(3)
 while True:
     #signal to the LiDAR board that we want a reading
     

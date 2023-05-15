@@ -1,3 +1,11 @@
+"""
+LiDAR Control Board
+Jack Pendlebury
+
+Multithreaded LiDAR Control.
+Core 0 - monitors UART and processes incoming requests.
+Core 1 - Waits for LiDAR interrupt, before grabbing sample data
+"""
 import pimoroni_i2c
 import breakout_vl53l5cx
 from machine import Pin,UART
@@ -26,7 +34,7 @@ int_pins = [16,17]
 #UART TIME
 uart = UART(0, baudrate = 115200, tx=Pin(0), rx=Pin(1))
 uart.init(bits=8, parity=None, stop=2)
-led = Pin ("LED",Pin.OUT)
+led = Pin ("LED",Pin.OUT)	#status LED
 
 #kick thread off
 interface = LiDAR_Interface(lidar_control_pins,int_pins)
@@ -35,15 +43,11 @@ def thread2():
         #wait until data is requested
         if uart.any():
             uart_in_data=uart.readline()
+            print(interface.avg_readings)
             #print(uart_in_data)
             if uart_in_data==b's':
-            #if uart_in_data.find(b's'):
-        #uart.write(str(num))
-        #print("interface reading: ")
-        #print(interface.avg_reading)
-                #uart.write(str(interface.avg_readings[0]))
                 uart.write(f"{interface.avg_readings[0]},{interface.avg_readings[1]}")
         #time.sleep(0.01)
 gc.enable()
 gc.threshold(150000) #prevents memory errors
-thread2()
+thread2()	#kick off second thread here
