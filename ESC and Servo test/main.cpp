@@ -46,10 +46,10 @@
 #define SOL_4 PE_10
 
 // VESCs
-#define LEFT_FRONT_WHEEL PA_3
-#define RIGHT_FRONT_WHEEL PC_8
-#define LEFT_REAR_WHEEL PC_9
-#define RIGHT_REAR_WHEEL PB_4
+#define LEFT_FRONT_WHEEL PA_3 // VESC 1
+#define RIGHT_FRONT_WHEEL PC_8 // VESC 2
+#define LEFT_REAR_WHEEL PC_9 // VESC 3
+#define RIGHT_REAR_WHEEL PB_4 // VESC 4
 
 // CONNECTOR CONNECTION
 #define CONN_CONNECTOR PF_10
@@ -61,10 +61,10 @@
 #define RELAY_4 PG_0
 
 // SERVOs
-#define SERVO_1 PB_1
-#define SERVO_2 PB_6
-#define SERVO_3 PD_14
-#define SERVO_4 PD_12
+#define SERVO_1 PB_1 // SERVO 1
+#define SERVO_2 PB_6 // SERVO 2
+#define SERVO_3 PD_13 // SERVO 3
+#define SERVO_4 PD_12 // SERVO 4
 
 // BATTERY LEVEL MONITORS
 #define BAT_LEV_1 PB_2
@@ -87,6 +87,11 @@
 #define BTN_4 PD_3
 #define BTN_5 PD_4
 #define BTN_6 PD_5
+
+// CONTROLLER BUTTONS
+// #define C_BTN_1 PF_7
+// #define C_BTN_2 PF_8
+// #define C_BTN_3 PA_4
 
 //SPEED TRIM POTS
 // #define TRIM_1 PA_4
@@ -116,6 +121,10 @@ AnalogIn xStickLeft(X_STICK_LEFT_INPUT),
          yStickRight(Y_STICK_RIGHT_INPUT);
 
 InterruptIn connConnector(CONN_CONNECTOR);
+
+// DigitalIn cBtn1(C_BTN_1),
+//           cBtn2(C_BTN_2),
+//           cBtn3(C_BTN_3);
 
 
 BusOut  cLEDs(COLLISION_LED_1, COLLISION_LED_2, COLLISION_LED_3, COLLISION_LED_4,
@@ -156,6 +165,7 @@ void speedAdjustBtnIRQ();
 void drivingModeBtnIRQ();
 void calibrateRisingIRQ();
 void calibrateFallingIRQ();
+void cBtn1FallingIRQ();
 
 // varaible initialisation
 float xStickLeftValue = 0.0f;
@@ -191,10 +201,6 @@ int main(){
     wait_us(250000);
     cLEDs = 0;
 
-    // leftWheelFront = 1.0f;
-    // rightWheelFront = 1.0f;
-    // leftWheelRear = 1.0f;
-    // rightWheelRear = 1.0f;
 
     // servo1 = 1.0f;
     // servo2 = 1.0f;
@@ -205,15 +211,17 @@ int main(){
 
     joyStickLeftThread.start(joyStickLeftThreadMethod);
     LEDAliveTicker.attach(LEDAliveIRQ, 1s);
+    // connThread.start(connThreadMethod);
     // connConnector.rise(connInIRQ);
     // connConnector.fall(connOutIRQ);
 
-    // while (true) {
+
+     while (true) {
         
     // printf("Left X : %f\n", xStickLeft.read());
     // printf("Left Y : %f\n", yStickLeft.read());
     // wait_us(1000000);
-    // }
+     }
 }
 
 /**
@@ -303,11 +311,11 @@ void joyStickLeftThreadMethod(){
         stickValueLock.trylock_for(1ms);
 
         xStickLeftValue = ((xStickLeft.read() * 2.0f) - 1.0f) * SPEED_FACTOR;
-        // printf("Left X : %f\n", xStickLeft.read());
+         printf("Left X : %f\n", xStickLeft.read());
         xStickLeftValue = (xStickLeftValue < -1.0f) || (xStickLeftValue > 1.0f) ? xStickLeftValue : 0.0f;
 
         yStickLeftValue = ((yStickLeft.read() * 2.0f) - 1.0f) * SPEED_FACTOR;
-        // printf("Left Y : %f\n", yStickLeft.read());
+         printf("Left Y : %f\n", yStickLeft.read());
         yStickLeftValue = (yStickLeftValue < -1.0f) || (yStickLeftValue > 1.0f) ? yStickLeftValue : 0.0f;
 
         xStickRightValue = ((xStickRight.read() * 2.0f) - 1.0f) * SPEED_FACTOR;
@@ -329,6 +337,7 @@ void joyStickLeftThreadMethod(){
             leftWheelRearSpeed = ((xStickLeftValue - yStickLeftValue)/SPEED_FACTOR) * speedAdjustValue;
             rightWheelRearSpeed = ((xStickLeftValue + yStickLeftValue)/SPEED_FACTOR) * speedAdjustValue;
         }
+
         leftWheelFront.write(leftWheelFrontSpeed);
         rightWheelFront.write(rightWheelFrontSpeed);
         leftWheelRear.write(leftWheelRearSpeed);
@@ -341,7 +350,6 @@ void joyStickLeftThreadMethod(){
 
 void LEDAliveIRQ(){
     dLED1 = !dLED1;
-    
 }
 
 void connInIRQ(){
