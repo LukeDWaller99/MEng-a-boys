@@ -3,6 +3,7 @@
     Main file for Prototyping Platform for the HEVCS - Luke Waller
 **/
 
+#include "AnalogIn.h"
 #include "DigitalIn.h"
 #include "DigitalOut.h"
 #include "InterruptIn.h"
@@ -11,82 +12,126 @@
 #include "ThisThread.h"
 #include "mbed.h"
 #include "ESC.h"
+#include "Servo.h"
 #include "mbed_wait_api.h"
-#include "mecanum.h"
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
 #include <math.h>
-#include "Buzzer.h"
+
 
 #define SPEED_FACTOR 10
 #define FULL_THROTTLE 1.0f
 #define ADJUSTED_THROTTLE 0.5f
 
-// WHEEL ESC - OUTPUT
+// DEBUG LEDs
+#define DEBUG_LED_1 PE_12
+#define DEBUG_LED_2 PE_14
+#define DEBUG_LED_3 PE_15
+
+// COLLISION LEDs
+#define COLLISION_LED_1 PF_12
+#define COLLISION_LED_2 PF_13
+#define COLLISION_LED_3 PE_9
+#define COLLISION_LED_4 PE_11
+#define COLLISION_LED_5 PF_14
+#define COLLISION_LED_6 PE_13
+#define COLLISION_LED_7 PF_15
+#define COLLISION_LED_8 PG_14
+
+// SOLENOIDS
+#define SOL_1 PG_9
+#define SOL_2 PE_7
+#define SOL_3 PE_8
+#define SOL_4 PE_10
+
+// VESCs
 #define LEFT_FRONT_WHEEL PA_3
-#define RIGHT_FRONT_WHEEL PF_8
-#define LEFT_REAR_WHEEL PF_9
-#define RIGHT_REAR_WHEEL PF_7
+#define RIGHT_FRONT_WHEEL PC_8
+#define LEFT_REAR_WHEEL PC_9
+#define RIGHT_REAR_WHEEL PB_4
+
+// CONNECTOR CONNECTION
+#define CONN_CONNECTOR PF_10
+
+// RELAYS
+#define RELAY_1 PF_2
+#define RELAY_2 PD_0
+#define RELAY_3 PD_1
+#define RELAY_4 PG_0
+
+// SERVOs
+#define SERVO_1 PB_1
+#define SERVO_2 PB_6
+#define SERVO_3 PD_14
+#define SERVO_4 PD_12
+
+// BATTERY LEVEL MONITORS
+#define BAT_LEV_1 PB_2
+#define BAT_LEV_2 PD_11
+#define BAT_LEV_3 PA_0
+#define BAT_LEV_4 PE_0
+
+// SWITCHES
+#define SW_1_UP PC_10
+#define SW_1_DW PC_11
+#define SW_2_UP PG_2
+#define SW_2_DW PG_3
+#define SW_3_UP PC_11
+#define SW_3_DW PD_2
+
+// BUTTONS
+#define BTN_1 PD_7
+#define BTN_2 PC_0
+#define BTN_3 PD_6
+#define BTN_4 PD_3
+#define BTN_5 PD_4
+#define BTN_6 PD_5
+
+//SPEED TRIM POTS
+// #define TRIM_1 PA_4
+#define TRIM_2 PA_5
+#define TRIM_3 PA_6
+#define TRIM_4 PA_7
 
 // JOyStickLeft - INPUT
 #define X_STICK_LEFT_INPUT PF_3
 #define Y_STICK_LEFT_INPUT PF_5
-#define X_STICK_RIGHT_INPUT PC_0
-#define Y_STICK_RIGHT_INPUT PC_3
-
-// TRIMMING POTS FOR ADJUSTING WHEEL SPEEDS - INPUTS
-#define FRONT_LEFT_TRIM_POT     PA_0
-#define FRONT_RIGHT_TRIM_POT    PB_0
-#define REAR_LEFT_TRIM_POT      PF_4
-#define REAR_RIGHT_TRIM_POT     PC_2
-
-// LEDS FOR FULL/HALF SPEED - OUTPUT
-#define MOTOR_MODE_LED  PB_11
-#define FULL_SPEED_LED  PB_10
-
-// BUTTON FOR CHANGING FROM FULL TO HALF SPEED - INPUT
-#define SPEED_ADJUST_BTN PE_15
-
-// DRIVING MODE BUTTON/SWITCH - INPUT
-#define DRIVING_MODE_BTN PE_14
-
-// ESC TEST BUTTON
-#define ESC_TEST_BUTTON PC_13
-
-// Buzzer
-#define BUZZER_OUTPUT   PE_12
+#define X_STICK_RIGHT_INPUT PF_8
+#define Y_STICK_RIGHT_INPUT PF_7
 
 ESC leftWheelFront(LEFT_FRONT_WHEEL),
     rightWheelFront(RIGHT_FRONT_WHEEL),
     leftWheelRear(LEFT_REAR_WHEEL),
     rightWheelRear(RIGHT_REAR_WHEEL);
 
+Servo servo1(SERVO_1),
+      servo2(SERVO_2),
+      servo3(SERVO_3),
+      servo4(SERVO_4);
+
 AnalogIn xStickLeft(X_STICK_LEFT_INPUT),
          yStickLeft(Y_STICK_LEFT_INPUT),
          xStickRight(X_STICK_RIGHT_INPUT),
-         yStickRight(Y_STICK_RIGHT_INPUT),
-         frontLeftTrim(FRONT_LEFT_TRIM_POT),
-         frontRightTrim(FRONT_RIGHT_TRIM_POT),
-         rearLeftTrim(REAR_LEFT_TRIM_POT),
-         rearRightTrim(REAR_RIGHT_TRIM_POT);
+         yStickRight(Y_STICK_RIGHT_INPUT);
 
-// DigitalIn escCalibrateButton(ESC_TEST_BUTTON);
+InterruptIn connConnector(CONN_CONNECTOR);
 
-InterruptIn speedAdjustBtn(SPEED_ADJUST_BTN),
-            drivingModeBtn(DRIVING_MODE_BTN),
-            escCalibrateButton(ESC_TEST_BUTTON);
 
-DigitalOut motorModeLED(MOTOR_MODE_LED),
-           fullSpeedLED(FULL_SPEED_LED);
+BusOut  cLEDs(COLLISION_LED_1, COLLISION_LED_2, COLLISION_LED_3, COLLISION_LED_4,
+              COLLISION_LED_5, COLLISION_LED_6, COLLISION_LED_7, COLLISION_LED_8),
+        solenoid(SOL_1, SOL_2, SOL_3, SOL_4),
+        relays(RELAY_1, RELAY_2, RELAY_3, RELAY_4);
 
-Buzzer buzzer(BUZZER_OUTPUT);
+DigitalOut dLED1(DEBUG_LED_1), 
+           dLED2(DEBUG_LED_2),
+           dLED3(DEBUG_LED_3);
 
 // THREAD INITS
 Thread buttonMonitor,
-       LEDDriveThread,
        joyStickLeftThread,
-       calibrateThread;
+       calibrateThread,
+       connThread;
 
 Mutex stickValueLock, 
       motorSpeedLock,
@@ -94,11 +139,17 @@ Mutex stickValueLock,
       motorModeLock,
       speedAdjustBoolLock;
 
+Ticker LEDAliveTicker;
+
 // METHOD INITS
 void buttonMonitorMethod();
 void LEDDriveThreadMethod();
 void joyStickLeftThreadMethod();
 void escCalibrateMethod();
+void LEDAliveIRQ();
+void connInIRQ();
+void connOutIRQ();
+void connThreadMethod();
 
 // IRQ METHODS
 void speedAdjustBtnIRQ();
@@ -116,29 +167,59 @@ float rightWheelFrontSpeed = 0.0f;
 float leftWheelRearSpeed = 0.0f;
 float rightWheelRearSpeed = 0.0f;
 float speedAdjustValue = FULL_THROTTLE;
-bool speedAdjustBool = false;
 int motorMode = 1;
 
 
 int main(){
 
     printf("Starting Board...\n");
+    cLEDs = 1;
+    wait_us(250000);
+    cLEDs = 2;
+    wait_us(250000);
+    cLEDs = 4;
+    wait_us(250000);
+    cLEDs = 8;
+    wait_us(250000);
+    cLEDs = 16;
+    wait_us(250000);
+    cLEDs = 32;
+    wait_us(250000);
+    cLEDs = 64;
+    wait_us(250000);
+    cLEDs = 128;
+    wait_us(250000);
+    cLEDs = 0;
 
-    speedAdjustBtn.rise(speedAdjustBtnIRQ);
-    drivingModeBtn.rise(drivingModeBtnIRQ);
-    escCalibrateButton.rise(calibrateRisingIRQ);
-    escCalibrateButton.fall(calibrateFallingIRQ);
-    
-    buttonMonitor.start(buttonMonitorMethod);
-    LEDDriveThread.start(LEDDriveThreadMethod);
+    // leftWheelFront = 1.0f;
+    // rightWheelFront = 1.0f;
+    // leftWheelRear = 1.0f;
+    // rightWheelRear = 1.0f;
+
+    // servo1 = 1.0f;
+    // servo2 = 1.0f;
+    // servo3 = 1.0f;
+    // servo4 = 1.0f;
+
+
+
     joyStickLeftThread.start(joyStickLeftThreadMethod);
-    calibrateThread.start(escCalibrateMethod);
+    LEDAliveTicker.attach(LEDAliveIRQ, 1s);
+    // connConnector.rise(connInIRQ);
+    // connConnector.fall(connOutIRQ);
 
+    // while (true) {
+        
+    // printf("Left X : %f\n", xStickLeft.read());
+    // printf("Left Y : %f\n", yStickLeft.read());
+    // wait_us(1000000);
+    // }
 }
 
 /**
 
 **/
+/*
 void buttonMonitorMethod(){
     printf("Button Monitor Thread Started...\n");
     while (true) {
@@ -180,10 +261,12 @@ void buttonMonitorMethod(){
         }
     }
 }
+*/
 
 /**
 
 **/
+/*
 void LEDDriveThreadMethod(){
     printf("LED Drive Thread Started...\n");
     while (true) {
@@ -207,10 +290,12 @@ void LEDDriveThreadMethod(){
         }
     }
 }
+*/
 
 /**
 
 **/
+
 void joyStickLeftThreadMethod(){
     printf("JoyStickLeft Thread Started...\n");
     while (true) {
@@ -218,15 +303,19 @@ void joyStickLeftThreadMethod(){
         stickValueLock.trylock_for(1ms);
 
         xStickLeftValue = ((xStickLeft.read() * 2.0f) - 1.0f) * SPEED_FACTOR;
+        // printf("Left X : %f\n", xStickLeft.read());
         xStickLeftValue = (xStickLeftValue < -1.0f) || (xStickLeftValue > 1.0f) ? xStickLeftValue : 0.0f;
 
         yStickLeftValue = ((yStickLeft.read() * 2.0f) - 1.0f) * SPEED_FACTOR;
+        // printf("Left Y : %f\n", yStickLeft.read());
         yStickLeftValue = (yStickLeftValue < -1.0f) || (yStickLeftValue > 1.0f) ? yStickLeftValue : 0.0f;
 
         xStickRightValue = ((xStickRight.read() * 2.0f) - 1.0f) * SPEED_FACTOR;
+        // printf("Right X : %f\n", xStickRight.read());
         xStickRightValue = (xStickRightValue < -1.0f) || (xStickRightValue > 1.0f) ? xStickRightValue : 0.0f;
 
         yStickRightValue = ((yStickRight.read() * 2.0f) - 1.0f) * SPEED_FACTOR;
+        // printf("Right y : %f\n", yStickRight.read());
         yStickRightValue = (yStickRightValue < -1.0f) || (yStickRightValue > 1.0f) ? yStickRightValue : 0.0f;
 
         stickValueLock.unlock();
@@ -239,11 +328,6 @@ void joyStickLeftThreadMethod(){
             rightWheelFrontSpeed = ((xStickLeftValue - yStickLeftValue)/SPEED_FACTOR) * speedAdjustValue;
             leftWheelRearSpeed = ((xStickLeftValue - yStickLeftValue)/SPEED_FACTOR) * speedAdjustValue;
             rightWheelRearSpeed = ((xStickLeftValue + yStickLeftValue)/SPEED_FACTOR) * speedAdjustValue;
-        } else if(motorMode == 2){
-            leftWheelFrontSpeed = xStickLeftValue/SPEED_FACTOR * speedAdjustValue;
-            rightWheelFrontSpeed = -xStickRightValue/SPEED_FACTOR * speedAdjustValue;
-            leftWheelRearSpeed = -xStickLeftValue/SPEED_FACTOR * speedAdjustValue;
-            rightWheelRearSpeed = xStickRightValue/SPEED_FACTOR * speedAdjustValue;
         }
         leftWheelFront.write(leftWheelFrontSpeed);
         rightWheelFront.write(rightWheelFrontSpeed);
@@ -255,9 +339,52 @@ void joyStickLeftThreadMethod(){
     }
 }
 
+void LEDAliveIRQ(){
+    dLED1 = !dLED1;
+    
+}
+
+void connInIRQ(){
+    dLED3 = 0;
+    connConnector.rise(NULL);
+    calibrateThread.flags_set(2);
+    connConnector.rise(connInIRQ);
+}
+
+void connOutIRQ(){
+    dLED3 = 1;
+    connConnector.fall(NULL);
+    calibrateThread.flags_set(1);
+    connConnector.fall(connOutIRQ);
+}
+
+void connThreadMethod(){
+    printf("Connector Thread Started...\n");
+    while(true){
+        ThisThread::flags_wait_any(0x7fffffff, false);
+        int flag = ThisThread::flags_get();
+        ThisThread::flags_clear(0x7fffffff);
+        switch(flag){
+            case '1':
+                motorSpeedLock.lock();
+                leftWheelFront.write(0.0f);
+                rightWheelFront.write(0.0f);
+                leftWheelRear.write(0.0f);
+                rightWheelRear.write(0.0f);
+            break;
+            case '2':
+                motorSpeedLock.unlock();
+            break;
+            default : 
+            break;
+        }
+    }
+}
+
 /**
 
 **/
+/*
 void escCalibrateMethod(){
     printf("Calibrate ESC Thread Started\n");
     while(true){
@@ -291,34 +418,11 @@ void escCalibrateMethod(){
         }
     }
 }
-
+*/
 /**
 
 **/
-void speedAdjustBtnIRQ(){
-    speedAdjustBtn.rise(NULL);
-    wait_us(5000);
-    if (speedAdjustBtn == 1){
-        buttonMonitor.flags_set(1);
-    }
-    speedAdjustBtn.rise(speedAdjustBtnIRQ);
-}
-
-/**
-
-**/
-void drivingModeBtnIRQ(){
-    drivingModeBtn.rise(NULL);
-    wait_us(5000);
-    if (drivingModeBtn == 1){
-        buttonMonitor.flags_set(2);
-    }
-    drivingModeBtn.rise(drivingModeBtnIRQ);
-}
-
-/**
-
-**/
+/*
 void calibrateRisingIRQ(){
     escCalibrateButton.rise(NULL);
     wait_us(5000);
@@ -327,10 +431,11 @@ void calibrateRisingIRQ(){
     }
     escCalibrateButton.rise(calibrateRisingIRQ);
 }
-
+*/
 /**
 
 **/
+/*
 void calibrateFallingIRQ(){
     escCalibrateButton.fall(NULL);
     wait_us(5000);
@@ -339,3 +444,4 @@ void calibrateFallingIRQ(){
     }
     escCalibrateButton.fall(calibrateFallingIRQ);
 }
+*/
