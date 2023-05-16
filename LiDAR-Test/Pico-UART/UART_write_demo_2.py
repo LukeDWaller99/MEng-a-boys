@@ -20,7 +20,7 @@ while True:
     
     #signal to the LiDAR board that we want a reading
     
-    print("requesting")
+    #print("requesting")
     uart.write('s') #for send
     if uart.any():
         t_sta=time.ticks_cpu()
@@ -42,6 +42,7 @@ while True:
         else:
             print("wake thread 2")
             data_list.append(mux.get_chan())
+            print(data_list)
             data_proc.set_data(data_list)
             data_proc.wake()
         

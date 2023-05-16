@@ -4,7 +4,7 @@ Data_Processor Class
 PRocesses LiDAR data and signals the main thread where appropriate
 """
 from machine import Pin,UART,I2C
-import _thread
+import _thread,time
 class Data_Processor:
     def __init__(self,i2c_pins):
         #data buffer
@@ -25,7 +25,7 @@ class Data_Processor:
                 dev_list=self.i2c.scan()
         print("I2C Connected")
         self.TARGET_ADDR = dev_list[0]
-        self.i2c.writeto(self.TARGET_ADDR, b'LIVE')         # write 3 bytes to peripheral with 7-bit address 42
+        self.i2c.writeto(self.TARGET_ADDR, b'LIVE')        
         
         second_thread = _thread.start_new_thread(self.I2C_Thread,[])
     
@@ -43,9 +43,12 @@ class Data_Processor:
             except:
                 pass	#do nothing, data is invalid, someone goofed.
             else:
-                if (int(self.data_list[0],10)<100) or (int(self.data_list[1],10)<100):
+                if (int(self.data_list[0],10)<50) or (int(self.data_list[1],10)<50):
                     print("SEND I2C")
                     self.i2c.writeto(self.TARGET_ADDR,b'STOP')
+                elif (int(self.data_list[0],10)<100) or (int(self.data_list[1],10)<100):
+                    print("SEND I2C")
+                    self.i2c.writeto(self.TARGET_ADDR,b'OBS')
                 else:
                     self.i2c.writeto(self.TARGET_ADDR,b'GO')
             self.i2c_thread_flag = 0
