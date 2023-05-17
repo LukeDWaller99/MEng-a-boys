@@ -12,14 +12,14 @@ scl_pin = Pin(9, Pin.PULL_UP)
 i2c = I2C(0,sda=sda_pin,scl=scl_pin,freq=400000)  #1M casues lockup, leave at 800K
 
 mux = MUX4([2,3])
-mux.select(3)
+mux.set_chan_limit(1)
 
 #data_proc = Data_Processor([sda_pin,scl_pin])
 while True:
     #engage second thread
     
     #signal to the LiDAR board that we want a reading
-    
+    mux.advance()
     #print("requesting")
     uart.write('s') #for send
     if uart.any():
