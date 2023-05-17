@@ -26,7 +26,6 @@ vl2.value(0)
 # You can find it here: https://github.com/ST-mirror/VL53L5CX_ULD_driver/blob/no-fw/lite/en/vl53l5cx_firmware.bin
 
 PINS_BREAKOUT_GARDEN = {"sda": 20, "scl": 21}
-PINS_PICO_EXPLORER = {"sda": 20, "scl": 21}
 
 sensor_mode = 8
 
@@ -46,6 +45,7 @@ if sensor_mode == 4:
     sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
 else:
     sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
+sensor.set_frequency_hz(10)
 sensor.start_ranging()
 #connect to sensor 2
 vl1.value(0)
@@ -61,6 +61,7 @@ if sensor_mode == 4:
     sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_4X4)
 else:
     sensor.set_resolution(breakout_vl53l5cx.RESOLUTION_8X8)
+sensor.set_frequency_hz(10)
 sensor.start_ranging()
 
 while True:
@@ -94,34 +95,34 @@ while True:
             led2.value(0)
             led3.value(1)
             t_start = time.ticks_ms()
-#     vl1.value(0)
-#     vl2.value(1)
-#     if sensor.data_ready():
-#         print("Reading sensor 2")
-#         # "data" is a namedtuple (attrtuple technically)
-#         # it includes average readings as "distance_avg" and "reflectance_avg"
-#         # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
-#         data = sensor.get_data()
-#         #diag_print(data, sensor_mode)
-#         print(centre_grid(data.distance, sensor_mode))
-#         #cent_reading = int(centre_grid_avg(centre_grid(data.distance, sensor_mode)))
-#         print("Average: {}".format(
-#             cent_reading))
-#         t_end2 = time.ticks_ms()
-#         print("Sensing done in {}ms...".format(t_end2 - t_start))
-#         ##now, do the LEDS
-#         if cent_reading < 50:
-#             led1.value(1)
-#             led2.value(0)
-#             led3.value(0)
-#         elif (cent_reading > 50) and (cent_reading < 150):
-#             led1.value(0)
-#             led2.value(1)
-#             led3.value(0)
-#         else:
-#             led1.value(0)
-#             led2.value(0)
-#             led3.value(1)
-#         iterations = iterations +1
-#         print(iterations)
+    vl1.value(0)
+    vl2.value(1)
+    if sensor.data_ready():
+        print("Reading sensor 2")
+        # "data" is a namedtuple (attrtuple technically)
+        # it includes average readings as "distance_avg" and "reflectance_avg"
+        # plus a full 4x4 or 8x8 set of readings (as a 1d tuple) for both values.
+        data = sensor.get_data()
+        #diag_print(data, sensor_mode)
+        print(centre_grid(data.distance, sensor_mode))
+        #cent_reading = int(centre_grid_avg(centre_grid(data.distance, sensor_mode)))
+        print("Average: {}".format(
+            cent_reading))
+        t_end2 = time.ticks_ms()
+        print("Sensing done in {}ms...".format(t_end2 - t_start))
+        ##now, do the LEDS
+        if cent_reading < 50:
+            led1.value(1)
+            led2.value(0)
+            led3.value(0)
+        elif (cent_reading > 50) and (cent_reading < 150):
+            led1.value(0)
+            led2.value(1)
+            led3.value(0)
+        else:
+            led1.value(0)
+            led2.value(0)
+            led3.value(1)
+        iterations = iterations +1
+        print(iterations)
         #gc.collect()

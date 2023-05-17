@@ -50,6 +50,8 @@ def thread2():
             if uart_in_data==b's':
                 uart.write(f"{interface.avg_readings[0]},{interface.avg_readings[1]}")
         #time.sleep(0.01)
-gc.enable()
-gc.threshold(150000) #prevents memory errors
-thread2()	#kick off second thread here
+
+second_thread = _thread.start_new_thread(thread2,[])
+
+while True:
+    interface.sense()	#kick off second thread here
