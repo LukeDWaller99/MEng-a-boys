@@ -1,0 +1,144 @@
+\documentclass [12pt]{article}
+\usepackage{fancyhdr}
+\usepackage[utf8]{inputenc}
+% \usepackage[english]{babel}
+\usepackage{gensymb}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage[table]{xcolor}
+\usepackage{siunitx}
+\usepackage{indentfirst}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[UKenglish]{datetime}
+\usepackage{setspace}
+\usepackage{hhline}
+\usepackage{lastpage}
+\usepackage[acronym]{glossaries}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\usepackage{subfigure}
+\usepackage[T1]{fontenc}
+\usepackage[numbers]{natbib}
+
+
+
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{customgreen}{rgb}{0,0.6,0}
+\definecolor{customgray}{rgb}{0.5,0.5,0.5}
+\definecolor{custommauve}{rgb}{0.6,0,0.8}
+
+\makeglossaries
+\loadglsentries{glossary.tex}
+
+\graphicspath{{images/}}
+
+\hypersetup
+{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    citecolor=black,
+}
+
+\doublespacing
+
+\title{}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+
+        \vspace*{\baselineskip}
+
+        \rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+        \rule{\textwidth}{0.4pt}\\
+
+        {\LARGE EXAMPLE TEXT}\\[0.2\baselineskip]
+
+        \rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+        \rule{\textwidth}{1.6pt}\\[\baselineskip]
+        \scshape
+
+        \textbf{Student No: 10618407}
+
+        \today
+
+        \vfill
+
+        \vspace{0.8cm}
+
+        \includegraphics[width=0.4\textwidth]{UOP_Logo.png}
+
+    \end{center}
+\end{titlepage}
+
+\newpage
+\fancyfoot[R]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+\pagenumbering{roman}
+\tableofcontents
+\listoffigures
+\listoftables
+\printglossaries
+
+\newpage
+\begin{abstract}
+
+\end{abstract}
+\section{Acknowledgements}
+
+\newpage
+\pagenumbering{arabic}
+\section{Introduction}
+\setcounter{page}{1}
+
+\newpage
+\section{Literature Review and Prior Art}
+
+
+\newpage
+\section{Business Justifications}
+
+\newpage
+\section{Requirements}
+
+\newpage
+\section{Optioneering}
+
+\newpage
+\section{Hardware Design}
+
+\newpage
+\section{Software Design}
+
+\newpage
+\section{Testing}
+
+\newpage
+\section{Evaluation}
+
+\newpage
+\section{Further Developments}
+
+\newpage
+\section{Conclusions}
+
+\newpage
+\bibliographystyle{IEEEtranN}
+\bibliography{refs}
+
+\appendix
+
+\end{document}
