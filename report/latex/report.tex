@@ -365,7 +365,54 @@ The finalised design for the motor mount was exactly 60mm in height (not includi
 Motor assembly modularity was one of the most important features of the motor mounts throughout the design and construction phases of this project. The motors mounts were designed to be modular to allow for streamlined integration, scalability, and ease-of-repair. By designing the motor modules in this way, an increase in the speed of integration was made, and it resulted in a positive environmental impact. The environmental benefits of modular designs include resource efficiency, extended product lifespan and sustainable upgrading of assemblies and modules.
 Overall, the team were very happy with the motor mount design. The motor was suitably reinforced, and the wheel was suitably supported. The belt drive was smooth, reliable, and quiet during operation and allowed for slight misalignments in the mechanism without causing slippage or the belt to fall off the pulleys. The mounts were strong and did not flex under the weight of the craft and the team are confident that it would have been able to support the full weight of the platform with ease. The only issue with the motor mounts was the gear reduction used. Upon reflection, a 2:1 reduction was insufficient for the motor to operate effectively. If re-designed, a 4:1 or higher reduction would have been used to allow the motor to spin faster and be able to more comfortably to operate at its peak-efficiency whilst maintaining a controlled speed at the wheels.
 
+\subsection{LiDAR Placement and Mounting Design}
+To provide 300° coverage, and to minimise blind spots in vision-critical regions, the LiDARs were mounted in dual-mounts. Vision-critical regions are areas that have the highest probability of an obstacle appearing in. The main regions in figure \ref{fig:lidar_plac} are directly in front of the front and back faces.
 
+% \begin{figure}[H]
+%         \centering
+%         \begin{subfigure}{width=0.5\textwidth}
+%             \centering
+%             \includegraphics[width=50mm]{lidar_placement_old.png}
+%             \caption{Original LiDAR Placement}
+%             \label{fig:lidar_plac_old}
+%         \end{subfigure}%
+%         \begin{subfigure}{width=0.5\textwidth}
+%             \centering
+%             \includegraphics[width=50mm]{lidar_placement_new.png}
+%             \caption{Revised LiDAR Placement}
+%             \label{fig:lidar_plac_new}
+%         \end{subfigure}
+%         \caption{Comparison of LiDAR Placements}
+%         \label{fig:lidar_plac}
+%     \end{figure}
+
+The original design in figure \ref{fig:lidar_plac_old} utilised six LiDARs placed around the chassis, one on each corner facing forwards or backwards, and one on each side, perpendicular to the others. This arrangement, while allowing for cross-referencing between adjacent LiDARs, had large blind spots on the corners, and a 1030mm blind spot in the centre of the front and back. This large a blind-spot in a vision-critical region was considered unacceptable, and so the design was changed.
+
+The adjacent figure \ref{fig:lidar_plac_new} shows an alternative mounting schema using an additional two LiDARs, bringing the total to eight. This arrangement, made up of centre-mounting the LiDARs at an angle that minimises overlap while doubling the field of view to 89°. This design limits the blind spots to a 755mm strip extending from each corner of the design. Whilst blind spots still exist, they are no longer in critical-vision regions, and so are less of a concern. Caution should still be taken by users, however, as obstacles within these diagonal regions may be an issue when using the strafe mode.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{LiDAR_PLACEMENT_GRAPH.png}
+    \caption{Diagram of LiDAR angular placement}
+    \label{fig:lidar_plac_graph}
+\end{figure}
+
+With the 47mm mount height, the lower half of the LiDAR beams would be pointed at the ground for most of the operation, effectively halving the useful number of samples the sensors would take. To prevent this, the LiDAR mounts were angled upwards by 12.3°,  improving the minimum distance of the obstacle height calculations to 150mm, and the distance at which the lowest row of sensors begins the reading the ground to 266mm.
+\subsection{LiDAR Mount Design}
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.25\textwidth]{l_mount_old.png}
+%     \caption{Original mount design}
+%     \label{fig:l_mount_old}
+% \end{figure}
+
+Following the initial mounting schema, the Lidar mounts were initially to screw into the ends of the chassis extrusion lengths, pointing the LiDARs forwards. Figure \ref{fig:l_mount_old} shows a render of one of the corner LiDAR mounts. The two screw holes in the recess match with the screw holes on the Pimoroni breakout board. The recess is designed to prevent the breakout board from extruding beyond the surface, reducing the chance for sensor damage should a collision occur. A rectangular cut out provides a routing channel for the LiDAR connectors.
+
+TWO LIDAR MOUNT RENDERS HERE FiX REF below
+
+Figures  and  show the redesigned centre and side Dual LiDAR mounts. Using the aforementioned calculations, the LiDARs are offset horizontally, maximising horizontal field of view. The centre mounts include screw holes to allow mounting to the top plates of the armatures, while the side mounts include side flanges to allow them to be secured to the side extrusion using T-nuts. Corners are chamfered to provide additional strength, reducing stress concentration at corners\cite{BELINGARDI2002273}.
+For the prototype, each mount was printed using PLA, chosen out of the available plastics for 3D printing for a combination of its relative strength, ease of printing, and low cost. For a production run of the product, a more permanent solution can be found, but for an initial prototype the inherent advantages of 3D printing for rapid prototyping made PLA a perfect choice.
 
 
 \newpage
