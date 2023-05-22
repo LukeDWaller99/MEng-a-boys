@@ -502,7 +502,17 @@ TWO LIDAR MOUNT RENDERS HERE FiX REF below
 Figures  and  show the redesigned centre and side Dual LiDAR mounts. Using the aforementioned calculations, the LiDARs are offset horizontally, maximising horizontal field of view. The centre mounts include screw holes to allow mounting to the top plates of the armatures, while the side mounts include side flanges to allow them to be secured to the side extrusion using T-nuts. Corners are chamfered to provide additional strength, reducing stress concentration at corners\cite{BELINGARDI2002273}.
 For the prototype, each mount was printed using PLA, chosen out of the available plastics for 3D printing for a combination of its relative strength, ease of printing, and low cost. For a production run of the product, a more permanent solution can be found, but for an initial prototype the inherent advantages of 3D printing for rapid prototyping made PLA a perfect choice.
 
-
+\begin{table}
+    \begin{tabular}
+    {|p{2.1cm}|p{1.8cm}|p{2.1cm}|p{2.1cm}|p{3.1cm}|p{3.2cm}|}
+    \hline
+        Material & Cost & Strength & Rigidity & Ease of Printing & Tolerance \\ \hline
+        PLA & LOW & MID & MID & EASY & Approx 0.4mm\\ \hline
+        TPU & MID & LOW & LOW & HARD & 0.4mm\\\hline
+        RESIN & HIGH & HIGH & HIGH & EASY & $>$0.1mm\\\hline
+    \end{tabular}\\
+    \caption{3D printing material comparison}
+    \end{table}
 \subsection{Breakaway Connector}
 
 A breakaway connector was design to add an additional safety measure when operating the craft. The breakaway connector is positioned along the cable connecting the controller to the craft, providing a reliable connection while allowing for detachment should the circumstance occur. Magnets are incorporated at the centre of each connector so that if the craft begins to move too far away from the user, the connection will be lost, and the craft will come to an immediate stop. 
@@ -611,9 +621,30 @@ To test the threshold detection and binary encoding, random sets of variables we
 \subsection{LiDAR Accuracy Testing}
 To test the accuracy of the LiDARs, they were placed in a vice, and pointed at a flat plywood sheet a fixed distance away. For the purposes of this test, the plywood sheet had an approximate 30\% reflectance value, and lighting conditions were ambient.
 
-%table
+\begin{table}[]
+    \begin{tabular}{|l|l|l|l|}
+    \hline
+    \textbf{Distance (mm)} & \textbf{Average Reading (mm)} & \textbf{Error} & \textbf{Error \%} \\ \hline
+    \textbf{5}             & 4.02                          & -0.98          & -19.60\%          \\ \hline
+    10                     & 10.5                          & 0.5            & 5.00\%            \\ \hline
+    15                     & 16.43                         & 1.43           & 9.53\%            \\ \hline
+    20                     & 19.74                         & -0.26          & -1.30\%           \\ \hline
+    25                     & 26.22                         & 1.22           & 4.88\%            \\ \hline
+    30                     & 27.4                          & -2.6           & -8.67\%           \\ \hline
+    100                    & 107.01                        & 7.01           & 7.01\%            \\ \hline
+    150                    & 159.8                         & 9.8            & 6.53\%            \\ \hline
+    200                    & 184.66                        & -15.34         & -7.67\%           \\ \hline
+    250                    & 233.58                        & -16.42         & -6.57\%           \\ \hline
+    300                    & 281.06                        & -18.94         & -6.31\%           \\ \hline
+    500                    & 532.89                        & 32.89          & 6.58\%            \\ \hline
+    750                    & 794.32                        & 44.32          & 5.91\%            \\ \hline
+    1000                   & 1096.73                       & 96.73          & 9.67\%            \\ \hline
+    \end{tabular}
+    \caption{LiDAR measurement testing results}
+    \label{tab:lidar_res}
+    \end{table}
 
-Table \ref{} shows a subset of testing result. The sensor performed better than expected, the error remaining within the bounds specified within the sensor’s datasheet. It should be noted, however, that the two targets the datasheet’s testing used had a reflectance of 17\% and 88\% respectively, and ambient light was fixed at 5kilolux, so these results are not directly comparable.
+Table \ref{tab:lidar_res} shows a subset of testing result. The sensor performed better than expected, the error remaining within the bounds specified within the sensor’s datasheet. It should be noted, however, that the two targets the datasheet’s testing used had a reflectance of 17\% and 88\% respectively, and ambient light was fixed at 5kilolux, so these results are not directly comparable.
 
 
 
