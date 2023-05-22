@@ -555,6 +555,34 @@ The team were happy with the performance of the breakaway connector. It provides
 \newpage
 \section{Software Design} \label{sec:softwareDesign}
 
+For code snippets, see appendix \ref{app:code_snippets}.
+\subsubsection{Main Board}
+The software for the main board was written in C++ using the Mbed Studio IDE. This code was a multithreaded control system capable of managing a large array of inputs and outputs simultaneously. The main requirements from the main board were PPM controlled outputs \cite{ppm} for the VESCs, PWM control for the servo motors, and GPIO outputs to control solenoids and other hardware such as relays and LEDs. Each of these functions ran inside their own thread which were independently thread-safe and required mutex locks to be taken to change global variables that other threads may need to access. The PPM and PWM control for the VESCs and servo motors respectively used custom classes developed by the team for these purposes. The Main board communicated with the controller board using SPI, more information of this can be found in §(INSERT SECTION).
+\subsubsection{Controller}
+Similarly to the main board, the controller board was also written in C++ using the Mbed Studio IDE. The code was a multithread control system was used to manage a large array of inputs to the board with LEDs to act as indicators for switch orientation and as a collision array for the craft. The controller contained two joysticks each with an X and Y direction, eight toggle switches, and 5 momentary push switches. These were used to interface with the craft and allowed the user to control all elements of the craft from the direction the platform drove, to the actuation angle of the servos. All the switches ran using interrupts and utilised hardware debouncing outlined in §(INSERT SECTION HERE). The joysticks were run on a rapid-polling ticker-based system that evaluated and updated the joystick input values ever 10ms. These functionalities ran inside their own thread which were independently thread-safe and required mutex locks to be taken to change global variables that other threads may need to access. The controller board communicated with the main board using SPI, more information of this can be found in §(INSERT SECTION).
+\subsubsection{Sensor System Controller}
+ 
+The Sensor System Controller interfaces with the sensors boards via a SN74LV4052A Dual 4-Channel multiplexer chip, in both PDIP and SOIC packages for breadboards and surface mount respectively. The multiplexer allowed for a single UART peripheral to connect to all four boards without a tangible effect on communication. The MUX4 class was created to control the multiplexer.
+The MUX4 class has methods for selecting a specific output channel, as well as an ‘advance’ method that moves the selection to the next available channel, wrapping around to the first channel once the last is reached.
+A method of setting a channel limit, effectively reducing the number of channels available to the MUX, is included. Useful for any purpose where not all 4 channels need to be used, such as for testing, each method has included logic to ensure that channels beyond the limit cannot be reached.
+ 
+The I2C to the main board’s initialisation within the Data Processor. This code is capable of scanning for connected I2C devices, automatically finding the address of the connected main board before beginning transmissions. If no connection is found, the I2C will re-attempt connection at 1 second interviews. Due to different power-on speeds, it is possible that the sensor controller will boot faster than the main board, in which case this code will successfully wait until proper connection can be established.
+\subsubsection{Transmission Encoding}
+For maximum speed and brevity, the motor vector commands are sent as a single encoded byte over I2C. Each two-bit pair refers to a direction: front, back, left, and right, and can be encoded with one of four values. ‘b00’ refers to all clear, with values from b01 to b11 referring to violations of three distance thresholds, b11 signalling a complete stop to vectoring in that direction. These thresholds are configurable at runtime, but for safety reasons are not user accessible. 
+ 
+\subsubsection{Sensor System Interface}
+ 
+
+The backbone of the LiDAR interface is provided by a LiDAR Interface class. This class, a singleton instance that in of itself instantiates \textit{n} amount of LiDAR Interrupt Handlers, as well as a transistor bus of n pins.
+The Transistor Bus class manages the transistors on the PCB that are used to disconnect the LiDARs from the I2C clock lines. The Pimoroni VL53L5CX library doesn’t allow for changes in address for the I2C transmissions to the LiDAR breakouts, and so the transistor method is an alternative method of doing so, similar to an SPI bus’s chip select line. To this effect, only one VL53L5CX object is instantiated in software, and addressing is purely handled by calls to the Transistor Bus class.
+The LiDAR Interrupt Handler class is, in effect, a wrapper for a standard GPIO interrupt. Contained within is a pollable status flag, alongside a get method for said flag, as well a clear method. The callback function acts as the ISR, triggered by a rising edge IRQ on the designated pin. The interface class instantiates a handler class for each connected LiDAR using a list comprehension to create a list of object instances.
+The LiDAR Interface instance runs on a separate core to the communications handling, which runs on core 0. By separating operations between the two cores, minimum latency can be achieved, ensuring LiDAR data passed up the sensor chain is a relevant as possible. Cross-core operations are read-only, ensuring a minimum chance of errors caused by multi-core operation.
+The UART operates by idling until a data request byte, b’r’ , is received from the Sensor System Controller. Once this byte is received, the most recent data is grabbed before being sent via the UART to the System Controller. The core then returns to an idle state until the next data request arrives.  
+ 
+
+
+
+
 \newpage
 \section{Testing}
 
@@ -765,6 +793,49 @@ Sirmon Industries Limited are actively pursuing further development of the HEVCS
     \label{fig:uartTestData}
 \end{figure}
 
+\section{Code Snippets}\label{app:code_snippets}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{MUX_4.png}
+    \caption{}
+    \label{fig:MUX_diag}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{S_S_controller.jpg}
+    \caption{}
+    \label{fig:SS_cont}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{try_loop.png}
+    \caption{}
+    \label{fig:try_loop}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{i2c_init.png}
+    \caption{}
+    \label{fig:i2c_init}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{trans_code.png}
+    \caption{}
+    \label{fig:trans_code}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{S_S_interface.jpg}
+    \caption{}
+    \label{fig:SS_interface}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{lidar_interface.jpg}
+    \caption{}
+    \label{fig:lidar_interface}
+\end{figure}
 Project OneNote \cite{onenote}
 Module OneDrive \cite{unidrive}
 Private OneDrive \cite{privdrive}
