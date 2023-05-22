@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 %\usepackage[english]{babel}
 \usepackage{gensymb}
+\usepackage{textgreek}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
 \usepackage{graphicx}
@@ -147,6 +148,59 @@ It is common knowledge that EV batteries are designed to possess an ability to r
 \newpage
 \section{Requirements}
 
+\subsection{Dimensions}
+
+To determine the compatibility of the \gls{hevcs} with existing \gls{ev}, a comprehensive survey was conducted on a sample of 40 recently released EV models. The survey aimed to evaluate two critical dimensions: ground clearance and distance between tyres. These dimensions play a crucial role in determining whether the \gls{hevcs}platform can be driven underneath the EVs and accommodate their specific characteristics. 
+
+Based on the survey results, the average ground clearance of the sampled EVs was determined. By considering the range of ground clearances across the surveyed models, an average value of ground clearance was calculated. This average ground clearance serves as a benchmark for the maximum height of the \gls{hevcs} platform, ensuring that it can safely fit underneath the majority of new EVs entering the market. Notably, the survey findings revealed that the \gls{hevcs} platform, with a maximum height of 155mm, would be compatible with approximately 53\% of the surveyed EVs, enabling seamless integration and operation. 
+
+In addition to ground clearance, the distance between tires, or the wheelbase, is a crucial factor to consider when assessing compatibility. Through the survey, the average wheelbase of the sampled \gls{ev}s was determined to be 2584.87mm. This measurement represents the average distance between the front and rear wheels of the surveyed EVs. By accounting for the typical tire diameter of 457.2mm, it is possible to estimate the average distance between the tires, which was found to be approximately 2127.67mm. This information is valuable for designing the \gls{hevcs} platform, as it ensures that the platform can accommodate the average wheelbase of EVs and align its components accordingly. 
+
+Considering door clearances is another important aspect when assessing compatibility between the \gls{hevcs} platform and \gls{ev}s. In the context of the UK, door clearances typically range between 762mm and 838mm. By incorporating these door clearance values into the design considerations, the \gls{hevcs} platform is designed to pass through doorways without any issues, allowing for smooth integration with existing infrastructure and ensuring seamless access to buildings or designated areas. 
+
+By conducting a meticulous survey of 40 new EV models and analysing key dimensions such as ground clearance, distance between tires, and door clearances, the compatibility of the \gls{hevcs} platform with existing EVs can be assessed in detail. This comprehensive evaluation enables the design team to make informed decisions, ensuring that the \gls{hevcs} platform aligns with the specifications of the majority of EVs in the market, facilitating integration, compatibility, and efficient operation. 
+
+\subsection{Structural Integrity}
+
+In light of the platform's maximum height constraint, which should not exceed 155mm, it is imperative to determine the maximum allowable wheel diameter. Based on this constraint, the wheel diameter is established as 150mm. Moreover, in compliance with class 2 mobility legislation, the platform is subject to a speed limitation of 4mph (equivalent to 1.79m/s) and a maximum weight capacity of 113.4kg. 
+
+With these parameters at hand, the team calculated the platform's maximum power and torque requirements. Considering the maximum weight condition, where the craft is carrying its full capacity of 113.4kg, each motor must exert a force of 278.11N to counteract gravity. This force is essential for maintaining stability and facilitating the robot's locomotion. 
+
+Given the fixed wheel diameter of 150mm and a linear speed of 4mph (1.79m/s), the angular velocity of the wheel was deduced. By employing the formula $ v = \textomega * r $, where v represents linear velocity, \textomega denotes angular velocity, and r signifies the wheel radius, the equation was rearranged to solve the angular velocity. In this case, the angular velocity was calculated to be approximately 23.87 rad/s. 
+
+Subsequently, the team determined the torque required to achieve this angular velocity. The equation $T=Fr$, where T represents torque, F denotes the force on each wheel, and r signifies radius of the wheel, was used Assuming constant angular velocity \textomega and negligible frictional losses, the torque required was computed to be approximately 20.86Nm. 
+
+Furthermore, we can derive the maximum power output required by the platform. Employing the equation $ P = T* \textomega $, where P represents power, we multiply the torque (T) by the angular velocity \textomega to obtain the maximum power output, which was found to be approximately 497.93W. 
+
+In addition to the previously mentioned requirements, the outdoor utilization of the platform necessitates its ability to navigate various challenging situations. These include driving on uneven terrain, overcoming obstacles, adapting to environmental conditions, maintaining stability on slippery surfaces, and traversing inclines. 
+
+The terrain outside differs significantly from controlled indoor environments. It can feature irregular surfaces with variations in elevation, such as gravel paths, grassy fields, or rough terrain. Failure to consider these factors in the design can lead to complications for the platform's operation. Therefore, robust design considerations should be made to ensure effective performance on uneven terrain while maintaining stability and preventing damage to the craft. 
+
+Moreover, the platform's operation will be subjected to changing environmental conditions throughout the year. It should be capable of withstanding various weather conditions, including rain, snow, high humidity, or extreme temperatures. To address these requirements, the platform should possess a minimum Ingress Protection (IP) rating of IP55, providing adequate protection against water and dust ingress. 
+
+In colder climates, surfaces can become icy, posing a significant challenge for the platform's traction and control. To ensure smooth and safe operation, the platform should be equipped with suitable mechanisms or materials that provide optimal grip and prevent slipping on icy surfaces. 
+
+Furthermore, outdoor paths may not always be flat, necessitating the platform's capability to traverse inclines. As per the class 2 mobility scooter legislation, the platform should be capable of coming to a stop on a slope of 1 in 5, which requires appropriate power, control, and braking mechanisms to ensure safe operation and prevent unintended rollbacks. 
+
+\subsection{Kerb Climbing}
+
+A prominent capability of the platform is its ability to negotiate kerbs, providing users with the convenience of effortless transportation to their vehicles without requiring physical exertion. Considering the platform's maximum weight capacity of 113kg, it is crucial to ensure that it can smoothly ascend and descend kerbs without causing instability or damage. To establish a target for the kerb height that the platform should be able to traverse, a comprehensive survey of kerb heights in the local area was conducted. 
+
+During the survey, a representative sample of kerbs was assessed to determine the average height encountered. By considering various locations and situations, such as residential areas, commercial districts, and public spaces, the survey aimed to capture the diverse range of kerb heights that the platform is likely to encounter in real-world scenarios. Upon careful analysis, the average kerb height was found to be approximately 150mm. 
+
+Setting the target kerb height at 150mm provided a benchmark for the platform's design and performance. It ensured that the platform could accommodate the typical kerb heights encountered during everyday use, allowing users to seamlessly navigate kerbs without requiring additional effort or assistance. Incorporating appropriate mechanisms, such as robust suspension systems, efficient power delivery, and suitable wheel designs, will facilitate the smooth traversal of kerbs and enhance the platform's overall usability. 
+
+\subsection{Safety Features}
+
+To ensure the safe and effective use of the \gls{hevcs}, several critical safety considerations must be taken into account. Given that the platform is intended for use by any member of the public, incorporating collision avoidance features becomes paramount to enhance ease of use and prevent potential accidents. 
+
+In addition to collision avoidance, it is essential to provide users with assistance regarding the capabilities and limitations of the platform. This information empowers users to make informed decisions and operate the platform safely. For instance, the system can provide feedback to the user regarding the platform's ability to navigate specific obstacles or terrains. This includes informing the user whether the platform can safely climb a given kerb height or assessing the steepness of a slope to determine if it exceeds the platform's capabilities. By offering this assistance, users can avoid situations that may pose a risk to their safety or the proper functioning of the platform. 
+
+According to Class 2 mobility scooter legislation, it is specified that the craft cannot be controlled remotely. Consequently, the controller for the platform will need to be tethered, ensuring that the operator maintains physical contact and direct control over the vehicle. This requirement ensures a higher level of safety and control, as it eliminates the potential risks associated with remote control operation. Furthermore, to address potential situations where the connection between the controller and the platform is lost, a fail-safe mechanism must be implemented. In such cases, the platform should be designed to immediately stop its movement to prevent unintended and uncontrolled motion, thereby prioritizing user safety and preventing the craft from rolling freely, potentially causing accidents or damage. 
+
+Implementing these safety features requires a comprehensive integration of sensor systems, advanced algorithms, and user interfaces. It is crucial to employ reliable and accurate sensors to ensure precise detection and assessment of the environment. Furthermore, developing robust algorithms capable of real-time analysis and decision-making is essential for timely collision avoidance and accurate user assistance. 
+
+ 
 \newpage
 \section{Optioneering}
 
@@ -176,7 +230,17 @@ Within this project, the ESP-8266 presents itself as a low-budget option capable
 
 \subsubsection{Super500 Servos}
 
+e Super500 applications suit that of the project, with a high level of accuracy and sufficient holding force. The servos are used to adjust the angle of the motor mounts to orientate and lift a platform weighing a maximum of 113.4kg up and down kerbs 150mm in height, providing the force defined in the requirements. As solenoids were used to hold the arms in a rigid, flat position, the servos only consumed power when articulating the arms, making the robot much more efficient when carrying the payload. 
+
+A single servo was used in each arm to lift the robot by 30 degrees. The servos used 0.4A each, meaning that lifting the whole platform with additional weight equating to roughly 40kg consumed 1.6A. However, the final design used two motors on each side of the robot, ensuring that a full weight of 113.4kg could be lifted.  Rounding up the supply current to 2A per hour, with a battery voltage of 24V, with 90\% efficiency, the robot can rotate between articulating its arms and holding the position for 90 minutes using 3000mAh li-po batteries. The configuration of the robot currently uses one battery per servo, however, considering the run-time of the articulation methods, and the lower supply current, these servos could use power from the same source. Altogether, the four servos would require 19.2wh from the main battery, a result the team believes to be efficiently optimised. 
+
 \subsubsection{6384 Motors}
+
+The team established that the 6384 motor was used in a lot of hobbyist projects that had similar applications as the \gls{hevcs}. These motors have a high-power output, making them suitable for applications that need a lot of torque. Similar projects include electric skateboards, bikes, and drones. Brushless motors have a longer lifespan and require less maintenance. Furthermore, less noise and vibration allows for smoother operation of the platform. 
+
+The motors are highly efficient compared to brushed motors due to having fewer parts and less friction. This results in more energy being converted into mechanical energy, and less energy lost in the form of heat. Brushless DC motors are capable of handling more precise speed control, an essential aspect of this product as it will operate around people.  
+
+Upon reflection, the team feel that the 6384 motors and Super500 servos were appropriate choice for the project due to their ‘plug-and-play’ usability. Furthermore, the \gls{bldc}s were easy to configure when paired with the speed controller. Their size meant that they aligned well with the extrusion, incorporated into a compact motor drive compartment. Additionally, later improvements to the \gls{hevcs}'s design meant that the motors and necessary driver equipment were contained in modular units. This means that they were all identical, easy to install, and maintain. Furthermore, if the \gls{hevcs} were to break when in use by a customer, new units could be installed with ease. 
 
 \subsection{Software Justifications}
 
@@ -205,6 +269,46 @@ Both hand saws and bench top saws were used for creating motor driver supports a
 
 \newpage
 \section{Hardware Design}
+
+\subsection{PCB and Circuit Development}
+
+The purpose of this project was to design and build a craft that could perform complex manoeuvrers and respond to various input signals. To achieve this, the craft required sophisticated electronic control systems that could manage its propulsion, movement, and orientation. All the components chosen were inexpensive and easy to procure to allow a fast turnaround on the circuits as to not slow down development of the project.   
+
+The development of these circuits required an advanced level of technical expertise and a deep understanding of electronic principles. The modularity of the circuits allowed for customization and expansion, providing flexibility and adaptability to the craft's design. The circuits and PCBs were developed using KiCAD. KiCAD was used because it has a user-friendly interface, robust capabilities for both schematic capture and layout design, and it is open-source and free-to-use for both commercial and non-commercial applications.
+
+\subsection{Platform Circuit}
+The first circuit, the platform circuit, was designed to take inputs from the controller and control various components of the craft, such as the \gls{vesc}s, relays, solenoids, and servos. These components were responsible for controlling the wheels; powering down the craft; locking the frame in a horizontal position to save the servos; and articulating the frame, respectively. Additionally, this circuit contained battery voltage monitoring circuitry and several buttons and switches for various inputs. There were several onboard debugging LEDs that could visually relay information. Additionally, there was an LED collision sensor output array. Further detail for the subcircuits for the components listed can be seen below.  
+
+\subsection{LEDs}
+
+Powering one LED using a microcontroller is possible as the microcontrollers used throughout this project can source up to 500mA when using external power \cite{nucleo144}. If more than a couple of LEDs were to be turned on at once, it is considered best practise to use a NPN transistor as a switch as not to sink too much current from the device \cite{artofe}. Given the application for this circuit, we considered it to be the best solution for LEDs. An example circuit can be seen below. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{LED.png}
+    \caption{LED Circuit from the Art of Electronics}
+    \label{fig:LED}
+\end{figure}
+
+\subsection{VESCs and Servos}
+The VESCs and servos required a similar output signal from the microcontroller, they both require a signal with a frequency of 50hz and a duty cycle between $ 1000\mu s $ and $2000\mu s $ \cite{pinckney2006pulse}. Using a PWM signal from the mbed board with a variable frequency controller, the Servo/ESC libraries written by the team worked effectively. This was deemed as the best solution for controlling the servos and ESCs for this project. 
+
+\subsection{Relays}
+
+Since the relays already contained all the necessary circuitry, they only required a pin to be connected. The relays worked as expected for turning on and off the power to the main craft and thusly, the team agreed these were the best solution.
+
+\subsection{Solenoids}
+
+Given the high-power drawing nature of solenoids, a specialist circuit was required for operation. It was decided that a Darlington pair was the most appropriate because they provide high current gain and can handle high currents and voltages with low power dissipation Additionally, Darlington pairs provide a high degree of isolation between the input and output circuits, which is important for protecting the control circuitry from voltage spikes and other transients that can be generated when switching inductive loads like solenoids. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{dpair.png}
+    \caption{Darlington Pair Circuit from the Art of Electronics}
+    \label{fig:dpair}
+\end{figure}
+
+For the circuit a TIP120 (a Darlington pair in a single TO-220 package) was used, along with a flyback diode to protect against current spikes from the discharging inductive load of the solenoid [horowitz and hill, P75, P38]. A 47K resistor was used to act as a pulldown resistor and a 2K2 resistor to limit current draw by the transistor. 
 
 \newpage
 \section{Software Design}
@@ -257,13 +361,15 @@ The research conducted throughout this project has included the use of and refer
 
 The environmental impact of the components and products used to build the \gls{hevcs} have been discussed in their relevant sections. Furthermore, the future improvements include discussion of alternative methods of acquiring power through sustainable, green energy sources. The team would like to reiterate the importance of recycling \gls{ev} batteries, building on the explanation on the impact on the environment discussed in the \gls{pep}. 
 
+Multiple characteristics of \gls{bldc}s result in a reduced negative impact on the environment. They require less energy to operate than DC or AC induction motors. They are more efficient in terms of energy loss and durability, meaning they need replacing less often and therefore produce less waste. As they do not have brushes, there is no carbon dust or other emissions produced during operation, including noise emission. However, the team acknowledge that the environmental impact is dependent on the motor’s application. This means that power consumption was limited through decisions within the software and the platform’s operation. This includes features such as regenerative breaking and speed limitations.  
+
 \subsection{Design}
 
 The team is pleased with the overall design of the \gls{hevcs} prototype platform and its capabilities, as the maximum height of the platform exceeded the target of 150mm. With a final height of 110mm, the \gls{hevcs} is able to fit under all bar one of the types of registered electric vehicles in UK \cite{carsinit}. Due to the confidential requirements in place for the project, the design was not able to be tested outdoors. However, the team is confident that with suitable levels of testing and a small amount of modification the \gls{hevcs} would be fully operational outdoors, on both pavement and road surfaces.  
 
 During testing, the craft demonstrated stability and the ability to support a payload of up to 80kg before collapsing, aligning with the requirements of the project. As well as this, the craft fully abides by all relevant class 2 mobility scooter legislation, allowing it to be used on pavements.  Furthermore, preliminary testing strongly suggests that the platform has the potential to navigate and manoeuvre over kerbs, of up to 150mm, with further developments and refinements. This promising outcome bodes well for the future optimisation and further developments of the platforms design capabilities.  
 
-Overall, the team is satisfied with the design prototype. This stems from its successful and complete adherence to the requirements of stability, wight capacity, and also for its potential developments in kerb climbing ability.  
+Overall, the team is satisfied with the design prototype. This stems from its successful and complete adherence to the requirements of stability, weight capacity, and also for its potential developments in kerb climbing ability.  
 
 \newpage
 \section{Further Developments}
@@ -275,7 +381,10 @@ Overall, the team is satisfied with the design prototype. This stems from its su
 \bibliographystyle{IEEEtran}
 \bibliography{ref.bib}
 
+\newpage
 \appendix
+
+\section{Appendix A: Project Documentation}
 
 Project OneNote \cite{onenote}
 Module OneDrive \cite{unidrive}
