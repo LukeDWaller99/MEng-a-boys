@@ -503,11 +503,120 @@ Figures  and  show the redesigned centre and side Dual LiDAR mounts. Using the a
 For the prototype, each mount was printed using PLA, chosen out of the available plastics for 3D printing for a combination of its relative strength, ease of printing, and low cost. For a production run of the product, a more permanent solution can be found, but for an initial prototype the inherent advantages of 3D printing for rapid prototyping made PLA a perfect choice.
 
 
+\subsection{Breakaway Connector}
+
+A breakaway connector was design to add an additional safety measure when operating the craft. The breakaway connector is positioned along the cable connecting the controller to the craft, providing a reliable connection while allowing for detachment should the circumstance occur. Magnets are incorporated at the centre of each connector so that if the craft begins to move too far away from the user, the connection will be lost, and the craft will come to an immediate stop. 
+
+The breakaway connector comprises of two main components: the PCB and the casing. On the male face of the PCB, a set 10 pogo pins organised in a circular pattern which will come in contact with corresponding SMD pads on the female connector PCB. The PCBs have a radius of 20mm and feature a central hole of radius 7mm to allow space for the magnet. Since KiCad does not have a feature to make a circular pattern, a MATLAB script was written that provides coordinates around circumference of a circle.
+
+For each end of the connector a case was fabricated using a 3D printer. The cases protect the PCBs from external factor that might affect the functionality and provide housing for the magnets. A triangular notch was incorporated into the design to stop an improper configuration during connection. This notch prevents incorrect alignment and ensures the power lines are correctly oriented, removing risk of damage to other connections.
+
+The design of the breakaway connector considers both safety and practicality and a render can be seen in \ref{connectorRender}. The neodymium magnets provide a 3.6kg pulling force enabling a secure detachable connection, while ensuring that the draft can be safely operated within a certain proximity to the user. 
+The team were happy with the performance of the breakaway connector. It provides a secure connection which can be broken should the circumstance occur. The casing protects the PCBs and holds the wire casing in place. While the breakaway connector worked well, further improvements could be made. The 3D printed case has some imperfections which can make it difficult to align the connectors correctly. Also, the rim around the pogo pins should be longer so that it can protect the ends of them from damage.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{ConnectorRender.png}
+    \caption{Render of the Breakaway Connector}
+    \label{fig:connectorRender}
+\end{figure}
+
+
 \newpage
-\section{Software Design}
+\section{Software Design} \label{sec:softwareDesign}
 
 \newpage
 \section{Testing}
+
+\subsection{Software Testing}
+When testing the software for the project, a set of testing requirements and a testing schema was used. The first step of software testing was a requirement analysis to understand the functional specifications of the system. The next step taken was test planning and test case design. These steps were used to define the objectives of testing and to determine the testing techniques to be utilised. Testing documentation was then needed to be developed to track all the tests that have been undertaken and define the inputs, outputs, and expected results from all the testing schemas. After the tests have been devised, the test environments are setup, and the tests are executed. Once this has happened, the results are analysed and any issues with the tests are handled using the appropriate manner.  Regression testing was then done to check that the newly added features did not negatively affect the old tests that were run. Validation and verification are then completed to check that the software meets the expected outputs under various operating conditions. After this the documentation is updated and a final testing report was created. 
+
+The STM32 development ecosystem provided comprehensive support for software testing. The STM32Cube software development platform includes tools and utilities for debugging, profiling, and testing, ensuring efficient detection and resolution of software issues. Additionally, third-party testing frameworks and tools, such as unit testing frameworks and code coverage analysis tools, are readily available and compatible with both mbed and STM32 platforms. These testing resources enabled the team to conduct rigorous testing and verification of their software, enhancing overall system quality. Furthermore, the STM32 boards are built on open standards and offer open-source software development environments.  
+
+Upon reflection, the team would like to use STM32Cube more in this project, and in the future, as it provides an open and flexible platform for software development, including libraries, middleware, and development tools. This openness enabled the team to access and modify the underlying software components, facilitating customisation, bug fixing, and optimization. Openness also encourages community contributions, resulting in continuous improvements and a collaborative testing environment, values of which result in the team’s increased passion for embedded software.
+The team also identified a possibility for more software-integrated error handling, such as try-throw-catch blocks in C++ and try-except-else-finally blocks in Python, both of which allow custom exceptions to be created and handled in defined ways.
+
+
+\subsubsection{Main Board Software Testing}
+The main board software was tested using the framework outlined in §(INSERT SECTION MARKER). The software for the main board was tested using bottom-up integration, an approach based on testing individual components (or units) first and gradually integrating them into larger subsystems. It is a method of integration testing that starts from the lowest level of the architecture and moves up until the system is comprehensively tested. 
+
+Testing began by toggling the LEDs on the board, then moving onto generating VESC outputs using PPM control. Once this was done, the two units were added together and then tested as a cohesive unit. This showed that the functionality of both blocks of code did not affect the operation of each other. This is was done for all the other functionality outlined in \ref{sec:softwareDesign}. Once all the functionality was tested, the board was then installed into the main craft and integration testing was done with the hardware. This was done to ensure that there were no conflicts from the code that negatively affected the software. 
+
+During operation the software on the main board worked mostly as expected most of the parts of the software work coherently and correctly. There were a few conflicts on Interrupt Lines and Busses, which required the changing of pins on the PCBs. Whilst this was time consuming to rectify it ultimately did not affect the overall functionality of the main board which continued to work as expected. 
+
+\subsubsection{Driving, Steering and Motor Control Testing}
+The motor control was obtained using PPM signals. PPM is similar to PWM signals that are used in standard RC remote control \cite{ppm}. The signals used a varying signal time between 0.5ms and 1.5ms on top of a 50Hz PWM output. This signal was then passed into the VESCs that were used to drive the motors. 
+
+The driving algorithm for the mecanum wheels is a complex set of equations that utilise trigonometry to calculate the correct speed and direction for the motors to rotate to travel in a specified direction. As a result of this, the equations and output from the algorithm required significant testing. The algorithms were initially tested using a python script utilising the build in ‘pytest’ library. This was used to evaluate test cases for the motor algorithms including the joystick at 0,0; 10,0; -10,0; etc. These tests were successful, indicating the algorithm was ready to deploy in C++ in an embedded context. 
+
+Once the driving algorithm was tested, it the steering algorithm could then be implemented. The steering algorithm was more simplistic than the driving algorithm. It only required to speed up or slow down the motors at a linear rate depending on direction the user wants to turn in and the speed they wish to turn in. 
+
+The Steering, Driving, and Motor Control was all successful and the team are confident that the best methods for controlling the motors was chosen. The VESCs were the best choice for this project as they provided a simplistic user interface which did not require extensive to control or external hall effect sensors to operate. If a higher precision control system was required, O-Drives would have been a better choice for a control system. 
+
+\subsection{Hardware Testing}
+
+\subsubsection{PCB Testing}
+
+The process of testing PCBs involves several steps to ensure proper functionality and reliability. The team started by visually inspecting the PCBs to check for any visible defects such as solder bridges, misplaced components, or damaged traces. This visual inspection may help identify any defects on the board that may cause an issue to the board’s performance. On initial visual inspection of the board when they had arrived, the controller board was missing the top layer silkscreen, which whilst not an issue with functionality, did cause disruptions to the soldering process. 
+
+Once visually inspected, the team performed continuity testing on the boards using a multimeter. By probing different points on the boards, the team ensured that the electrical connections on the board were intact and that there were no open circuits.  Upon testing on the PCBs there were a few places which required resoldering, which if not been checked would have caused issues with debugging later in the process. 
+
+The next step the team performed was basic power-on testing. Once the continuity of the PCB was performed, the PCB was powered using a lab power supply with a current limit. The board was then probed again using a multimeter to test that the correct voltages and currents are present within the circuit. This stage helps identify any power issues, abnormal heating, or voltage irregularities. 
+
+The final two stages of the PCB testing that the team undertook were functional and performance testing. Functional testing was used to validate the operation of the PCB by simulating real-world input and output conditions. The team used specific signals and inputs to the boards to evaluate the outputs that were received. This was done in using the onboard microcontrollers and some C++ testing firmware. This step verifies that the PCB performs as intended. Performance testing was then done which is very similar to functional testing but loads the PCB more to test it can work under a variety of challenging conditions. 
+
+Once the testing was completed, the team was satisfied that the PCBs worked as expected. 
+
+
+\subsubsection{Motor Mount Testing}
+
+Several types of testing were implemented at each stage to evaluate the performance and reliability of the motor mounts and associated components.
+During the initial design stage, a non-load bearing test rig was utilised to assess the functionality of the motors and their integration with the VESCs, using the VESC Tool software. Functional tests confirmed that the motors could be successfully activated and controlled using the software. However, when a wheel was mounted to the motors, the mounts experienced vibrations causing them to shear along the layer lines.
+
+The motor mount design was revised to address the stability and structural concerns. The new design supported the wheel on both sides and were robust enough to support a basic square aluminium chassis. These mounts allowed for the testing of the drive system as outline in section ??. 
+Further tests were conducted on new motor mounts which included a belt drive system. Initially, the distance between the pulleys was too short for the belt, so the distance was revise ensuring optimal belt engagement and preventing slippage. To further improve the reliability of the belt drive, a tensioning pulley was implemented, through the addition of a slot on the plates. Overall, the motor design demonstrated smooth and quiet operation during testing.
+
+Stress tests were conducted throughout the testing process confirmed the strength and durability of the motor mounts. They exhibited resistance to breakage, deformation, and failure when subjected to controlled forces and loads. This indicated their ability to withstand the operational test demands placed upon them.
+
+Subjective testing provided insights into the performance of the motor mounts. Observations revealed no significant vibrations or abnormal noise during operation, indicating satisfactory stability, smoothness, and overall quality. 
+
+Based on the comprehensive testing results obtained at each stage of development, the motor mounts were integrated into the HEVCS. The results validated their functionality, strength, and compatibility, ensuring their reliable performances within the system.
+
+\subsubsection{Design}
+
+Once the chassis was assembled, a number of tests were conducted to evaluate its performance and capabilities. The testing focused on key aspects such as the articulation of the arms, the payload weight limits, the lifting capacity of the chassis, and the platform’s ability to navigate obstacles.
+
+The assembled chassis underwent an assessment of its articulation capabilities. This involved examining the movement and flexibility of the arms. The objective was to ensure smooth operation and unrestricted articulation, enabling the platform to navigate various terrains. Visual inspection along with manual manipulation of the arms confirmed that the arms have the full range of motion they require.
+
+Once range of motion was assessed, the maximum weight that the chassis can handle, within the limit set out by the legislation, was assessed. Incremental weights were added in 10kg intervals up to 80kgs, were used to measure the chassis’ payload capacity. The test showed that the platform is capable of being driven while carrying 80kg.
+
+Nex the lifting capacity of the chassis was evaluated. Initial tests revealed that the super 500 servos, powered by a 16V supply, struggled to lift the chassis, which weighed 31kg. However, when using a 24V power supply, the servos showed an improved performance, successfully lifting the chassis without encountering any issues. This test revealed that the servos required a greater voltage supply than initially thought.
+
+Additionally, a mock-up of a step with a height of 150mm was constructed to test the platform’s ability to fit underneath an electric vehicle and its ability to climb a kerb. Since the platform had a height of 110mm, it was successfully driven underneath the mock-up step. However, power issues prevented a comprehensive assessment of the platform’s kerb climbing capabilities, the results obtained from previous tests provided confidence in its ability to navigate such obstacles successfully.
+
+Overall, the testing phase demonstrated the functionality and performances of the HEVCS. By examining each functionality of the arms, the testing process validated the system’s effectiveness and provided valuable insights for further refinement and optimisation.
+
+
+\subsection{Inter-board Communications Testing}
+
+A variety of communications protocols were used during the development of the project, each with different strengths and weaknesses leading to differing applicability. I2C was primarily used for short-range communication, intra-board where possible. A combination of SPI and UART was used to communicate over longer distances. The code in figure \ref{} shows a fragment of one half of the UART test code, complete with timing. On average, a UART transmission took $\approx$ 85 CPU ticks to complete, and data integrity was preserved throughout.
+
+	Wherever data transfers occurred, data validation was used to ensure incorrect data was not taken into the system. In particular, as several communication busses had discreet contents – that is, the contents of each data packet could only be one of a few possible values -error checking was simple.  
+
+Figure \ref{} shows one example of a try/except statement designed to catch invalid data. By attempting to read the second entry of the data list, the code checks to see if at least two values have been received. If not, the data is not processed, as continuing would lead to an out-of-index exception. 
+
+\subsubsection{Binary Encoding Testing}
+To test the threshold detection and binary encoding, random sets of variables were generated, and then fed into the comparison function. These variables are then displayed on the terminal. This testing method does require human comprehension of the output, however high confidence in the code can quickly be reached with only a subset of values tested. Edge and corner cases were specifically tested for compliance.
+
+\subsection{LiDAR Accuracy Testing}
+To test the accuracy of the LiDARs, they were placed in a vice, and pointed at a flat plywood sheet a fixed distance away. For the purposes of this test, the plywood sheet had an approximate 30\% reflectance value, and lighting conditions were ambient.
+
+%table
+
+Table \ref{} shows a subset of testing result. The sensor performed better than expected, the error remaining within the bounds specified within the sensor’s datasheet. It should be noted, however, that the two targets the datasheet’s testing used had a reflectance of 17\% and 88\% respectively, and ambient light was fixed at 5kilolux, so these results are not directly comparable.
+
+
+
 
 \newpage
 \section{Evaluation}
@@ -588,6 +697,22 @@ Sirmon Industries Limited are actively pursuing further development of the HEVCS
 \appendix
 
 \section{Appendix A: Project Documentation}
+
+\section{Testing}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{uartTest.png}
+    \caption{}
+    \label{fig:uartTest}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{uartTestData.png}
+    \caption{}
+    \label{fig:uartTestData}
+\end{figure}
 
 Project OneNote \cite{onenote}
 Module OneDrive \cite{unidrive}
