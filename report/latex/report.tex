@@ -28,6 +28,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[numbers]{natbib}
 \usepackage{helvet}
+\usepackage{setspace}
 \renewcommand{\familydefault}{\sfdefault}
 
 \definecolor{customgreen}{rgb}{0,0.6,0}
@@ -91,16 +92,52 @@
 \listoftables
 \printglossaries
 
+
+\setstretch{1.5}
+
 \newpage
 \begin{abstract}
 
+    The HEVCS is a project aims to address the challenge posed by the UK Government's ban on the sale of new petrol and diesel cars by 2030 along with the lack of critical charging infrastructure for electric vehicles in the country. To tackle this challenge, the HEVCS has been developed.
+
+    The HEVCS is a more affordable solution than installing a built-in charging circuit and provides a practical alternative for households without access to off-road parking or garages. The HEVCS is charged within the user's home and comes with a vertical dock for easy charging. The user charges the HEVCS platform in their home at their convenience using the provided dock. The user then drives the HEVCS from their house to their vehicle Once they are at their vehicle they drive it underneath, plug it in and begin to charge their car. When the car is charged the user returns the HEVCS to their house and re-docks it.
+
+    The HEVCS has a compact and versatile design with a height of just 110mm, making it suitable for use with most electric vehicles. It features an adjustable payload compartment that can store a battery capacity suitable for the customer’s needs. The batteries used within the payload compartment are recycled batteries that are no longer ‘fit-for-purpose’ from old electric vehicle battery packs. Additionally, the HEVCS can climb kerbs up to 150mm tall, making it suitable for use in both urban and rural environments.
+
+    The HEVCS uses mecanum wheels, which provide advanced control and manoeuvrability that allows the platform to move in any direction, making it an ideal choice for tight spaces.
+    Moreover, the HEVCS conforms to class 2 mobility scooter legislation, which means it is considered a pavement vehicle with a maximum speed of 4mph. It achieves this using a tethered controller to allow secure control over the platform's movements. This feature ensures that the HEVCS aligns with the safety regulations for class 2 vehicles.
+
+    In summary, the HEVCS is a practical choice of vehicle charging solution which incorporates a compact design, adjustable payload compartment, mecanum wheels, and an affordable price. The HEVCS offers a viable alternative to the current lack of charging infrastructure in the country, providing an accessible way for individuals to transition to electric vehicles.
+
+
 \end{abstract}
 \section{Acknowledgements}
+
+The team would like to express our gratitude to the following individuals and organizations both internal and external to the university for their invaluable contributions to this project:
+
+Firstly, we would like to thank James and Heather Sirmon from Sirmon Industries ltd. for providing the initial specification for the project as well as for covering a large amount of the project’s costs. We would also like to thank Jake Gibson Shaw-Sutton for being the external supervisor for this project along with Jo Byrne and the European Social Fund for organising and facilitating this project.
+
+We extend our appreciation to Dr Paul Davey for being our project module leader and providing us with additional ideas to enhance our project. We are also thankful to Dr Hazel Sales for her insights into English grammar and writing for engineering, which significantly improved the clarity of our report. We also acknowledge the assistance of Dr Alan Malvern for providing us with ideas for and marking our patent landscape document, and Martin Simpson for allowing us to access SMB 209 for use as our laboratory and for general help in the labs. We extend our appreciation to Anna Hansen and Doyel Sengupta for sorting out all the component orders and ensuring timely delivery of materials, without which this project would not have been possible.
+
+We further our appreciation to Rick Preston for his assistance in cutting the aluminium extrusion facilitating the use of the university’s Workshops. We are also grateful to Dave Pattison from W6 for undertaking the metal work for this project.
+
+Finally, we would like to express our gratitude to the campus coffee shops for providing us with warm cups of coffee and cake to get through the long days, and the support staff for helping us with general queries surrounding procedure and laboratory assistance throughout the project.
+
+The team would also like to thank their family and friends for their continued support and inspiration through this project and university.
+
 
 \newpage
 \pagenumbering{arabic}
 \section{Introduction}
 \setcounter{page}{1}
+
+In recent years, the automotive industry has experienced a surge in the sales and adoption of electric vehicles (EVs). This increasing market demand for EVs reflects a growing consumer preference for sustainable transportation solutions that reduce carbon emissions and dependence on fossil fuels. However, despite the rapid growth in EV sales, the implementation of charging infrastructure has not kept pace with the exponential expansion. This discrepancy between the increasing number of EVs on the road and the limited availability of charging stations has emerged as a critical challenge, impacting the overall convenience and acceptance of electric vehicles.
+However, the slow pace of charging infrastructure development poses a significant hurdle to the widespread adoption of EVs. The availability of public charging stations is limited, particularly in regions or areas with inadequate infrastructure planning. This situation creates challenges for EV owners, as they face concerns regarding range anxiety and the availability of convenient and accessible charging options. The imbalances between EV adoption and the charging infrastructure rollout not only affects individual EV owners but also impacts the overall perception of EVs among potential buyers, influencing their decision-making process.
+The continued growth and adoption of EVs requires a concerted focus on addressing the disparity between charging infrastructure and EV sales. The Home Electric Vehicle Charging System (HEVCS) has been developed to bridge this gap. By offering a portable charging solution, the HEVCS enables EV owners to conveniently charge their vehicle without relying solely on fixed charging infrastructure. The HEVCS caters to diverse user demographics, ensuring accessibility and usability for individuals of all abilities.
+The primary objective of the HEVCS is to provide flexibility to users by being driven directly to the EV, eliminating the need for fixed charging points in residential areas. With the HEVCS ability to navigate kerbs, it ensures the ease of operation for individuals with varying levels of mobility or strength.
+This report discusses current technologies trying to improve the charging infrastructure and identifies the gap that the HEVCS is trying to fill. It also discusses the design architecture and evaluate the operation of the HEVCS. Moreover, it will explore the potential benefits and implications of integrating the HEVCS into the existing EV market, considering factors such as user experience, charging efficiency, and environmental sustainability.
+The development of the HEVCS addresses the gap between EV sales and charging infrastructure, offering a portable solution for EV owners. By examining the technical aspects, operational features, and potential impacts of the HEVCS, this report aims to aid in the understanding of the charging platform and its role in shaping the future of electric vehicle adoption.
+
 
 \newpage
 \section{Literature Review and Prior Art}
@@ -228,6 +265,14 @@ The STM32L432KC microcontroller outperforms most Arduino boards in terms of proc
 \subsubsection{ESP-8266}
 Within this project, the ESP-8266 presents itself as a low-budget option capable of reliable data saving capabilities using Wi-Fi. It has a compact design with a vast range of peripherals available. Its highly integrated System-on-a-Chip (SoC) architecture reduces requirements for additional components. Its enhanced power management features enable the ESP to be used during periods of long-term operation on a limited power source. Through examination of the features, its network connectivity was enhanced within the project. The ESP-8266’s ability to connect to the internet using Wi-Fi opens a plethora of opportunities for \gls{iot} applications. The support provided includes various options regarding networking protocols, with detailed guides on how to implement each.
 
+\subsubsection{Pi Pico}
+The Raspberry Pi Pico was chosen to manage the LiDAR sensors for a variety of reasons, all of which made them more suitable than competing boards. The cheap cost and small size, at less than £4 each and measuring 20x50mm, allowed them to easily be mounted around the chassis, without taking up space better suited for the battery payload or other control systems.
+In sensing applications, especially ones as safety critical as monitoring the LiDARs, minimised latency is key. The Pi Pico uses a UK-designed RP2040 microcontroller, featuring an Arm Cortex-M0+ processor, with dual cores running at a maximum of 133MHz. This dual-core architecture allows for true multitasking, as opposed to the 'multithreading' implementations seen using the MBED RTOS on the F429zi, where clever use of the scheduler mimics the ability to multitask. This functionality proved ideal for multiple purposes, with communication between boards often delegated to one of the cores, allowing the second core to solely manage sensor reading and data processing.
+Whilst the 133 Mhz clock speed of the M0+ is beaten by the maximum 180MHz capable of the Cortex M4, the dual core capability effectively doubles the number of instructions performed per second, providing unparalleled flexibility for the price point. The 264Kb of SRAM matches that of the F429ZI, and whilst more RAM is undoubtably a positive, this amount proved adequate for the purpose, especially when needing to compensate for MicroPython's more laissez-faire approach to memory management.
+Pimoroni, who manufactured the chosen breakout boards for the VL53L5CX, supplied firmware written specially for the Pi Pico in MicroPython. This, combined with a prior familiarity with MicroPython, alongside unreliable support for the C SDK, further pushed towards the Pi Pico over an STM32-based microcontroller board.
+With just ~91mA of power consumption in a wake-state, the Pi Pico draws a miniscule amount of power, especially in comparison to the drive systems and other ancillary parts of the HEVCS system. However, power efficiency should always be taken into consideration when designing a system. By minimising power use by the MCUs, more power can be allotted for the drive systems, increasing range.
+
+
 \subsubsection{Super500 Servos}
 
 e Super500 applications suit that of the project, with a high level of accuracy and sufficient holding force. The servos are used to adjust the angle of the motor mounts to orientate and lift a platform weighing a maximum of 113.4kg up and down kerbs 150mm in height, providing the force defined in the requirements. As solenoids were used to hold the arms in a rigid, flat position, the servos only consumed power when articulating the arms, making the robot much more efficient when carrying the payload.
@@ -242,9 +287,43 @@ The motors are highly efficient compared to brushed motors due to having fewer p
 
 Upon reflection, the team feel that the 6384 motors and Super500 servos were appropriate choice for the project due to their ‘plug-and-play’ usability. Furthermore, the \gls{bldc}s were easy to configure when paired with the speed controller. Their size meant that they aligned well with the extrusion, incorporated into a compact motor drive compartment. Additionally, later improvements to the \gls{hevcs}'s design meant that the motors and necessary driver equipment were contained in modular units. This means that they were all identical, easy to install, and maintain. Furthermore, if the \gls{hevcs} were to break when in use by a customer, new units could be installed with ease.
 
+\subsubsection{LiDAR Selection}
+
+Light Detection and Ranging (LiDAR) sensors typically come in one of two types, mechanical and solid-state. Mechanical LiDARs use mechanical components to rotate the LiDAR sensor through 360°, taking thousands of samples per second. Solid-state LiDARs are typically a single sensor on a chip, fixed in position. Mechanical LiDARs are a mature technology, well established within industry applications, however are bulky and extremely expensive. The SLAMTEC RPLIDAR S2M1-L18 costs £299.99, and the LEISHEN AGV Anti-Collision LiDAR increases that to £656.25 \cite{robotshoplidar}.
+An additional downside of mechanical LiDARs, and the vast amount of high-resolution point-cloud data they produce, is the data must be processed in some way. Many robots use the Robot Operating System’s sensor interface framework, with its publisher-subscriber model, to help process the data, alongside software running on an on-board desktop CPU running a Linux instance. This would be unfeasible given the selected MCUs, and the size and power requirements of the robot.
+Solid state LiDARs, such as the chosen VL53L5CX are significantly more compact, measuring at just 19x19x4.6mm. They also cost significantly less, at £19.50 including the breakout board. With a viewing angle of 63° diagonally and 44.5° horizontally, they wide coverage for their price point. With 64 samples at a maximum of 60Hz, the VL53L5CX generates 3,840 samples per second, enough for high accuracy detection of obstacles at up to four metres. Single Photon Avalanche Diodes act as the receiver array, providing high sensitivity to even single-photon responses. Built-in histogram analysis automatically removes cross-talk induced by protective glass covers, allowing for the sensor to be fully enclosed without affecting its accuracy. No sensor on the market matched the VL53L5CX for performance at it’s price point, and its main weakness, the limited field of view, could easily be solved by positioning multiple around the design. Even after purchasing eight, it is still around half the cost of the SLAMTEC S2L1-M18, and resulted in 30,720 samples per second, near-parity with the S2L1-M18’s 32,000 samples per second \cite{robotshopanticol}.
+
+\subsubsection{IMU Selection}
+The MPU6050 by InvenSense was chosen as the IMU of choice. Combining a 3-axis gyroscope and accelerometer onto the same chip, alongside onboard motion processing to extract information from the readings taken. Capable of measuring values of up to 2,000°/s, and up to +/- 16Gs, the MPU6050’s upper and lower limits far exceed any movement the platform will be capable of undertaking. Additionally, each MPU6050 only draws 11mW of power, ideal for MCU applications.
+Available as a breakout board for less than £5, and using an I2C interface, the MPU6050 was ideal for our requirements of a low latency inertial measurement unit. Comparable units, such as the MPU6000, or the more powerful MPU-6500 were considered. The MPU6000 is functionality identical from a sensor’s perspective, only adding an SPI interface. As I2C had already been chosen as the interconnect medium, this provided little benefit. In contrast, the MPU6500 is significantly more powerful, providing 32KHz gyro updates while consuming only 6.1mW. However, this comes at the cost of drastically increased vibration sensitivity, leading to soft mounting being almost mandatory. Given the low speeds and resolution required of the IMU, the 6500 would greatly exceed the necessary specification, and costing £7.63 for just the chip, are much more expensive than the 6050.
+
+\subsubsection{Multiplexer Selection}
+The SN74LV4052A Dual 4-channel multiplexer was chosen to allow a single UART peripheral to control all four sensor boards \cite{SN74LV4052A}. Dual input/output with 4 channels made it well suited for UART’s two-line tx/rx protocol, and four channels was the exact number needed for this application.
+The multiplexer, at the chosen Vcc of 5V, has a switch rise/fall time of 20ns/V. At 115200 baud, a switch time of 8.68 us is required. The multiplexer achieves this by a factor of 80, having no tangible impact on communication speed through the UART.
+This chip is available in both Plastic Dual In-Line Packages (PDIP) and Small Outline Integrated Circuit (SOIC), suitable for both through-hole and surface-mount respectively. This allowed for the part to easily be tested before being surface mounted to the PCB.
+
+\subsubsection{Wheel Selection}]
+During the process of designing the HEVCS many different types of wheels were evaluated to determine the optimal choice for the desired operation and performance. A range of wheels were considered, including conventional wheels, ball wheels, and omniwheels. However, after careful analysis mecanum wheels provided the best balance between a complicated drive system and manoeuvrability of the platform making them the most viable option that most closely aligned with the projects requirements. The unique design and characteristics of the mecanum wheels, as discussed in detail below, make them an ideal choice for omnidirectional movement, enhanced manoeuvrability, and stability for the robot platform \cite{dickerson1991control}.  These were all important considerations for the project.
+
+The benefits of mecanum wheels can be primarily broken down into four main sections: Omindirectional Movement; Enhanced Manoeuvrability; High-Precision Control; and Stability and Traction \cite{doroftei2007omnidirectional}. Omindirectional movement allowed by the mecanum wheels is one of the biggest benefits of using this type of drive system. A robot with mecanum wheels can be driven in any direction given the proper control interface. This allows the robot to navigate in any direction with relative ease including strafing and moving diagonally. This was important when considering the operation of the platform as it is required to fit underneath vehicles. These wheels would allow the user to drive the platform directly to the car and the drive it sideways straight underneath without having to parallel park the robot instead.
+
+Enhanced manoeuvrability of the craft is essential as it is designed to be operated inside tight spaces inside the users’ home. Unlike commercial buildings and outside, the users’ home may contain tight corners and narrow doorways and openings. It is therefore imperative that the platform can navigate in tight spaces and environments.  By independently controlling each of the wheels, complex manoeuvres such as tight turns and intricate paths can be achieved.
+Similarly, to enhanced manoeuvrability, high-precision control is vital for the platform to allow it to be precisely controlled around the users’ home. Given that each wheel can be independently driven, high precision task can be achieved by making small incrementally adjustments and movements.
+Stability and traction were vital requirements for this project as the platform estimated to be 100kg fully ladened. Because of this, the platform was given a wide wheelbase as well as its low centre of gravity due to the design. The angled rollers on mecanum wheels create a large contact area with the ground giving them a large contact force creating large amounts of traction enabling the platform to operate successfully on many types of terrain.
+In addition to the above points, mecanum wheels are also relatively strong and can support a heavy payload for the platform.
+In conclusion, mecanum wheels provide numerous advantages in environments which require precise movements and high-precision control. With omnidirectional movement, enhanced manoeuvrability, stability, and traction, the platform will be able to navigate precisely and maintain stability whilst operating. The are an ideal choice for applications that prioritise precise control and movements.
+Upon reflection, the team are happy with our decision to choose the mecanum wheels for the wheels for the platform. The advanced control and manoeuvrability enabled the platform to be driven precisely within tight environments whilst allow the craft to remain stable and controllable by the user.
+
+
 \subsection{Software Justifications}
 
 \subsubsection{MicroPython}
+
+The Pi Pico can be programmed in both C++ and MicroPython. As an interpreted, high-level language, Python derivatives are slower than compiled low-level languages like C++. However, Python’s nature as a higher-level language leads to simpler, more human-readable code \cite{readablecode}. Given that Pimoroni’s VL53L5CX MicroPython library was to be used to interface with the sensors, the choice of language was heavily biased towards MicroPython.
+The use of MicroPython’s Read-Evaluate-Print Loop (REPL) allows for code to be executed without downloading files on to the board. This feature proved invaluable for testing GPIO pin outs as well as checking traces on the PCBs. By using the REPL to quickly configure and toggle specific GPIO Pins, the PCBs could quickly be checked without having to write a full program.
+MicroPython also comes included with libraries for performing most MCU-related operations, such as managing GPIO pins and other peripherals. The provided first-party APIs are all pre-verified to work with specific boards, such as the Pi Pico, reducing development time by re-using prior work. As these APIs performed the heavy-lifting of MCU interfacing, Python was ideal for writing the high level code to link the APIs together.
+An additional benefit of MicroPython is it allows low-level C++ calls where needed, for performance. For example, if an additional UART port was needed, and was implemented using software level bit-banging, MicroPython may not achieve the necessary speed to reach higher baud rates. By using C-calls to perform the bit banging, performance can be enhanced. As no software-ports were used during this project, this was not required, but remained a useful option should the board’s peripheral selection be inadequate.
+
 
 \subsubsection{C++ and Object Orientated Programming}
 As C++ is a widely supported language, it’s application and portability amongst various platforms and controllers is greatly enhanced. The team were able to migrate their applications between platforms with ease, saving time and increasing efficiency. A range of libraries were used on both the F429ZI and L432KC, along with mbed \gls{api}s that did not require significant modification between platforms. The team recognised the decision to use C++ as an essential requirement due to the importance of optimisation and reliable communication protocols.
@@ -256,6 +335,15 @@ Upon reflection, the team felt that their approach reduced complexity within the
 
 \subsubsection{VESC Software}
 The\gls{vesc} Tool, a highly versatile and widely used application, was used to configure, and program the \gls{vesc}s. Similarly, this tool is used to configure electric skateboards, bikes, robots, and electric vehicle applications. The user-friendly, intuitive interface guides the user through adjusting various parameters. These include customised motor control parameters such as acceleration, braking profiles, maximum motor current, battery voltage limits, throttle curves and so forth. The \gls{vesc} Tool also provides real-time monitoring information, while logging such data to create a performance record, to display visualizations of relevant parameters. Furthermore, the advanced features include regenerative braking and \gls{foc}. Also known as Vector or Direct Torque Control, \gls{foc} allows for precise control of both speed and torque of the motors.
+
+\subsubsection{Pimoroni VL53 Firmware}
+An additional benefit of the VL53L5CX was the already available firmware and software available for interfacing with the Pi Pico. The provided examples were an excellent introduction into how to interface with the sensor, and formed the backbone of the eventual software solution. However, the overall documentation for the Pimoroni firmware was lacking, with very little provided on the selection of available commands, or basic functionality like changing the sensors’ I2C address. This lead to the development of hardware workarounds for software failures, whereas custom firmware would have avoided several development pitfalls. Without actually developing the custom firmware it is impossible to predict if it would result in time saved when time spent developing the firmware is factored in. Regardless of development predictions, the lack of documentation was a weakness of the Pimoroni breakout boards.
+
+\subsubsection{ThonnyIDE}
+Thonny is the IDE of choice for MicroPython development. With built in support for editing, compilation, and debugging, all packaged in an easy-to-use interface, it was ideal for the lightweight work done. It’s integrated terminal viewer, and capability to view the file system of connected MCUs also helped when it came to managing which libraries were downloaded to which boards, and ensuring all boards were running on the same firmware version.
+An additional benefit of Thonny is that it is both free and open source. Whilst more powerful editors are available, none had the integrated file system viewer while also being free. The ArduinoLab IDE was one such candidate, but lacked the powerful debugging tools that came with Thonny, as well as having no support for the Pi Pico.
+VSCode has extensions available for both PiPico support and MicroPython, however the configuration needed was deemed unnecessary when compared with Thonny’s “plug-and-play” capabilities. For a larger project, with a more complex hierarchical structure within MicroPython, VSCode would be a more suitable candidate. Notably, VSCode also has built in integration with Git version control software, something that would be extremely useful if multiple project members were working in MicroPython at once. As only one aspect of the project was in MicroPython, all managed by one team member, this capability was not needed.
+
 
 \subsection{Manufacturing Justifications}
 
@@ -431,6 +519,16 @@ Overall, the team is satisfied with the design prototype. This stems from its su
 
 \newpage
 \section{Further Developments}
+
+While the HEVCS in its current form, performs to a good standard, there are still some areas in which improvements can be made. These include power systems, reducing height, and integration of the payload.
+Throughout the development process of the HEVCS, several challenges were encountered in relation to the power systems on the PCBs. A significant issue involved the voltage regulators, as they were unable to handle the step-down of current without being attached to a heatsink, in the form of aluminium extrusion. This limitation gave concern with the long-term reliability and thermal management of the power circuitry. As a result, further improvements of power circuitry need to be implemented.
+Another complication arose during development during transmissions from the main board to the VESCs. This was due to the VESCs and main board not sharing a common ground, which was solved by grounding the entire chassis so that a ground plane had to be implemented. For future designs, a more robust and safer ground plane will need to be implemented.
+In the existing design of the HEVCS, the arrangement of the motor leads going to the VESCs is contributing to the overall height of the system. To address this issue, a hole can be added to the piece of extrusion that is behind the motors. With this addition, the motors can be laid flat so that the cables can be coming out the back instead of the top. This will reduce the height by approximately 20mm.
+Currently the super 500 servos are being powered by batteries that supply a voltage of 14.8V. While this voltage falls within the operational range of the servos, to get the maximum torque of 500kg.cm, they require 24V supply. By providing the servos with the maximum voltage, the system can ensure optimal performance and maximise the torque output required for its intended application.
+Additionally, the batteries that are being used to power the motors do not have a large enough capacity to allow for enough runtime. To take this project further batteries with a greater capacity need to be found. For 30mins of runtime, the motors will need a battery with a capacity of 12 Ah. Alternatively, the motors can be powered from the payload compartment. While this would reduce the amount that the EV can be charged, it will reduce complexity when it comes to charging the system.
+To fully test the capabilities of the systems, the payload compartment of the HEVCS needs to be loaded with retired EV batteries. Additionally, the necessary components and infrastructure must be incorporated to facilitate the charging of EVs using these batteries. This testing phase would allow for an evaluation of the entire systems performance, efficiency, and overall effectiveness in delivering the intended charging capabilities. Testing under realistic conditions, any potential issues or areas of improvements can be identified and addressed.
+Sirmon Industries Limited are actively pursuing further development of the HEVCS by collaborating with a third party. Their aim is to transform the HEVCS into a commercially viable product that will be available for purchase by consumers. Recognising the potential of the system and its significance in addressing the growing demand for EV charging solutions, Sirmon Industries Limited has filed a patent application.
+
 
 \newpage
 \section{Conclusions}
