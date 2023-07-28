@@ -56,33 +56,86 @@
 
 \begin{document}
 
-\begin{titlepage}
-    \begin{center}
-        \vspace*{1cm}
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
 
-        \vspace*{\baselineskip}
-
-        \rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
-        \rule{\textwidth}{0.4pt}\\
-
-        {\LARGE EXAMPLE TEXT}\\[0.2\baselineskip]
-
-        \rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
-        \rule{\textwidth}{1.6pt}\\[\baselineskip]
-        \scshape
-
-        \textbf{Student No: 10618407}
-
-        \today
-
-        \vfill
-
-        \vspace{0.8cm}
-
-        \includegraphics[width=0.4\textwidth]{UOP_Logo.png}
-
-    \end{center}
+\begin{titlepage} % Suppresses displaying the page number on the title page and the subsequent page counts as page 1
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for horizontal lines, change thickness here
+	
+	\center % Centre everything on the page
+	
+	%------------------------------------------------
+	%	Headings
+	%------------------------------------------------
+	
+	\textsc{\LARGE University of Plymouth}\\[1.5cm] % Main heading such as the name of your university/college
+	
+	\textsc{\Large PROJ515}\\[0.5cm] % Major heading such as course name
+	
+	\textsc{\large MEng Project}\\[0.5cm] % Minor heading such as course title
+	
+	%------------------------------------------------
+	%	Title
+	%------------------------------------------------
+	
+	\HRule\\[0.4cm]
+	
+	{\huge\bfseries The Home Electric Vehicle Charging System (HEVCS)}\\[0.4cm] % Title of your document
+	
+	\HRule\\[1.5cm]
+	
+	%------------------------------------------------
+	%	Author(s)
+	%------------------------------------------------
+	
+	% \begin{minipage}{0.4\textwidth}
+	% 	\begin{flushleft}
+	% 		\large
+	% 		\textit{Author}\\
+	% 		D. \textsc{Cole} % Your name
+	% 	\end{flushleft}
+	% \end{minipage}
+	% ~
+	% \begin{minipage}{0.4\textwidth}
+	% 	\begin{flushright}
+	% 		\large
+	% 		\textit{Supervisor}\\
+	% 		Dr. Caroline \textsc{Becker} % Supervisor's name
+	% 	\end{flushright}
+	% \end{minipage}
+	
+	% If you don't want a supervisor, uncomment the two lines below and comment the code above
+	%{\large\textit{Author}}\\
+	{\large\textit{Student Number}}\\
+	10614838 \\% Dan
+	10613591 \\% Jack
+	10615728 \\% Noah
+	10618407 % Luke
+	
+	
+	%------------------------------------------------
+	%	Date
+	%------------------------------------------------
+	
+	\vfill\vfill\vfill % Position the date 3/4 down the remaining page
+	
+	{\large\today} % Date, change the \today to a set date if you want to be precise
+	
+	%------------------------------------------------
+	%	Logo
+	%------------------------------------------------
+	
+	\vfill\vfill
+	\includegraphics[width=0.4\textwidth]{UOP_Logo.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
+	 
+	%----------------------------------------------------------------------------------------
+	
+	\vfill % Push the date up 1/4 of the remaining page
+	
 \end{titlepage}
+
+%----------------------------------------------------------------------------------------
 
 \newpage
 \fancyfoot[R]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
@@ -657,11 +710,11 @@ Overall, the testing phase demonstrated the functionality and performances of th
 
 \subsection{Inter-board Communications Testing}
 
-A variety of communications protocols were used during the development of the project, each with different strengths and weaknesses leading to differing applicability. I2C was primarily used for short-range communication, intra-board where possible. A combination of SPI and UART was used to communicate over longer distances. The code in figure \ref{} shows a fragment of one half of the UART test code, complete with timing. On average, a UART transmission took $\approx$ 85 CPU ticks to complete, and data integrity was preserved throughout.
+A variety of communications protocols were used during the development of the project, each with different strengths and weaknesses leading to differing applicability. I2C was primarily used for short-range communication, intra-board where possible. A combination of SPI and UART was used to communicate over longer distances. The code in figure \ref{fig:uartTest} shows a fragment of one half of the UART test code, complete with timing. On average, a UART transmission took $\approx$ 85 CPU ticks to complete, and data integrity was preserved throughout.
 
 	Wherever data transfers occurred, data validation was used to ensure incorrect data was not taken into the system. In particular, as several communication busses had discreet contents – that is, the contents of each data packet could only be one of a few possible values -error checking was simple.  
 
-Figure \ref{} shows one example of a try/except statement designed to catch invalid data. By attempting to read the second entry of the data list, the code checks to see if at least two values have been received. If not, the data is not processed, as continuing would lead to an out-of-index exception. 
+Figure \ref{fig:uartTestData} shows one example of a try/except statement designed to catch invalid data. By attempting to read the second entry of the data list, the code checks to see if at least two values have been received. If not, the data is not processed, as continuing would lead to an out-of-index exception. 
 
 \subsubsection{Binary Encoding Testing}
 To test the threshold detection and binary encoding, random sets of variables were generated, and then fed into the comparison function. These variables are then displayed on the terminal. This testing method does require human comprehension of the output, however high confidence in the code can quickly be reached with only a subset of values tested. Edge and corner cases were specifically tested for compliance.
@@ -765,8 +818,7 @@ To fully test the capabilities of the systems, the payload compartment of the HE
 Sirmon Industries Limited are actively pursuing further development of the HEVCS by collaborating with a third party. Their aim is to transform the HEVCS into a commercially viable product that will be available for purchase by consumers. Recognising the potential of the system and its significance in addressing the growing demand for EV charging solutions, Sirmon Industries Limited has filed a patent application.
 
 
-\newpage
-\section{Conclusions}
+
 
 \newpage
 \bibliographystyle{IEEEtran}
@@ -836,6 +888,9 @@ Sirmon Industries Limited are actively pursuing further development of the HEVCS
     \caption{}
     \label{fig:lidar_interface}
 \end{figure}
+
+\section{Links}
+
 Project OneNote \cite{onenote}
 Module OneDrive \cite{unidrive}
 Private OneDrive \cite{privdrive}
@@ -843,6 +898,6 @@ Private OneDrive \cite{privdrive}
 Finalised BoM \cite{bom}
 Risk Assessment and COSHH Forms \cite{RA}
 
-GitHub Repository \cite{}
+GitHub Repository \cite{github}
 
 \end{document}
